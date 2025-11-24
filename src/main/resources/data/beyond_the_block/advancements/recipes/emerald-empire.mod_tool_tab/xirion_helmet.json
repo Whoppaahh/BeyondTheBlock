@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "beyond_the_block:xirion_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_xirion": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_the_block:xirion"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_xirion",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "beyond_the_block:xirion_helmet"
+    ]
+  }
+}

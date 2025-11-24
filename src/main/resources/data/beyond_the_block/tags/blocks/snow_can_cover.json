@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:leaves",
+    "#minecraft:wooden_fences",
+    "minecraft:nether_brick_fence",
+    "minecraft:crimson_fence",
+    "minecraft:warped_fence",
+    "#minecraft:walls",
+    "#minecraft:saplings",
+    "#minecraft:replaceable_plants",
+    "#minecraft:flowers",
+    "#minecraft:dirt",
+    "#minecraft:walls"
+  ]
+}

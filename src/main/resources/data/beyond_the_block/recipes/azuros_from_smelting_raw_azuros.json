@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 350,
+  "experience": 3.0,
+  "group": "azuros",
+  "ingredient": {
+    "item": "beyond_the_block:raw_azuros"
+  },
+  "result": "beyond_the_block:azuros"
+}

@@ -1,0 +1,24 @@
+{
+   "structures": [
+    {
+      "structure": "beyond_the_block:plains_shrine",
+      "weight": 1
+    },
+     {
+       "structure": "beyond_the_block:desert_shrine",
+       "weight": 1,
+       "biomes": "#minecraft:is_desert"
+     },
+     {
+       "structure": "beyond_the_block:snow_shrine",
+       "weight": 1,
+       "biomes": "#minecraft:is_snowy"
+     }
+  ],
+  "placement": {
+    "salt": 1642136474,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

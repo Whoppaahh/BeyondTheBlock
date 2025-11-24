@@ -1,0 +1,12 @@
+{
+  "type": "beyond_the_block:smithing_gem_upgrade",
+  "base": {
+    "tag": "beyond_the_block:gem_upgradable_tools"
+  },
+  "addition": {
+    "tag": "beyond_the_block:cut_gems"
+  },
+  "result": {
+    "item": "beyond_the_block:custom_upgraded_tool"
+  }
+}

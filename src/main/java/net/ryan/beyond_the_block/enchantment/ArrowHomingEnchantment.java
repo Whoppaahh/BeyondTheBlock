@@ -1,0 +1,27 @@
+package net.ryan.beyond_the_block.enchantment;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import org.jetbrains.annotations.Nullable;
+
+public class ArrowHomingEnchantment extends Enchantment {
+    public ArrowHomingEnchantment(Rarity weight, EnchantmentTarget type, @Nullable EnchantmentTarget type1, EquipmentSlot... slotTypes) {
+        super(weight, type, slotTypes);
+
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return 3;
+    }
+
+    @Override
+    public boolean isAcceptableItem(ItemStack stack) {
+        return stack.getItem() instanceof BowItem || stack.getItem() instanceof CrossbowItem || stack.isOf(Items.BOOK);
+    }
+}

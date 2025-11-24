@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lava_lamp",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:lava_bucket"
+    },
+    "N": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "GLG",
+    "NNN"
+  ],
+  "result": {
+    "item": "beyond_the_block:lava_lamp_block"
+  }
+}

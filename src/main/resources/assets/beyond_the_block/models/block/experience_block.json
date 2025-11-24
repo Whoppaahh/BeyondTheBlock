@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "beyond_the_block:block/experience_block",
+    "particle": "beyond_the_block:block/experience_block"
+  }
+}

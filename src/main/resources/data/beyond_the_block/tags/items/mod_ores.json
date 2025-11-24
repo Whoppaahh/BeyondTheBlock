@@ -1,0 +1,45 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:miranite_ore",
+    "beyond_the_block:deepslate_miranite_ore",
+    "beyond_the_block:nether_miranite_ore",
+    "beyond_the_block:end_miranite_ore",
+
+    "beyond_the_block:chromite_ore",
+    "beyond_the_block:deepslate_chromite_ore",
+    "beyond_the_block:nether_chromite_ore",
+    "beyond_the_block:end_chromite_ore",
+
+    "beyond_the_block:nocturnite_ore",
+    "beyond_the_block:deepslate_nocturnite_ore",
+    "beyond_the_block:nether_nocturnite_ore",
+    "beyond_the_block:end_nocturnite_ore",
+
+    "beyond_the_block:rosette_ore",
+    "beyond_the_block:deepslate_rosette_ore",
+    "beyond_the_block:nether_rosette_ore",
+    "beyond_the_block:end_rosette_ore",
+
+    "beyond_the_block:amberine_ore",
+    "beyond_the_block:deepslate_amberine_ore",
+
+    "beyond_the_block:ruby_ore",
+    "beyond_the_block:deepslate_ruby_ore",
+
+    "beyond_the_block:indigra_ore",
+    "beyond_the_block:deepslate_indigra_ore",
+    "beyond_the_block:nether_indigra_ore",
+    "beyond_the_block:end_indigra_ore",
+
+    "beyond_the_block:azuros_ore",
+    "beyond_the_block:deepslate_azuros_ore",
+    "beyond_the_block:nether_azuros_ore",
+    "beyond_the_block:end_azuros_ore",
+
+    "beyond_the_block:xirion_ore",
+    "beyond_the_block:deepslate_xirion_ore",
+    "beyond_the_block:nether_xirion_ore",
+    "beyond_the_block:end_xirion_ore"
+  ]
+}

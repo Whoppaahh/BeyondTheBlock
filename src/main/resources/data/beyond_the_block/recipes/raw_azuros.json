@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "beyond_the_block:raw_azuros_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "beyond_the_block:raw_azuros"
+  }
+}

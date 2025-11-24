@@ -1,0 +1,203 @@
+{
+  "type": "minecraft:overworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "beyond_the_block:birch_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "depth": 1,
+            "erosion": [
+              -1,
+              -0.375
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -0.9333,
+              -0.7666
+            ]
+          }
+        },
+        {
+          "biome": "beyond_the_block:dark_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "depth": 0,
+            "erosion": [
+              -1,
+              -0.375
+            ],
+            "humidity": [
+              0.3,
+              1
+            ],
+            "offset": 0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -0.9333,
+              -0.7666
+            ]
+          }
+        },
+        {
+          "biome": "beyond_the_block:flower_forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0,
+            "erosion": [
+              -0.7799,
+              -0.375
+            ],
+            "humidity": [
+              -1,
+              -0.35
+            ],
+            "offset": 0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -0.7666,
+              -0.5666
+            ]
+          }
+        },
+        {
+          "biome": "beyond_the_block:forest",
+          "parameters": {
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "depth": 0,
+            "erosion": [
+              -0.7799,
+              -0.375
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "offset": 0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -0.7666,
+              -0.5666
+            ]
+          }
+        },
+        {
+          "biome": "beyond_the_block:old_growth_birch_forest",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "depth": 0,
+            "erosion": [
+              -1,
+              -0.375
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0,
+            "temperature": [
+              -0.15,
+              0.2
+            ],
+            "weirdness": [
+              -0.05,
+              0.05
+            ]
+          }
+        },
+        {
+          "biome": "beyond_the_block:windswept_forest",
+          "parameters": {
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "depth": 0,
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0,
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "weirdness": [
+              0.2666,
+              0.4
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "spawn_costs": {},
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": []
+  },
+  "features": [
+    "minecraft:birch_forest_trees",
+    "minecraft:dark_forest_trees",
+    "minecraft:flower_forest_trees",
+    "minecraft:forest_trees",
+    "minecraft:old_growth_birch_forest_trees",
+    "minecraft:windswept_forest_trees"
+  ],
+  "structures": {
+    "village": [],
+    "mansion": [],
+    "mineshaft": [],
+    "ocean_ruin": [],
+    "stronghold": [],
+    "temple": []
+  },
+  "carvers": {
+    "air": [],
+    "liquid": []
+  },
+  "type": "beyond_the_block:chopping_dim_type"
+}

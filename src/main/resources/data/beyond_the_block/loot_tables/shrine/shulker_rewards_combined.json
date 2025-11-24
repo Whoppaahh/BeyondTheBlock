@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": { "min": 0, "max": 2, "type": "minecraft:uniform" },
+      "name": "vanilla", "entries": [{ "type": "loot_table",
+      "name": "beyond_the_block:shrine/shulker_rewards_vanilla" }] },
+
+    {
+      "rolls": { "min": 0, "max": 2, "type": "minecraft:uniform" },
+      "name": "modded",
+      "entries": [{ "type": "loot_table",
+        "name": "beyond_the_block:shrine/shulker_rewards_modded" }] }
+  ]
+}

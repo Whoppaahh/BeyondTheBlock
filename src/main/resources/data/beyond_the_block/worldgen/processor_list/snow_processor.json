@@ -1,0 +1,58 @@
+[
+  {
+    "processor_type": "minecraft:rule",
+    "rules": [
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.7
+        },
+        "output_state": {
+          "Name": "minecraft:snow_block"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:stone_brick_wall"
+        },
+        "output_state": {
+          "Name": "minecraft:ice"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:ice",
+          "probability": 0.3
+        },
+        "output_state": {
+          "Name": "minecraft:blue_ice"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:ice",
+          "probability": 0.5
+        },
+        "output_state": {
+          "Name": "minecraft:packed_ice"
+        }
+      }
+    ]
+  }
+]

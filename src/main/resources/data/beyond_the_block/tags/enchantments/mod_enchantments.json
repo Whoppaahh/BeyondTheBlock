@@ -1,0 +1,39 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:warding_glyph",
+    "beyond_the_block:floral_leap",
+    "beyond_the_block:grounded_resistance",
+    "beyond_the_block:silent_steps",
+
+    "beyond_the_block:echo_guard",
+    "beyond_the_block:durability_boost",
+    "beyond_the_block:radiant_aura",
+    "beyond_the_block:shadows_veil",
+    "beyond_the_block:mind_ward",
+
+    "beyond_the_block:frozen_momentum",
+    "beyond_the_block:graceful_movement",
+    "beyond_the_block:night_stride",
+
+    "beyond_the_block:temporal_efficiency",
+    "beyond_the_block:nightfall_cleave",
+    "beyond_the_block:timber_cut",
+
+    "beyond_the_block:deep_till",
+    "beyond_the_block:gardens_bounty",
+    "beyond_the_block:night_cultivation",
+
+    "beyond_the_block:shadow_mining",
+    "beyond_the_block:stone_breaker",
+
+    "beyond_the_block:dark_dig",
+    "beyond_the_block:earth_shatter",
+    "beyond_the_block:fertility",
+
+    "beyond_the_block:life_steal",
+    "beyond_the_block:phantom_slash",
+    "beyond_the_block:resilient_strike",
+    "beyond_the_block:temporal_slice"
+  ]
+}

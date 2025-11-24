@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "package": "net.ryan.beyond_the_block.mixin.Client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ArmourFeatureRendererMixin",
+    "ClientPlayerEntityMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "ExampleClientMixin",
+    "HandledScreenAccessor",
+    "HandledScreenMixin",
+    "HeldItemFeatureRendererMixin",
+    "HeldItemRendererMixin",
+    "InGameHudMixin",
+    "ItemRendererMixin",
+    "LivingEntityRendererAccessor",
+    "LivingEntityRendererMixin",
+    "TitleScreenMixin",
+    "EntityRendererMixin",
+    "BatEntityModelMixin",
+    "BipedModelMixin",
+    "GhastEntityModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "DoubleInventoryAccessor"
+  ]
+}

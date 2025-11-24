@@ -1,0 +1,40 @@
+{
+  "replace": false,
+  "values": [
+
+    "beyond_the_block:chromite_boots",
+    "beyond_the_block:chromite_chestplate",
+    "beyond_the_block:chromite_helmet",
+    "beyond_the_block:chromite_leggings",
+
+    "beyond_the_block:amberine_boots",
+    "beyond_the_block:amberine_chestplate",
+    "beyond_the_block:amberine_helmet",
+    "beyond_the_block:amberine_leggings",
+
+    "beyond_the_block:miranite_boots",
+    "beyond_the_block:miranite_chestplate",
+    "beyond_the_block:miranite_helmet",
+    "beyond_the_block:miranite_leggings",
+
+    "beyond_the_block:xirion_boots",
+    "beyond_the_block:xirion_chestplate",
+    "beyond_the_block:xirion_helmet",
+    "beyond_the_block:xirion_leggings",
+
+    "beyond_the_block:azuros_boots",
+    "beyond_the_block:azuros_chestplate",
+    "beyond_the_block:azuros_helmet",
+    "beyond_the_block:azuros_leggings",
+
+    "beyond_the_block:ruby_boots",
+    "beyond_the_block:ruby_chestplate",
+    "beyond_the_block:ruby_helmet",
+    "beyond_the_block:ruby_leggings",
+
+    "beyond_the_block:rosette_boots",
+    "beyond_the_block:rosette_chestplate",
+    "beyond_the_block:rosette_helmet",
+    "beyond_the_block:rosette_leggings"
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "minecraft:iron_pickaxe": [
+    "Tempered by fire and will, this pickaxe strikes with the certainty of forged steel. It bends not before stone nor metal, carving paths to hidden veins of promise.",
+    "Born from sweat and stone, it carves the veins of the earth with steady resolve, a faithful tool of those who dare to seek beneath the surface.",
+    "A steadfast companion, forged in the heat of toil, it breaks barriers where others falter and reveals the heart of the mountain."
+  ],
+  "minecraft:diamond_pickaxe": [
+    "A shard of the earth’s unbroken heart, it cleaves through stone with effortless grace, singing the song of the deepest mines and the rarest treasures.",
+    "Forged in silence, it gleams with the strength of forgotten ages, a blade that parts stone like whispered secrets.",
+    "The jewel of miners’ dreams, it strikes with sharpness and purity, revealing riches buried beyond reach."
+  ],
+  "minecraft:netherite_pickaxe": [
+    "Forged in fires beyond the mortal realm, it carries the weight of forgotten ages. Its blows rend rock and fate alike, unyielding in the darkest depths.",
+    "A relic of ancient power, blackened and eternal, it shatters stone with a force that echoes through realms.",
+    "Born of shadow and flame, it cleaves the earth as if it were but smoke, unbreakable and relentless."
+  ],
+  "minecraft:stone_sword": [
+    "Rough and honest, this blade bears the marks of early struggle, a symbol of courage carved from the world’s ancient bones.",
+    "A simple edge, honed by necessity and grit, it tells of battles fought when hope was thin but will was strong.",
+    "Chipped and worn, it bites with the raw strength of survival, a first defiance against the chaos beyond."
+  ],
+  "minecraft:diamond_sword": [
+    "The final whisper of the deep, honed into judgment. Light dances along its edge like prophecy, and even silence fears the sound it makes when drawn.",
+    "A blade of perfect clarity, it cleaves through darkness and doubt alike, shining with the promise of swift justice.",
+    "Born from earth’s purest secret, it sings the sharp song of glory and fate entwined in every strike."
+  ],
+  "minecraft:netherite_sword": [
+    "Dark and eternal, this blade holds the fury of the nether's endless blaze. It cuts not just flesh, but the threads of destiny itself.",
+    "Forged in hellfire and shadow, it whispers doom with every swing, a remorseless judge of all who stand before it.",
+    "An edge tempered by abyssal flame, it rends reality as easily as flesh, bearing the weight of countless lost souls."
+  ],
+  "minecraft:iron_axe": [
+    "The tool of labor and battle, forged for both wood and war. Each strike echoes the steady pulse of craft and conquest.",
+    "Heavy and honest, it cleaves with purpose born of endless toil, a companion to those who shape and defend their world.",
+    "A brutal instrument carved from iron’s stubborn heart, it falls like thunder upon tree and foe alike."
+  ],
+  "minecraft:diamond_axe": [
+    "An artisan’s wrath carved from the earth’s purest stone. It falls swift and sure, felling giants with grace and unyielding power.",
+    "The hand of precision wielded as a weapon, it strikes with elegance and deadly certainty, cleaving the world’s defenses.",
+    "A blade that hums with the earth’s deepest fury, it fells timber and terror alike with a single, flawless arc."
+  ],
+  "minecraft:netherite_axe": [
+    "Blackened by otherworldly flame, it swings like a tempest, tearing through timber and fate with equal might.",
+    "A shadow forged in fire’s heart, it rends the world asunder with ruthless strength and unyielding will.",
+    "The echo of apocalypse in a single stroke, it cleaves with the fury of forgotten infernos."
+  ],
+  "minecraft:iron_shovel": [
+    "Simple and sturdy, this blade turns the soil with patient strength, carving paths for life to take root.",
+    "A humble servant to earth and seed, it pushes through dirt and sand with quiet determination.",
+    "A steady hand in the dirt, it reveals the foundations beneath the surface and prepares the world for growth."
+  ],
+  "minecraft:diamond_shovel": [
+    "A gleaming chisel against the earth, it parts dirt and sand with the precision of a master’s hand.",
+    "Sharp and sure, it breaks the ground with effortless grace, unearthing secrets buried in shadow and stone.",
+    "The earth yields before its edge like water, a sculptor’s tool that shapes the hidden world beneath our feet."
+  ],
+  "minecraft:netherite_shovel": [
+    "Born from fire and shadow, it digs not just the ground, but deeper truths hidden beneath the surface.",
+    "A blade that parts the soil like smoke, revealing more than earth, unearthing ancient power and forgotten fate.",
+    "A relic of a world lost to flame, it turns the dirt with unyielding strength and uncanny purpose."
+  ],
+  "minecraft:coal_ore": [
+    "Blackened veins of forgotten fire, embedded deep within the earth. They hold the spark that powers flame and industry alike.",
+    "Dark embers trapped in stone, waiting to ignite the breath of furnaces and forge new destinies.",
+    "The heart of shadow and smoke, it fuels the fires of progress beneath the world’s crust."
+  ],
+  "minecraft:iron_ore": [
+    "Heavy with promise, this ore sings of strength forged from stone and sweat, waiting to be freed from its rocky prison.",
+    "Cold and stubborn, it holds the first step towards might and metal, a seed of tools and weapons yet to come.",
+    "Veins of raw power bound in earth’s embrace, ready to be shaped by the hands of those who dare."
+  ],
+  "minecraft:gold_ore": [
+    "A treasure wrapped in stubborn rock, its gleam calls to kings and dreamers alike, whispering tales of wealth and power.",
+    "Sunlight trapped beneath the earth’s surface, it shines with the vanity of empires and the promise of excess.",
+    "The lure of riches and folly, it gleams with the seductive glow of fortunes won and lost in shadowed halls."
+  ],
+  "minecraft:diamond_ore": [
+    "The earth’s secret kept beneath layers of stone, sparkling with the weight of ages and the hope of fortune.",
+    "Crystals forged in silence and pressure, holding the breath of centuries in their flawless facets.",
+    "A buried heart of light, it shines with impossible purity and whispers of untold power."
+  ],
+  "minecraft:emerald_ore": [
+    "A rare gift of mountain breath, glowing with the promise of trade and the mysteries of distant lands.",
+    "Jewels born of stone and time, pulsing with the heartbeat of commerce and silent bargains.",
+    "The currency of kings and wanderers, it gleams with the restless hunger of wealth and desire."
+  ],
+  "minecraft:nether_gold_ore": [
+    "Glittering fragments from a hellish vein, burning with the glow of corrupted riches and fiery promise.",
+    "Gold twisted by nether flame, a lure that burns as fiercely as it dazzles.",
+    "A treasure from infernal depths, its brilliance hides the danger that clings like smoke."
+  ],
+  "minecraft:ancient_debris": [
+    "Fragments from a time before, dark and unyielding. Their power shapes the fate of all who dare to wield it.",
+    "Shards of forgotten ages, heavy with the weight of lost empires and eternal flame.",
+    "The bones of a dead world, hardened by time and fire, waiting to be reborn in mortal hands."
+  ],
+  "minecraft:iron_ingot": [
+    "Melted from the bones of the world and shaped by mortal hands, this ingot carries the resolve of those who tame fire. It is humble, yes—but steadfast, bearing the quiet dignity of tools and armor, of battles fought and shelters built.",
+    "A bar of solid will, forged in heat and hammer, ready to be shaped into instruments of survival and power.",
+    "The foundation of craft and conquest, it gleams with the quiet strength of those who build and defend."
+  ],
+  "minecraft:gold_ingot": [
+    "Soft light trapped in molten form, it glimmers with wealth and folly alike. It adorns crowns and coins but burns too easily to hold true strength.",
+    "Liquid sun captured in metal, it sings of beauty, excess, and fleeting fortune.",
+    "The gleam of kings and thieves, it dazzles and deceives with equal brilliance."
+  ],
+  "minecraft:netherite_ingot": [
+    "An echo of ancient power forged in otherworldly flames, it holds strength beyond mortal craft—unyielding, eternal, and dark as forgotten night.",
+    "The essence of shadow and fire, it hums with the heartbeat of realms beyond our own.",
+    "A bar of endless night, cold and unforgiving, the pinnacle of mortal forging and nether flame."
+  ],
+  "minecraft:bread": [
+    "Simple sustenance baked from patience and grain, a warm promise of nourishment for the weary traveler.",
+    "The humble gift of harvest, soft and warm, carrying the comfort of home and hard work.",
+    "A morsel of life, plain yet vital, the fuel of journeys long and burdens heavy."
+  ],
+  "minecraft:cooked_beef": [
+    "A hearty morsel, kissed by flame and flame’s breath, offering strength to those who brave the wilds.",
+    "Savor the fire’s gift, rich with the taste of survival and the promise of renewed vigor.",
+    "A meal carved from the hunt, its flavor sharp and bold like the spirit of the wild."
+  ],
+  "minecraft:apple": [
+    "A crisp bite of fleeting sweetness, a moment’s respite beneath the endless sky.",
+    "Sunlight captured in red and gold, it offers a simple joy and the whisper of orchards long past.",
+    "A fruit of temptation and health, its skin gleams with the memory of summer’s touch."
+  ],
+  "minecraft:blaze_rod": [
+    "A bone scorched in the eternal breath of flame, plucked from the very spine of the inferno itself. It pulses faintly with the memory of ancient fire, a relic of something that never knew mercy—only heat, fury, and lightless ash.",
+    "A shard of living fire, forged where flame dreams, a scepter of burning wrath that crackles with the echo of wild embers and forgotten blaze.",
+    "The ember's backbone, hardened by the furnace’s rage—alive with a heat that burns without flame, a silent roar from the depths of the nether."
+  ],
+
+  "minecraft:ender_pearl": [
+    "The remnant of a gaze that has seen the fold between stars. Cold to the touch, yet humming with disquiet, it twists space like silk and vanishes before the mind can follow. A single blink from a creature who dreams between dimensions.",
+    "A captured fragment of the void’s whisper, swirling with fractured light and the silent promise of vanished places unseen.",
+    "A liquid shadow, spun from cosmic threads—folding space like parchment, it leaps where footsteps cannot tread and eyes cannot follow."
+  ],
+
+  "minecraft:golden_apple": [
+    "A forbidden fruit soaked in ancient sunlight, its flesh glimmers with whispers of forgotten power. To bite is to borrow the strength of emperors and the endurance of gods—if only for a moment, before the burden returns.",
+    "Sunlight trapped in skin of gold, a morsel that promises vigor and crowns the mortal with fleeting immortality’s kiss.",
+    "A gilded seed of divine favor, sweet and dangerous—its core pulses with the echoes of legends and the weight of sacrifice."
+  ],
+
+  "minecraft:diamond": [
+    "Formed under eons of pressure and silence, it is the earth’s most intimate secret—crystallized resolve, impossible purity. It sings of permanence and pride, of civilizations rising and falling, all while it remained buried and unbroken.",
+    "A shard of frozen eternity, shining with the quiet pride of mountains that have outlasted time and storm.",
+    "The heart of stone, sharpened by patience and silence—immutable and cold, yet burning with unseen fire."
+  ],
+
+  "minecraft:feather": [
+    "The lightest trace of sky’s rebellion—a single plume shed from the wind’s fury. With it, stories are written in silence, and paths drawn between clouds. It carries the scent of thunder and the memory of flight.",
+    "A whisper caught in flight, soft as the breath of dawn, drifting between earth and sky like a forgotten dream.",
+    "The fragile signature of winged grace—touched by storms, carried by winds, it tells tales only the clouds remember."
+  ],
+
+  "minecraft:nether_star": [
+    "A fragment torn from the heart of oblivion, caught in the aftermath of celestial war. It burns not with flame, but with the quiet fury of the void—eternal, unknowable, and unbearably still. It is a remnant of endings, a spark that outlived the dark.",
+    "A cold fire stolen from the cosmos’ shattered core, glowing with a silence that hums beneath the fabric of reality.",
+    "The last breath of dying stars, crystallized into a beacon of voidlight—a relic of destruction’s quiet aftermath."
+  ],
+
+  "minecraft:lapis_lazuli": [
+    "A stone veined with forgotten wisdom, pulled from caverns where silence teaches more than words. Its blue depths reflect ancient chants, lost maps, and the laughter of those who once bent stars into spells.",
+    "The ink of the earth’s old magic, swirling in endless blue, a key to secrets that time forgot to lock away.",
+    "A gem caught in the web of dreams, glowing faintly with the wisdom of old worlds and the songs of deep shadows."
+  ],
+
+  "minecraft:emerald": [
+    "A jewel that pulses with promise, glinting like envy and hope intertwined. Merchants covet it, kings weigh it, and mountains dream of it. Its green gleam is not just wealth—but the hunger that follows it.",
+    "The heart of the forest forged into crystal—alive with whispers of power and the silent greed of those who seek it.",
+    "A shard of verdant ambition, shimmering with the restless hunger of empires and the quiet patience of ancient stones."
+  ],
+
+  "minecraft:book": [
+    "Bound in silence, yet louder than thunder. Each page holds a world, each word a key. Within its spine are spells, secrets, histories, and lies, all waiting for eyes bold enough to read and hearts steady enough to remember.",
+    "A vault of whispered truths and forgotten dreams, its pages crackle with the energy of a thousand untold stories.",
+    "An echo carved in parchment, bearing the weight of knowledge, magic, and the silent screams of lost lore."
+  ],
+
+  "minecraft:torch": [
+    "A humble flame clinging to a sliver of wood, yet bold enough to defy the dark. It burns not with power, but with purpose—a guardian of light against the forgotten places where shadows wait to whisper.",
+    "A flicker of hope caught in wood and flame, the fragile spear that pushes back the cold silence of night.",
+    "A sentinel of warmth and courage, burning softly where shadows gather to dream."
+  ],
+
+  "minecraft:bucket": [
+    "An empty thing that carries meaning, whether brimming with water, lava, or blood. It is a vessel of transformation, the quiet witness to harvests, floods, and fire-born rebirths.",
+    "A hollow heart that holds the world’s weight—whether calm and clear or wild and burning, it carries stories of change.",
+    "A simple chalice of possibility, bearing the shifting tides between life, death, and rebirth."
+  ],
+
+  "minecraft:saddle": [
+    "Worn leather shaped to tame the untamable. It tells of long roads and faster winds, of beasts that yielded to no man until now. Each stitch is a story of conquest, or companionship.",
+    "A leather throne for wild spirits, binding beast to rider with threads of trust and command.",
+    "The quiet harness of adventure, creased by endless journeys and the whispers of hooves on distant trails."
+  ],
+
+  "minecraft:leather": [
+    "Toughened by time, worn by wind. This is the skin of the wild remembered, softened by toil but never tamed. A piece of something that once breathed and ran free beneath the sun.",
+    "The faded hide of freedom and survival, marked by sun and storm, a memory stitched in flesh and sweat.",
+    "Worn armor of the wild, carrying the scent of earth and the echo of footsteps long vanished."
+  ],
+
+  "minecraft:trident": [
+    "Forged where waves break and thunder answers, it is a weapon of kings drowned and risen. To hurl it is to call the wrath of the sea itself, ancient and endless, wrapped in salt and storm.",
+    "A spear of tempest and tide, sharp as the ocean’s fury and cold as drowned kings’ resolve.",
+    "The ruler’s stormbound javelin, crackling with the power of crashing waves and storm-wracked skies."
+  ],
+
+  "minecraft:wooden_sword": [
+    "The first defiance of innocence—a sharpened branch carved with hope and fear. It does not gleam, but it *dares*, and that is enough for legends to begin.",
+    "A child’s rebellion made weapon, crude and honest, striking out at shadows with trembling hands.",
+    "A sapling turned sentinel, fragile yet fierce, guarding dreams born of youthful fire."
+  ],
+
+  "minecraft:stone_pickaxe": [
+    "A crude child of stone and stubborn hands. It scrapes secrets from the deep and wears the dust of buried truths. Its edge may dull, but its purpose does not.",
+    "A rugged key to earth’s hidden vaults, shaped by sweat and grit more than craft or art.",
+    "The first echo of industry, breaking stone and silence alike, worn smooth by endless toil."
+  ],
+
+  "minecraft:iron_sword": [
+    "Metal given shape and will. This blade has known fire and fury, and now rests in the hands of one who chooses when to spill blood and when to sheathe silence.",
+    "A cold promise forged in flame, sharp enough to carve fate from chaos and quiet enough to hold restraint.",
+    "The sword of iron resolve, biting with purpose and resting only when justice demands."
+  ],
+
+  "minecraft:bow": [
+    "A hunter’s breath held tight, a promise bent in tension. It arcs the will of its wielder through the air—grace and death in a single motion.",
+    "A slender curve of whispered intent, launching silent fate on feathered wings.",
+    "The wind’s ally and death’s messenger, poised between patience and release."
+  ],
+
+  "minecraft:arrow": [
+    "A sliver of decision launched toward fate. It is flight given purpose, a whisper in the wind, an ending delivered before it can be heard.",
+    "A thin shaft of resolve, swift and unyielding—silent until it speaks in impact.",
+    "The breath of the bow’s will, slicing air and destiny in one fatal arc."
+  ],
+  "beyond_the_block:chromite": "A shard of grounded power, forged in the hush beneath the mountains. It hums with stubborn strength and holds the patience of stone that has waited centuries to be chosen.",
+  "beyond_the_block:nocturnite": "A gem kissed by eternal dusk. It drinks the light and offers shadow, each facet a memory of silent betrayal or hidden refuge beneath the moon’s gaze.",
+  "beyond_the_block:rosette": "A jewel of gentle rebellion, soft pink as a warrior’s final breath. It blooms in defiance, the rarest strength masked in elegance.",
+  "beyond_the_block:azuros": "A fragment of the sky’s sorrow, stilled in crystal. Deep as ocean, light as cloud, it sings the song of far-off places never touched by flame.",
+  "beyond_the_block:amberine": "Trapped sunlight, alive with memory. It flickers like forgotten warmth in winter’s heart, comforting yet wild, the echo of a fire never lit by man.",
+  "beyond_the_block:miranite": "Ever-shifting, like dreams caught in stone. Miranite refuses stillness—its glow dances between colors, truths, and destinies not yet written.",
+  "beyond_the_block:indigra": "The soul of twilight bottled in violet fire. It is both an ending and a beginning, the dusk between decisions where magic makes its home."
+}

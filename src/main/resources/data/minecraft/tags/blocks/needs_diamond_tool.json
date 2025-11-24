@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:deepslate_ruby_ore",
+    "beyond_the_block:nocturnite_ore",
+    "beyond_the_block:deepslate_nocturnite_ore",
+    "beyond_the_block:nether_nocturnite_ore",
+    "beyond_the_block:end_nocturnite_ore",
+    "beyond_the_block:nocturnite_block",
+    "beyond_the_block:experience_block"
+  ]
+}

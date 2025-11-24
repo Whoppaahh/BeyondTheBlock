@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "beyond_the_block:block/gem_block/gem_block_front",
+    "south": "beyond_the_block:block/gem_block/gem_block_back",
+    "up": "beyond_the_block:block/gem_block/gem_block_top",
+    "down": "beyond_the_block:block/gem_block/gem_block_back",
+    "east": "beyond_the_block:block/gem_block/gem_block_side",
+    "west": "beyond_the_block:block/gem_block/gem_block_side",
+    "particle": "beyond_the_block:block/gem_block/gem_block_front"
+  }
+}

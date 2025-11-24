@@ -1,0 +1,48 @@
+[
+  {
+    "processor_type": "minecraft:rule",
+    "rules": [
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:stone_brick_slab"
+        },
+        "output_state": {
+          "Name": "minecraft:mangrove_slab"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:stone_brick_wall"
+        },
+        "output_state": {
+          "Name": "minecraft:mangrove_fence"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:stone_bricks",
+          "probability": 0.7
+        },
+        "output_state": {
+          "Name": "minecraft:mangrove_planks"
+        }
+      }
+    ]
+  },
+  {
+    "processor_type": "minecraft:block_age",
+    "mossiness": 0.7
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "player_vault_open": {
+    "category": "blocks",
+    "subtitle": "beyond_the_block.player_vault_open",
+    "sounds": [
+      "beyond_the_block:player_vault_open"
+    ]
+  },
+  "riddle_generated": {
+    "category": "blocks",
+    "subtitle": "beyond_the_block.riddle_generated",
+    "sounds": [
+      "beyond_the_block:riddle_generated"
+    ]
+  },
+  "riddle_complete": {
+    "category": "blocks",
+    "subtitle": "beyond_the_block.riddle_complete",
+    "sounds": [
+      "beyond_the_block:riddle_complete"
+    ]
+  }
+}

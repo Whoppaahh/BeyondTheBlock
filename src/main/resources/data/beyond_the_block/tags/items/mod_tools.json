@@ -1,0 +1,40 @@
+{
+  "replace": false,
+  "values": [
+
+    "beyond_the_block:chromite_pickaxe",
+    "beyond_the_block:chromite_axe",
+    "beyond_the_block:chromite_hoe",
+    "beyond_the_block:chromite_shovel",
+
+    "beyond_the_block:amberine_pickaxe",
+    "beyond_the_block:amberine_axe",
+    "beyond_the_block:amberine_hoe",
+    "beyond_the_block:amberine_shovel",
+
+    "beyond_the_block:miranite_pickaxe",
+    "beyond_the_block:miranite_axe",
+    "beyond_the_block:miranite_hoe",
+    "beyond_the_block:miranite_shovel",
+
+    "beyond_the_block:xirion_pickaxe",
+    "beyond_the_block:xirion_axe",
+    "beyond_the_block:xirion_hoe",
+    "beyond_the_block:xirion_shovel",
+
+    "beyond_the_block:azuros_pickaxe",
+    "beyond_the_block:azuros_axe",
+    "beyond_the_block:azuros_hoe",
+    "beyond_the_block:azuros_shovel",
+
+    "beyond_the_block:ruby_pickaxe",
+    "beyond_the_block:ruby_axe",
+    "beyond_the_block:ruby_hoe",
+    "beyond_the_block:ruby_shovel",
+
+    "beyond_the_block:rosette_pickaxe",
+    "beyond_the_block:rosette_axe",
+    "beyond_the_block:rosette_hoe",
+    "beyond_the_block:rosette_shovel"
+  ]
+}

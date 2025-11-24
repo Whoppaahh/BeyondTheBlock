@@ -1,0 +1,13 @@
+{
+  "type": "beyond_the_block:custom_blasting",
+  "ingredient": {
+    "item": "minecraft:raw_gold_block"
+  },
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 9
+  },
+  "experience": 4.5,
+  "cookingtime": 3000,
+  "group": "gold_ingot"
+}

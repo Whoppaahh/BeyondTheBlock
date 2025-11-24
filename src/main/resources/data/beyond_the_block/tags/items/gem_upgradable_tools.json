@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:amberine_sword",
+    "beyond_the_block:amberine_axe",
+    "beyond_the_block:azuros_sword",
+    "beyond_the_block:azuros_axe",
+    "beyond_the_block:chromite_sword",
+    "beyond_the_block:chromite_axe",
+    "beyond_the_block:rosette_sword",
+    "beyond_the_block:rosette_axe",
+    "beyond_the_block:miranite_sword",
+    "beyond_the_block:miranite_axe",
+    "beyond_the_block:ruby_sword",
+    "beyond_the_block:ruby_axe",
+    "beyond_the_block:ruby_pickaxe",
+    "beyond_the_block:ruby_hoe",
+    "beyond_the_block:ruby_shovel",
+    "beyond_the_block:xirion_sword",
+    "beyond_the_block:xirion_axe",
+    "beyond_the_block:xirion_pickaxe",
+    "beyond_the_block:xirion_hoe",
+    "beyond_the_block:xirion_shovel"
+  ]
+}

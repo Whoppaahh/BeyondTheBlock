@@ -1,0 +1,15 @@
+{
+  "name": "beyond_the_block:shrine/swamp_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "beyond_the_block:shrine/plains_shrine",
+        "processors": "beyond_the_block:swamp_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

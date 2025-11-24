@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:ruby_block",
+    "beyond_the_block:amberine_ore",
+    "beyond_the_block:deepslate_amberine_ore",
+    "beyond_the_block:amberine_block"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/layered_cube",
+  "textures": {
+    "layer0": "minecraft:block/end_stone",
+    "layer1" : "beyond_the_block:block/rosette_ore"
+  }
+}

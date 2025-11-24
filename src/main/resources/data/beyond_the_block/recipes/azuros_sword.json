@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": {
+      "item": "beyond_the_block:azuros"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  R",
+    " R ",
+    "S  "
+  ],
+  "result": {
+    "item": "beyond_the_block:azuros_sword"
+  }
+}

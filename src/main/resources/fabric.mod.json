@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "beyond_the_block",
+	"version": "${version}",
+	"name": "Beyond The Block",
+	"description": "Adds a bunch of new items, including ores/tools/armour and some new status effects and enchantments",
+	"authors": [
+		"Whoppaahh"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "MIT",
+	"icon": "assets/beyond_the_block/icon.png",
+	"environment": "*",
+	"accessWidener": "beyond_the_block.accesswidener",
+	"entrypoints": {
+		"main": ["net.ryan.beyond_the_block.BeyondTheBlock"],
+		"client": ["net.ryan.beyond_the_block.BeyondTheBlockClient"],
+		"fabric-datagen": ["net.ryan.beyond_the_block.datagen.ModDataGeneration"],
+		"modmenu": ["net.ryan.beyond_the_block.config.ModMenu"]
+	},
+	"mixins": [
+      "beyond_the_block.mixins.json",
+		{
+			"config": "beyond_the_block.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*",
+		"cloth-config": ">=6.2.62",
+		"modmenu": ">=4.0.6",
+		"lambdynlights": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

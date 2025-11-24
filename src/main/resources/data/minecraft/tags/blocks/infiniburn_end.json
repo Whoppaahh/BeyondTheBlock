@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:amberine_ore",
+    "beyond_the_block:deepslate_amberine_ore",
+    "beyond_the_block:end_azuros_ore",
+    "beyond_the_block:end_chromite_ore",
+    "beyond_the_block:end_indigra_ore",
+    "beyond_the_block:end_miranite_ore",
+    "beyond_the_block:end_rosette_ore",
+    "beyond_the_block:end_nocturnite_ore",
+    "beyond_the_block:end_xirion_ore"
+  ]
+}

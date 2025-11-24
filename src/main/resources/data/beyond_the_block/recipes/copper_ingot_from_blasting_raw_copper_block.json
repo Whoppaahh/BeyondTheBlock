@@ -1,0 +1,13 @@
+{
+  "type": "beyond_the_block:custom_blasting",
+  "ingredient": {
+    "item": "minecraft:raw_copper_block"
+  },
+  "result": {
+    "item": "minecraft:copper_ingot",
+    "count": 9
+  },
+  "experience": 3.0,
+  "cookingtime": 1000,
+  "group": "copper_ingot"
+}

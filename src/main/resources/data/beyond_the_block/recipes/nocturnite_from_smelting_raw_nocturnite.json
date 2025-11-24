@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 1200,
+  "experience": 15.0,
+  "group": "nocturnite",
+  "ingredient": {
+    "item": "beyond_the_block:raw_nocturnite"
+  },
+  "result": "beyond_the_block:nocturnite"
+}

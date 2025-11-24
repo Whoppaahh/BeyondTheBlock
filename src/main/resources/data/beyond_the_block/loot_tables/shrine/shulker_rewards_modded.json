@@ -1,0 +1,102 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": { "min": 0, "max": 1, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "beyond_the_block:mod_weapons",
+          "functions": [
+            {
+              "function": "beyond_the_block:filtered_enchant_randomly",
+              "namespaces": ["beyond_the_block"]
+            }
+          ],
+          "weight": 5
+        }
+      ]
+    },
+    {
+      "rolls": { "min": 1, "max": 1, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "beyond_the_block:mod_tools",
+          "functions": [
+            {
+              "function": "beyond_the_block:filtered_enchant_randomly",
+              "namespaces": ["beyond_the_block"]
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "beyond_the_block:astracinder",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": { "min": 0, "max": 1, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "beyond_the_block:mod_armours",
+          "functions": [
+            {
+              "function": "beyond_the_block:filtered_enchant_randomly",
+              "namespaces": ["beyond_the_block"]
+            }
+          ],
+          "weight": 5
+        },
+        {
+          "type": "item",
+          "name": "beyond_the_block:experience_block",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": { "min": 1, "max": 1, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "tag",
+          "expand": true,
+          "name": "beyond_the_block:mod_ores",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "rolls": { "min": 1, "max": 2, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "tag",
+          "expand": true,
+          "name": "beyond_the_block:cut_gems",
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "rolls": { "min": 1, "max": 2, "type": "minecraft:uniform" },
+      "entries": [
+        {
+          "type": "item",
+          "expand": true,
+          "name": "minecraft:book",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "beyond_the_block:filtered_enchant_randomly",
+              "namespaces": ["beyond_the_block"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SI ",
+    " PP",
+    " PP"
+  ],
+  "key": {
+    "S": { "item": "minecraft:string" },
+    "I": { "item": "minecraft:iron_nugget" },
+    "P": { "item": "minecraft:paper" }
+  },
+  "result": {
+    "item": "minecraft:name_tag",
+    "count": 1
+  }
+}

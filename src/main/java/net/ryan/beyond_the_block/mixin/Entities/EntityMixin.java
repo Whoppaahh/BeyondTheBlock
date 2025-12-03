@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
-import net.ryan.beyond_the_block.utils.Helpers.EntityTagManager;
+import net.ryan.beyond_the_block.utils.VillagerNames.EntityTagManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

@@ -10,7 +10,7 @@
     "#minecraft:saplings",
     "#minecraft:replaceable_plants",
     "#minecraft:flowers",
-    "#minecraft:dirt",
-    "#minecraft:walls"
+    "#minecraft:walls",
+    "minecraft:grass_block"
   ]
 }

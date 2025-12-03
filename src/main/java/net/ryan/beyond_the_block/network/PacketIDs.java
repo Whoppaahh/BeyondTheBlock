@@ -5,6 +5,7 @@ import net.ryan.beyond_the_block.BeyondTheBlock;
 
 public class PacketIDs {
     public static final Identifier SYNC_INVENTORY_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_inventory");
+    public static final Identifier SYNC_BREEDING_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_breeding");
 
     public static final Identifier GUARD_FOLLOW_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "guard_follow");
     public static final Identifier GUARD_PATROL_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "guard_patrol");

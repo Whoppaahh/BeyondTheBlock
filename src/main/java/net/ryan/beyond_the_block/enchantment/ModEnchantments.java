@@ -19,6 +19,7 @@ import net.ryan.beyond_the_block.enchantment.Armour.helmets.ShadowsVeilEnchantme
 import net.ryan.beyond_the_block.enchantment.Armour.leggings.FrozenMomentumEnchantment;
 import net.ryan.beyond_the_block.enchantment.Armour.leggings.GracefulMovementEnchantment;
 import net.ryan.beyond_the_block.enchantment.Armour.leggings.NightstrideEnchantment;
+import net.ryan.beyond_the_block.enchantment.Tools.FishingCookingEnchantment;
 import net.ryan.beyond_the_block.enchantment.Tools.axes.BarkskinEnchantment;
 import net.ryan.beyond_the_block.enchantment.Tools.axes.NightfallCleaveEnchantment;
 import net.ryan.beyond_the_block.enchantment.Tools.axes.TimbercutEnchantment;
@@ -35,7 +36,7 @@ import net.ryan.beyond_the_block.enchantment.Tools.swords.*;
 public class ModEnchantments {
 
     public static Enchantment FISHING_COOKING = register("fishing_cooking",
-            new FlameSweepEnchantment(Enchantment.Rarity.UNCOMMON,
+            new FishingCookingEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.FISHING_ROD, EquipmentSlot.MAINHAND));
     public static Enchantment FLAME_SWEEP = register("flame_sweep",
             new FlameSweepEnchantment(Enchantment.Rarity.UNCOMMON,
@@ -44,7 +45,7 @@ public class ModEnchantments {
             new WrathOfThorEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.BOW, EnchantmentTarget.CROSSBOW, EquipmentSlot.MAINHAND));
     public static Enchantment HOMING = register("homing",
-            new WrathOfThorEnchantment(Enchantment.Rarity.UNCOMMON,
+            new ArrowHomingEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.BOW, EnchantmentTarget.CROSSBOW, EquipmentSlot.MAINHAND));
     //region Armour
     public static Enchantment WARDING_GLYPH = register("warding_glyph",

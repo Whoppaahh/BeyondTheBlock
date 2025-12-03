@@ -24,7 +24,7 @@ import net.ryan.beyond_the_block.effect.Beneficial.SoulLinkEffect;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
-import net.ryan.beyond_the_block.utils.Helpers.ArrowHitsAccess;
+import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
 import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

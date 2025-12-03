@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.utils.Helpers;
+package net.ryan.beyond_the_block.utils.VillagerNames;
 
 public interface EntityTagManager {
     //April Fools

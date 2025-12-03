@@ -21,9 +21,50 @@ public class ModConfig implements ConfigData {
     public ShrinesConfig shrines = new ShrinesConfig();
     public EnchantmentConfig enchantments = new EnchantmentConfig();
     public MiscConfig misc = new MiscConfig();
-    public VillagerNamesConfig villagerNames = new VillagerNamesConfig();
 
+
+    public VillagerNamesConfig villagerNames = new VillagerNamesConfig();
     public AutoCameraConfig autoCamera = new AutoCameraConfig();
+    public SnowConfig snowConfig = new SnowConfig();
+    public TrajectoryConfig trajectoryConfig = new TrajectoryConfig();
+
+    public static class TrajectoryConfig{
+        public boolean enabled = true;
+
+        public boolean showBow = true;
+        public boolean showCrossbow = true;
+        public boolean showTrident = false;      // future use
+        public boolean showThrowables = false;   // snowballs, pearls, potions
+
+        // When to show
+        public boolean onlyWhileAiming = true;   // right-click / drawing
+        public boolean requireSneak = false;     // only show while sneaking
+
+        // Quality
+        public int maxSteps = 64;
+
+        // Visuals
+        public boolean gradient = true;
+        public boolean thickLine = true;
+        public int thicknessLines = 3;           // number of parallel lines
+        public float thicknessOffset = 0.03f;    // world offset between lines
+        public boolean showImpactMarker = true;
+        public int colorNone = 0x19FFE0;   // cyan-ish for no collision in range
+        public int colorBlock = 0xFF5555;  // red for block hits
+        public int colorEntity = 0xFFF16A; // yellow for entity hits
+    }
+
+    public static class SnowConfig{
+        // How many random columns per tick should be checked for open-sky snow?
+        public int snowOpenSkyAttemptsPerTick = 6;
+
+        // How many random columns per tick should be checked for canopy snow?
+        public int snowCanopyAttemptsPerTick = 4;
+
+        // How high above ground to search for canopy blocks (leaves, fences, plants, etc.)
+        public int snowCanopyScanDepth = 8;
+
+    }
 
     public static class AutoCameraConfig{
         public boolean enableAutoCamera = true;
@@ -38,6 +79,7 @@ public class ModConfig implements ConfigData {
 
     public static class VillagerNamesConfig{
         public boolean enableNames = true;
+        public boolean nameOnlyWhenEmployed = true;
         public boolean colouriseNames = true;
         public double nameVisibilityRange = 8.0;
         public boolean useAlliteration = true;

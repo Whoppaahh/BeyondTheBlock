@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
@@ -46,6 +47,8 @@ import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.screen.Screens.*;
 import net.ryan.beyond_the_block.utils.GUI.FloatingXPManager;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
+import net.ryan.beyond_the_block.utils.Snow.SnowDebugRenderer;
+import net.ryan.beyond_the_block.utils.GUI.TrajectoryRenderer;
 import net.ryan.beyond_the_block.utils.Helpers.HighlightTracker;
 import net.ryan.beyond_the_block.utils.OutlineRenderer;
 import net.ryan.beyond_the_block.village.GuardVillager.Render.GuardEntityRenderer;
@@ -68,6 +71,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        WorldRenderEvents.BEFORE_ENTITIES.register(TrajectoryRenderer::render);
         registerBlockEntities();
         registerGeoItems();
         registerParticles();
@@ -81,6 +85,8 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         FloatingXPManager.register();
 
         OutlineRenderer.init();
+        SnowDebugRenderer.init();
+
     }
 
 

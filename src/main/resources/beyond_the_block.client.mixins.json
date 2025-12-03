@@ -4,9 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "ArmourFeatureRendererMixin",
+    "BatEntityModelMixin",
+    "BipedModelMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "EntityRendererMixin",
     "ExampleClientMixin",
+    "GhastEntityModelMixin",
     "HandledScreenAccessor",
     "HandledScreenMixin",
     "HeldItemFeatureRendererMixin",
@@ -15,11 +19,7 @@
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
-    "TitleScreenMixin",
-    "EntityRendererMixin",
-    "BatEntityModelMixin",
-    "BipedModelMixin",
-    "GhastEntityModelMixin"
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

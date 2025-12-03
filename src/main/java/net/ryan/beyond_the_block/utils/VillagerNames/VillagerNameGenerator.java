@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.utils.VillagerNames;
 
 import net.minecraft.util.Formatting;
 import net.minecraft.util.registry.Registry;

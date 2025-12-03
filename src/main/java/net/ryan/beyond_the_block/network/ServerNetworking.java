@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.network;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.ryan.beyond_the_block.effect.ModEffects;
@@ -37,6 +38,14 @@ public class ServerNetworking {
         //EmeraldEmpire.LOGGER.info("Syncing Guard Stats");
         ServerPlayNetworking.send(player, GUARD_STATS_SYNC_PACKET_ID, buf);
     }
+
+    public static void syncBreedingInfo(ServerPlayerEntity player, AnimalEntity animal, int age) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeVarInt(animal.getId());
+        buf.writeInt(age);
+        ServerPlayNetworking.send(player, SYNC_BREEDING_PACKET_ID, buf);
+    }
+
 
     public static void syncPlayerInventoryWithClient(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();

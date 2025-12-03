@@ -6,7 +6,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.SpectralArrowEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.hit.EntityHitResult;
-import net.ryan.beyond_the_block.utils.Helpers.ArrowHitsAccess;
+import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -24,7 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.utils.Helpers.EntityTagManager;
+import net.ryan.beyond_the_block.utils.VillagerNames.EntityTagManager;
 
 import java.util.HashSet;
 import java.util.Random;

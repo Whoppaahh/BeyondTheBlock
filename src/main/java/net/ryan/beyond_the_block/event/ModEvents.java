@@ -18,7 +18,6 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -56,8 +55,12 @@ import net.ryan.beyond_the_block.entity.SheepColours;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
 import net.ryan.beyond_the_block.utils.FlameTrailPoint;
+import net.ryan.beyond_the_block.utils.GUI.BreedingHUDRenderer;
 import net.ryan.beyond_the_block.utils.GUI.FollowerHudRenderer;
+import net.ryan.beyond_the_block.utils.GUI.TrajectoryHUD;
 import net.ryan.beyond_the_block.utils.Helpers.*;
+import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
+import net.ryan.beyond_the_block.utils.Snow.SnowHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -115,7 +118,7 @@ public class ModEvents {
             MindWardEnchantment.registerTickHandler(world);
             ShadowsVeilEnchantment.registerTickHandler(world);
           //  SpiderCobwebTrailGoal.decayCobwebs(world);
-           // SnowHelper.tickSnow(world);
+            SnowHelper.tick(world);
             RestoreManager.tick(world);
         });
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
@@ -173,6 +176,10 @@ public class ModEvents {
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(ModEvents::dropArrows);
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(CupidArrowEntity::onDamage);
         ServerLivingEntityEvents.AFTER_DEATH.register(FreezeEffectLayer::onDeath);
+
+        HudRenderCallback.EVENT.register(new BreedingHUDRenderer());
+        HudRenderCallback.EVENT.register(new TrajectoryHUD());
+
         HudRenderCallback.EVENT.register((context, tickDelta) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null) return;

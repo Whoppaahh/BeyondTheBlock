@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.utils.ProjectileHelpers;
 
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;

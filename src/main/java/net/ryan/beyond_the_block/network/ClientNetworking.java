@@ -5,10 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.ryan.beyond_the_block.network.Packets.Server.SyncGuardStatsS2CPacket;
-import net.ryan.beyond_the_block.network.Packets.Server.SyncPlayerInventoryS2CPacket;
-import net.ryan.beyond_the_block.network.Packets.Server.SyncRiddleTimeS2CPacket;
-import net.ryan.beyond_the_block.network.Packets.Server.SyncRiddlesS2CPacket;
+import net.ryan.beyond_the_block.network.Packets.Server.*;
 
 import static net.ryan.beyond_the_block.network.PacketIDs.*;
 
@@ -19,6 +16,7 @@ public class ClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(SYNC_RIDDLES_ID, SyncRiddlesS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(GUARD_STATS_SYNC_PACKET_ID, SyncGuardStatsS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(RIDDLE_TIME_SYNC_PACKET_ID, SyncRiddleTimeS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SYNC_BREEDING_PACKET_ID, SyncBreedingInfoS2CPacket::receive);
     }
 
     public static void sendInventoryUpdate(PlayerEntity player) {

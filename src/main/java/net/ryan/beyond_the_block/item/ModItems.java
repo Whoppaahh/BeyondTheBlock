@@ -17,6 +17,7 @@ import net.ryan.beyond_the_block.item.Tools.*;
 
 public class ModItems {
 
+    public static final Item TROWEL_ITEM = registerItem("trowel", new TrowelItem(new FabricItemSettings().group(ModItemGroup.ModToolTab)));
     public static final Item SANTA_HELMET = registerItem("santa_helmet", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroup.ModArmourTab)));
     public static final Item SANTA_CHESTPLATE = registerItem("santa_chestplate", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroup.ModArmourTab)));
     public static final Item SANTA_LEGGINGS = registerItem("santa_leggings", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.LEGS, new Item.Settings().group(ModItemGroup.ModArmourTab)));

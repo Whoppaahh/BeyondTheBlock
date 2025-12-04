@@ -1,0 +1,19 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_empty" }
+    },
+
+    { "when": { "content": "slime", "level": 1 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_slime_level1" } },
+    { "when": { "content": "slime", "level": 2 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_slime_level2" } },
+    { "when": { "content": "slime", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_slime_level3" } },
+
+    { "when": { "content": "honey", "level": 1 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_honey_level1" } },
+    { "when": { "content": "honey", "level": 2 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_honey_level2" } },
+    { "when": { "content": "honey", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_honey_level3" } },
+
+    { "when": { "content": "magma", "level": 1 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level1" } },
+    { "when": { "content": "magma", "level": 2 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level2" } },
+    { "when": { "content": "magma", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level3" } }
+  ]
+}

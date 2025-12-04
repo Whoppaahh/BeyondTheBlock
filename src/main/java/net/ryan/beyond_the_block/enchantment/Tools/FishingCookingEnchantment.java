@@ -6,7 +6,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import org.jetbrains.annotations.Nullable;
 
 public class FishingCookingEnchantment extends Enchantment {
     public FishingCookingEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot... slotTypes) {

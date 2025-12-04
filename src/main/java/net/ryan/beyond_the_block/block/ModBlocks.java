@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.OreBlock;
 import net.minecraft.entity.EquipmentSlot;
@@ -22,6 +23,16 @@ import net.ryan.beyond_the_block.item.ModItemGroup;
 
 
 public class ModBlocks {
+
+    public static final Block DYED_WATER_CAULDRON_BLOCK = registerBlock("dyed_water_cauldron", new DyedWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).nonOpaque()), ModItemGroup.ModBlocksTab);
+    public static final Block MODDED_FLUID_CAULDRON_BLOCK = registerBlock("modded_fluid_cauldron", new ModdedFluidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).nonOpaque().luminance(state -> {
+        if(!(state.getBlock() instanceof ModdedFluidCauldronBlock block)) return 0;
+        return switch (state.get(ModdedFluidCauldronBlock.CONTENT)){
+            case MAGMA -> 15;
+            case HONEY -> 4;
+            case SLIME -> 0;
+        };
+    })), ModItemGroup.ModBlocksTab);
     public static final Block SANTA_HAT = registerBlockWithoutBlockItem("santa_hat",
             new SantaHat(FabricBlockSettings.of(Material.WOOL).strength(1f,1f)), ModItemGroup.ModArmourTab);
     public static final Item SANTA_HAT_ITEM = Registry.register(Registry.ITEM, new Identifier(BeyondTheBlock.MOD_ID, "santa_hat"), new BlockItem(SANTA_HAT, new FabricItemSettings().group(ModItemGroup.ModArmourTab)

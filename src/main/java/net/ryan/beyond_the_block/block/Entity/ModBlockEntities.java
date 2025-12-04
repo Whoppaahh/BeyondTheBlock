@@ -14,6 +14,15 @@ import net.ryan.beyond_the_block.block.ModBlocks;
 
 public class ModBlockEntities {
 
+    public static final BlockEntityType<DyedWaterCauldronBlockEntity> DYED_WATER_CAULDRON_BLOCK_ENTITY =
+            Registry.register(Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "dyed_water_cauldron_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(DyedWaterCauldronBlockEntity::new, ModBlocks.DYED_WATER_CAULDRON_BLOCK).build());
+
+    public static final BlockEntityType<ModdedFluidCauldronBlockEntity> MODDED_FLUID_CAULDRON_BLOCK_ENTITY =
+            Registry.register(Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "modded_fluid_cauldron_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(ModdedFluidCauldronBlockEntity::new, ModBlocks.MODDED_FLUID_CAULDRON_BLOCK).build());
     public static final BlockEntityType<GemBlockEntity> GEM_BLOCK_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE,
                     new Identifier(BeyondTheBlock.MOD_ID, "gem_block_entity"),

@@ -12,6 +12,9 @@ public class ModScreenHandlers {
     public static final ScreenHandlerType<GemScreenHandler> GEM_SCREEN_HANDLER =
             new ExtendedScreenHandlerType<>(GemScreenHandler::new);
 
+    public static final ScreenHandlerType<TrowelScreenHandler> TROWEL_SCREEN_HANDLER =
+            new ExtendedScreenHandlerType<>(TrowelScreenHandler::new);
+
     public static final ScreenHandlerType<InfiFurnaceScreenHandler> INFI_SCREEN_HANDLER =
             new ExtendedScreenHandlerType<>(InfiFurnaceScreenHandler::new);
 
@@ -38,5 +41,7 @@ public class ModScreenHandlers {
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("staff_screen"), STAFF_SCREEN_HANDLER);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("infi_furnace_screen"), INFI_SCREEN_HANDLER);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("decrafter_screen"), DECRAFTER_SCREEN_HANDLER);
+
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier("trowel_screen"), TROWEL_SCREEN_HANDLER);
     }
 }

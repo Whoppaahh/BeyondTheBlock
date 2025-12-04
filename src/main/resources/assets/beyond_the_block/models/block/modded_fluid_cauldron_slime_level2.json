@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "texture": "minecraft:block/slime_block"
+  },
+  "elements": [
+    {
+      "from": [2, 11, 2],
+      "to":   [14, 11, 14],
+      "faces": {
+        "up": { "texture": "#texture" }
+      }
+    }
+  ]
+}

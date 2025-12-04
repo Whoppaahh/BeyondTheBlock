@@ -1,8 +1,6 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -14,8 +12,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Box;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
 import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.utils.VillagerNames.VillagerEntityMixinAccessor;
 import net.ryan.beyond_the_block.utils.VillagerNames.VillagerNameGenerator;

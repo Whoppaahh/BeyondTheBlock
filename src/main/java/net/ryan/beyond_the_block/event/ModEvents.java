@@ -80,6 +80,7 @@ public class ModEvents {
         registerBlockConversions();
         registerServerTickEvents();
         registerEntityEvents();
+        HiveTracker.init();
     }
 
     private static void registerPlayerEvents() {
@@ -120,6 +121,7 @@ public class ModEvents {
           //  SpiderCobwebTrailGoal.decayCobwebs(world);
             SnowHelper.tick(world);
             RestoreManager.tick(world);
+            //HoneyDripHelper.tick(world);
         });
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
             try {
@@ -220,6 +222,11 @@ public class ModEvents {
             if (world.getFluidState(placePos).isOf(Fluids.LAVA) && world.getFluidState(placePos).isStill()) {
                 queueAdjacentSand(world, placePos.toImmutable());
             }
+        }
+
+        ActionResult cauldronResult = ModdedFluidCauldronHandler.handleCauldronUse(player, world, hand, hit);
+        if (cauldronResult != ActionResult.PASS) {
+            return cauldronResult;
         }
 
         ItemStack stack = player.getStackInHand(hand);

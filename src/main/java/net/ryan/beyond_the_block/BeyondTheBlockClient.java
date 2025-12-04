@@ -47,10 +47,10 @@ import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.screen.Screens.*;
 import net.ryan.beyond_the_block.utils.GUI.FloatingXPManager;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
-import net.ryan.beyond_the_block.utils.Snow.SnowDebugRenderer;
 import net.ryan.beyond_the_block.utils.GUI.TrajectoryRenderer;
 import net.ryan.beyond_the_block.utils.Helpers.HighlightTracker;
 import net.ryan.beyond_the_block.utils.OutlineRenderer;
+import net.ryan.beyond_the_block.utils.Snow.SnowDebugRenderer;
 import net.ryan.beyond_the_block.village.GuardVillager.Render.GuardEntityRenderer;
 import net.ryan.beyond_the_block.village.ModVillagers;
 import org.slf4j.Logger;
@@ -133,6 +133,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
     }
 
     private void registerScreens() {
+        HandledScreens.register(ModScreenHandlers.TROWEL_SCREEN_HANDLER, TrowelScreen::new);
         HandledScreens.register(ModScreenHandlers.GEM_SCREEN_HANDLER, GemScreen::new);
         HandledScreens.register(ModScreenHandlers.GUARD_SCREEN_HANDLER, GuardVillagerScreen::new);
         HandledScreens.register(ModScreenHandlers.RIDDLE_CORE_SCREEN_HANDLER, RiddleCoreScreen::new);
@@ -167,6 +168,9 @@ public class BeyondTheBlockClient implements ClientModInitializer {
     private void registerBlockRenderLayers() {
         // Manual translucency
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LAVA_LAMP_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getCutout());
+
 
         // Backup tick retry (stops after success)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

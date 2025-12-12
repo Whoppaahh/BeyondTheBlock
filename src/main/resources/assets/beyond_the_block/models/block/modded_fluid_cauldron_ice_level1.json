@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "texture": "minecraft:block/honey_block_top"
+    "texture": "minecraft:block/ice"
   },
   "elements": [
     {
-      "from": [2, 15, 2],
-      "to":   [14, 15, 14],
+      "from": [2, 9, 2],
+      "to":   [14, 9, 14],
       "faces": {
         "up": { "texture": "#texture" }
       }

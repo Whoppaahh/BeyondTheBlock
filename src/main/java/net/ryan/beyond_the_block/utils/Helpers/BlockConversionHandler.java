@@ -12,7 +12,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -28,7 +27,6 @@ import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
-import net.ryan.beyond_the_block.utils.Snow.SnowHelper;
 
 import java.util.function.BiFunction;
 
@@ -61,7 +59,6 @@ public class BlockConversionHandler {
         return tryConvert(player, world, held, state, pos,
                 BlockConversionHandler::convertFurnace,
                 BlockConversionHandler::convertCraftingTable,
-                BlockConversionHandler::convertToSnow,
                 BlockConversionHandler::convertDirtPath,
                 BlockConversionHandler::convertByEnchantment
         );
@@ -136,18 +133,6 @@ public class BlockConversionHandler {
                     20, 0.3, 0.5, 0.3, 0.1);
         }
         return ActionResult.SUCCESS;
-    }
-
-    private static ActionResult convertToSnow(PlayerEntity player, ConversionContext ctx) {
-        if (!(ctx.held.getItem() instanceof BlockItem bi) || !bi.getBlock().getDefaultState().isIn(BlockTags.SNOW))
-            return ActionResult.PASS;
-
-        BlockPos base = ctx.state.isIn(SnowHelper.SNOW_CAN_COVER) ? ctx.pos.down() : ctx.pos;
-        if (ctx.world.getBlockState(base).getMaterial().isReplaceable()) {
-            ctx.world.setBlockState(base, Blocks.SNOW_BLOCK.getDefaultState(), 3);
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
     }
 
     private static ActionResult convertDirtPath(PlayerEntity player, ConversionContext ctx) {

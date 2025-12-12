@@ -2,7 +2,9 @@ package net.ryan.beyond_the_block.utils.GUI;
 
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.collection.DefaultedList;
 
 public class TrowelInventory extends SimpleInventory {

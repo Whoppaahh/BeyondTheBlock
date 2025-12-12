@@ -1,15 +1,19 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "texture": "minecraft:block/honey_block_top"
+    "texture": "minecraft:block/water_still"
   },
   "elements": [
     {
       "from": [2, 15, 2],
       "to":   [14, 15, 14],
       "faces": {
-        "up": { "texture": "#texture" }
+        "up": {
+          "texture": "#texture",
+          "tintindex": 0
+        }
       }
     }
   ]
 }
+

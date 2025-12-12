@@ -10,13 +10,6 @@ import java.util.List;
 
 public class ModPlacedFeatures {
 
-    public static final RegistryEntry<PlacedFeature> SNOW_PLACED = PlacedFeatures.register("snow_under_blocks",
-            ModConfiguredFeatures.SNOW_CONFIGURED,
-            RarityFilterPlacementModifier.of(1),
-            SquarePlacementModifier.of(),
-            PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-            BiomePlacementModifier.of());
-
     //region XP
     public static final RegistryEntry<PlacedFeature> XP_ORE_PLACED = PlacedFeatures.register("xp_ore_placed",
             ModConfiguredFeatures.XP_ORE, modifiersWithRarity(6,

@@ -10,28 +10,31 @@ import net.ryan.beyond_the_block.BeyondTheBlock;
 public class ModTags {
     public static class Blocks {
 
-        public static final TagKey<Block> NEEDS_RUBY_TOOL = createTag("needs_ruby_tool");
-        public static final TagKey<Block> INCORRECT_FOR_RUBY_TOOL = createTag("incorrect_for_ruby_tool");
+        public static final TagKey<Block> NEEDS_RUBY_TOOL = createBlockTag("needs_ruby_tool");
+        public static final TagKey<Block> INCORRECT_FOR_RUBY_TOOL = createBlockTag("incorrect_for_ruby_tool");
 
-
-        private static TagKey<Block> createTag(String name) {
-            return TagKey.of(Registry.BLOCK.getKey(), Identifier.of(BeyondTheBlock.MOD_ID, name));
+        private static TagKey<Block> createBlockTag(String name) {
+            return TagKey.of(Registry.BLOCK_KEY, Identifier.of(BeyondTheBlock.MOD_ID, name));
         }
     }
 
     public static class Items {
-        public static final TagKey<Item> TRANSFORMABLE_ITEMS = createTag("transformable_items");
+        public static final TagKey<Item> TRANSFORMABLE_ITEMS = createItemTag("transformable_items");
 
-        public static final TagKey<Item> GEM_UPGRADABLE_TOOLS = createTag("gem_upgradable_tools");
-        public static final TagKey<Item> MOD_CUT_GEMS = createTag("mod_cut_gems");
-        public static final TagKey<Item> MOD_ARMOURS = createTag("mod_armours");
-        public static final TagKey<Item> MOD_ORES = createTag("mod_ores");
-        public static final TagKey<Item> MOD_TOOLS = createTag("mod_tools");
-        public static final TagKey<Item> MOD_WEAPONS = createTag("mod_weapons");
+        public static final TagKey<Item> GEM_UPGRADABLE_TOOLS = createItemTag("gem_upgradable_tools");
+        public static final TagKey<Item> MOD_CUT_GEMS = createItemTag("mod_cut_gems");
+        public static final TagKey<Item> MOD_ARMOURS = createItemTag("mod_armours");
+        public static final TagKey<Item> MOD_ORES = createItemTag("mod_ores");
+        public static final TagKey<Item> MOD_TOOLS = createItemTag("mod_tools");
+        public static final TagKey<Item> MOD_WEAPONS = createItemTag("mod_weapons");
 
 
-        private static TagKey<Item> createTag(String name) {
+        private static TagKey<Item> createItemTag(String name) {
             return TagKey.of(Registry.ITEM.getKey(), Identifier.of(BeyondTheBlock.MOD_ID, name));
         }
+    }
+
+    public static void registerModTags(){
+        BeyondTheBlock.LOGGER.info("Registering Mod Tags");
     }
 }

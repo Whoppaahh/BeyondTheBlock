@@ -28,4 +28,9 @@ public class ClientNetworking {
             ClientPlayNetworking.send(SYNC_INVENTORY_PACKET_ID, buf);
         }
     }
+    public static void sendWidthUpdate(int width) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(width);
+            ClientPlayNetworking.send(SYNC_PATH_WIDTH_PACKET_ID, buf);
+        }
 }

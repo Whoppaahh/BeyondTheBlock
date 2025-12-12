@@ -46,6 +46,7 @@ import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
+import net.ryan.beyond_the_block.utils.ModTags;
 import net.ryan.beyond_the_block.utils.TheftDetection.VillageContainerScannerManager;
 import net.ryan.beyond_the_block.utils.VillagerNames.VillagerNameLoader;
 import net.ryan.beyond_the_block.utils.XPOrbs.HomingXPManager;
@@ -53,7 +54,6 @@ import net.ryan.beyond_the_block.village.ModVillagers;
 import net.ryan.beyond_the_block.world.Dimension.ModDimensions;
 import net.ryan.beyond_the_block.world.Feature.ModConfiguredFeatures;
 import net.ryan.beyond_the_block.world.Gen.ModOreGeneration;
-import net.ryan.beyond_the_block.world.Gen.SnowGeneration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -137,8 +137,7 @@ public class BeyondTheBlock implements ModInitializer {
 
     private void registerModContent() {
         ModConfiguredFeatures.registerConfiguredFeatures();
-        SnowGeneration.addToBiomes();
-
+       // SnowGeneration.addToBiomes();
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
         ModItems.registerModItems();
@@ -147,6 +146,7 @@ public class BeyondTheBlock implements ModInitializer {
         ModParticles.registerModParticles();
         ModEnchantments.registerModEnchantments();
         ModEffects.registerEffects();
+        ModTags.registerModTags();
         ModOreGeneration.generateModOres();
         ModLootTableModifiers.modifyLootTables();
         ModDimensions.register();

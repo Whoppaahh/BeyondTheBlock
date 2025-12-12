@@ -1,0 +1,33 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/cauldron"
+      }
+    },
+    {
+      "when": {
+        "level": 1
+      },
+      "apply": {
+        "model": "beyond_the_block:block/dyed_water_cauldron_level1"
+      }
+    },
+    {
+      "when": {
+        "level": 2
+      },
+      "apply": {
+        "model": "beyond_the_block:block/dyed_water_cauldron_level2"
+      }
+    },
+    {
+      "when": {
+        "level": 3
+      },
+      "apply": {
+        "model": "beyond_the_block:block/dyed_water_cauldron_level3"
+      }
+    }
+  ]
+}

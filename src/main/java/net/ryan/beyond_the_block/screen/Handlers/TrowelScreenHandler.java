@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.screen.Handlers;
 
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;

@@ -19,12 +19,11 @@
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
-    "TitleScreenMixin"
+    "MouseScrollMixin",
+    "TitleScreenMixin",
+    "DoubleInventoryAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "DoubleInventoryAccessor"
-  ]
+  }
 }

@@ -10,6 +10,7 @@ import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.utils.GUI.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Config(name = "beyond_the_block")
@@ -25,8 +26,31 @@ public class ModConfig implements ConfigData {
 
     public VillagerNamesConfig villagerNames = new VillagerNamesConfig();
     public AutoCameraConfig autoCamera = new AutoCameraConfig();
-    public SnowConfig snowConfig = new SnowConfig();
     public TrajectoryConfig trajectoryConfig = new TrajectoryConfig();
+    public PathConfig pathConfig = new PathConfig();
+
+    public static class PathConfig{
+        public boolean enabled = true;
+        public int maxDistance = 64;
+        public boolean useTerrainFollowing = true;
+        public boolean preserveDurability = false;
+        public boolean previewMode = true;
+        public String defaultPathBlockId = "minecraft:dirt_path";
+        public List<String> allowedStartingBlocks = Arrays.asList(
+                "minecraft:grass_block",
+                "minecraft:stone",
+                "minecraft:dirt"
+        );
+        public List<String> allowedEndingBlocks = Arrays.asList(
+                "minecraft:grass_block",
+                "minecraft:stone"
+        );
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 9)
+        public int minWidth = 1;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 9)
+        public int maxWidth = 7;
+        public boolean showWidthHud = true;
+    }
 
     public static class TrajectoryConfig{
         public boolean enabled = true;
@@ -52,18 +76,6 @@ public class ModConfig implements ConfigData {
         public int colorNone = 0x19FFE0;   // cyan-ish for no collision in range
         public int colorBlock = 0xFF5555;  // red for block hits
         public int colorEntity = 0xFFF16A; // yellow for entity hits
-    }
-
-    public static class SnowConfig{
-        // How many random columns per tick should be checked for open-sky snow?
-        public int snowOpenSkyAttemptsPerTick = 6;
-
-        // How many random columns per tick should be checked for canopy snow?
-        public int snowCanopyAttemptsPerTick = 4;
-
-        // How high above ground to search for canopy blocks (leaves, fences, plants, etc.)
-        public int snowCanopyScanDepth = 8;
-
     }
 
     public static class AutoCameraConfig{
@@ -118,13 +130,6 @@ public class ModConfig implements ConfigData {
         public boolean rewardsIncludeModdedItems = true;
         @ConfigEntry.BoundedDiscrete(min = 200, max = 240000)
         public long generationInterval = 24000;
-    }
-    public static class BanksConfig{
-        @ConfigEntry.BoundedDiscrete(min = 1, max = 128)
-        public int villageDetectionRange = 32;
-        @ConfigEntry.BoundedDiscrete(min = 200, max = 240000)
-        public long interestInterval = 24000;
-        public float interestRate = 0.05F;
     }
 
     public static class GuardsConfig{

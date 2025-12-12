@@ -1,10 +1,10 @@
 package net.ryan.beyond_the_block.block.Entity;
 
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.block.BlockState;
 
 public class ModdedFluidCauldronBlockEntity extends BlockEntity {
 

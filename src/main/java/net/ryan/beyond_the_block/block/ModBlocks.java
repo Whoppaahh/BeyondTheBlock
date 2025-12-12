@@ -30,7 +30,7 @@ public class ModBlocks {
         return switch (state.get(ModdedFluidCauldronBlock.CONTENT)){
             case MAGMA -> 15;
             case HONEY -> 4;
-            case SLIME -> 0;
+            case SLIME, ICE -> 0;
         };
     })), ModItemGroup.ModBlocksTab);
     public static final Block SANTA_HAT = registerBlockWithoutBlockItem("santa_hat",

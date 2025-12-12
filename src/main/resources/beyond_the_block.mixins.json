@@ -31,7 +31,6 @@
     "Blocks.FenceBlockMixin",
     "Blocks.FluidBlockMixin",
     "Blocks.LecternBlockMixin",
-    "Blocks.PlantBlockMixin",
     "Entities.AnimalEntityBreedingSyncMixin",
     "Entities.ArrowEntityMixin",
     "Entities.EntityMixin",
@@ -41,6 +40,7 @@
     "Entities.LivingEntityMixin",
     "Entities.MobEntityMixin",
     "Entities.PersistentProjectileEntityMixin",
+    "Entities.PersistentProjectileMixin",
     "Entities.PlayerEntityMixin",
     "Entities.SlimeEntityMixin",
     "Entities.SnowballEntityMixin",
@@ -50,6 +50,7 @@
     "Items.CrossbowItemMixin",
     "Items.FireArrowMixin",
     "Items.FishingBobberEntityMixin",
+    "Items.ItemPathMixin",
     "Items.ItemStackMixin"
   ],
   "injectors": {

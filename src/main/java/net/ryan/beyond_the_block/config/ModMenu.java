@@ -170,26 +170,6 @@ public class ModMenu implements ModMenuApi {
                     .setSaveConsumer(v -> config.villagerNames.genderMode = v)
                     .build());
 
-            ConfigCategory snowGeneration = builder.getOrCreateCategory(Text.literal("Snow"));
-            snowGeneration.addEntry(entryBuilder.startIntField(
-                            Text.literal("Open Sky Attempts Per Tick"),
-                            config.snowConfig.snowOpenSkyAttemptsPerTick)
-                    .setDefaultValue(6)
-                    .setSaveConsumer(v -> config.snowConfig.snowOpenSkyAttemptsPerTick = v)
-                    .build());
-            snowGeneration.addEntry(entryBuilder.startIntField(
-                            Text.literal("Canopy Attempts Per Tick"),
-                            config.snowConfig.snowCanopyAttemptsPerTick)
-                    .setDefaultValue(4)
-                    .setSaveConsumer(v -> config.snowConfig.snowCanopyAttemptsPerTick = v)
-                    .build());
-            snowGeneration.addEntry(entryBuilder.startIntField(
-                            Text.literal("Canopy Scan Depth"),
-                            config.snowConfig.snowCanopyScanDepth)
-                    .setDefaultValue(8)
-                    .setSaveConsumer(v -> config.snowConfig.snowCanopyScanDepth = v)
-                    .build());
-
             builder.setSavingRunnable(AutoConfig.getConfigHolder(ModConfig.class)::save);
             return builder.build();
         };

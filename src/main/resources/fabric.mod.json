@@ -23,10 +23,7 @@
 	},
 	"mixins": [
       "beyond_the_block.mixins.json",
-		{
-			"config": "beyond_the_block.client.mixins.json",
-			"environment": "client"
-		}
+      "beyond_the_block.client.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",

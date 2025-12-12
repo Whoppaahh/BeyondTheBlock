@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -123,6 +125,7 @@ public class ModdedFluidCauldronHandler {
                 case SLIME -> Items.SLIME_BLOCK;
                 case HONEY -> Items.HONEY_BLOCK;
                 case MAGMA -> Items.MAGMA_BLOCK;
+                case ICE -> Items.ICE;
             };
 
             player.setStackInHand(hand, new ItemStack(output));
@@ -149,6 +152,7 @@ public class ModdedFluidCauldronHandler {
             case SLIME -> stack.isOf(Items.SLIME_BALL);
             case HONEY -> stack.isOf(Items.HONEY_BOTTLE) || stack.isOf(Items.HONEYCOMB);
             case MAGMA -> stack.isOf(Items.MAGMA_CREAM);
+            case ICE -> false;
         };
     }
 
@@ -192,6 +196,7 @@ public class ModdedFluidCauldronHandler {
             case SLIME -> SoundEvents.ENTITY_SLIME_SQUISH;
             case HONEY -> SoundEvents.BLOCK_HONEY_BLOCK_BREAK;
             case MAGMA -> SoundEvents.BLOCK_LAVA_EXTINGUISH;
+            case ICE -> SoundEvents.BLOCK_SNOW_PLACE;
         };
 
         world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);

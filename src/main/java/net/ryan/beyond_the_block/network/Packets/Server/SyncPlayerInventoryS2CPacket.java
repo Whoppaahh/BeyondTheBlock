@@ -6,6 +6,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.ryan.beyond_the_block.BeyondTheBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class SyncPlayerInventoryS2CPacket {
                 }
                 // Optionally, refresh the UI if needed
                 // player.inventoryListener.onInventoryChanged(player.inventory);
-                //EmeraldEmpire.LOGGER.info("Player Inventory Synced with Client");
+                BeyondTheBlock.LOGGER.info("Player Inventory Synced with Client");
             }
         });
     }

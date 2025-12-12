@@ -39,6 +39,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.block.DyedWaterCauldronBlock;
+import net.ryan.beyond_the_block.block.Entity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.block.Entity.InfiFurnaceBlockEntity;
 import net.ryan.beyond_the_block.block.ModBlocks;
 import net.ryan.beyond_the_block.block.PlayerVaultBlock;
@@ -60,7 +62,6 @@ import net.ryan.beyond_the_block.utils.GUI.FollowerHudRenderer;
 import net.ryan.beyond_the_block.utils.GUI.TrajectoryHUD;
 import net.ryan.beyond_the_block.utils.Helpers.*;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
-import net.ryan.beyond_the_block.utils.Snow.SnowHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -119,9 +120,12 @@ public class ModEvents {
             MindWardEnchantment.registerTickHandler(world);
             ShadowsVeilEnchantment.registerTickHandler(world);
           //  SpiderCobwebTrailGoal.decayCobwebs(world);
-            SnowHelper.tick(world);
+           // SnowHelper.tick(world);
             RestoreManager.tick(world);
-            //HoneyDripHelper.tick(world);
+            HoneyDripHelper.tick(world);
+            PowderSnowCauldronHelper.tick(world);
+            MagmaDripHelper.tick(world);
+            IceConversionHelper.tick(world);
         });
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
             try {
@@ -224,12 +228,39 @@ public class ModEvents {
             }
         }
 
+            BlockPos pos = hit.getBlockPos();
+            BlockState state = world.getBlockState(pos);
+            ItemStack stack = player.getStackInHand(hand);
+
+            if (state.isOf(Blocks.WATER_CAULDRON) && stack.getItem() instanceof DyeItem dyeItem) {
+
+                int rgb = DyedWaterCauldronBlock.toRgb(dyeItem.getColor());
+
+                world.setBlockState(
+                        pos,
+                        ModBlocks.DYED_WATER_CAULDRON_BLOCK.getDefaultState()
+                                .with(LeveledCauldronBlock.LEVEL, state.get(LeveledCauldronBlock.LEVEL)),
+                        3
+                );
+
+                BlockEntity be = world.getBlockEntity(pos);
+                if (be instanceof DyedWaterCauldronBlockEntity dyed) {
+                    dyed.mixDye(rgb);
+                }
+
+                if (!player.isCreative()) stack.decrement(1);
+
+                world.playSound(null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1, 1.1f);
+
+                return ActionResult.SUCCESS;
+            }
+
+
         ActionResult cauldronResult = ModdedFluidCauldronHandler.handleCauldronUse(player, world, hand, hit);
         if (cauldronResult != ActionResult.PASS) {
             return cauldronResult;
         }
 
-        ItemStack stack = player.getStackInHand(hand);
         int tillLevel = EnchantmentHelper.getLevel(ModEnchantments.DEEP_TILL, stack);
         if (tillLevel > 0) {
             MyEnchantmentHelper.tillArea(world, hit.getBlockPos(), tillLevel);
@@ -299,9 +330,6 @@ public class ModEvents {
     private static ActionResult handleBlockConversion(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
         ActionResult result;
 
-        result = convertToSnow(player, world, hand, hit);
-        if (result != ActionResult.PASS) return result;
-
         result = convertDirtPath(player, world, hand, hit);
         if (result != ActionResult.PASS) return result;
 
@@ -311,48 +339,7 @@ public class ModEvents {
         result = convertFurnace(player, world, hand, hit);
         return result;
     }
-    private static ActionResult convertToSnow(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
-        BlockPos clickedPos = hit.getBlockPos();
-        BlockState clicked = world.getBlockState(clickedPos);
-        ItemStack stack = player.getStackInHand(hand);
 
-        if (world.isClient) return ActionResult.PASS;
-
-        // Check if clicked block is a snow layer
-        if (clicked.isOf(Blocks.SNOW)) {
-            BlockPos below = clickedPos.down();
-            BlockState base = world.getBlockState(below);
-
-            // Only replace if the base block is replaceable or a standard ground block
-            if (base.getMaterial().isReplaceable() || base.isOf(Blocks.GRASS_BLOCK) || base.isOf(Blocks.DIRT) || base.isOf(Blocks.SAND)) {
-                world.setBlockState(below, Blocks.SNOW_BLOCK.getDefaultState(), 3);
-            }
-        }
-
-        // Only act if holding a snow block
-        if (!(stack.getItem() instanceof BlockItem item && item.getBlock().getDefaultState().isIn(BlockTags.SNOW))) {
-            return ActionResult.PASS;
-        }
-
-        BlockPos basePos;
-
-        // If clicked block is a “top block” we want to preserve, replace the block below
-        if (clicked.isIn(SnowHelper.SNOW_CAN_COVER)) {
-            basePos = clickedPos.down();
-        } else {
-            basePos = clickedPos;
-        }
-
-        BlockState baseState = world.getBlockState(basePos);
-
-        // Only replace if base block is replaceable or in SNOW_CAN_COVER
-        if (baseState.getMaterial().isReplaceable() || baseState.isIn(SnowHelper.SNOW_CAN_COVER)) {
-            world.setBlockState(basePos, Blocks.SNOW_BLOCK.getDefaultState(), 3);
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
     private static ActionResult convertDirtPath(PlayerEntity playerEntity, World world, Hand hand, BlockHitResult blockHitResult) {
         BlockPos pos = blockHitResult.getBlockPos();
         BlockState state = world.getBlockState(pos);

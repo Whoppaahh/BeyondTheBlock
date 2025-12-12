@@ -199,7 +199,8 @@ public class ModdedFluidCauldronBlock extends LeveledCauldronBlock implements Bl
     public enum Content implements StringIdentifiable {
         SLIME("slime"),
         HONEY("honey"),
-        MAGMA("magma");
+        MAGMA("magma"),
+        ICE("ice");
 
         private final String name;
 

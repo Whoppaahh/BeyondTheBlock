@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 
 public class PacketIDs {
+    public static final Identifier SYNC_PATH_WIDTH_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_path_width");
     public static final Identifier SYNC_INVENTORY_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_inventory");
     public static final Identifier SYNC_BREEDING_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_breeding");
 

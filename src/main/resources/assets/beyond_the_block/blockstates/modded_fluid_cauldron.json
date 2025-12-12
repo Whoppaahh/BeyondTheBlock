@@ -14,6 +14,10 @@
 
     { "when": { "content": "magma", "level": 1 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level1" } },
     { "when": { "content": "magma", "level": 2 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level2" } },
-    { "when": { "content": "magma", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level3" } }
+    { "when": { "content": "magma", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_magma_level3" } },
+
+    { "when": { "content": "ice", "level": 1 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_ice_level1" } },
+    { "when": { "content": "ice", "level": 2 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_ice_level2" } },
+    { "when": { "content": "ice", "level": 3 }, "apply": { "model": "beyond_the_block:block/modded_fluid_cauldron_ice_level3" } }
   ]
 }

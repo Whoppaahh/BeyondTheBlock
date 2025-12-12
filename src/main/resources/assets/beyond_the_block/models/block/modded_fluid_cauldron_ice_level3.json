@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "texture": "minecraft:block/honey_block_top"
+    "texture": "minecraft:block/ice"
   },
   "elements": [
     {

@@ -6,8 +6,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.screen.Handlers.StaffScreenHandler;
 import net.ryan.beyond_the_block.screen.Handlers.TrowelScreenHandler;
 
 

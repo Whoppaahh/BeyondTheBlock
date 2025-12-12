@@ -1,31 +1,42 @@
 package net.ryan.beyond_the_block;
 
 import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.block.Block;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.ryan.beyond_the_block.block.Entity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.block.Entity.ModBlockEntities;
 import net.ryan.beyond_the_block.block.Entity.Render.*;
 import net.ryan.beyond_the_block.block.ModBlocks;
+import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.effect.Beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithEnchantment;
@@ -49,14 +60,17 @@ import net.ryan.beyond_the_block.utils.GUI.FloatingXPManager;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
 import net.ryan.beyond_the_block.utils.GUI.TrajectoryRenderer;
 import net.ryan.beyond_the_block.utils.Helpers.HighlightTracker;
+import net.ryan.beyond_the_block.utils.Helpers.PathPreviewState;
+import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
 import net.ryan.beyond_the_block.utils.OutlineRenderer;
-import net.ryan.beyond_the_block.utils.Snow.SnowDebugRenderer;
 import net.ryan.beyond_the_block.village.GuardVillager.Render.GuardEntityRenderer;
 import net.ryan.beyond_the_block.village.ModVillagers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
+
+import java.util.List;
 
 public class BeyondTheBlockClient implements ClientModInitializer {
 
@@ -83,10 +97,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         registerDynamicLights();
 
         FloatingXPManager.register();
-
         OutlineRenderer.init();
-        SnowDebugRenderer.init();
-
     }
 
 
@@ -99,6 +110,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.SINGLE_INPUT_BLOCK_ENTITY, SingleInputBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.DOUBLE_INPUT_BLOCK_ENTITY, DoubleInputBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.ANIMATED_BLOCK_ENTITY, AnimatedBlockRenderer::new);
+
     }
 
     private void registerGeoItems() {
@@ -169,13 +181,107 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         // Manual translucency
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LAVA_LAMP_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getTranslucent());
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+            if (world != null && pos != null && world.getBlockEntity(pos) instanceof DyedWaterCauldronBlockEntity be) {
+                return be.getColor();
+            }
+            return 0x3F76E4; // default water tint
+        }, ModBlocks.DYED_WATER_CAULDRON_BLOCK);
 
 
         // Backup tick retry (stops after success)
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (!modOresLayersRegistered) attemptRegisterModOres();
+            updatePathPreview(client);
         });
+
+        WorldRenderEvents.AFTER_ENTITIES.register((context) -> {
+            if(PathPreviewState.hasPreview() && AutoConfig.getConfigHolder(ModConfig.class).get().pathConfig.previewMode){
+                renderPathPreview(context.matrixStack());
+            }
+        });
+    }
+
+    private void renderPathPreview(MatrixStack matrices) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        Camera camera = client.gameRenderer.getCamera();
+        Vec3d camPos = camera.getPos();
+
+        VertexConsumerProvider.Immediate provider = client.getBufferBuilders().getEntityVertexConsumers();
+        VertexConsumer consumer = provider.getBuffer(RenderLayer.getLines());
+
+        for (BlockPos pos : PathPreviewState.getPositions()) {
+            double x = pos.getX() - camPos.x;
+            double y = pos.getY() - camPos.y;
+            double z = pos.getZ() - camPos.z;
+
+            Box box = new Box(x, y, z, x + 1, y + 1, z + 1);
+
+            WorldRenderer.drawBox(
+                    matrices,
+                    consumer,
+                    box,
+                    0f, 1f, 0f, 1f // RGBA - bright green
+            );
+        }
+
+        provider.draw(); // flush to GPU
+    }
+
+
+
+    private void updatePathPreview(MinecraftClient client) {
+        if (client.player == null || client.world == null) {
+            PathPreviewState.clear();
+            return;
+        }
+
+        ItemStack stack = client.player.getMainHandStack();
+        if (!(stack.getItem() instanceof ShovelItem)) {
+            PathPreviewState.clear();
+            return;
+        }
+
+        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).get();
+        var pc = config.pathConfig;
+
+        // Must have a starting point set
+        if (!PathToolHelper.hasStart(stack)) {
+            PathPreviewState.clear();
+            return;
+        }
+
+        // Must be looking at a block
+        if (!(client.crosshairTarget instanceof BlockHitResult hit)) {
+            PathPreviewState.clear();
+            return;
+        }
+
+        BlockPos start = PathToolHelper.getStart(stack);
+        BlockPos end = hit.getBlockPos();
+
+        // Too far? No preview
+        if (!PathToolHelper.withinMaxDistance(start, end, pc.maxDistance)) {
+            PathPreviewState.clear();
+            return;
+        }
+
+        // Compute width
+        int width = PathToolHelper.getWidth(stack, config);
+
+        // Compute line & widened area
+        List<BlockPos> centerLine = PathToolHelper.computeLine2D(start, end);
+        var direction = PathToolHelper.getPrimaryDirection(start, end);
+        List<BlockPos> full = PathToolHelper.widenLine(centerLine, width, direction);
+
+        // Terrain-follow for preview
+        List<BlockPos> adjusted = full.stream()
+                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos, pc.useTerrainFollowing))
+                .toList();
+
+        PathPreviewState.setPositions(adjusted);
     }
 
     private void attemptRegisterModOres() {

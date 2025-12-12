@@ -8,16 +8,10 @@ import net.minecraft.world.gen.feature.*;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.block.ModBlocks;
 import net.ryan.beyond_the_block.config.ModConfig;
-import net.ryan.beyond_the_block.world.Gen.SnowGeneration;
 
 import java.util.List;
 
 public class ModConfiguredFeatures {
-
-
-    public static final RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> SNOW_CONFIGURED =
-            ConfiguredFeatures.register("snow_under_blocks", SnowGeneration.SNOW_FEATURE, DefaultFeatureConfig.INSTANCE);
-
 
     //region XP
     public static final List<OreFeatureConfig.Target> OVERWORLD_XP_ORES = List.of(

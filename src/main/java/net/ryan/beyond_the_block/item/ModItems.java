@@ -1,10 +1,12 @@
 package net.ryan.beyond_the_block.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.BeyondTheBlock;
@@ -236,8 +238,17 @@ public class ModItems {
     private static Item registerItem(String name, Item item){
         return Registry.register(Registry.ITEM, new Identifier(BeyondTheBlock.MOD_ID, name), item);
     }
+    private static void registerCompostables(){
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.ROTTEN_FLESH, 0.3F);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.POISONOUS_POTATO, 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.SPIDER_EYE, 0.3f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.PUFFERFISH, 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.CHORUS_FRUIT, 0.65f);
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(Items.BEETROOT_SOUP, 1.0f);
+    }
 
     public static void registerModItems(){
+        registerCompostables();
         BeyondTheBlock.LOGGER.info("Registering Mod Items for " + BeyondTheBlock.MOD_ID);
     }
 

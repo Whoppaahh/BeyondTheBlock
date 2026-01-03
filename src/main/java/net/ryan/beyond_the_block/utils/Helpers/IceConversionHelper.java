@@ -6,7 +6,7 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.block.ModdedFluidCauldronBlock;
+import net.ryan.beyond_the_block.block.Cauldrons.ModdedFluidCauldronBlock;
 
 import static net.ryan.beyond_the_block.block.ModBlocks.MODDED_FLUID_CAULDRON_BLOCK;
 

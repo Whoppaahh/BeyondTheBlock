@@ -5,10 +5,14 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntryList;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 
 public class ModTags {
+
     public static class Blocks {
+
+        public static final TagKey<Block> CAULDRON_RECOLORABLE = createBlockTag("cauldron_recolorable");
 
         public static final TagKey<Block> NEEDS_RUBY_TOOL = createBlockTag("needs_ruby_tool");
         public static final TagKey<Block> INCORRECT_FOR_RUBY_TOOL = createBlockTag("incorrect_for_ruby_tool");

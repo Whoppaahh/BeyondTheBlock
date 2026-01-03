@@ -24,10 +24,79 @@ public class ModConfig implements ConfigData {
     public MiscConfig misc = new MiscConfig();
 
 
-    public VillagerNamesConfig villagerNames = new VillagerNamesConfig();
+    public NamesConfig mobNames = new NamesConfig();
     public AutoCameraConfig autoCamera = new AutoCameraConfig();
     public TrajectoryConfig trajectoryConfig = new TrajectoryConfig();
     public PathConfig pathConfig = new PathConfig();
+    public PassiveMobDropConfig passiveDropsConfig = new PassiveMobDropConfig();
+    public WebConfig webConfig = new WebConfig();
+    public HorseConfig horseConfig = new HorseConfig();
+    public DoubeOpenablesConfig doubleOpenables = new DoubeOpenablesConfig();
+
+    public static class DoubeOpenablesConfig {
+        public boolean enableRecursiveOpening = true;
+
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 32)
+        public int recursiveOpeningMaxBlocksDistance = 10;
+
+        /* ================= Block types ================= */
+
+        public boolean enableDoors = true;
+        public boolean enableFenceGates = true;
+        public boolean enableTrapdoors = true;
+
+        /* ================= Compatibility ================= */
+
+        public boolean enableModIncompatibilityCheck = true;
+    }
+
+    public static class HorseConfig{
+        public boolean enableSwimming = true;
+        public boolean undeadCanSwim = false;
+
+        public boolean preventWandering = true;
+        public double stayRadius = 10.0;
+
+        public boolean removeMiningPenalty = true;
+        public boolean increaseStepHeight = true;
+
+        public float minAlpha = 0.25F;
+        public float fadePitch = 30.0F;
+
+        public boolean headPitchOffset = true;
+        public float headOffsetDegrees = 30.0F;
+
+    }
+
+    public static class WebConfig{
+        public int minDecayTicks = 400;     // 20 seconds
+        public int maxDecayTicks = 2400;    // 2 minutes
+
+        public float baseDecayChance = 0.75f;
+        public float lightDecayBonus = 0.20f;
+        public float darknessDecayReduction = 0.15f;
+
+        public int densityRadius = 4;
+        public int densityLimit = 6;
+
+        public float normalSpiderRate = 0.10f;
+        public float caveSpiderRate = 0.20f;
+    }
+
+    public static class PassiveMobDropConfig {
+        public boolean enableChickenFeathers = true;
+        public int chickenFeatherInterval = 600;   // every 30 seconds
+        public float chickenFeatherChance = 0.10f; // 10%
+
+        public boolean enableSkeletonBones = true;
+        public int skeletonBoneInterval = 800;
+        public float skeletonBoneChance = 0.06f;
+
+        public boolean enableSpiderDrops = true;
+        public int spiderDropInterval = 700;
+        public float spiderDropChance = 0.08f;
+        public float cobwebWeight = 0.20f;         // 20% cobweb, 80% string
+    }
 
     public static class PathConfig{
         public boolean enabled = true;
@@ -89,12 +158,14 @@ public class ModConfig implements ConfigData {
         }
     }
 
-    public static class VillagerNamesConfig{
+    public static class NamesConfig {
         public boolean enableNames = true;
         public boolean nameOnlyWhenEmployed = true;
         public boolean colouriseNames = true;
         public double nameVisibilityRange = 8.0;
         public boolean useAlliteration = true;
+        public boolean nameIronGolems = true;
+        public boolean nameTamedMobs = true;
 
         public GenderMode genderMode = GenderMode.BOTH;
 

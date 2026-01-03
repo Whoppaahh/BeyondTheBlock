@@ -51,6 +51,12 @@ public class BlockConversionHandler {
         BlockState state = world.getBlockState(pos);
         ItemStack held = player.getStackInHand(hand);
 
+        if (state.getBlock() instanceof DoorBlock
+                || state.getBlock() instanceof TrapdoorBlock
+                || state.getBlock() instanceof FenceGateBlock) {
+            return ActionResult.PASS;
+        }
+
         // Only run block conversions when the player is sneaking or holding a special item
         if (!player.isSneaking() && !(held.getItem() instanceof BlockItem) && !hasRelevantEnchant(held))
             return ActionResult.PASS;

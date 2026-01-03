@@ -196,9 +196,9 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
                 horse.setCustomName(Text.of("Guard Horse"));
 
                 HorseAccessor accessor = (HorseAccessor) horse;
-                accessor.emeraldEmpire$setTamedPublic(true);
-                accessor.emeraldEmpire$setSaddledPublic(true);
-                SimpleInventory inventory = accessor.emeraldEmpire$getItemsPublic();
+                accessor.beyond$setTamedPublic(true);
+                accessor.beyond$setSaddledPublic(true);
+                SimpleInventory inventory = accessor.beyond$getItemsPublic();
                 inventory.setStack(0, new ItemStack(Items.SADDLE));
                 inventory.setStack(1, new ItemStack(Items.IRON_HORSE_ARMOR));
                 inventory.markDirty();

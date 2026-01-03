@@ -1,5 +1,6 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,19 +15,24 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithTracker;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.particle.ModParticles;
+import net.ryan.beyond_the_block.utils.Helpers.MountUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,6 +47,32 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
     @Unique
     private static final TrackedData<Integer> AIR_JUMP_COUNT =
             DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    @Unique
+    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+    @Inject(
+            method = "getBlockBreakingSpeed(Lnet/minecraft/block/BlockState;)F",
+            at = @At("RETURN"),
+            cancellable = true
+    )
+    private void horsebuff$removeMountedMiningPenalty(
+            BlockState state,
+            CallbackInfoReturnable<Float> cir
+    ) {
+        PlayerEntity player = (PlayerEntity)(Object)this;
+
+        if (!cfg.horseConfig.removeMiningPenalty) return;
+        if (!player.hasVehicle()) return;
+        if (!(player.getVehicle() instanceof AbstractHorseEntity)) return;
+
+        /*
+         * Vanilla applies a 0.2F multiplier when mounted.
+         * Undo that by dividing it back out.
+         */
+        float speed = cir.getReturnValue();
+        cir.setReturnValue(speed / 0.2F);
+    }
 
     @Override
     public TrackedData<Integer> emeraldEmpire$getAirJumpCountKey() {
@@ -257,6 +289,34 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
             if (!normal.isEmpty()) return normal;
             return ItemStack.EMPTY;
         }
+
+    @Inject(
+            method = "interact",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void beyond_the_block$sneakKickMount(
+            Entity entity,
+            Hand hand,
+            CallbackInfoReturnable<ActionResult> cir
+    ) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (player.getWorld().isClient) return;
+        if (!player.isSneaking()) return;
+
+        // Hard PvP gate: never affect players
+        if (entity instanceof PlayerEntity) return;
+
+        // Only act if mounting is involved
+        if (!entity.hasVehicle() && entity.getPassengerList().isEmpty()) return;
+
+        MountUtils.safelyKickOffMount(entity);
+
+        // Prevent vanilla interaction (mounting, trading, etc.)
+        cir.setReturnValue(ActionResult.SUCCESS);
+    }
+
     }
 
 

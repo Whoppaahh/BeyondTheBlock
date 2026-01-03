@@ -14,15 +14,33 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.block.Cauldrons.DyedWaterCauldronBlock;
+import net.ryan.beyond_the_block.block.Cauldrons.ModdedFluidCauldronBlock;
 import net.ryan.beyond_the_block.block.Shrine.PlayerInputBlocks.DoubleInputBlock;
 import net.ryan.beyond_the_block.block.Shrine.PlayerInputBlocks.SingleInputBlock;
 import net.ryan.beyond_the_block.block.Shrine.ShrineCoreBlock;
 import net.ryan.beyond_the_block.block.Shrine.ShrineDecorBlock;
 import net.ryan.beyond_the_block.block.Shrine.ShrineHeadsBlock;
+import net.ryan.beyond_the_block.block.Sponges.CompressedSpongeBlock;
+import net.ryan.beyond_the_block.block.Sponges.DoubleCompressedSpongeBlock;
+import net.ryan.beyond_the_block.block.Sponges.TripleCompressedSpongeBlock;
+import net.ryan.beyond_the_block.block.Sponges.WetCompressedSpongeBlock;
 import net.ryan.beyond_the_block.item.ModItemGroup;
 
 
 public class ModBlocks {
+
+
+
+    public static final Block SPEED_RAIL_BLOCK = registerBlock("speed_rail_block", new SpeedRailBlock(FabricBlockSettings.copyOf(Blocks.POWERED_RAIL)), ModItemGroup.ModBlocksTab);
+
+    public static final Block COMPRESSED_SPONGE = registerBlock("compressed_sponge", new CompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.6F)), ModItemGroup.ModBlocksTab);
+    public static final Block DOUBLE_COMPRESSED_SPONGE = registerBlock("double_compressed_sponge", new DoubleCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.8F)), ModItemGroup.ModBlocksTab);
+    public static final Block TRIPLE_COMPRESSED_SPONGE = registerBlock("triple_compressed_sponge", new TripleCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(1.0F)), ModItemGroup.ModBlocksTab);
+
+    public static final Block WET_COMPRESSED_SPONGE = registerBlock("wet_compressed_sponge", new WetCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.6F), () -> COMPRESSED_SPONGE),  ModItemGroup.ModBlocksTab);
+    public static final Block WET_DOUBLE_COMPRESSED_SPONGE = registerBlock("wet_double_compressed_sponge", new WetCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.8F), () -> DOUBLE_COMPRESSED_SPONGE), ModItemGroup.ModBlocksTab);
+    public static final Block WET_TRIPLE_COMPRESSED_SPONGE = registerBlock("wet_triple_compressed_sponge", new WetCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(1.0F), () -> TRIPLE_COMPRESSED_SPONGE), ModItemGroup.ModBlocksTab);
 
     public static final Block DYED_WATER_CAULDRON_BLOCK = registerBlock("dyed_water_cauldron", new DyedWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).nonOpaque()), ModItemGroup.ModBlocksTab);
     public static final Block MODDED_FLUID_CAULDRON_BLOCK = registerBlock("modded_fluid_cauldron", new ModdedFluidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).nonOpaque().luminance(state -> {

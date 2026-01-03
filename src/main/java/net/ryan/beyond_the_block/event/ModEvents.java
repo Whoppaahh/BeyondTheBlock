@@ -11,6 +11,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -26,12 +27,10 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -39,7 +38,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.block.DyedWaterCauldronBlock;
+import net.ryan.beyond_the_block.block.Cauldrons.DyedWaterCauldronBlock;
 import net.ryan.beyond_the_block.block.Entity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.block.Entity.InfiFurnaceBlockEntity;
 import net.ryan.beyond_the_block.block.ModBlocks;
@@ -88,11 +87,60 @@ public class ModEvents {
         AttackBlockCallback.EVENT.register(ModEvents::onBlockMined);
         AttackEntityCallback.EVENT.register(ModEvents::onEntityAttacked);
         PlayerBlockBreakEvents.BEFORE.register(ModEvents::onBlockBreak);
-        UseBlockCallback.EVENT.register(ModEvents::onBlockUsed);
-        UseEntityCallback.EVENT.register(ModEvents::onEntityUsed);
-
         PlayerBlockBreakEvents.BEFORE.register(PlayerVaultBlock::handleBreak);
+        UseBlockCallback.EVENT.register(DoubleOpenablesHandler::onUse);
+        UseBlockCallback.EVENT.register(ModEvents::onBlockUsed);
+        UseBlockCallback.EVENT.register(BetterLadderPlacement::onUseBlock);
+        UseItemCallback.EVENT.register(ModEvents::onItemUsed);
+        UseItemCallback.EVENT.register(BetterLadderPlacement::onUseItem);
+        UseEntityCallback.EVENT.register(ModEvents::onEntityUsed);
     }
+
+    private static TypedActionResult<ItemStack> onItemUsed(
+            PlayerEntity player,
+            World world,
+            Hand hand
+    ) {
+        ItemStack stack = player.getStackInHand(hand);
+
+        // Only care about block items
+        if (!(stack.getItem() instanceof BlockItem)) {
+            return TypedActionResult.pass(stack);
+        }
+
+        // Raycast MUST run on both sides
+        BlockHitResult hit = (BlockHitResult) player.raycast(5.0D, 0.0F, false);
+        if (hit == null) {
+            return TypedActionResult.pass(stack);
+        }
+
+        BlockPos placePos = hit.getBlockPos().offset(hit.getSide());
+
+        // CLIENT-SIDE BLOCK (prevents prediction)
+        if (world.isClient) {
+            if (world instanceof ClientWorld clientWorld
+                    && RestoreManager.isProtectedClient(placePos)) {
+                return TypedActionResult.fail(stack);
+            }
+            return TypedActionResult.pass(stack);
+        }
+
+        // SERVER-SIDE BLOCK (authoritative)
+        if (world instanceof ServerWorld serverWorld) {
+            if (RestoreManager.isProtected(serverWorld, placePos)) {
+                player.sendMessage(
+                        Text.literal("This area is restoring.")
+                                .formatted(Formatting.GRAY),
+                        true
+                );
+                return TypedActionResult.fail(stack);
+            }
+        }
+
+        return TypedActionResult.pass(stack);
+    }
+
+
 
     private static ActionResult onEntityUsed(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
         if (world.isClient) return ActionResult.PASS;
@@ -119,14 +167,14 @@ public class ModEvents {
             IronCladVisionEnchantment.registerTickHandler(world);
             MindWardEnchantment.registerTickHandler(world);
             ShadowsVeilEnchantment.registerTickHandler(world);
-          //  SpiderCobwebTrailGoal.decayCobwebs(world);
-           // SnowHelper.tick(world);
+
             RestoreManager.tick(world);
             HoneyDripHelper.tick(world);
             PowderSnowCauldronHelper.tick(world);
             MagmaDripHelper.tick(world);
             IceConversionHelper.tick(world);
         });
+
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
             try {
                 Path worldDatapacks = minecraftServer.getSavePath(WorldSavePath.DATAPACKS);
@@ -164,8 +212,7 @@ public class ModEvents {
                 e.printStackTrace();
             }
         });
-       // ServerTickEvents.END_SERVER_TICK.register(PathSpeedHelper::tickSpeed);
-       // ServerChunkEvents.CHUNK_UNLOAD.register(SnowHelper::clearBitMark);
+        ServerTickEvents.END_SERVER_TICK.register(PathSpeedHelper::tickSpeed);
         ServerEntityEvents.ENTITY_LOAD.register(SheepColours::randomiseColours);
     }
 
@@ -220,61 +267,110 @@ public class ModEvents {
         return ActionResult.PASS;
     }
 
-    private static ActionResult onBlockUsed(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            BlockPos placePos = hit.getBlockPos().offset(hit.getSide());
-            if (world.getFluidState(placePos).isOf(Fluids.LAVA) && world.getFluidState(placePos).isStill()) {
-                queueAdjacentSand(world, placePos.toImmutable());
+    private static ActionResult onBlockUsed(
+            PlayerEntity player,
+            World world,
+            Hand hand,
+            BlockHitResult hit
+    ) {
+
+        BlockState blockState = world.getBlockState(hit.getBlockPos());
+        if (blockState.contains(Properties.OPEN)) {
+            return ActionResult.PASS;
+        }
+
+        BlockPos placePos = hit.getBlockPos().offset(hit.getSide());
+
+        // =========================
+        // CLIENT: stop prediction
+        // =========================
+        if (world.isClient) {
+            if (RestoreManager.isProtectedClient(placePos)) {
+                player.sendMessage(
+                        Text.literal("This area is restoring.")
+                                .formatted(Formatting.GRAY),
+                        true
+                );
+                return ActionResult.FAIL; // hard stop
+            }
+            return ActionResult.PASS; // allow prediction
+        }
+
+        // =========================
+        // SERVER: stop authority
+        // =========================
+        if (world instanceof ServerWorld serverWorld) {
+            if (RestoreManager.isProtected(serverWorld, placePos)) {
+                player.sendMessage(
+                        Text.literal("This area is restoring.")
+                                .formatted(Formatting.GRAY),
+                        true
+                );
+                return ActionResult.FAIL; // hard stop
             }
         }
 
-            BlockPos pos = hit.getBlockPos();
-            BlockState state = world.getBlockState(pos);
-            ItemStack stack = player.getStackInHand(hand);
+        // =========================
+        // NORMAL LOGIC CONTINUES
+        // =========================
 
-            if (state.isOf(Blocks.WATER_CAULDRON) && stack.getItem() instanceof DyeItem dyeItem) {
+        // Lava → sand logic
+        if (world instanceof ServerWorld && world.getFluidState(placePos).isOf(Fluids.LAVA)
+                && world.getFluidState(placePos).isStill()) {
+            queueAdjacentSand(world, placePos.toImmutable());
+        }
 
-                int rgb = DyedWaterCauldronBlock.toRgb(dyeItem.getColor());
+        BlockPos pos = hit.getBlockPos();
+        BlockState state = world.getBlockState(pos);
+        ItemStack stack = player.getStackInHand(hand);
 
-                world.setBlockState(
-                        pos,
-                        ModBlocks.DYED_WATER_CAULDRON_BLOCK.getDefaultState()
-                                .with(LeveledCauldronBlock.LEVEL, state.get(LeveledCauldronBlock.LEVEL)),
-                        3
-                );
+        // Water cauldron dye logic
+        if (state.isOf(Blocks.WATER_CAULDRON) && stack.getItem() instanceof DyeItem dyeItem) {
+            int rgb = DyedWaterCauldronBlock.toRgb(dyeItem.getColor());
 
-                BlockEntity be = world.getBlockEntity(pos);
-                if (be instanceof DyedWaterCauldronBlockEntity dyed) {
-                    dyed.mixDye(rgb);
-                }
+            world.setBlockState(
+                    pos,
+                    ModBlocks.DYED_WATER_CAULDRON_BLOCK.getDefaultState()
+                            .with(LeveledCauldronBlock.LEVEL,
+                                    state.get(LeveledCauldronBlock.LEVEL)),
+                    3
+            );
 
-                if (!player.isCreative()) stack.decrement(1);
-
-                world.playSound(null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1, 1.1f);
-
-                return ActionResult.SUCCESS;
+            BlockEntity be = world.getBlockEntity(pos);
+            if (be instanceof DyedWaterCauldronBlockEntity dyed) {
+                dyed.mixDye(rgb);
             }
 
+            if (!player.isCreative()) stack.decrement(1);
 
-        ActionResult cauldronResult = ModdedFluidCauldronHandler.handleCauldronUse(player, world, hand, hit);
+            world.playSound(null, pos,
+                    SoundEvents.ITEM_DYE_USE,
+                    SoundCategory.BLOCKS, 1, 1.1f);
+
+            return ActionResult.SUCCESS;
+        }
+
+        ActionResult cauldronResult =
+                ModdedFluidCauldronHandler.handleCauldronUse(player, world, hand, hit);
         if (cauldronResult != ActionResult.PASS) {
             return cauldronResult;
         }
 
         int tillLevel = EnchantmentHelper.getLevel(ModEnchantments.DEEP_TILL, stack);
         if (tillLevel > 0) {
-            MyEnchantmentHelper.tillArea(world, hit.getBlockPos(), tillLevel);
+            MyEnchantmentHelper.tillArea(world, pos, tillLevel);
             return ActionResult.SUCCESS;
         }
 
         int barkskinLevel = EnchantmentHelper.getLevel(ModEnchantments.BARKSKIN, stack);
         if (barkskinLevel > 0) {
-            MyEnchantmentHelper.handleTreeStripping(player, stack, hit.getBlockPos(), world);
+            MyEnchantmentHelper.handleTreeStripping(player, stack, pos, world);
             return ActionResult.SUCCESS;
         }
 
         return ActionResult.PASS;
     }
+
 
     private static void transferArmourPartial(PlayerEntity player, ArmorStandEntity armourStand, World world) {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
@@ -402,7 +498,7 @@ public class ModEvents {
         BlockState state = world.getBlockState(pos);
 
         if (!(state.getBlock() instanceof FurnaceBlock)) return ActionResult.PASS;
-        if (world.isClient()) return ActionResult.SUCCESS;
+        if (world.isClient()) return ActionResult.PASS;
 
         ItemStack heldStack = player.getStackInHand(hand);
 

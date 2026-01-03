@@ -6,7 +6,7 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.utils.VillagerNames.EntityTagManager;
+import net.ryan.beyond_the_block.utils.Naming.EntityTagManager;
 
 public class ChristmasFeatures {
 

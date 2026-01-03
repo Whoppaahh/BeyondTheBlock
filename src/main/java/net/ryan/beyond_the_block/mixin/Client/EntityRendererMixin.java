@@ -5,7 +5,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.utils.VillagerNames.EntityTagManager;
+import net.ryan.beyond_the_block.utils.Naming.EntityTagManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

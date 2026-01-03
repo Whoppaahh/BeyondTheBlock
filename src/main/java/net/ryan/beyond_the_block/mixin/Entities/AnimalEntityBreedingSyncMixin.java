@@ -1,7 +1,11 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.mixin.Accessors.AnimalAgeAccessor;
 import net.ryan.beyond_the_block.network.ServerNetworking;
@@ -10,6 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -34,6 +39,21 @@ public abstract class AnimalEntityBreedingSyncMixin {
             for (ServerPlayerEntity p : tracking) {
                 ServerNetworking.syncBreedingInfo(p, self, age);
             }
+        }
+    }
+
+    @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
+    private void beyond$allowSecondHorseRider(
+            PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir
+    ) {
+        if (!((Object)this instanceof AbstractHorseEntity horse)) return;
+
+        if (!horse.isTame() || !horse.isSaddled()) return;
+        if (player.hasVehicle()) return;
+
+        if (horse.getPassengerList().size() == 1) {
+            player.startRiding(horse, true);
+            cir.setReturnValue(ActionResult.SUCCESS);
         }
     }
 }

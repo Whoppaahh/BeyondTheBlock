@@ -1,5 +1,6 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -8,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.effect.Beneficial.SoulLinkEffect;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
@@ -40,12 +43,31 @@ import java.util.List;
 public class LivingEntityMixin implements ArrowHitsAccess {
 
     @Unique
+    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+    @Unique
     private final List<NbtCompound> arrowdrops$arrowHits = new ArrayList<>();
 
     @Override
     public List<NbtCompound> beyondTheBlock$getArrowHits() {
         return arrowdrops$arrowHits;
     }
+
+    @Inject(method = "stopRiding", at = @At("HEAD"), cancellable = true)
+    private void horsebuff$preventUnderwaterDismount(CallbackInfo ci) {
+        if (!cfg.horseConfig.enableSwimming) return;
+
+        LivingEntity self = (LivingEntity)(Object)this;
+
+        if (!(self instanceof PlayerEntity player)) return;
+        if (!player.isTouchingWater()) return;
+
+        Entity vehicle = player.getVehicle();
+        if (!(vehicle instanceof AbstractHorseEntity)) return;
+
+        // Prevent forced underwater eject
+        ci.cancel();
+    }
+
 
     // Save
     @Inject(method = "writeCustomDataToNbt", at = @At("RETURN"))

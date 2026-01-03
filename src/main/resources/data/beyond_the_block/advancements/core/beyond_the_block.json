@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": { "item": "minecraft:ender_pearl" },
+    "title": "Beyond the Block",
+    "description": "There’s more to this world than meets the eye.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "obtain_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "item": "beyond_the_block:ruby" }]
+      }
+    }
+  }
+}

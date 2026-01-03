@@ -6,8 +6,10 @@
     "ArmourFeatureRendererMixin",
     "BatEntityModelMixin",
     "BipedModelMixin",
+    "BlockModelRendererMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "DoubleInventoryAccessor",
     "EntityRendererMixin",
     "ExampleClientMixin",
     "GhastEntityModelMixin",
@@ -15,13 +17,13 @@
     "HandledScreenMixin",
     "HeldItemFeatureRendererMixin",
     "HeldItemRendererMixin",
+    "HorseEntityModelMixin",
     "InGameHudMixin",
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
     "MouseScrollMixin",
-    "TitleScreenMixin",
-    "DoubleInventoryAccessor"
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

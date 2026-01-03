@@ -19,7 +19,7 @@ import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 
-import static net.ryan.beyond_the_block.network.PacketIDs.LEAP_OF_FAITH_PACKET_ID;
+import static net.ryan.beyond_the_block.network.Packets.PacketIDs.LEAP_OF_FAITH_PACKET_ID;
 
 public class LeapOfFaithEnchantment extends Enchantment {
     public LeapOfFaithEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot... slotTypes) {

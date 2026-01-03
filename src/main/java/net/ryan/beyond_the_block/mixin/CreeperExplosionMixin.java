@@ -1,41 +1,40 @@
 package net.ryan.beyond_the_block.mixin;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.mixin.Accessors.ExplosionAccessor;
 import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
 @Mixin(Explosion.class)
 public abstract class CreeperExplosionMixin {
 
-    @Inject(method = "collectBlocksAndDamageEntities", at = @At("TAIL"))
-    private void onCollectBlocks(CallbackInfo ci) {
-        Explosion explosion = (Explosion) (Object) this;
-        World world = ((ExplosionAccessor) explosion).getWorld();
-        Entity source = ((ExplosionAccessor) explosion).getEntity();
+    @Shadow
+    @Final private World world;
+    @Shadow @Final private ObjectArrayList<BlockPos> affectedBlocks;
+    @Shadow @Final
+    private Entity entity;
 
-        if (world.isClient() || !(source instanceof CreeperEntity)) return;
+    @Inject(method = "affectWorld", at = @At("HEAD"), cancellable = true)
+    private void beyondtheblock$affectWorld(boolean particles, CallbackInfo ci) {
+        if (world.isClient) return;
+        if (!(entity instanceof CreeperEntity)) return;
 
-        List<BlockPos> blocksToSave = explosion.getAffectedBlocks();
-        BeyondTheBlock.LOGGER.info("[BeyondTheBlock] Saving {} blocks from Creeper explosion", blocksToSave.size());
+        RestoreManager.CREEPER_EXPLODING.set(true);
 
-        for (BlockPos pos : blocksToSave) {
-            if (!world.getBlockState(pos).isAir()) {
-                RestoreManager.saveAndScheduleRestore(world, blocksToSave);
-            }
-        }
+        RestoreManager.saveAndScheduleRestore(world, affectedBlocks);
+        affectedBlocks.clear();
 
-        explosion.clearAffectedBlocks(); // Prevent vanilla drops
+        RestoreManager.CREEPER_EXPLODING.remove();
+        ci.cancel();
     }
 }
 

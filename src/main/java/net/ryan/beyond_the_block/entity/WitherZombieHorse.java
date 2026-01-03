@@ -23,4 +23,10 @@ public class WitherZombieHorse extends ZombieHorseEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.5D);
     }
+    @Override
+    public void remove(RemovalReason reason) {
+        this.removeAllPassengers();
+        super.remove(reason);
+    }
+
 }

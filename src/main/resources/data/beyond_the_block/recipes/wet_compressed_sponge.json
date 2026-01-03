@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "beyond_the_block:wet_compressed_sponge" },
+  "result": "beyond_the_block:compressed_sponge",
+  "experience": 0.1,
+  "cookingtime": 400
+}

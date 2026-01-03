@@ -1,0 +1,17 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:sponge" },
+    "title": "Absorbent Thinking",
+    "description": "Sometimes you need more sponge.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "craft_compressed_sponge": {
+      "trigger": "beyond_the_block:compressed_sponge"
+    }
+  }
+}

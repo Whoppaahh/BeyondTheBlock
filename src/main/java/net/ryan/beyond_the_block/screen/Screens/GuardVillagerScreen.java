@@ -21,8 +21,8 @@ import net.ryan.beyond_the_block.screen.Handlers.Guard.GuardVillagerScreenHandle
 import net.ryan.beyond_the_block.utils.GUI.GuardGUIButton;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
-import static net.ryan.beyond_the_block.network.PacketIDs.GUARD_FOLLOW_PACKET_ID;
-import static net.ryan.beyond_the_block.network.PacketIDs.GUARD_PATROL_PACKET_ID;
+import static net.ryan.beyond_the_block.network.Packets.PacketIDs.GUARD_FOLLOW_PACKET_ID;
+import static net.ryan.beyond_the_block.network.Packets.PacketIDs.GUARD_PATROL_PACKET_ID;
 
 public class GuardVillagerScreen extends HandledScreen<GuardVillagerScreenHandler> {
 

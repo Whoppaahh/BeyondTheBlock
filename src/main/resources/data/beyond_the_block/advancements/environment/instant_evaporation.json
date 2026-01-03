@@ -1,0 +1,17 @@
+{
+  "parent": "beyond_the_block:environment/over_prepared",
+  "display": {
+    "icon": { "item": "minecraft:lava_bucket" },
+    "title": "Instant Evaporation",
+    "description": "The Nether speeds things up.",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "dry_sponge_in_nether": {
+      "trigger": "beyond_the_block:dry_sponge_nether"
+    }
+  }
+}

@@ -1,76 +1,63 @@
 package net.ryan.beyond_the_block.entity;
 
-import net.minecraft.block.Block;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.*;
+import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.utils.Helpers.CobwebDecayScheduler;
 
 public class SpiderCobwebTrailGoal extends Goal {
     private final SpiderEntity spider;
-    private final Random random = new Random();
-    private BlockPos lastPos = null;
-    public static final Set<BlockPos> spiderPlacedCobwebs = new HashSet<>();
-
+    private int cooldown;
+    ModConfig cfg;
 
     public SpiderCobwebTrailGoal(SpiderEntity spider) {
         this.spider = spider;
-        this.setControls(EnumSet.of(Control.MOVE));
+        this.cooldown = 0;
+        cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 
     @Override
     public boolean canStart() {
-        return true; // always active
-    }
-
-    @Override
-    public boolean shouldContinue() {
-        return true;
+        return !spider.getWorld().isClient();
     }
 
     @Override
     public void tick() {
-        BlockPos currentPos = spider.getBlockPos();
+        if (spider.getWorld().isClient()) return;
+        if (--cooldown > 0) return;
+        cooldown = 20; // once per second
 
-        if (!currentPos.equals(lastPos)) {
-            lastPos = currentPos;
+        ServerWorld world = (ServerWorld) spider.getWorld();
+        BlockPos pos = spider.getBlockPos().down();
 
-            if (random.nextDouble() < 0.3) { // 30% chance per block
-                synchronized (spiderPlacedCobwebs) {
-                    if (spider.world.isAir(currentPos)) {
-                        spider.world.setBlockState(currentPos, Blocks.COBWEB.getDefaultState());
-                        spiderPlacedCobwebs.add(currentPos);
-                    }
-                }
-            }
-        }
+        if (!world.getBlockState(pos).isAir()) return;
+        if (!canPlaceWeb(world, pos)) return;
+
+        float chance = spider instanceof CaveSpiderEntity
+                ? cfg.webConfig.caveSpiderRate
+                : cfg.webConfig.normalSpiderRate;
+
+        if (world.random.nextFloat() > chance) return;
+
+        world.setBlockState(pos, Blocks.COBWEB.getDefaultState());
+        CobwebDecayScheduler.schedule(world, pos);
     }
 
-    public static void decayCobwebs(ServerWorld world) {
-        int lifetimeTicks = 100 + new Random().nextInt(301);
-        double perTickChance = 1.0 / lifetimeTicks;
-        synchronized (spiderPlacedCobwebs) {
-            Iterator<BlockPos> iterator = spiderPlacedCobwebs.iterator();
-            while (iterator.hasNext()) {
-                BlockPos pos = iterator.next();
+    private boolean canPlaceWeb(ServerWorld world, BlockPos pos) {
+        int radius = cfg.webConfig.densityRadius;
+        int limit = cfg.webConfig.densityLimit;
 
-                // 1% chance per tick to disappear
-                if (world.getBlockState(pos).isOf(Blocks.COBWEB) && Math.random() < perTickChance) {
-                    world.removeBlock(pos, false);
-
-                    // 10% chance to drop string
-                    if (Math.random() < 0.1) {
-                        Block.dropStack(world, pos, new ItemStack(Items.STRING));
-                    }
-
-                    iterator.remove();
-                }
+        int count = 0;
+        for (BlockPos p : BlockPos.iterateOutwards(pos, radius, radius, radius)) {
+            if (world.getBlockState(p).isOf(Blocks.COBWEB)) {
+                if (++count > limit) return false;
             }
         }
+        return true;
     }
 }

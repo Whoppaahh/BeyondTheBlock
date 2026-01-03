@@ -136,38 +136,38 @@ public class ModMenu implements ModMenuApi {
             ConfigCategory villagerNames = builder.getOrCreateCategory(Text.literal("Villager Names"));
             villagerNames.addEntry(entryBuilder.startBooleanToggle(
                             Text.literal("Enable Villager Names"),
-                            config.villagerNames.enableNames)
+                            config.mobNames.enableNames)
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.villagerNames.enableNames = v)
+                    .setSaveConsumer(v -> config.mobNames.enableNames = v)
                     .build());
 
             villagerNames.addEntry(entryBuilder.startBooleanToggle(
                             Text.literal("Use Profession Colours"),
-                            config.villagerNames.colouriseNames)
+                            config.mobNames.colouriseNames)
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.villagerNames.colouriseNames = v)
+                    .setSaveConsumer(v -> config.mobNames.colouriseNames = v)
                     .build());
 
             villagerNames.addEntry(entryBuilder.startDoubleField(
                             Text.literal("Name Visibility Range"),
-                            config.villagerNames.nameVisibilityRange)
+                            config.mobNames.nameVisibilityRange)
                     .setDefaultValue(8.0)
-                    .setSaveConsumer(v -> config.villagerNames.nameVisibilityRange = v)
+                    .setSaveConsumer(v -> config.mobNames.nameVisibilityRange = v)
                     .build());
 
             villagerNames.addEntry(entryBuilder.startBooleanToggle(
                             Text.literal("Alliterative Names"),
-                            config.villagerNames.useAlliteration)
+                            config.mobNames.useAlliteration)
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.villagerNames.useAlliteration = v)
+                    .setSaveConsumer(v -> config.mobNames.useAlliteration = v)
                     .build());
 
             villagerNames.addEntry(entryBuilder.startEnumSelector(
                             Text.literal("Name Gender Mode"),
-                            ModConfig.VillagerNamesConfig.GenderMode.class,
-                            config.villagerNames.genderMode)
-                    .setDefaultValue(ModConfig.VillagerNamesConfig.GenderMode.BOTH)
-                    .setSaveConsumer(v -> config.villagerNames.genderMode = v)
+                            ModConfig.NamesConfig.GenderMode.class,
+                            config.mobNames.genderMode)
+                    .setDefaultValue(ModConfig.NamesConfig.GenderMode.BOTH)
+                    .setSaveConsumer(v -> config.mobNames.genderMode = v)
                     .build());
 
             builder.setSavingRunnable(AutoConfig.getConfigHolder(ModConfig.class)::save);

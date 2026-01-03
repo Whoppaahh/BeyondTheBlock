@@ -5,7 +5,7 @@ import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.ryan.beyond_the_block.block.ModdedFluidCauldronBlock;
+import net.ryan.beyond_the_block.block.Cauldrons.ModdedFluidCauldronBlock;
 
 import java.util.List;
 

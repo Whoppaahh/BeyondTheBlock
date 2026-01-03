@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import static net.ryan.beyond_the_block.network.PacketIDs.SYNC_RIDDLES_ID;
+import static net.ryan.beyond_the_block.network.Packets.PacketIDs.SYNC_RIDDLES_ID;
 
 public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory {
     private final DefaultedList<ItemStack> item = DefaultedList.ofSize(1, Items.WRITTEN_BOOK.getDefaultStack());

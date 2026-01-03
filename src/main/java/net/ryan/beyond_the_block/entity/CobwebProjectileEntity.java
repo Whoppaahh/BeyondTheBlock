@@ -12,10 +12,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.utils.Helpers.CobwebDecayScheduler;
 
 public class CobwebProjectileEntity extends ThrownItemEntity {
 
@@ -54,24 +56,30 @@ public class CobwebProjectileEntity extends ThrownItemEntity {
     }
 
     @Override
-    protected void onBlockHit(BlockHitResult blockHitResult) {
-        BlockPos pos = blockHitResult.getBlockPos().up();
-        if (world.isAir(pos)) {
-            world.setBlockState(pos, Blocks.COBWEB.getDefaultState());
-            synchronized (SpiderCobwebTrailGoal.spiderPlacedCobwebs) {
-                SpiderCobwebTrailGoal.spiderPlacedCobwebs.add(pos);
-            }
+    protected void onBlockHit(BlockHitResult hit) {
+        if (!(world instanceof ServerWorld sw)) return;
+
+        BlockPos pos = hit.getBlockPos().up();
+        if (sw.isAir(pos)) {
+            sw.setBlockState(pos, Blocks.COBWEB.getDefaultState());
+            CobwebDecayScheduler.schedule(sw, pos);
         }
-        this.discard();
+        discard();
     }
 
+
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) {
-        if(entityHitResult.getEntity() instanceof LivingEntity le) {
+    protected void onEntityHit(EntityHitResult hit) {
+        if (!(world instanceof ServerWorld)) {
+            discard();
+            return;
+        }
+        if (hit.getEntity() instanceof LivingEntity le) {
             le.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 60, 1));
         }
-        this.discard();
+        discard();
     }
+
 
     @Override
     public Packet<?> createSpawnPacket() {

@@ -62,8 +62,8 @@ public class FreezeEffect extends StatusEffect {
                         entity,
                         new EntityStatusEffectS2CPacket(entity.getId(), instance)
                 );
-                BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Height: " + entity.getHeight());
-                BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Width: " + entity.getWidth());
+              //  BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Height: " + entity.getHeight());
+              //  BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Width: " + entity.getWidth());
 
             }
         }

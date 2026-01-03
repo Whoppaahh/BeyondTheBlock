@@ -11,6 +11,8 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MagmaCubeEntity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -26,7 +28,7 @@ public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>>
     public FreezeEffectLayer(FeatureRendererContext<T, M> context, M baseModel) {
         super(context);
 
-        this.iceModel = (M) baseModel.getClass().cast(baseModel);
+        this.iceModel = baseModel;
     }
 
     @Override
@@ -43,12 +45,20 @@ public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>>
                 (healthRatio < 0.50f) ? 2 :
                         (healthRatio < 0.75f) ? 1 : 0;
 
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(new Identifier("minecraft", "textures/block/frosted_ice" + "_" + crackLevel + ".png")));
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(new Identifier("minecraft", "textures/block/frosted_ice" + "_" + crackLevel + ".png")));
 
         // Render the copied model (ice overlay)
         iceModel.animateModel(entity, limbAngle, limbDistance, tickDelta);
         iceModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+        matrices.push();
+        if(entity instanceof SlimeEntity || entity instanceof MagmaCubeEntity){
+            matrices.scale(1.5f, 1.5f, 1.5f);
+            matrices.translate(0, -0.425f, 0);
+        }else {
+            matrices.scale(1f, 1f, 1f);
+        }
         iceModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+        matrices.pop();
     }
 
     public static void shatterOnThaw(LivingEntity entity) {

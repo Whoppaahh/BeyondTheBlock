@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:arrow" },
+    "title": "Stick With the Basics",
+    "description": "Not all arrows are created equal.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "obtain_custom_arrow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "item": "beyond_the_block:cupid_arrow" }]
+      }
+    }
+  }
+}

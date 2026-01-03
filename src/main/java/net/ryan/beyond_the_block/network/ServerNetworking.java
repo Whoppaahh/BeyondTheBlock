@@ -19,7 +19,7 @@ import net.ryan.beyond_the_block.network.Packets.Client.TeleportWithStaffC2SPack
 import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
-import static net.ryan.beyond_the_block.network.PacketIDs.*;
+import static net.ryan.beyond_the_block.network.Packets.PacketIDs.*;
 
 public class ServerNetworking {
 

@@ -1,9 +1,13 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.entity.SpiderCobwebTrailGoal;
 import net.ryan.beyond_the_block.entity.SpiderWebAttackGoal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,6 +26,25 @@ public abstract class SpiderEntityMixin extends HostileEntity {
     private void addWebGoal(EntityType<? extends SpiderEntity> entityType, World world, CallbackInfo ci) {
         this.goalSelector.add(3, new SpiderWebAttackGoal((SpiderEntity) (Object) this));
         this.goalSelector.add(4, new SpiderCobwebTrailGoal((SpiderEntity) (Object) this));
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void beyond$dropSpiderMaterials(CallbackInfo ci) {
+        if (this.world.isClient) return;
+
+        var cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig().passiveDropsConfig;
+        if (!cfg.enableSpiderDrops) return;
+
+        if (this.age % cfg.spiderDropInterval == 0) {
+            if (this.random.nextFloat() < cfg.spiderDropChance) {
+
+                if (this.random.nextFloat() < cfg.cobwebWeight) {
+                    this.dropStack(new ItemStack(Items.COBWEB));
+                } else {
+                    this.dropStack(new ItemStack(Items.STRING));
+                }
+            }
+        }
     }
 
 }

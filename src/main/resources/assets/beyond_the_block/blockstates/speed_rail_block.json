@@ -1,0 +1,75 @@
+{
+  "variants": {
+    "shape=north_south,speed=0,powered=false": { "model": "beyond_the_block:block/speed_rail_block" },
+    "shape=north_south,speed=1,powered=false": { "model": "beyond_the_block:block/speed_rail_block" },
+    "shape=north_south,speed=2,powered=false": { "model": "beyond_the_block:block/speed_rail_block" },
+    "shape=north_south,speed=3,powered=false": { "model": "beyond_the_block:block/speed_rail_block" },
+    "shape=north_south,speed=4,powered=false": { "model": "beyond_the_block:block/speed_rail_block" },
+
+    "shape=north_south,speed=0,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on" },
+    "shape=north_south,speed=1,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on" },
+    "shape=north_south,speed=2,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on" },
+    "shape=north_south,speed=3,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on" },
+    "shape=north_south,speed=4,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on" },
+
+    "shape=east_west,speed=0,powered=false": { "model": "beyond_the_block:block/speed_rail_block", "y": 90 },
+    "shape=east_west,speed=1,powered=false": { "model": "beyond_the_block:block/speed_rail_block", "y": 90 },
+    "shape=east_west,speed=2,powered=false": { "model": "beyond_the_block:block/speed_rail_block", "y": 90 },
+    "shape=east_west,speed=3,powered=false": { "model": "beyond_the_block:block/speed_rail_block", "y": 90 },
+    "shape=east_west,speed=4,powered=false": { "model": "beyond_the_block:block/speed_rail_block", "y": 90 },
+
+    "shape=east_west,speed=0,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on", "y": 90 },
+    "shape=east_west,speed=1,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on", "y": 90 },
+    "shape=east_west,speed=2,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on", "y": 90 },
+    "shape=east_west,speed=3,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on", "y": 90 },
+    "shape=east_west,speed=4,powered=true":  { "model": "beyond_the_block:block/speed_rail_block_on", "y": 90 },
+
+    "powered=false,shape=ascending_east,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" , "y": 90 },
+    "powered=false,shape=ascending_east,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" , "y": 90},
+    "powered=false,shape=ascending_east,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" , "y": 90},
+    "powered=false,shape=ascending_east,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" , "y": 90},
+    "powered=false,shape=ascending_east,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" , "y": 90},
+
+    "powered=true,shape=ascending_east,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" , "y": 90},
+    "powered=true,shape=ascending_east,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" , "y": 90},
+    "powered=true,shape=ascending_east,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" , "y": 90},
+    "powered=true,shape=ascending_east,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" , "y": 90},
+    "powered=true,shape=ascending_east,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" , "y": 90},
+
+    "powered=false,shape=ascending_north,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" },
+    "powered=false,shape=ascending_north,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" },
+    "powered=false,shape=ascending_north,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" },
+    "powered=false,shape=ascending_north,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" },
+    "powered=false,shape=ascending_north,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_ne" },
+
+    "powered=true,shape=ascending_north,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" },
+    "powered=true,shape=ascending_north,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" },
+    "powered=true,shape=ascending_north,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" },
+    "powered=true,shape=ascending_north,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" },
+    "powered=true,shape=ascending_north,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_ne_on" },
+
+    "powered=false,shape=ascending_south,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" },
+    "powered=false,shape=ascending_south,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" },
+    "powered=false,shape=ascending_south,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" },
+    "powered=false,shape=ascending_south,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" },
+    "powered=false,shape=ascending_south,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" },
+
+    "powered=true,shape=ascending_south,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" },
+    "powered=true,shape=ascending_south,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" },
+    "powered=true,shape=ascending_south,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" },
+    "powered=true,shape=ascending_south,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" },
+    "powered=true,shape=ascending_south,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" },
+
+    "powered=false,shape=ascending_west,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" , "y": 90},
+    "powered=false,shape=ascending_west,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" , "y": 90},
+    "powered=false,shape=ascending_west,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" , "y": 90},
+    "powered=false,shape=ascending_west,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" , "y": 90},
+    "powered=false,shape=ascending_west,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_sw" , "y": 90},
+
+    "powered=true,shape=ascending_west,speed=0": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" , "y": 90},
+    "powered=true,shape=ascending_west,speed=1": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" , "y": 90},
+    "powered=true,shape=ascending_west,speed=2": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" , "y": 90},
+    "powered=true,shape=ascending_west,speed=3": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" , "y": 90},
+    "powered=true,shape=ascending_west,speed=4": { "model": "beyond_the_block:block/speed_rail_block_raised_sw_on" , "y": 90}
+  }
+}

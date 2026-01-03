@@ -1,11 +1,14 @@
 package net.ryan.beyond_the_block.entity;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
@@ -114,9 +117,9 @@ public class SpiderWebAttackGoal extends Goal {
             int count = 3;
             for (int i = 0; i < count; i++) {
                 serverWorld.spawnParticles(
-                        new net.minecraft.particle.BlockStateParticleEffect(
-                                net.minecraft.particle.ParticleTypes.BLOCK,
-                                net.minecraft.block.Blocks.COBWEB.getDefaultState()
+                        new BlockStateParticleEffect(
+                                ParticleTypes.BLOCK,
+                                Blocks.COBWEB.getDefaultState()
                         ),
                         spider.getX() + (random.nextDouble() - 0.5) * 0.25,
                         spider.getY() + 1 + (random.nextDouble() - 0.5) * 0.25,
@@ -191,7 +194,7 @@ public class SpiderWebAttackGoal extends Goal {
         return new Vec3d(vec.x * cos - vec.z * sin, vec.y, vec.x * sin + vec.z * cos);
     }
 
-    private void spawnParticles(net.minecraft.particle.ParticleEffect type, int count,
+    private void spawnParticles(ParticleEffect type, int count,
                                 double offsetX, double offsetY, double offsetZ, double speed) {
         if (spider.getWorld() instanceof ServerWorld serverWorld) {
             serverWorld.spawnParticles(

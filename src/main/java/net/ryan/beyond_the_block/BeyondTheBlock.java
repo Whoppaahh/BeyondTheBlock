@@ -47,8 +47,8 @@ import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
 import net.ryan.beyond_the_block.utils.ModTags;
+import net.ryan.beyond_the_block.utils.Naming.NameLoader;
 import net.ryan.beyond_the_block.utils.TheftDetection.VillageContainerScannerManager;
-import net.ryan.beyond_the_block.utils.VillagerNames.VillagerNameLoader;
 import net.ryan.beyond_the_block.utils.XPOrbs.HomingXPManager;
 import net.ryan.beyond_the_block.village.ModVillagers;
 import net.ryan.beyond_the_block.world.Dimension.ModDimensions;
@@ -130,7 +130,7 @@ public class BeyondTheBlock implements ModInitializer {
         BLEEDING_HANDLER = new BleedingParticleHandler();
         holder.registerSaveListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
-        ServerLifecycleEvents.SERVER_STARTED.register(VillagerNameLoader::load);
+        ServerLifecycleEvents.SERVER_STARTED.register(NameLoader::load);
     }
 
     // --------------------- Registrations ---------------------

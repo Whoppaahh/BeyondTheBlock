@@ -89,12 +89,12 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         registerBlockEntities();
         registerGeoItems();
         registerParticles();
-        registerLivingEntityFeatures();
         registerScreens();
         registerClientTickEvents();
         registerEntityRenderers();
         registerBlockRenderLayers();
         registerDynamicLights();
+        registerLivingEntityFeatures();
 
         FloatingXPManager.register();
         OutlineRenderer.init();
@@ -138,8 +138,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
                 (entityType, renderer, helper, context) -> {
                     LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer =
                             (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) renderer;
-                    ((LivingEntityRendererAccessor) livingRenderer).getFeatures()
-                            .add(new FreezeEffectLayer<>(livingRenderer, livingRenderer.getModel()));
+                    helper.register(new FreezeEffectLayer<>(livingRenderer, livingRenderer.getModel()));
                 }
         );
     }
@@ -179,6 +178,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
     private void registerBlockRenderLayers() {
         // Manual translucency
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SPEED_RAIL_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LAVA_LAMP_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getTranslucent());

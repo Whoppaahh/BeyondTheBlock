@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin.Blocks;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,8 +8,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Helpers.DoubleOpenablesHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,14 +32,13 @@ public abstract class TrapdoorBlockMixin {
         if (world.isClient) return;
         if (player == null || player.isSneaking()) return;
 
-        ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        if (!cfg.doubleOpenables.enableTrapdoors) return;
-        if (!cfg.doubleOpenables.enableRecursiveOpening) return;
+        if (!Configs.server().features.openables.enableTrapdoors) return;
+        if (!Configs.server().features.openables.enableRecursiveOpening) return;
 
         DoubleOpenablesHandler.propagateTrapdoors(
                 world,
                 pos,
-                cfg.doubleOpenables.recursiveOpeningMaxBlocksDistance
+                Configs.server().features.openables.recursiveOpeningMaxBlocksDistance
         );
     }
 }

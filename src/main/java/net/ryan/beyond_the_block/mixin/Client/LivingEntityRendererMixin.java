@@ -1,24 +1,28 @@
 package net.ryan.beyond_the_block.mixin.Client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.mixin.Accessors.EntityRendererAccessor;
+import net.ryan.beyond_the_block.utils.GlowManager;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntityRenderer.class)
@@ -28,8 +32,21 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     @Unique
     private float beyond$finalAlpha = 1.0F;
 
-    @Unique
-    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+    @ModifyVariable(
+            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "Lnet/minecraft/client/render/entity/LivingEntityRenderer;getRenderLayer(Lnet/minecraft/entity/LivingEntity;ZZZ)Lnet/minecraft/client/render/RenderLayer;"
+            )
+    )
+    private RenderLayer beyond$forceTranslucentLayer(RenderLayer original, T entity) {
+        if (beyond$finalAlpha < 1.0F) {
+            Identifier texture = ((EntityRendererAccessor<T>) this).callGetTexture(entity);
+            return RenderLayer.getEntityTranslucentCull(texture);
+        }
+        return original;
+    }
 
     @Inject(
             method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
@@ -59,10 +76,10 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
                     mc.options.getPerspective().isFirstPerson()) {
 
                 float pitch = mc.player.getPitch();
-                if (pitch >= cfg.horseConfig.fadePitch) {
+                if (pitch >= Configs.client().visuals.horses.fadePitch) {
                     beyond$finalAlpha *= MathHelper.clamp(
-                            1.0F - ((pitch - cfg.horseConfig.fadePitch) / 60.0F),
-                            cfg.horseConfig.minAlpha,
+                            1.0F - ((pitch - Configs.client().visuals.horses.fadePitch) / 70.0F),
+                            Configs.client().visuals.horses.minAlpha,
                             1.0F
                     );
                 }
@@ -80,5 +97,19 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     )
     private float beyond$applyFinalAlpha(float originalAlpha) {
         return originalAlpha * beyond$finalAlpha;
+    }
+
+
+    @ModifyVariable(
+            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+            at = @At("HEAD"),
+            argsOnly = true,
+            ordinal = 0 // first int = light
+    )
+    private int injectGlowLight(int light, LivingEntity entity) {
+        if (GlowManager.shouldGlow(entity)) {
+            return GlowManager.FULL_BRIGHT;
+        }
+        return light;
     }
 }

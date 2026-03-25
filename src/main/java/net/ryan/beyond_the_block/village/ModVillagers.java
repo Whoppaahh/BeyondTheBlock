@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block.village;
 
 import com.google.common.collect.ImmutableSet;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
@@ -39,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.poi.PointOfInterestType;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.event.GuardVillagersEvents;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.village.GuardVillager.Goals.AttackEntityDaytimeGoal;
@@ -175,7 +174,7 @@ public class ModVillagers {
 
     private static ActionResult villagerConvert(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
         ItemStack itemStack = player.getStackInHand(hand);
-        boolean requiresHOTV = AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.convertVillagerIfHaveHotv;
+        boolean requiresHOTV = Configs.server().features.guards.convertVillagerIfHaveHotv;
         boolean hasHOTV = player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE);
 
         if ((itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof CrossbowItem || itemStack.getItem() instanceof BowItem) && player.isSneaking()) {
@@ -246,7 +245,7 @@ public class ModVillagers {
         }
         boolean isVillager = target.getType() == EntityType.VILLAGER || target instanceof GuardEntity;
         if (isVillager) {
-            List<MobEntity> list = mob.getWorld().getNonSpectatingEntities(MobEntity.class, mob.getBoundingBox().expand(AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange, 5.0D, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange));
+            List<MobEntity> list = mob.getWorld().getNonSpectatingEntities(MobEntity.class, mob.getBoundingBox().expand(Configs.server().features.guards.guardVillagerHelpRange, 5.0D, Configs.server().features.guards.guardVillagerHelpRange));
             for (MobEntity mobEntity : list) {
                 if ((mobEntity instanceof GuardEntity || mob.getType() == EntityType.IRON_GOLEM) && mobEntity.getTarget() == null) {
                     mobEntity.setTarget(mob);
@@ -260,14 +259,14 @@ public class ModVillagers {
     }
 
     private static void addGoals(ServerWorld serverWorld, Entity entity) {
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.raidAnimals) {
+        if (Configs.server().features.guards.raidAnimals) {
             if (entity instanceof RaiderEntity raiderEntity)
                 if (raiderEntity.hasActiveRaid()) {
                     raiderEntity.targetSelector.add(5, new ActiveTargetGoal<>(raiderEntity, AnimalEntity.class, false));
                 }
         }
 
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.attackAllMobs) {
+        if (Configs.server().features.guards.attackAllMobs) {
             if (entity instanceof HostileEntity && !(entity instanceof SpiderEntity)) {
                 MobEntity mob = (MobEntity) entity;
                 mob.targetSelector.add(2, new ActiveTargetGoal<>(mob, GuardEntity.class, false));
@@ -279,7 +278,7 @@ public class ModVillagers {
 
 
         if (entity instanceof IllagerEntity illager) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.illagersRunFromPolarBears) {
+            if (Configs.server().features.guards.illagersRunFromPolarBears) {
                 illager.goalSelector.add(2, new FleeEntityGoal<>(illager, PolarBearEntity.class, 6.0F, 1.0D, 1.2D));
             }
 
@@ -287,16 +286,16 @@ public class ModVillagers {
         }
 
         if (entity instanceof VillagerEntity villagerEntity) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.villagersRunFromPolarBears)
+            if (Configs.server().features.guards.villagersRunFromPolarBears)
                 villagerEntity.goalSelector.add(2, new FleeEntityGoal<>(villagerEntity, PolarBearEntity.class, 6.0F, 1.0D, 1.2D));
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.witchesVillager)
+            if (Configs.server().features.guards.witchesVillager)
                 villagerEntity.goalSelector.add(2, new FleeEntityGoal<>(villagerEntity, WitchEntity.class, 6.0F, 1.0D, 1.2D));
         }
 
         if (entity instanceof VillagerEntity villagerEntity) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.blackSmithHealing)
+            if (Configs.server().features.guards.blackSmithHealing)
                 villagerEntity.goalSelector.add(1, new HealGolemGoal(villagerEntity));
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.clericHealing)
+            if (Configs.server().features.guards.clericHealing)
                 villagerEntity.goalSelector.add(1, new HealGuardAndPlayerGoal(villagerEntity, 1.0D, 100, 0, 10.0F));
         }
 
@@ -318,7 +317,7 @@ public class ModVillagers {
         }
 
         if (entity instanceof WitchEntity witch) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.witchesVillager) {
+            if (Configs.server().features.guards.witchesVillager) {
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, VillagerEntity.class, true));
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, IronGolemEntity.class, true));
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, GuardEntity.class, true));
@@ -337,11 +336,11 @@ public class ModVillagers {
         boolean shouldDamage = true;
         boolean isVillager = entity.getType() == EntityType.VILLAGER || entity.getType() == GUARD_VILLAGER;
         boolean isGolem = isVillager || entity.getType() == EntityType.IRON_GOLEM;
-        if (isGolem && attacker.getType() == GUARD_VILLAGER && !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardArrowsHurtVillagers) {
+        if (isGolem && attacker.getType() == GUARD_VILLAGER && !Configs.server().features.guards.guardArrowsHurtVillagers) {
             shouldDamage = false;
         }
         if (isVillager && attacker instanceof MobEntity) {
-            List<MobEntity> list = attacker.getWorld().getNonSpectatingEntities(MobEntity.class, attacker.getBoundingBox().expand(AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange, 5.0D, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange));
+            List<MobEntity> list = attacker.getWorld().getNonSpectatingEntities(MobEntity.class, attacker.getBoundingBox().expand(Configs.server().features.guards.guardVillagerHelpRange, 5.0D, Configs.server().features.guards.guardVillagerHelpRange));
             for (MobEntity mob : list) {
                 boolean type = mob.getType() == GUARD_VILLAGER || mob.getType() == EntityType.IRON_GOLEM;
                 boolean trueSourceGolem = attacker.getType() == GUARD_VILLAGER || attacker.getType() == EntityType.IRON_GOLEM;
@@ -353,9 +352,9 @@ public class ModVillagers {
     }
 
     public static boolean hotvChecker(PlayerEntity player, GuardEntity guard) {
-        boolean hotvRequired = AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.giveGuardStuffHotv;
+        boolean hotvRequired = Configs.server().features.guards.giveGuardStuffHotv;
         boolean hasHOTV = player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE);
-        boolean highRep = guard.getPlayerEntityReputation(player) > AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.reputationRequirement;
+        boolean highRep = guard.getPlayerEntityReputation(player) > Configs.server().features.guards.reputationRequirement;
 
         return (!hotvRequired || hasHOTV) || highRep && !player.getWorld().isClient();
     }

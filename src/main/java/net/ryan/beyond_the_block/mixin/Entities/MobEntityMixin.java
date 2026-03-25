@@ -1,13 +1,12 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +54,7 @@ public class MobEntityMixin {
         }
         boolean isVillager = target.getType() == EntityType.VILLAGER || target instanceof GuardEntity;
         if (isVillager) {
-            List<MobEntity> list = ((MobEntity)(Object)this).getWorld().getNonSpectatingEntities(MobEntity.class, ((MobEntity)(Object)this).getBoundingBox().expand(AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange, 5.0D, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardVillagerHelpRange));
+            List<MobEntity> list = ((MobEntity)(Object)this).getWorld().getNonSpectatingEntities(MobEntity.class, ((MobEntity)(Object)this).getBoundingBox().expand(Configs.server().features.guards.guardVillagerHelpRange, 5.0D, Configs.server().features.guards.guardVillagerHelpRange));
             for (MobEntity mobEntity : list) {
                 if ((mobEntity instanceof GuardEntity || ((MobEntity)(Object)this).getType() == EntityType.IRON_GOLEM) && mobEntity.getTarget() == null) {
                     mobEntity.setTarget(((MobEntity)(Object)this));

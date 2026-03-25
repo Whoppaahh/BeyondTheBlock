@@ -1,11 +1,10 @@
 package net.ryan.beyond_the_block.mixin.Client;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.utils.Helpers.CameraState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,7 +46,7 @@ public class ClientPlayerEntityMixin {
 
     @Inject(method = "startRiding", at = @At("HEAD"))
     private void autoCamera_onMount(Entity entity, boolean force, CallbackInfoReturnable<Boolean> cir) {
-        if (!AutoConfig.getConfigHolder(ModConfig.class).get().autoCamera.enableAutoCamera) return;
+        if (!Configs.client().hud.camera.enabled) return;
         if (entity == null) return;
 
         MinecraftClient client = MinecraftClient.getInstance();
@@ -58,9 +57,8 @@ public class ClientPlayerEntityMixin {
             CameraState.hasStored = true;
         }
 
-        ModConfig.AutoCameraConfig.Mode mode = AutoConfig.getConfigHolder(ModConfig.class).get().autoCamera.cameraModeOnMount;
 
-        switch (mode) {
+        switch (Configs.client().hud.camera.cameraModeOnMount) {
             case ALWAYS_FIRST -> client.options.setPerspective(net.minecraft.client.option.Perspective.FIRST_PERSON);
             case ALWAYS_THIRD -> client.options.setPerspective(net.minecraft.client.option.Perspective.THIRD_PERSON_BACK);
             case PREVIOUS -> client.options.setPerspective(net.minecraft.client.option.Perspective.THIRD_PERSON_BACK);
@@ -69,7 +67,7 @@ public class ClientPlayerEntityMixin {
 
     @Inject(method = "dismountVehicle", at = @At("HEAD"))
     private void autoCamera_onDismount(CallbackInfo ci) {
-        if (!AutoConfig.getConfigHolder(ModConfig.class).get().autoCamera.enableAutoCamera) return;
+        if (!Configs.client().hud.camera.enabled) return;
 
         MinecraftClient client = MinecraftClient.getInstance();
 

@@ -39,6 +39,7 @@ public class HeldItemRendererMixin {
                 && player.hasStatusEffect(StatusEffects.INVISIBILITY)) {
             ci.cancel();
         }
+
     }
 }
 

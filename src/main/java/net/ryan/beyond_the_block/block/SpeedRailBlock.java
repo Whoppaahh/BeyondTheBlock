@@ -1,7 +1,8 @@
 package net.ryan.beyond_the_block.block;
 
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.PoweredRailBlock;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.utils.Accessors.MinecartSpeedAccessor;
 import net.ryan.beyond_the_block.utils.Helpers.SpeedRailValues;
@@ -32,7 +32,7 @@ public class SpeedRailBlock extends PoweredRailBlock {
                 this.getStateManager().getDefaultState()
                         .with(POWERED, false)
                         .with(SHAPE, RailShape.NORTH_SOUTH)
-                        .with(SPEED_LEVEL, 0)
+                        .with(SPEED_LEVEL, 1)
         );
     }
 
@@ -45,7 +45,7 @@ public class SpeedRailBlock extends PoweredRailBlock {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return super.getPlacementState(ctx)
-                .with(SPEED_LEVEL, 0);
+                .with(SPEED_LEVEL, 1);
     }
 
     @Override
@@ -83,29 +83,5 @@ public class SpeedRailBlock extends PoweredRailBlock {
         return ActionResult.SUCCESS;
     }
 
-
-    @Override
-    public void onEntityCollision(BlockState state, World world,
-                                  BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-
-        if (!(entity instanceof AbstractMinecartEntity cart)) return;
-        if (!state.get(POWERED)) return;
-
-        int level = state.get(SPEED_LEVEL);
-        if (level == 0) return;
-
-        double targetSpeed = switch (level) {
-            case 1 -> 0.2;
-            case 2 -> 0.4;
-            case 3 -> 0.6;
-            case 4 -> 0.8;
-            default -> 0.0;
-        };
-
-        // DO NOT set velocity
-        // Let vanilla physics handle direction, kick-start, and reversal
-        ((MinecartSpeedAccessor) cart).beyondTheBlock$setCustomSpeed(targetSpeed);
-    }
 
 }

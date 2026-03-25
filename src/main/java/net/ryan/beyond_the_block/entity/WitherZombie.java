@@ -49,26 +49,26 @@ public class WitherZombie extends SkeletonEntity implements RangedAttackMob {
 
         EntityData data = super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
 
-        if (world instanceof ServerWorld serverWorld && this.random.nextFloat() < 0.2F) {
-            ZombieHorseEntity horse = this.random.nextFloat() < 0.5F
-                    ? ModEntities.WITHER_SKELETON_HORSE.create(serverWorld)
-                    : ModEntities.WITHER_ZOMBIE_HORSE.create(serverWorld);
-
-            if (horse != null) {
-                horse.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
-                horse.setTame(true);
-                horse.setPersistent();
-                serverWorld.spawnEntity(horse);
-
-
-                // Defer mounting by one tick (IMPORTANT)
-                serverWorld.getServer().execute(() -> {
-                    if (this.isAlive() && horse.isAlive()) {
-                        this.startRiding(horse, true);
-                    }
-                });
-            }
-        }
+//        if (world instanceof ServerWorld serverWorld && this.random.nextFloat() < 0.2F) {
+//            ZombieHorseEntity horse = this.random.nextFloat() < 0.5F
+//                    ? ModEntities.WITHER_SKELETON_HORSE.create(serverWorld)
+//                    : ModEntities.WITHER_ZOMBIE_HORSE.create(serverWorld);
+//
+//            if (horse != null) {
+//                horse.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
+//                horse.setTame(true);
+//                horse.setPersistent();
+//                serverWorld.spawnEntity(horse);
+//
+//
+//                // Defer mounting by one tick (IMPORTANT)
+//                serverWorld.getServer().execute(() -> {
+//                    if (this.isAlive() && horse.isAlive()) {
+//                        this.startRiding(horse, true);
+//                    }
+//                });
+//            }
+//        }
 
         return data;
     }

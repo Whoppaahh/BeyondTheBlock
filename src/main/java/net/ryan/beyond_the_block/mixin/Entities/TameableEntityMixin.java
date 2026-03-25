@@ -1,9 +1,8 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Naming.NameEngine;
 import net.ryan.beyond_the_block.utils.Naming.NameableMob;
 import net.ryan.beyond_the_block.utils.Naming.TitleResolvers;
@@ -21,10 +20,8 @@ public abstract class TameableEntityMixin {
 
         if (entity.getWorld().isClient()) return;
 
-        ModConfig.NamesConfig cfg =
-                AutoConfig.getConfigHolder(ModConfig.class).getConfig().mobNames;
 
-        if (!cfg.nameTamedMobs) return;
+        if (!Configs.client().visuals.names.nameTamed) return;
         if (entity.hasCustomName()) return;
         if (!(entity instanceof NameableMob nameable)) return;
 
@@ -37,8 +34,8 @@ public abstract class TameableEntityMixin {
                 nameable,
                 title.title(),
                 title.colour(),
-                cfg,
-                cfg.useAlliteration
+                Configs.client(),
+                Configs.client().visuals.names.alliteration
         );
     }
 

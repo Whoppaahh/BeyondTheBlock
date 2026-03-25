@@ -3,7 +3,7 @@ package net.ryan.beyond_the_block.utils.Naming;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.ConfigClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +14,21 @@ public class VillagerNameGenerator {
     public static final Random RANDOM = new Random();
 
 
-    public static String pickName(ModConfig.NamesConfig.GenderMode genderMode) {
+    public static String pickName(ConfigClient.Names.GenderMode genderMode) {
         List<String> pool = new ArrayList<>();
-        if (genderMode == ModConfig.NamesConfig.GenderMode.MALE || genderMode == ModConfig.NamesConfig.GenderMode.BOTH)
+        if (genderMode == ConfigClient.Names.GenderMode.MALE || genderMode == ConfigClient.Names.GenderMode.BOTH)
             pool.addAll(NameLoader.getMaleNames());
-        if (genderMode == ModConfig.NamesConfig.GenderMode.FEMALE || genderMode == ModConfig.NamesConfig.GenderMode.BOTH)
+        if (genderMode == ConfigClient.Names.GenderMode.FEMALE || genderMode == ConfigClient.Names.GenderMode.BOTH)
             pool.addAll(NameLoader.getFemaleNames());
 
         return pool.isEmpty() ? "Alex" : pool.get(RANDOM.nextInt(pool.size()));
     }
 
-    public static List<String> pickNamesStartingWith(char letter, ModConfig.NamesConfig.GenderMode genderMode) {
+    public static List<String> pickNamesStartingWith(char letter, ConfigClient.Names.GenderMode genderMode) {
         List<String> pool = new ArrayList<>();
-        if (genderMode == ModConfig.NamesConfig.GenderMode.MALE || genderMode == ModConfig.NamesConfig.GenderMode.BOTH)
+        if (genderMode == ConfigClient.Names.GenderMode.MALE || genderMode == ConfigClient.Names.GenderMode.BOTH)
             pool.addAll(NameLoader.getMaleNames());
-        if (genderMode == ModConfig.NamesConfig.GenderMode.FEMALE || genderMode == ModConfig.NamesConfig.GenderMode.BOTH)
+        if (genderMode == ConfigClient.Names.GenderMode.FEMALE || genderMode == ConfigClient.Names.GenderMode.BOTH)
             pool.addAll(NameLoader.getFemaleNames());
 
         final char c = Character.toUpperCase(letter);

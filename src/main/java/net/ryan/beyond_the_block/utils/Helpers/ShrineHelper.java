@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.Helpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffect;
@@ -18,7 +17,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.block.Shrine.ShrineCoreBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +62,10 @@ public class ShrineHelper {
         // Define the loot table
         Identifier lootTableID;
 
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.rewardsIncludeVanillaItems && AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.rewardsIncludeModdedItems) {
+        if (Configs.server().features.shrines.rewardsIncludeVanillaItems && Configs.server().features.shrines.rewardsIncludeModdedItems) {
             // Create a combined loot table ID
             lootTableID = new Identifier(BeyondTheBlock.MOD_ID, "shrine/shulker_rewards_combined");
-        } else if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.rewardsIncludeModdedItems) {
+        } else if (Configs.server().features.shrines.rewardsIncludeModdedItems) {
             lootTableID = new Identifier(BeyondTheBlock.MOD_ID, "shrine/shulker_rewards_modded");
         } else {
             lootTableID = new Identifier(BeyondTheBlock.MOD_ID, "shrine/shulker_rewards_vanilla");

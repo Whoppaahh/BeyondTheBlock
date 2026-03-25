@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -10,7 +9,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Box;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Naming.NameEngine;
 import net.ryan.beyond_the_block.utils.Naming.NameableMob;
 import net.ryan.beyond_the_block.utils.Naming.VillagerNameGenerator;
@@ -74,11 +73,9 @@ public abstract class VillagerEntityMixin implements NameableMob {
         VillagerEntity villager = (VillagerEntity)(Object)this;
         if (villager.getWorld().isClient()) return;
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        ModConfig.NamesConfig cfg = config.mobNames;
-        if (!cfg.enableNames) return;
+        if (!Configs.client().visuals.names.enabled) return;
 
-        nameVisibilityRange = cfg.nameVisibilityRange;
+        nameVisibilityRange = Configs.client().visuals.names.visibilityRange;
 
         // Babies never receive names
         if (villager.isBaby()) {
@@ -89,7 +86,7 @@ public abstract class VillagerEntityMixin implements NameableMob {
         VillagerProfession profession = data.getProfession();
 
         // Config option: Only name employed villagers
-        if (cfg.nameOnlyWhenEmployed && profession == VillagerProfession.NONE) {
+        if (Configs.client().visuals.names.onlyWhenEmployed && profession == VillagerProfession.NONE) {
             villager.setCustomName(null);
             villager.setCustomNameVisible(false);
             return;
@@ -98,7 +95,7 @@ public abstract class VillagerEntityMixin implements NameableMob {
         // Perform full naming
         NameEngine.assignName(villager, this, VillagerNameGenerator.getProfessionTitle(profession),
                 VillagerNameGenerator.getProfessionColor(profession),
-                cfg,
+                Configs.client(),
                 profession != VillagerProfession.NONE);
     }
 

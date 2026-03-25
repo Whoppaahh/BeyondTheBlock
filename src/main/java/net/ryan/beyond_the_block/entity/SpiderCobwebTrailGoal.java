@@ -1,24 +1,21 @@
 package net.ryan.beyond_the_block.entity;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Helpers.CobwebDecayScheduler;
 
 public class SpiderCobwebTrailGoal extends Goal {
     private final SpiderEntity spider;
     private int cooldown;
-    ModConfig cfg;
 
     public SpiderCobwebTrailGoal(SpiderEntity spider) {
         this.spider = spider;
         this.cooldown = 0;
-        cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 
     @Override
@@ -39,8 +36,8 @@ public class SpiderCobwebTrailGoal extends Goal {
         if (!canPlaceWeb(world, pos)) return;
 
         float chance = spider instanceof CaveSpiderEntity
-                ? cfg.webConfig.caveSpiderRate
-                : cfg.webConfig.normalSpiderRate;
+                ? Configs.server().features.webs.caveSpiderRate
+                : Configs.server().features.webs.normalSpiderRate;
 
         if (world.random.nextFloat() > chance) return;
 
@@ -49,8 +46,8 @@ public class SpiderCobwebTrailGoal extends Goal {
     }
 
     private boolean canPlaceWeb(ServerWorld world, BlockPos pos) {
-        int radius = cfg.webConfig.densityRadius;
-        int limit = cfg.webConfig.densityLimit;
+        int radius = Configs.server().features.webs.densityRadius;
+        int limit = Configs.server().features.webs.densityLimit;
 
         int count = 0;
         for (BlockPos p : BlockPos.iterateOutwards(pos, radius, radius, radius)) {

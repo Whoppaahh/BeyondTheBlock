@@ -1,12 +1,11 @@
 package net.ryan.beyond_the_block.utils.GUI;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.TrajectoryPath;
 
 public class TrajectoryHUD implements HudRenderCallback {
@@ -20,9 +19,7 @@ public class TrajectoryHUD implements HudRenderCallback {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player == null) return;
 
-            ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-            ModConfig.TrajectoryConfig cfg = config.trajectoryConfig;
-            if (!cfg.enabled) return;
+            if (!Configs.client().hud.trajectory.enabled) return;
 
             Vec3d eye = client.player.getCameraPosVec(tickDelta);
             Vec3d end;

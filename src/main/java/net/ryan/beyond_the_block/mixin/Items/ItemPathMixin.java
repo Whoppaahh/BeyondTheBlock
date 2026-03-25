@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block.mixin.Items;
 
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Helpers.PathBuilder;
 import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
 import net.ryan.beyond_the_block.utils.Helpers.PathUndoManager;
@@ -42,8 +41,7 @@ public class ItemPathMixin {
             return;
         }
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).get();
-        if (!config.pathConfig.enabled) {
+        if (!Configs.server().features.paths.enabled) {
             return;
         }
 
@@ -53,9 +51,8 @@ public class ItemPathMixin {
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
-        var pc = config.pathConfig;
-        Set<Block> allowedStart = PathToolHelper.resolveBlockList(pc.allowedStartingBlocks);
-        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(pc.allowedEndingBlocks);
+        Set<Block> allowedStart = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedStartingBlocks);
+        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedEndingBlocks);
 
         boolean hasStart = PathToolHelper.hasStart(stack);
 
@@ -95,7 +92,7 @@ public class ItemPathMixin {
             return;
         }
 
-        PathBuilder.buildPath(world, player, stack, start, pos, config);
+        PathBuilder.buildPath(world, player, stack, start, pos, Configs.server());
 
         cir.setReturnValue(ActionResult.SUCCESS);
     }

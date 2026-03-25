@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.village.GuardVillager.Goals;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -16,7 +15,7 @@ import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 import org.jetbrains.annotations.Nullable;
@@ -117,7 +116,7 @@ public class RangedCrossbowAttackPassiveGoal<T extends PathAwareEntity & RangedA
             }
             this.mob.lookAtEntity(target, 30.0F, 30.0F);
             this.mob.getLookControl().lookAt(target, 30.0F, 30.0F);
-            if (this.friendlyInLineOfSight() && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.friendlyFire)
+            if (this.friendlyInLineOfSight() && Configs.server().features.guards.friendlyFire)
                 this.crossbowState = CrossbowState.FIND_NEW_POSITION;
 
             switch (this.crossbowState) {

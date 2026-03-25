@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.ProjectileHelpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +29,8 @@ public final class TrajectoryHelper {
         World world = client.world;
         if (player == null || world == null) return TrajectoryPath.EMPTY;
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        ModConfig.TrajectoryConfig cfg = config.trajectoryConfig;
-        if (!cfg.enabled) return TrajectoryPath.EMPTY;
+
+        if (!Configs.client().hud.trajectory.enabled) return TrajectoryPath.EMPTY;
 
         ItemStack stack = player.getMainHandStack();
         boolean isBow = stack.getItem() instanceof BowItem;
@@ -46,18 +44,18 @@ public final class TrajectoryHelper {
 
         TrajectoryPath.WeaponKind weaponKind = TrajectoryPath.WeaponKind.OTHER;
 
-        if (isBow && !cfg.showBow) return TrajectoryPath.EMPTY;
-        if (isCrossbow && !cfg.showCrossbow) return TrajectoryPath.EMPTY;
-        if (isTrident && !cfg.showTrident) return TrajectoryPath.EMPTY;
-        if (isThrowable && !cfg.showThrowables) return TrajectoryPath.EMPTY;
+        if (isBow && !Configs.client().hud.trajectory.showBow) return TrajectoryPath.EMPTY;
+        if (isCrossbow && !Configs.client().hud.trajectory.showCrossbow) return TrajectoryPath.EMPTY;
+        if (isTrident && !Configs.client().hud.trajectory.showTrident) return TrajectoryPath.EMPTY;
+        if (isThrowable && !Configs.client().hud.trajectory.showThrowables) return TrajectoryPath.EMPTY;
 
         if (isBow) weaponKind = TrajectoryPath.WeaponKind.BOW;
         else if (isCrossbow) weaponKind = TrajectoryPath.WeaponKind.CROSSBOW;
 
         // Gating: sneak + aiming
-        if (cfg.requireSneak && !player.isSneaking()) return TrajectoryPath.EMPTY;
+        if (Configs.client().hud.trajectory.requireSneak && !player.isSneaking()) return TrajectoryPath.EMPTY;
 
-        if (cfg.onlyWhileAiming) {
+        if (Configs.client().hud.trajectory.onlyWhileAiming) {
             if (isBow) {
                 if (!player.isUsingItem() || player.getActiveItem() != stack) return TrajectoryPath.EMPTY;
             } else if (isCrossbow) {
@@ -85,7 +83,7 @@ public final class TrajectoryHelper {
         int hitEntityId = -1;
 
         // Per-tick simulation: this is the key fix
-        int maxTicks = Math.max(1, cfg.maxSteps);
+        int maxTicks = Math.max(1, Configs.client().hud.trajectory.maxSteps);
         for (int tick = 0; tick < maxTicks; tick++) {
             Vec3d nextPos = pos.add(velocity);
 

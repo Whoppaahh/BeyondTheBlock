@@ -7,7 +7,6 @@
     "ActiveTargetGoalMixin",
     "CreeperExplosionMixin",
     "CrossbowAccessor",
-    "ExampleMixin",
     "InfinityEnchantmentMixin",
     "InventoryMixin",
     "LecternScreenHandlerMixin",
@@ -21,6 +20,7 @@
     "VillagerTaskListProviderMixin",
     "Accessors.AbstractFurnaceAccessor",
     "Accessors.AnimalAgeAccessor",
+    "Accessors.ArrowEntityAccessor",
     "Accessors.BarrelBlockEntityAccessor",
     "Accessors.ChestBlockEntityAccessor",
     "Accessors.DispenserBlockEntityAccessor",
@@ -38,9 +38,11 @@
     "Blocks.FluidBlockMixin",
     "Blocks.LadderBlockMixin",
     "Blocks.LecternBlockMixin",
+    "Blocks.SweetBerryBlockMixin",
     "Blocks.TrapdoorBlockMixin",
     "Entities.AnimalEntityBreedingSyncMixin",
     "Entities.ArrowEntityMixin",
+    "Entities.BannerBlockEntityMixin",
     "Entities.BaseNameLivingEntityMixin",
     "Entities.ChickenEntityMixin",
     "Entities.EntityMixin",
@@ -48,6 +50,7 @@
     "Entities.HorseEntityMixin",
     "Entities.InfinityEnchantmentMixin",
     "Entities.IronGolemEntityMixin",
+    "Entities.ItemFrameEntityMixin",
     "Entities.LivingEntityMixin",
     "Entities.MinecartMixin",
     "Entities.MobEntityMixin",
@@ -55,6 +58,7 @@
     "Entities.PersistentProjectileEntityMixin",
     "Entities.PersistentProjectileMixin",
     "Entities.PlayerEntityMixin",
+    "Entities.SheepEntityMixin",
     "Entities.SkeletonEntityMixin",
     "Entities.SlimeEntityMixin",
     "Entities.SnowballEntityMixin",
@@ -72,5 +76,8 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "Accessors.EntityRendererAccessor"
+  ]
 }

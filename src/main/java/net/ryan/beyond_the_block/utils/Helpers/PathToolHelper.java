@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.Helpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,7 +15,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.ConfigServer;
+import net.ryan.beyond_the_block.config.Configs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ public final class PathToolHelper {
         return nbt != null && nbt.contains(TAG_PATH_START, NbtElement.COMPOUND_TYPE);
     }
 
-    public static int getWidth(ItemStack stack, ModConfig config) {
+    public static int getWidth(ItemStack stack, ConfigServer config) {
         NbtCompound nbt = stack.getOrCreateNbt();
 
         if (!nbt.contains(TAG_WIDTH)) {
@@ -47,14 +47,13 @@ public final class PathToolHelper {
         int width = nbt.getInt(TAG_WIDTH);
 
         // Clamp to config min/max
-        width = Math.max(config.pathConfig.minWidth, Math.min(config.pathConfig.maxWidth, width));
+        width = Math.max(Configs.server().features.paths.minWidth, Math.min(Configs.server().features.paths.maxWidth, width));
 
         return width;
     }
 
     public static void setWidth(ItemStack stack, int width) {
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).get();
-        width = Math.max(config.pathConfig.minWidth, Math.min(config.pathConfig.maxWidth, width));
+        width = Math.max(Configs.server().features.paths.minWidth, Math.min(Configs.server().features.paths.maxWidth, width));
 
         NbtCompound nbt = stack.getOrCreateNbt();
         nbt.putInt(TAG_WIDTH, width);
@@ -95,8 +94,8 @@ public final class PathToolHelper {
         return set;
     }
 
-    public static BlockState resolveDefaultPathBlock(ModConfig config) {
-        Identifier id = Identifier.tryParse(config.pathConfig.defaultPathBlockId);
+    public static BlockState resolveDefaultPathBlock(ConfigServer config) {
+        Identifier id = Identifier.tryParse(Configs.server().features.paths.defaultPathBlockId);
         Block block = (id != null) ? Registry.BLOCK.get(id) : Blocks.DIRT_PATH;
         if (block == Blocks.AIR) block = Blocks.DIRT_PATH;
         return block.getDefaultState();
@@ -195,7 +194,7 @@ public final class PathToolHelper {
 
     // --- Path material resolution ---
 
-    public static BlockState resolvePathBlockFor(World world, PlayerEntity player, BlockPos pos, ModConfig config) {
+    public static BlockState resolvePathBlockFor(World world, PlayerEntity player, BlockPos pos, ConfigServer config) {
         // 1. Offhand block has priority
         ItemStack offhand = player.getOffHandStack();
         if (offhand.getItem() instanceof BlockItem blockItem) {

@@ -3,10 +3,9 @@ package net.ryan.beyond_the_block.config;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.api.*;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
 public class ModMenu implements ModMenuApi {
@@ -14,163 +13,274 @@ public class ModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> {
-            ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+            ConfigClient config = AutoConfig.getConfigHolder(ConfigClient.class).getConfig();
+            ConfigServer serverConfig = AutoConfig.getConfigHolder(ConfigServer.class).getConfig();
+
+
             ConfigBuilder builder = ConfigBuilder.create()
                     .setParentScreen(parent)
-                    .setTitle(Text.literal("BTB Config"));
-            ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+                    .setTitle(Text.literal("Beyond The Block Config"));
 
-            ConfigCategory shrineConfig = builder.getOrCreateCategory(Text.literal("Shrines"));
-            shrineConfig.addEntry(entryBuilder
-                            .startBooleanToggle(
-                            Text.literal("Vanilla Loot"),
-                            config.shrines.rewardsIncludeVanillaItems)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> config.shrines.rewardsIncludeVanillaItems = newValue).build());
-            shrineConfig.addEntry(entryBuilder
-                    .startBooleanToggle(
-                            Text.literal("Modded Loot"),
-                            config.shrines.rewardsIncludeModdedItems)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> config.shrines.rewardsIncludeModdedItems = newValue)
-                    .build());
-            shrineConfig.addEntry(entryBuilder
-                            .startLongField(
-                            Text.literal("Generation Interval"),
-                            config.shrines.generationInterval)
-                    .setDefaultValue(24000)
-                    .setSaveConsumer(newValue -> config.shrines.generationInterval = newValue)
-                    .build());
+            ConfigEntryBuilder entry = builder.entryBuilder();
 
-            ConfigCategory oresConfig = builder.getOrCreateCategory(Text.literal("Ores"));
-            oresConfig.addEntry(entryBuilder.startTextDescription(Text.literal("=== Ores: Modded ===")).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Ruby Ore Vein Size"), config.ores.rubyOre).setDefaultValue(6).setSaveConsumer(v -> config.ores.rubyOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Miranite Ore Vein Size"), config.ores.miraniteOre).setDefaultValue(2).setSaveConsumer(v -> config.ores.miraniteOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Chromite Ore Vein Size"), config.ores.chromiteOre).setDefaultValue(10).setSaveConsumer(v -> config.ores.chromiteOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Nocturnite Ore Vein Size"), config.ores.nocturniteOre).setDefaultValue(4).setSaveConsumer(v -> config.ores.nocturniteOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Amberine Ore Vein Size"), config.ores.amberineOre).setDefaultValue(7).setSaveConsumer(v -> config.ores.amberineOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Rosette Ore Vein Size"), config.ores.rosetteOre).setDefaultValue(5).setSaveConsumer(v -> config.ores.rosetteOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Azuros Ore Vein Size"), config.ores.azurosOre).setDefaultValue(6).setSaveConsumer(v -> config.ores.azurosOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Indigra Ore Vein Size"), config.ores.indigraOre).setDefaultValue(3).setSaveConsumer(v -> config.ores.indigraOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("Xirion Ore Vein Size"), config.ores.xirionOre).setDefaultValue(9).setSaveConsumer(v -> config.ores.xirionOre = v).build());
-            oresConfig.addEntry(entryBuilder.startIntField(Text.literal("XP Ore Vein Size"), config.ores.xpOre).setDefaultValue(4).setSaveConsumer(v -> config.ores.xpOre = v).build());
+            ConfigCategory gameplay = builder.getOrCreateCategory(Text.literal("Gameplay (Server)"));
 
+            if (MinecraftClient.getInstance().isIntegratedServerRunning()) {
 
-            // Guards
-            ConfigCategory guardsConfig = builder.getOrCreateCategory(Text.literal("Guards"));
-            SubCategoryBuilder visualSub = entryBuilder.startSubCategory(Text.literal("=== Guard: Visuals ==="))
-                            .setExpanded(false);
-            visualSub.add(entryBuilder.startBooleanToggle(Text.literal("Guard Variants"), config.guards.visuals.guardVariants).setDefaultValue(false).setSaveConsumer(v -> config.guards.visuals.guardVariants = v).build());
-            visualSub.add(entryBuilder.startBooleanToggle(Text.literal("Guard Wear Berets"), config.guards.visuals.guardBerets).setDefaultValue(false).setSaveConsumer(v -> config.guards.visuals.guardBerets = v).build());
-            visualSub.add(entryBuilder.startBooleanToggle(Text.literal("Display Shoulder Pads"), config.guards.visuals.displayShoulderPads).setDefaultValue(false).setSaveConsumer(v -> config.guards.visuals.displayShoulderPads = v).build());
-            guardsConfig.addEntry(visualSub.build());
+                SubCategoryBuilder guards = entry.startSubCategory(Text.literal("Guards"))
+                        .setExpanded(false);
 
-            SubCategoryBuilder statsSub = entryBuilder.startSubCategory(Text.literal("=== Guard: Stats ==="))
+                guards.add(entry.startBooleanToggle(
+                                Text.literal("Enable Guards"),
+                                serverConfig.features.guards.enabled)
+                        .setSaveConsumer(v -> serverConfig.features.guards.enabled = v)
+                        .build());
+
+                gameplay.addEntry(guards.build());
+            }
+            AutoConfig.getConfigHolder(ConfigServer.class).save();
+
+            /* ========================================================= */
+            /* ======================= VISUALS ========================== */
+            /* ========================================================= */
+
+            ConfigCategory visuals = builder.getOrCreateCategory(Text.literal("Visuals"));
+
+            /* ---------- Blood ---------- */
+
+            SubCategoryBuilder blood = entry.startSubCategory(Text.literal("Blood Effects"))
                     .setExpanded(false);
-            statsSub.add(entryBuilder.startDoubleField(Text.literal("Health Modifier"), config.guards.behavior.healthModifier).setDefaultValue(20D).setSaveConsumer(v -> config.guards.behavior.healthModifier = v).build());
-            statsSub.add(entryBuilder.startFloatField(Text.literal("Amount of Health Regenerated"), config.guards.behavior.amountOfHealthRegenerated).setDefaultValue(1F).setSaveConsumer(v -> config.guards.behavior.amountOfHealthRegenerated = v).build());
-            statsSub.add(entryBuilder.startDoubleField(Text.literal("Speed Modifier"), config.guards.behavior.speedModifier).setDefaultValue(0.5D).setSaveConsumer(v -> config.guards.behavior.speedModifier = v).build());
-            statsSub.add(entryBuilder.startDoubleField(Text.literal("Follow Range Modifier"), config.guards.behavior.followRangeModifier).setDefaultValue(20D).setSaveConsumer(v -> config.guards.behavior.followRangeModifier = v).build());
-            statsSub.add(entryBuilder.startFloatField(Text.literal("Chance to Drop Equipment"), config.guards.behavior.chanceToDropEquipment).setDefaultValue(25F).setSaveConsumer(v -> config.guards.behavior.chanceToDropEquipment = v).build());
-            statsSub.add(entryBuilder.startBooleanToggle(Text.literal("Guards Open Doors"), config.guards.behavior.guardsOpenDoors).setDefaultValue(true).setSaveConsumer(v -> config.guards.behavior.guardsOpenDoors = v).build());
-            statsSub.add(entryBuilder.startDoubleField(Text.literal("Villager Assist Range"), config.guards.behavior.guardVillagerHelpRange).setDefaultValue(50).setSaveConsumer(v -> config.guards.behavior.guardVillagerHelpRange = v).build());
-            guardsConfig.addEntry(statsSub.build());
 
-            SubCategoryBuilder repSub = entryBuilder.startSubCategory(Text.literal("=== Guard: Reputation ==="))
-                    .setExpanded(false);
-            repSub.add(entryBuilder.startBooleanToggle(Text.literal("Hero Status Required to give Guards Items"), config.guards.behavior.giveGuardStuffHotv).setDefaultValue(false).setSaveConsumer(v -> config.guards.behavior.giveGuardStuffHotv = v).build());
-            repSub.add(entryBuilder.startBooleanToggle(Text.literal("Hero Status Required to set Guard Patrol"), config.guards.behavior.setGuardPatrolHotv).setDefaultValue(false).setSaveConsumer(v -> config.guards.behavior.setGuardPatrolHotv = v).build());
-            repSub.add(entryBuilder.startBooleanToggle(Text.literal("Hero Status to convert Villagers"), config.guards.behavior.convertVillagerIfHaveHotv).setDefaultValue(false).setSaveConsumer(v -> config.guards.behavior.convertVillagerIfHaveHotv = v).build());
-            repSub.add(entryBuilder.startBooleanToggle(Text.literal("Follow Hero"), config.guards.behavior.followHero).setDefaultValue(true).setSaveConsumer(v -> config.guards.behavior.followHero = v).build());
-            repSub.add(entryBuilder.startIntField(Text.literal("Reputation Requirement"), config.guards.behavior.reputationRequirement).setDefaultValue(15).setSaveConsumer(v -> config.guards.behavior.reputationRequirement = v).build());
-            repSub.add(entryBuilder.startIntField(Text.literal("Reputation Required to be Attacked"), config.guards.behavior.reputationRequirementToBeAttacked).setDefaultValue(-100).setSaveConsumer(v -> config.guards.behavior.reputationRequirementToBeAttacked = v).build());
-            guardsConfig.addEntry(repSub.build());
+            blood.add(entry.startBooleanToggle(Text.literal("Enable Blood"),
+                            config.visuals.blood.enabled)
+                    .setTooltip(Text.literal("Enable blood particle effects when entities are damaged"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.visuals.blood.enabled = v)
+                    .build());
 
-            SubCategoryBuilder combatSub = entryBuilder.startSubCategory(Text.literal("=== Guard: Combat ==="))
-                    .setExpanded(false);
-            combatSub.add(entryBuilder.startBooleanToggle(Text.literal("Guard Formation"), config.guards.behavior.guardFormation).setDefaultValue(false).setSaveConsumer(v -> config.guards.behavior.guardFormation = v).build());
-            combatSub.add(entryBuilder.startBooleanToggle(Text.literal("Cleric Healing"), config.guards.behavior.clericHealing).setDefaultValue(true).setSaveConsumer(v -> config.guards.behavior.clericHealing = v).build());
-            combatSub.add(entryBuilder.startBooleanToggle(Text.literal("Blacksmith Healing"), config.guards.behavior.blackSmithHealing).setDefaultValue(true).setSaveConsumer(v -> config.guards.behavior.blackSmithHealing = v).build());
-            combatSub.add(entryBuilder.startBooleanToggle(Text.literal("Armourer Repairs Guards Armour"), config.guards.behavior.armourerRepairGuardArmour).setDefaultValue(true).setSaveConsumer(v -> config.guards.behavior.armourerRepairGuardArmour = v).build());
-            guardsConfig.addEntry(combatSub.build());
-
-            ConfigCategory enchantmentsConfig = builder.getOrCreateCategory(Text.literal("Enchantments"));
-            enchantmentsConfig.addEntry(ConfigEntryBuilder.create().startTextDescription(Text.literal("=== Timbercut/Barkskin ===")).build());
-            enchantmentsConfig.addEntry(ConfigEntryBuilder.create().startEnumSelector(
-                            Text.literal("Enchantment Drop Mode"),
-                            DropMode.class,
-                            config.enchantments.dropMode)
-                    .setDefaultValue(DropMode.NORMAL)
-                    .setSaveConsumer(newValue -> config.enchantments.dropMode = newValue)
-                    .build());
-            enchantmentsConfig.addEntry(ConfigEntryBuilder.create().startBooleanToggle(
-                            Text.literal("Enchantment Show Highlights"),
-                            config.enchantments.showHighlights)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> config.enchantments.showHighlights = newValue)
-                    .build());
-            ConfigCategory miscConfig = builder.getOrCreateCategory(Text.literal("Misc"));
-            miscConfig.addEntry(ConfigEntryBuilder.create().startTextDescription(Text.literal("=== Title Logo ===")).build());
-            miscConfig.addEntry(ConfigEntryBuilder.create().startBooleanToggle(
-                            Text.literal("Enabled Custom Title Logo"),
-                            config.misc.titleLogo)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> config.misc.titleLogo = newValue)
-                    .build());
-            miscConfig.addEntry(ConfigEntryBuilder.create().startTextDescription(Text.literal("=== Blood Effects ===")).build());
-            miscConfig.addEntry(ConfigEntryBuilder.create().startBooleanToggle(
-                            Text.literal("Blood Particles"),
-                            config.misc.showBlood)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> config.misc.showBlood = newValue)
-                    .build());
-            if (config.misc.showBlood) {
-                miscConfig.addEntry(ConfigEntryBuilder.create().startFloatField(
-                                Text.literal("Health Fraction"),
-                                config.misc.healthFraction)
+            if (config.visuals.blood.enabled) {
+                blood.add(entry.startFloatField(Text.literal("Health Threshold"),
+                                config.visuals.blood.healthFraction)
+                        .setTooltip(Text.literal("Only show blood when entity health is below this fraction"))
                         .setDefaultValue(0.25F)
-                        .setSaveConsumer(newValue -> config.misc.healthFraction = newValue)
+                        .setSaveConsumer(v -> config.visuals.blood.healthFraction = v)
                         .build());
             }
 
-            ConfigCategory villagerNames = builder.getOrCreateCategory(Text.literal("Villager Names"));
-            villagerNames.addEntry(entryBuilder.startBooleanToggle(
-                            Text.literal("Enable Villager Names"),
-                            config.mobNames.enableNames)
+            visuals.addEntry(blood.build());
+
+            /* ---------- Guard Visuals ---------- */
+
+            SubCategoryBuilder guardVisuals = entry.startSubCategory(Text.literal("Guard Visuals"))
+                    .setExpanded(false);
+
+            guardVisuals.add(entry.startBooleanToggle(Text.literal("Enable Variants"),
+                            config.visuals.guards.variants)
+                    .setTooltip(Text.literal("Enable different guard appearances"))
+                    .setDefaultValue(false)
+                    .setSaveConsumer(v -> config.visuals.guards.variants = v)
+                    .build());
+
+            guardVisuals.add(entry.startBooleanToggle(Text.literal("Show Berets"),
+                            config.visuals.guards.berets)
+                    .setTooltip(Text.literal("Allow guards to wear berets"))
+                    .setDefaultValue(false)
+                    .setSaveConsumer(v -> config.visuals.guards.berets = v)
+                    .build());
+
+            guardVisuals.add(entry.startBooleanToggle(Text.literal("Show Shoulder Pads"),
+                            config.visuals.guards.shoulderPads)
+                    .setTooltip(Text.literal("Render shoulder pads on guards"))
+                    .setDefaultValue(false)
+                    .setSaveConsumer(v -> config.visuals.guards.shoulderPads = v)
+                    .build());
+
+            visuals.addEntry(guardVisuals.build());
+
+            /* ---------- Horse Camera ---------- */
+
+            SubCategoryBuilder horseCam = entry.startSubCategory(Text.literal("Horse Camera"))
+                    .setExpanded(false);
+
+            horseCam.add(entry.startFloatField(Text.literal("Minimum Alpha"),
+                            config.visuals.horses.minAlpha)
+                    .setTooltip(Text.literal("Minimum transparency when camera clips into horse"))
+                    .setDefaultValue(0.25F)
+                    .setSaveConsumer(v -> config.visuals.horses.minAlpha = v)
+                    .build());
+
+            horseCam.add(entry.startFloatField(Text.literal("Fade Pitch"),
+                            config.visuals.horses.fadePitch)
+                    .setTooltip(Text.literal("Pitch angle at which fading begins"))
+                    .setDefaultValue(30F)
+                    .setSaveConsumer(v -> config.visuals.horses.fadePitch = v)
+                    .build());
+
+            horseCam.add(entry.startBooleanToggle(Text.literal("Enable Head Offset"),
+                            config.visuals.horses.headPitchOffset)
+                    .setTooltip(Text.literal("Adjust horse head rotation based on camera pitch"))
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.mobNames.enableNames = v)
+                    .setSaveConsumer(v -> config.visuals.horses.headPitchOffset = v)
                     .build());
 
-            villagerNames.addEntry(entryBuilder.startBooleanToggle(
-                            Text.literal("Use Profession Colours"),
-                            config.mobNames.colouriseNames)
+            if (config.visuals.horses.headPitchOffset) {
+                horseCam.add(entry.startFloatField(Text.literal("Head Offset Degrees"),
+                                config.visuals.horses.headOffsetDegrees)
+                        .setTooltip(Text.literal("Maximum head rotation offset"))
+                        .setDefaultValue(30F)
+                        .setSaveConsumer(v -> config.visuals.horses.headOffsetDegrees = v)
+                        .build());
+            }
+
+            visuals.addEntry(horseCam.build());
+
+            /* ---------- Names ---------- */
+
+            SubCategoryBuilder names = entry.startSubCategory(Text.literal("Entity Names"))
+                    .setExpanded(false);
+
+            names.add(entry.startBooleanToggle(Text.literal("Enable Names"),
+                            config.visuals.names.enabled)
+                    .setTooltip(Text.literal("Enable custom generated names"))
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.mobNames.colouriseNames = v)
+                    .setSaveConsumer(v -> config.visuals.names.enabled = v)
                     .build());
 
-            villagerNames.addEntry(entryBuilder.startDoubleField(
-                            Text.literal("Name Visibility Range"),
-                            config.mobNames.nameVisibilityRange)
-                    .setDefaultValue(8.0)
-                    .setSaveConsumer(v -> config.mobNames.nameVisibilityRange = v)
-                    .build());
+            if (config.visuals.names.enabled) {
 
-            villagerNames.addEntry(entryBuilder.startBooleanToggle(
-                            Text.literal("Alliterative Names"),
-                            config.mobNames.useAlliteration)
+                names.add(entry.startBooleanToggle(Text.literal("Only When Employed"),
+                                config.visuals.names.onlyWhenEmployed)
+                        .setTooltip(Text.literal("Only name villagers with professions"))
+                        .setDefaultValue(true)
+                        .setSaveConsumer(v -> config.visuals.names.onlyWhenEmployed = v)
+                        .build());
+
+                names.add(entry.startBooleanToggle(Text.literal("Use Colours"),
+                                config.visuals.names.colourise)
+                        .setTooltip(Text.literal("Colour names based on profession"))
+                        .setDefaultValue(true)
+                        .setSaveConsumer(v -> config.visuals.names.colourise = v)
+                        .build());
+
+                names.add(entry.startDoubleField(Text.literal("Visibility Range"),
+                                config.visuals.names.visibilityRange)
+                        .setTooltip(Text.literal("Maximum distance names are visible"))
+                        .setDefaultValue(8.0)
+                        .setSaveConsumer(v -> config.visuals.names.visibilityRange = v)
+                        .build());
+
+                names.add(entry.startBooleanToggle(Text.literal("Alliteration"),
+                                config.visuals.names.alliteration)
+                        .setTooltip(Text.literal("Generate alliterative names"))
+                        .setDefaultValue(true)
+                        .setSaveConsumer(v -> config.visuals.names.alliteration = v)
+                        .build());
+            }
+
+            visuals.addEntry(names.build());
+
+            /* ---------- Title ---------- */
+
+            visuals.addEntry(entry.startBooleanToggle(Text.literal("Custom Title Logo"),
+                            config.visuals.title.customLogo)
+                    .setTooltip(Text.literal("Replace the default Minecraft logo"))
                     .setDefaultValue(true)
-                    .setSaveConsumer(v -> config.mobNames.useAlliteration = v)
+                    .setSaveConsumer(v -> config.visuals.title.customLogo = v)
                     .build());
 
-            villagerNames.addEntry(entryBuilder.startEnumSelector(
-                            Text.literal("Name Gender Mode"),
-                            ModConfig.NamesConfig.GenderMode.class,
-                            config.mobNames.genderMode)
-                    .setDefaultValue(ModConfig.NamesConfig.GenderMode.BOTH)
-                    .setSaveConsumer(v -> config.mobNames.genderMode = v)
+            /* ---------- Enchantments ---------- */
+
+            visuals.addEntry(entry.startBooleanToggle(Text.literal("Show Enchantment Highlights"),
+                            config.visuals.enchantments.showHighlights)
+                    .setTooltip(Text.literal("Highlight affected blocks when using enchantments"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.visuals.enchantments.showHighlights = v)
                     .build());
 
-            builder.setSavingRunnable(AutoConfig.getConfigHolder(ModConfig.class)::save);
+            /* ========================================================= */
+            /* ========================= HUD ============================ */
+            /* ========================================================= */
+
+            ConfigCategory hud = builder.getOrCreateCategory(Text.literal("HUD"));
+
+            /* ---------- Trajectory ---------- */
+
+            SubCategoryBuilder trajectory = entry.startSubCategory(Text.literal("Trajectory"))
+                    .setExpanded(false);
+
+            trajectory.add(entry.startBooleanToggle(Text.literal("Enable Trajectory Preview"),
+                            config.hud.trajectory.enabled)
+                    .setTooltip(Text.literal("Show a projectile path preview"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.hud.trajectory.enabled = v)
+                    .build());
+
+            if (config.hud.trajectory.enabled) {
+
+                trajectory.add(entry.startBooleanToggle(Text.literal("Only While Aiming"),
+                                config.hud.trajectory.onlyWhileAiming)
+                        .setTooltip(Text.literal("Only show trajectory when using items"))
+                        .setDefaultValue(true)
+                        .setSaveConsumer(v -> config.hud.trajectory.onlyWhileAiming = v)
+                        .build());
+
+                trajectory.add(entry.startBooleanToggle(Text.literal("Require Sneak"),
+                                config.hud.trajectory.requireSneak)
+                        .setTooltip(Text.literal("Only show trajectory while sneaking"))
+                        .setDefaultValue(false)
+                        .setSaveConsumer(v -> config.hud.trajectory.requireSneak = v)
+                        .build());
+
+                trajectory.add(entry.startIntField(Text.literal("Max Steps"),
+                                config.hud.trajectory.maxSteps)
+                        .setTooltip(Text.literal("Maximum simulation steps"))
+                        .setDefaultValue(64)
+                        .setSaveConsumer(v -> config.hud.trajectory.maxSteps = v)
+                        .build());
+            }
+
+            hud.addEntry(trajectory.build());
+
+            /* ---------- Camera ---------- */
+
+            SubCategoryBuilder camera = entry.startSubCategory(Text.literal("Auto Camera"))
+                    .setExpanded(false);
+
+            camera.add(entry.startBooleanToggle(Text.literal("Enable Auto Camera"),
+                            config.hud.camera.enabled)
+                    .setTooltip(Text.literal("Automatically adjust camera when mounting"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.hud.camera.enabled = v)
+                    .build());
+
+            hud.addEntry(camera.build());
+
+            /* ---------- Paths ---------- */
+
+            SubCategoryBuilder paths = entry.startSubCategory(Text.literal("Path HUD"))
+                    .setExpanded(false);
+
+            paths.add(entry.startBooleanToggle(Text.literal("Preview Mode"),
+                            config.hud.paths.previewMode)
+                    .setTooltip(Text.literal("Preview paths before placing"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.hud.paths.previewMode = v)
+                    .build());
+
+            paths.add(entry.startBooleanToggle(Text.literal("Show Width HUD"),
+                            config.hud.paths.showWidthHud)
+                    .setTooltip(Text.literal("Display current path width"))
+                    .setDefaultValue(true)
+                    .setSaveConsumer(v -> config.hud.paths.showWidthHud = v)
+                    .build());
+
+            hud.addEntry(paths.build());
+
+            /* ========================================================= */
+
+            builder.setSavingRunnable(AutoConfig.getConfigHolder(ConfigClient.class)::save);
+
             return builder.build();
         };
     }

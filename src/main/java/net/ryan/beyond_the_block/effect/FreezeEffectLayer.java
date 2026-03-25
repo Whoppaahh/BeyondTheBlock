@@ -13,6 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -51,11 +52,14 @@ public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>>
         iceModel.animateModel(entity, limbAngle, limbDistance, tickDelta);
         iceModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
         matrices.push();
-        if(entity instanceof SlimeEntity || entity instanceof MagmaCubeEntity){
+        if (entity instanceof SlimeEntity || entity instanceof MagmaCubeEntity) {
             matrices.scale(1.5f, 1.5f, 1.5f);
             matrices.translate(0, -0.425f, 0);
-        }else {
+        } else {
             matrices.scale(1f, 1f, 1f);
+//            if (entity instanceof SheepEntity) {
+//                matrices.translate(0, -0.425f, 0);
+//            }
         }
         iceModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
         matrices.pop();

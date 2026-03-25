@@ -1,0 +1,6 @@
+{
+  "parent": "beyond_the_block:block/template_water_torch",
+  "textures": {
+    "torch": "beyond_the_block:block/water_torch"
+  }
+}

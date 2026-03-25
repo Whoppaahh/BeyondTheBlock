@@ -13,12 +13,11 @@ import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -52,13 +51,16 @@ import net.ryan.beyond_the_block.enchantment.Armour.leggings.NightstrideEnchantm
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
 import net.ryan.beyond_the_block.entity.CupidArrowEntity;
+import net.ryan.beyond_the_block.entity.ModEntities;
 import net.ryan.beyond_the_block.entity.SheepColours;
+import net.ryan.beyond_the_block.entity.WitherZombie;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
 import net.ryan.beyond_the_block.utils.FlameTrailPoint;
 import net.ryan.beyond_the_block.utils.GUI.BreedingHUDRenderer;
 import net.ryan.beyond_the_block.utils.GUI.FollowerHudRenderer;
 import net.ryan.beyond_the_block.utils.GUI.TrajectoryHUD;
+import net.ryan.beyond_the_block.utils.Glowable;
 import net.ryan.beyond_the_block.utils.Helpers.*;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
 import org.jetbrains.annotations.Nullable;
@@ -94,6 +96,30 @@ public class ModEvents {
         UseItemCallback.EVENT.register(ModEvents::onItemUsed);
         UseItemCallback.EVENT.register(BetterLadderPlacement::onUseItem);
         UseEntityCallback.EVENT.register(ModEvents::onEntityUsed);
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            BlockPos pos = hitResult.getBlockPos();
+            BlockState state = world.getBlockState(pos);
+
+            if (!(state.getBlock() instanceof BannerBlock)) return ActionResult.PASS;
+
+            BlockEntity be = world.getBlockEntity(pos);
+            if (be instanceof Glowable glowable) {
+                ItemStack stack = player.getStackInHand(hand);
+
+                if (stack.isOf(Items.GLOW_INK_SAC)) {
+                    BeyondTheBlock.LOGGER.info("Glowing");
+                    glowable.bt$setGlowing(true);
+                    if (!player.getAbilities().creativeMode) stack.decrement(1);
+                    return ActionResult.SUCCESS;
+                } else if (stack.isOf(Items.INK_SAC)) {
+                    glowable.bt$setGlowing(false);
+                    if (!player.getAbilities().creativeMode) stack.decrement(1);
+                    return ActionResult.SUCCESS;
+                }
+            }
+
+            return ActionResult.PASS;
+        });
     }
 
     private static TypedActionResult<ItemStack> onItemUsed(
@@ -214,6 +240,41 @@ public class ModEvents {
         });
         ServerTickEvents.END_SERVER_TICK.register(PathSpeedHelper::tickSpeed);
         ServerEntityEvents.ENTITY_LOAD.register(SheepColours::randomiseColours);
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            if (!(entity instanceof ZombieEntity zombie)) return;
+
+            // Prevent re-processing
+            if (zombie.hasVehicle()) return;
+
+            // Optional: only natural-ish zombies
+            if (zombie.isPersistent()) return; // skips named / special cases
+
+            // Surface check (optional)
+            if (!world.isSkyVisible(zombie.getBlockPos())) return;
+
+            if (world.random.nextFloat() < 0.2F) {
+
+                ZombieHorseEntity horse = world.random.nextFloat() < 0.5F
+                        ? ModEntities.WITHER_SKELETON_HORSE.create(world)
+                        : ModEntities.WITHER_ZOMBIE_HORSE.create(world);
+
+                if (horse == null) return;
+
+                horse.refreshPositionAndAngles(
+                        zombie.getX(),
+                        zombie.getY(),
+                        zombie.getZ(),
+                        zombie.getYaw(),
+                        zombie.getPitch()
+                );
+                horse.setTame(true);
+                horse.setPersistent();
+                world.spawnEntity(horse);
+
+                zombie.startRiding(horse, true);
+
+            }
+        });
     }
 
 

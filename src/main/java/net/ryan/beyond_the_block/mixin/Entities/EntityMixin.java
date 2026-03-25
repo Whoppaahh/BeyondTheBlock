@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -13,9 +12,8 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
 import net.ryan.beyond_the_block.utils.Helpers.StayNearData;
@@ -45,8 +43,6 @@ public abstract class EntityMixin implements EntityTagManager {
     @Unique
     private static final TrackedData<Boolean> HAS_CHRISTMAS_NAME =
             DataTracker.registerData(Entity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    @Unique
-    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
     @Inject(
             method = "canAddPassenger(Lnet/minecraft/entity/Entity;)Z",
@@ -74,7 +70,7 @@ public abstract class EntityMixin implements EntityTagManager {
         if (!(passenger instanceof PlayerEntity player)) return;
 
         if (!horse.isSaddled()) return;
-        if (!cfg.horseConfig.preventWandering) return;
+        if (!Configs.server().features.horses.preventWandering) return;
 
         // Store stay position on the horse itself
         ((HorseAccessor) horse).beyond$setStayData(

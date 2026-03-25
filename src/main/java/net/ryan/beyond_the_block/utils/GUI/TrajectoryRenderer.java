@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.GUI;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.TrajectoryHelper;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.TrajectoryPath;
 
@@ -25,9 +24,7 @@ public final class TrajectoryRenderer {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null || client.world == null) return;
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        ModConfig.TrajectoryConfig cfg = config.trajectoryConfig;
-        if (!cfg.enabled) {
+        if (!Configs.client().hud.trajectory.enabled) {
             TrajectoryHUD.lastPath = TrajectoryPath.EMPTY;
             return;
         }
@@ -55,10 +52,10 @@ public final class TrajectoryRenderer {
         // Choose base color from config and hit kind
         int color;
         switch (path.hitKind) {
-            case BLOCK -> color = cfg.colorBlock;
-            case ENTITY -> color = cfg.colorEntity;
-            case NONE -> color = cfg.colorNone;
-            default -> color = cfg.colorNone;
+            case BLOCK -> color = Configs.client().hud.trajectory.colorBlock;
+            case ENTITY -> color = Configs.client().hud.trajectory.colorEntity;
+            case NONE -> color = Configs.client().hud.trajectory.colorNone;
+            default -> color = Configs.client().hud.trajectory.colorNone;
         }
 
         float baseR = ((color >> 16) & 0xFF) / 255.0F;
@@ -71,10 +68,10 @@ public final class TrajectoryRenderer {
         int segments = points.size() - 1;
         if (segments <= 0) return;
 
-        int lines = cfg.thickLine ? Math.max(1, cfg.thicknessLines) : 1;
+        int lines = Configs.client().hud.trajectory.thickLine ? Math.max(1, Configs.client().hud.trajectory.thicknessLines) : 1;
 
         for (int l = 0; l < lines; l++) {
-            float offsetScale = cfg.thickLine ? (l - (lines - 1) / 2.0f) * cfg.thicknessOffset : 0.0f;
+            float offsetScale = Configs.client().hud.trajectory.thickLine ? (l - (lines - 1) / 2.0f) * Configs.client().hud.trajectory.thicknessOffset : 0.0f;
 
             for (int i = 0; i < segments; i++) {
                 Vec3d p1 = points.get(i);
@@ -94,8 +91,8 @@ public final class TrajectoryRenderer {
                 float t1 = segments <= 1 ? 0f : (float)i / (float)segments;
                 float t2 = segments <= 1 ? 1f : (float)(i + 1) / (float)segments;
 
-                float a1 = cfg.gradient ? (0.3f + 0.7f * (1.0f - t1)) : 1.0f;
-                float a2 = cfg.gradient ? (0.3f + 0.7f * (1.0f - t2)) : 1.0f;
+                float a1 = Configs.client().hud.trajectory.gradient ? (0.3f + 0.7f * (1.0f - t1)) : 1.0f;
+                float a2 = Configs.client().hud.trajectory.gradient ? (0.3f + 0.7f * (1.0f - t2)) : 1.0f;
 
                 vc.vertex(posMat,
                                 (float)(o1.x - camPos.x),
@@ -116,7 +113,7 @@ public final class TrajectoryRenderer {
         }
 
         // Impact highlight (block outline or entity hitbox tint)
-        if (cfg.showImpactMarker && path.hitKind != TrajectoryPath.HitKind.NONE && path.hitPos != null) {
+        if (Configs.client().hud.trajectory.showImpactMarker && path.hitKind != TrajectoryPath.HitKind.NONE && path.hitPos != null) {
             if (path.hitKind == TrajectoryPath.HitKind.BLOCK && path.hitBlock != null) {
                 drawBlockOutline(vc, posMat, normMat, camPos, path.hitBlock, baseR, baseG, baseB);
             } else if (path.hitKind == TrajectoryPath.HitKind.ENTITY && path.hitEntityId != -1) {

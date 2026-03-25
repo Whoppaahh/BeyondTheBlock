@@ -3,7 +3,8 @@ package net.ryan.beyond_the_block.utils.Naming;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.ConfigClient;
+import net.ryan.beyond_the_block.config.Configs;
 
 import java.util.List;
 import java.util.Random;
@@ -17,21 +18,21 @@ public final class NameEngine {
             NameableMob nameable,
             String title,
             Formatting colour,
-            ModConfig.NamesConfig cfg,
+            ConfigClient cfg,
             boolean allowAlliteration
     ) {
         // Base name
         String baseName = nameable.beyondTheBlock$getBaseName();
         if (baseName == null || baseName.isBlank()) {
-            baseName = VillagerNameGenerator.pickName(cfg.genderMode);
+            baseName = VillagerNameGenerator.pickName(cfg.visuals.names.genderMode);
             nameable.beyondTheBlock$setBaseName(baseName);
         }
 
         // Alliteration (caller decides if allowed)
-        if (cfg.useAlliteration && allowAlliteration && title.startsWith("the ")) {
+        if (Configs.client().visuals.names.alliteration && allowAlliteration && title.startsWith("the ")) {
             char letter = Character.toUpperCase(title.charAt(4));
             List<String> options =
-                    VillagerNameGenerator.pickNamesStartingWith(letter, cfg.genderMode);
+                    VillagerNameGenerator.pickNamesStartingWith(letter, Configs.client().visuals.names.genderMode);
 
             if (!options.isEmpty()) {
                 baseName = options.get(RANDOM.nextInt(options.size()));
@@ -41,7 +42,7 @@ public final class NameEngine {
 
         entity.setCustomName(
                 Text.literal(baseName + " " + title)
-                        .formatted(cfg.colouriseNames ? colour : Formatting.WHITE)
+                        .formatted(Configs.client().visuals.names.colourise ? colour : Formatting.WHITE)
         );
         entity.setCustomNameVisible(false);
     }

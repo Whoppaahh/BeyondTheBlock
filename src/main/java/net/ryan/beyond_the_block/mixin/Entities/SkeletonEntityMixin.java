@@ -1,13 +1,12 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,11 +23,10 @@ public abstract class SkeletonEntityMixin extends HostileEntity {
     private void beyond$dropBones(CallbackInfo ci) {
         if (this.world.isClient) return;
 
-        var cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig().passiveDropsConfig;
-        if (!cfg.enableSkeletonBones) return;
+        if (!Configs.server().features.drops.enableSkeletonBones) return;
 
-        if (this.age % cfg.skeletonBoneInterval == 0) {
-            if (this.random.nextFloat() < cfg.skeletonBoneChance) {
+        if (this.age % Configs.server().features.drops.skeletonBoneInterval == 0) {
+            if (this.random.nextFloat() < Configs.server().features.drops.skeletonBoneChance) {
                 this.dropStack(new ItemStack(Items.BONE));
             }
         }

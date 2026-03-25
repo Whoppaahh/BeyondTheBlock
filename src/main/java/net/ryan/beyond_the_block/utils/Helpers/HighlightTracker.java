@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.Helpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -8,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 
 import java.util.HashSet;
@@ -44,7 +43,7 @@ public class HighlightTracker {
 
         // Make sure we're on the client
         if (player == null || !player.getWorld().isClient) return;
-        if(!AutoConfig.getConfigHolder(ModConfig.class).getConfig().enchantments.showHighlights) return;
+        if(!Configs.client().visuals.enchantments.showHighlights) return;
 
         ItemStack tool = player.getMainHandStack();
         BlockPos targetPos = getTargetedBlock(player);

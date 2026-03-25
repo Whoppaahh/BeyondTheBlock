@@ -19,14 +19,14 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.chunk.WorldChunk;
 import net.ryan.beyond_the_block.block.Entity.ModBlockEntities;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.ConfigClient;
+import net.ryan.beyond_the_block.config.ConfigServer;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.entity.ModEntities;
@@ -125,11 +125,11 @@ public class BeyondTheBlock implements ModInitializer {
     // --------------------- Configuration ---------------------
 
     private void setupConfig() {
-        AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
-        var holder = AutoConfig.getConfigHolder(ModConfig.class);
+        AutoConfig.register(ConfigClient.class, JanksonConfigSerializer::new);
+        AutoConfig.register(ConfigServer.class, JanksonConfigSerializer::new);
         BLEEDING_HANDLER = new BleedingParticleHandler();
-        holder.registerSaveListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
-        holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
+        //holder.registerSaveListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
+        //holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         ServerLifecycleEvents.SERVER_STARTED.register(NameLoader::load);
     }
 

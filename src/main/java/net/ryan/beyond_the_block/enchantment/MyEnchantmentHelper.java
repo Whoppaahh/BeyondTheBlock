@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.enchantment;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.Enchantment;
@@ -19,8 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.config.DropMode;
-import net.ryan.beyond_the_block.config.ModConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -160,7 +159,7 @@ public class MyEnchantmentHelper {
 
             BlockState state = world.getBlockState(current);
             if (isLog(state)) {
-                DropMode dropMode = AutoConfig.getConfigHolder(ModConfig.class).getConfig().enchantments.dropMode;
+                DropMode dropMode = Configs.server().features.enchantments.dropMode;
                 switch (dropMode) {
                     case NORMAL -> world.breakBlock(current, true, player); // default drops
                     case MERGED, DIRECT -> {
@@ -184,7 +183,7 @@ public class MyEnchantmentHelper {
         }
 
         // Now handle all collected drops once
-        DropMode dropMode = AutoConfig.getConfigHolder(ModConfig.class).getConfig().enchantments.dropMode;
+        DropMode dropMode = Configs.server().features.enchantments.dropMode;
         if (dropMode == DropMode.MERGED || dropMode == DropMode.DIRECT) {
             handleMergedOrDirectDrops(world, origin, player, collectedDrops, dropMode == DropMode.DIRECT);
         }
@@ -226,7 +225,7 @@ public class MyEnchantmentHelper {
         if (level <= 1) return;
 
         int radius = 2 + level;
-        DropMode dropMode = AutoConfig.getConfigHolder(ModConfig.class).getConfig().enchantments.dropMode;
+        DropMode dropMode = Configs.server().features.enchantments.dropMode;
 
         // Only collect if using custom drop logic
         List<ItemStack> collectedDrops = (dropMode != DropMode.NORMAL) ? new ArrayList<>() : null;

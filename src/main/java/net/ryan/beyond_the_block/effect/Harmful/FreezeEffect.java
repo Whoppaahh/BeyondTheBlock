@@ -15,7 +15,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.effect.ModEffects;
 import net.ryan.beyond_the_block.utils.TickTimeUtil;

@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntryList;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 
 public class ModTags {

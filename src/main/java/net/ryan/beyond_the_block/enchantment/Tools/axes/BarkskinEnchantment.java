@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.enchantment.Tools.axes;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,8 +16,8 @@ import net.minecraft.item.Items;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.config.DropMode;
-import net.ryan.beyond_the_block.config.ModConfig;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
 import org.jetbrains.annotations.Nullable;
@@ -80,7 +79,7 @@ public class BarkskinEnchantment extends Enchantment {
         toCheck.add(start);
 
         List<ItemStack> collectedDrops = new ArrayList<>();
-        DropMode dropMode = AutoConfig.getConfigHolder(ModConfig.class).getConfig().enchantments.dropMode;
+        DropMode dropMode = Configs.server().features.enchantments.dropMode;
 
         while (!toCheck.isEmpty()) {
             BlockPos current = toCheck.poll();

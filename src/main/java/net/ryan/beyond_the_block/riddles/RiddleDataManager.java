@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.riddles;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -13,7 +12,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.PersistentState;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 
 import java.util.*;
@@ -185,23 +184,23 @@ public class RiddleDataManager extends PersistentState {
 
     public static long getEstimatedTimeOfDay() {
         long elapsed = (System.currentTimeMillis() - lastUpdated) / 50; // convert ms to ticks
-        return (syncedTimeOfDay + elapsed) % AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.generationInterval;
+        return (syncedTimeOfDay + elapsed) % Configs.server().features.shrines.generationInterval;
     }
 
     public static long getSecondsUntilNextDay() {
-        long ticksRemaining = AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.generationInterval - getEstimatedTimeOfDay();
+        long ticksRemaining = Configs.server().features.shrines.generationInterval - getEstimatedTimeOfDay();
         return ticksRemaining / 20;
     }
 
     public void tick(ServerWorld world) {
-        long timeOfDay = world.getTimeOfDay() % AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.generationInterval; //24000 for full day
+        long timeOfDay = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval; //24000 for full day
 
         if (timeOfDay < 100 && lastGenerationTime != world.getTimeOfDay() && shrinePos != null) {
             lastGenerationTime = world.getTimeOfDay();
             generateDailyRiddle(world);
         }
         if (world.getTime() % 200 == 0) { // Every 10 seconds
-            long time = world.getTimeOfDay() % AutoConfig.getConfigHolder(ModConfig.class).getConfig().shrines.generationInterval;
+            long time = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval;
 
             for (ServerPlayerEntity player : world.getPlayers()) {
                 ServerNetworking.syncRiddleTime(player, time);

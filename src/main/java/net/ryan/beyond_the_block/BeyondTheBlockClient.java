@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block;
 
 import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -36,7 +35,7 @@ import net.ryan.beyond_the_block.block.Entity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.block.Entity.ModBlockEntities;
 import net.ryan.beyond_the_block.block.Entity.Render.*;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.effect.Beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithEnchantment;
@@ -51,7 +50,6 @@ import net.ryan.beyond_the_block.item.AnimatedItem.AnimatedItemRenderer;
 import net.ryan.beyond_the_block.item.Armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.item.CupidArrowEntityRenderer;
 import net.ryan.beyond_the_block.item.ModItems;
-import net.ryan.beyond_the_block.mixin.Client.LivingEntityRendererAccessor;
 import net.ryan.beyond_the_block.network.ClientNetworking;
 import net.ryan.beyond_the_block.particle.*;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
@@ -178,6 +176,8 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
     private void registerBlockRenderLayers() {
         // Manual translucency
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_TORCH_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WALL_WATER_TORCH_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SPEED_RAIL_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LAVA_LAMP_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
@@ -198,7 +198,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         });
 
         WorldRenderEvents.AFTER_ENTITIES.register((context) -> {
-            if(PathPreviewState.hasPreview() && AutoConfig.getConfigHolder(ModConfig.class).get().pathConfig.previewMode){
+            if(PathPreviewState.hasPreview() && Configs.client().hud.paths.previewMode){
                 renderPathPreview(context.matrixStack());
             }
         });
@@ -244,9 +244,6 @@ public class BeyondTheBlockClient implements ClientModInitializer {
             return;
         }
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).get();
-        var pc = config.pathConfig;
-
         // Must have a starting point set
         if (!PathToolHelper.hasStart(stack)) {
             PathPreviewState.clear();
@@ -263,13 +260,13 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         BlockPos end = hit.getBlockPos();
 
         // Too far? No preview
-        if (!PathToolHelper.withinMaxDistance(start, end, pc.maxDistance)) {
+        if (!PathToolHelper.withinMaxDistance(start, end,  Configs.server().features.paths.maxDistance)) {
             PathPreviewState.clear();
             return;
         }
 
         // Compute width
-        int width = PathToolHelper.getWidth(stack, config);
+        int width = PathToolHelper.getWidth(stack, Configs.server());
 
         // Compute line & widened area
         List<BlockPos> centerLine = PathToolHelper.computeLine2D(start, end);
@@ -278,7 +275,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
         // Terrain-follow for preview
         List<BlockPos> adjusted = full.stream()
-                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos, pc.useTerrainFollowing))
+                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos,  Configs.server().features.paths.useTerrainFollowing))
                 .toList();
 
         PathPreviewState.setPositions(adjusted);

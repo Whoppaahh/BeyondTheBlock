@@ -4,14 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "ArmourFeatureRendererMixin",
+    "BannerBlockEntityRendererMixin",
     "BatEntityModelMixin",
     "BipedModelMixin",
-    "BlockModelRendererMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "DoubleInventoryAccessor",
     "EntityRendererMixin",
-    "ExampleClientMixin",
     "GhastEntityModelMixin",
     "HandledScreenAccessor",
     "HandledScreenMixin",
@@ -19,10 +18,12 @@
     "HeldItemRendererMixin",
     "HorseEntityModelMixin",
     "InGameHudMixin",
+    "ItemFrameRendererMixin",
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
     "MouseScrollMixin",
+    "SheepWoolFeatureRendererMixin",
     "TitleScreenMixin"
   ],
   "injectors": {

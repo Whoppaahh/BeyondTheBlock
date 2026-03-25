@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -27,7 +26,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithTracker;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.item.ModItems;
@@ -48,8 +47,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
     private static final TrackedData<Integer> AIR_JUMP_COUNT =
             DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
-    @Unique
-    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
     @Inject(
             method = "getBlockBreakingSpeed(Lnet/minecraft/block/BlockState;)F",
@@ -62,7 +59,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
     ) {
         PlayerEntity player = (PlayerEntity)(Object)this;
 
-        if (!cfg.horseConfig.removeMiningPenalty) return;
+        if (!Configs.server().features.horses.removeMiningPenalty) return;
         if (!player.hasVehicle()) return;
         if (!(player.getVehicle() instanceof AbstractHorseEntity)) return;
 

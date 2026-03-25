@@ -125,6 +125,13 @@ public class ModItems {
     public static final Item ROSETTE_SHOVEL = registerItem("rosette_shovel", new ModShovelItem(ModToolMaterials.ROSETTE, 3, 2, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
     public static final Item ROSETTE_SWORD = registerItem("rosette_sword", new ModSwordItem(ModToolMaterials.ROSETTE, 5, 5, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
     //endregion
+    //region Nocturnite Tools
+    public static final Item NOCTURNITE_AXE = registerItem("nocturnite_axe", new ModAxeItem(ModToolMaterials.NOCTURNITE, 7, 3, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    public static final Item NOCTURNITE_PICKAXE = registerItem("nocturnite_pickaxe", new ModPickaxeItem(ModToolMaterials.NOCTURNITE, 5, 3, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    public static final Item NOCTURNITE_HOE = registerItem("nocturnite_hoe", new ModHoeItem(ModToolMaterials.NOCTURNITE, 2, 1, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    public static final Item NOCTURNITE_SHOVEL = registerItem("nocturnite_shovel", new ModShovelItem(ModToolMaterials.NOCTURNITE, 5, 2, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    public static final Item NOCTURNITE_SWORD = registerItem("nocturnite_sword", new ModSwordItem(ModToolMaterials.NOCTURNITE, 8, 7, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    //endregion
     //endregion
     //region Modded Armour
     //region Ruby
@@ -139,6 +146,20 @@ public class ModItems {
                     new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     public static final Item RUBY_BOOTS = registerItem("ruby_boots",
             new ModArmourItem(ModArmourMaterials.RUBY, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    //endregion
+    //region Nocturnite
+    public static final Item NOCTURNITE_HELMET = registerItem("nocturnite_helmet",
+            new ModArmourItem(ModArmourMaterials.NOCTURNITE, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item NOCTURNITE_CHESTPLATE = registerItem("nocturnite_chestplate",
+            new ModArmourItem(ModArmourMaterials.NOCTURNITE, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item NOCTURNITE_LEGGINGS = registerItem("nocturnite_leggings",
+            new ModArmourItem(ModArmourMaterials.NOCTURNITE, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item NOCTURNITE_BOOTS = registerItem("nocturnite_boots",
+            new ModArmourItem(ModArmourMaterials.NOCTURNITE, EquipmentSlot.FEET,
                     new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     //endregion
     //region Azuros

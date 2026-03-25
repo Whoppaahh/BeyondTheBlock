@@ -1,22 +1,15 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.SkeletonHorseEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
 import net.ryan.beyond_the_block.utils.Helpers.StayNearData;
 import net.ryan.beyond_the_block.utils.Naming.NameEngine;
@@ -36,8 +29,6 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
 
     @Unique
     private StayNearData horsebuff$stayData;
-    @Unique
-    ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
     @Inject(method = "getPrimaryPassenger", at = @At("HEAD"), cancellable = true)
     private void forceFirstPassengerAsController(CallbackInfoReturnable<LivingEntity> cir) {
@@ -115,7 +106,7 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
             horse.setAngry(false);
             return;
         }
-        if (!cfg.horseConfig.preventWandering) return;
+        if (!Configs.server().features.horses.preventWandering) return;
 
         StayNearData data = this.beyond$getStayData();
         if (data == null) return;
@@ -123,7 +114,7 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
 
         double dist = horse.getPos().distanceTo(horsebuff$stayData.center);
 
-        if (dist > cfg.horseConfig.stayRadius) {
+        if (dist > Configs.server().features.horses.stayRadius) {
             horse.getNavigation().startMovingTo(
                     horsebuff$stayData.center.x,
                     horsebuff$stayData.center.y,
@@ -138,7 +129,7 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
     private void horsebuff$swimMounted(CallbackInfo ci) {
         AbstractHorseEntity horse = (AbstractHorseEntity)(Object)this;
 
-        if (cfg.horseConfig.increaseStepHeight && horse.hasPassengers()) {
+        if (Configs.server().features.horses.increaseStepHeight && horse.hasPassengers()) {
             horse.stepHeight = Math.max(horse.stepHeight, 1.1F);
         }
 
@@ -146,9 +137,9 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
         if (!horse.hasPassengers()) return;
         if (!horse.isTouchingWater()) return;
 
-        if (!cfg.horseConfig.enableSwimming) return;
+        if (!Configs.server().features.horses.enableSwimming) return;
 
-        if (!cfg.horseConfig.undeadCanSwim &&
+        if (!Configs.server().features.horses.undeadCanSwim &&
                 (horse instanceof ZombieHorseEntity || horse instanceof SkeletonHorseEntity)) {
             return;
         }
@@ -171,7 +162,7 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
         if (horse.getWorld().isClient()) return;
         if (horse.hasCustomName()) return;
 
-        if (!cfg.mobNames.enableNames || !cfg.mobNames.nameTamedMobs) return;
+        if (!Configs.client().visuals.names.enabled || !Configs.client().visuals.names.nameTamed) return;
 
         TitleResolvers.Title title = TitleResolvers.resolve(horse);
         if (title == null) return;
@@ -181,8 +172,8 @@ public abstract class HorseEntityMixin implements NameableMob, HorseAccessor {
                 this,
                 title.title(),
                 title.colour(),
-                cfg.mobNames,
-                cfg.mobNames.useAlliteration
+                Configs.client(),
+                Configs.client().visuals.names.alliteration
         );
     }
     @Shadow

@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.village.GuardVillager.Render;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
@@ -11,7 +10,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 public class GuardEntityModel extends BipedEntityModel<GuardEntity> {
@@ -75,10 +74,10 @@ public class GuardEntityModel extends BipedEntityModel<GuardEntity> {
 		boolean hasChestplate = entityIn.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ArmorItem;
 		boolean hasHelmet = entityIn.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem;
 
-		this.leftShoulder.visible = !hasChestplate && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.visuals.displayShoulderPads;
-		this.rightShoulder.visible = !hasChestplate && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.visuals.displayShoulderPads;
+		this.leftShoulder.visible = !hasChestplate && Configs.client().visuals.guards.shoulderPads;
+		this.rightShoulder.visible = !hasChestplate && Configs.client().visuals.guards.shoulderPads;
 		this.jacket.visible = !hasChestplate;
-		this.hat.visible = !hasHelmet && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.visuals.guardBerets;
+		this.hat.visible = !hasHelmet && Configs.client().visuals.guards.berets;
 
 		if (entityIn.getKickTicks() > 0) {
 			float f1 = 1.0F - (float) MathHelper.abs(10 - 2 * entityIn.getKickTicks()) / 10.0F;

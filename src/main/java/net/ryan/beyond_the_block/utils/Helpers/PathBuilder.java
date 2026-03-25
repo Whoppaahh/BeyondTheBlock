@@ -7,7 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.ConfigServer;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.utils.PathUndoEntry;
 
 import java.util.List;
@@ -19,24 +20,22 @@ public final class PathBuilder {
 
     public static void buildPath(World world, PlayerEntity player, ItemStack stack,
                                  BlockPos start, BlockPos end,
-                                 ModConfig config) {
+                                 ConfigServer config) {
 
         if (!(world instanceof ServerWorld serverWorld)) return;
 
-        // Config shortcuts
-        var pc = config.pathConfig;
 
         // Width: sneaking on second click -> configured width, else 1
         int width = PathToolHelper.getWidth(stack, config);
         if (width < 1) width = 1;
 
         // Limits
-        if (!PathToolHelper.withinMaxDistance(start, end, pc.maxDistance)) {
+        if (!PathToolHelper.withinMaxDistance(start, end, Configs.server().features.paths.maxDistance)) {
             return;
         }
 
-        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(pc.allowedEndingBlocks);
-        Set<Block> allowedStart = PathToolHelper.resolveBlockList(pc.allowedStartingBlocks);
+        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedEndingBlocks);
+        Set<Block> allowedStart = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedStartingBlocks);
 
         // Ensure start and end are allowed as per config
         if (!allowedStart.contains(world.getBlockState(start).getBlock())) return;
@@ -52,7 +51,7 @@ public final class PathBuilder {
         PathUndoEntry undo = new PathUndoEntry();
 
         for (BlockPos pos : full) {
-            BlockPos adjusted = PathToolHelper.adjustToTerrain(world, pos, pc.useTerrainFollowing);
+            BlockPos adjusted = PathToolHelper.adjustToTerrain(world, pos, Configs.server().features.paths.useTerrainFollowing);
             BlockState current = world.getBlockState(adjusted);
 
             if (!allowedEnd.contains(current.getBlock())) continue;
@@ -74,7 +73,7 @@ public final class PathBuilder {
         }
 
 
-        if (!pc.preserveDurability && blocksChanged > 0) {
+        if (!Configs.server().features.paths.preserveDurability && blocksChanged > 0) {
             stack.damage(blocksChanged, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
 

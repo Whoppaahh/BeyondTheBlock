@@ -3,7 +3,6 @@ package net.ryan.beyond_the_block.village.GuardVillager;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.Dynamic;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -59,7 +58,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.Handlers.Guard.GuardVillagerScreenHandler;
@@ -144,16 +143,16 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         super(type, world);
         this.guardInventory.addListener(this);
         this.setPersistent();
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardsOpenDoors)
+        if (Configs.server().features.guards.guardsOpenDoors)
             ((MobNavigation) this.getNavigation()).setCanPathThroughDoors(true);
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.healthModifier)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.speedModifier)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, Configs.server().features.guards.healthModifier)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, Configs.server().features.guards.speedModifier)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.followRangeModifier);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, Configs.server().features.guards.followRangeModifier);
     }
 
     public static int slotToInventoryIndex(EquipmentSlot slot) {
@@ -252,7 +251,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         for (int i = 0; i < this.guardInventory.size(); ++i) {
             ItemStack itemstack = this.guardInventory.getStack(i);
             Random random = getWorld().getRandom();
-            if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack) && random.nextFloat() < AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.chanceToDropEquipment)
+            if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack) && random.nextFloat() < Configs.server().features.guards.chanceToDropEquipment)
                 this.dropStack(itemstack);
         }
     }
@@ -387,7 +386,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         try {
             UUID uuid = this.getOwnerId();
             boolean heroOfTheVillage = uuid != null && getWorld().getPlayerByUuid(uuid) != null && Objects.requireNonNull(getWorld().getPlayerByUuid(uuid)).hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE);
-            return uuid == null || (getWorld().getPlayerByUuid(uuid) != null && (!heroOfTheVillage && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.followHero) || !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.followHero && getWorld().getPlayerByUuid(uuid) == null) ? null : getWorld().getPlayerByUuid(uuid);
+            return uuid == null || (getWorld().getPlayerByUuid(uuid) != null && (!heroOfTheVillage && Configs.server().features.guards.followHero) || !Configs.server().features.guards.followHero && getWorld().getPlayerByUuid(uuid) == null) ? null : getWorld().getPlayerByUuid(uuid);
         } catch (IllegalArgumentException illegalargumentexception) {
             return null;
         }
@@ -466,7 +465,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         if (this.shieldCoolDown > 0)
             --this.shieldCoolDown;
         if (this.getHealth() < this.getMaxHealth() && this.age % 200 == 0) {
-            this.heal(AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.amountOfHealthRegenerated);
+            this.heal(Configs.server().features.guards.amountOfHealthRegenerated);
         }
         if (!getWorld().isClient) this.tickAngerLogic((ServerWorld) getWorld(), true);
         this.tickHandSwing();
@@ -583,8 +582,8 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
                 this.equipStack(equipmentSlotType, stack);
             }
         }
-        this.handDropChances[EquipmentSlot.MAINHAND.getEntitySlotId()] = AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.chanceToDropEquipment;
-        this.handDropChances[EquipmentSlot.OFFHAND.getEntitySlotId()] = AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.chanceToDropEquipment;
+        this.handDropChances[EquipmentSlot.MAINHAND.getEntitySlotId()] = Configs.server().features.guards.chanceToDropEquipment;
+        this.handDropChances[EquipmentSlot.OFFHAND.getEntitySlotId()] = Configs.server().features.guards.chanceToDropEquipment;
     }
 
     public List<ItemStack> getStacksFromLootTable(EquipmentSlot slot) {
@@ -608,15 +607,15 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         this.goalSelector.add(2, new RangedBowAttackPassiveGoal<>(this, 0.5D, 20, 15.0F));
         this.goalSelector.add(2, new GuardEntityMeleeGoal(this, 0.8D, true));
         this.goalSelector.add(3, new FollowHeroGoal(this));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardsRunFromPolarBears)
+        if (Configs.server().features.guards.guardsRunFromPolarBears)
             this.goalSelector.add(3, new FleeEntityGoal<>(this, PolarBearEntity.class, 12.0F, 1.0D, 1.2D));
         this.goalSelector.add(3, new WanderAroundPointOfInterestGoal(this, 0.5D, false));
         this.goalSelector.add(3, new IronGolemWanderAroundGoal(this, 0.5D));
         this.goalSelector.add(3, new MoveThroughVillageGoal(this, 0.5D, false, 4, () -> false));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardsOpenDoors) this.goalSelector.add(3, new GuardInteractDoorGoal(this, true));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.guardFormation) this.goalSelector.add(5, new FollowShieldGuards(this));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.clericHealing) this.goalSelector.add(6, new RunToClericGoal(this));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.armourerRepairGuardArmour)
+        if (Configs.server().features.guards.guardsOpenDoors) this.goalSelector.add(3, new GuardInteractDoorGoal(this, true));
+        if (Configs.server().features.guards.guardFormation) this.goalSelector.add(5, new FollowShieldGuards(this));
+        if (Configs.server().features.guards.clericHealing) this.goalSelector.add(6, new RunToClericGoal(this));
+        if (Configs.server().features.guards.armourerRepairGuardArmour)
             this.goalSelector.add(6, new ArmorerRepairGuardArmorGoal(this));
         this.goalSelector.add(4, new WalkBackToCheckPointGoal(this, 0.5D));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.5D));
@@ -630,8 +629,8 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         this.targetSelector.add(3, new HeroHurtByTargetGoal(this));
         this.targetSelector.add(3, new HeroHurtTargetGoal(this));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, RaiderEntity.class, true));
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.attackAllMobs)
-            this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, true, (mob) -> mob instanceof Monster && !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.mobBlackList.contains(mob.getSavedEntityId())));
+        if (Configs.server().features.guards.attackAllMobs)
+            this.targetSelector.add(3, new ActiveTargetGoal<>(this, MobEntity.class, 5, true, true, (mob) -> mob instanceof Monster && !Configs.server().features.guards.mobBlackList.contains(mob.getSavedEntityId())));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::shouldAngerAt));
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
         this.targetSelector.add(4, new UniversalAngerGoal<>(this, false));
@@ -744,7 +743,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
 
     @Override
     public boolean canTarget(LivingEntity target) {
-        return !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.mobBlackList.contains(target.getSavedEntityId()) && !target.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE) && !this.isOwner(target) && !(target instanceof VillagerEntity) && !(target instanceof IronGolemEntity) && !(target instanceof GuardEntity) && super.canTarget(target);
+        return !Configs.server().features.guards.mobBlackList.contains(target.getSavedEntityId()) && !target.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE) && !this.isOwner(target) && !(target instanceof VillagerEntity) && !(target instanceof IronGolemEntity) && !(target instanceof GuardEntity) && super.canTarget(target);
     }
 
     @Override
@@ -803,16 +802,16 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         boolean configValues = player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)
-                && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.giveGuardStuffHotv
+                && Configs.server().features.guards.giveGuardStuffHotv
                 || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)
-                && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.setGuardPatrolHotv
+                && Configs.server().features.guards.setGuardPatrolHotv
                 || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)
-                && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.giveGuardStuffHotv
-                && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.setGuardPatrolHotv
-                || this.getPlayerEntityReputation(player) >= AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.reputationRequirement
+                && Configs.server().features.guards.giveGuardStuffHotv
+                && Configs.server().features.guards.setGuardPatrolHotv
+                || this.getPlayerEntityReputation(player) >= Configs.server().features.guards.reputationRequirement
                 || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)
-                && !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.giveGuardStuffHotv
-                && !AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.setGuardPatrolHotv
+                && !Configs.server().features.guards.giveGuardStuffHotv
+                && !Configs.server().features.guards.setGuardPatrolHotv
                 || this.getOwnerId() != null
                 && this.getOwnerId().equals(player.getUuid());
 
@@ -972,7 +971,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
             for (VillagerEntity villager : list) {
                 for (PlayerEntity player : list1) {
                     int i = villager.getReputation(player);
-                    if (i <= AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.reputationRequirementToBeAttacked) {
+                    if (i <= Configs.server().features.guards.reputationRequirementToBeAttacked) {
                         this.villageAggressorTarget = player;
                     }
                 }

@@ -1,9 +1,7 @@
 package net.ryan.beyond_the_block.utils.Helpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.DoorHinge;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
@@ -42,9 +40,8 @@ public final class DoubleOpenablesHandler {
         BlockPos pos = hit.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
-        ModConfig cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
-        if (cfg.doubleOpenables.enableModIncompatibilityCheck) {
+        if (Configs.server().features.openables.enableModIncompatibilityCheck) {
             if (FabricLoader.getInstance().isModLoaded("quark")) {
                 BeyondTheBlock.LOGGER.warn("Quark detected. Disable one to avoid duplicate behavior.");
             }
@@ -54,7 +51,7 @@ public final class DoubleOpenablesHandler {
             }
         }
 
-        if (!cfg.doubleOpenables.enableDoors) return ActionResult.PASS;
+        if (!Configs.server().features.openables.enableDoors) return ActionResult.PASS;
         if (!(state.getBlock() instanceof DoorBlock)) return ActionResult.PASS;
 
         // Drive doors from LOWER only (matches vanilla + Serilum)
@@ -64,14 +61,14 @@ public final class DoubleOpenablesHandler {
 
         boolean originalOpen = state.get(Properties.OPEN);
 
-        if (cfg.doubleOpenables.enableRecursiveOpening) {
+        if (Configs.server().features.openables.enableRecursiveOpening) {
             toggleDoorRecursive(
                     world,
                     pos,
                     state,
                     originalOpen,
                     0,
-                    cfg.doubleOpenables.recursiveOpeningMaxBlocksDistance
+                    Configs.server().features.openables.recursiveOpeningMaxBlocksDistance
             );
         } else {
             toggle(world, pos, state);

@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.utils.Helpers;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,14 +9,14 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.effect.ModEffects;
 
 import java.util.*;
 
 public class BleedingParticleHandler {
 
-    private static final float BLOOD_HEALTH_FRACTION = AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.healthFraction;
+    private static final float BLOOD_HEALTH_FRACTION = Configs.client().visuals.blood.healthFraction;
     private static final int BLOOD_INTERVAL = 10;
 
     private final Map<UUID, Integer> cooldowns = new HashMap<>();
@@ -28,7 +27,7 @@ public class BleedingParticleHandler {
     private static final net.minecraft.entity.effect.StatusEffect BLEED_EFFECT = ModEffects.BLEED;
 
     public void onWorldTick(ServerWorld world) {
-        if (!AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.showBlood) return;
+        if (!Configs.client().visuals.blood.enabled) return;
 
         cooldowns.replaceAll((uuid, cd) -> Math.max(cd - 1, 0));
 
@@ -99,7 +98,7 @@ public class BleedingParticleHandler {
 
     // 💥 Public helper for hit splatter
     public static void spawnBloodSplatter(ServerWorld world, Vec3d pos, Vec3d attackDir, float damage) {
-        if (!AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.showBlood) return;
+        if (!Configs.client().visuals.blood.enabled) return;
         Vec3d norm = attackDir.normalize();
         double spread = 0.2 + (damage * 0.02); // more scatter with more damage
         int particles = 8 + (int)(damage * 1.2); // more particles for higher damage

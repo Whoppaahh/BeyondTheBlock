@@ -1,12 +1,11 @@
 package net.ryan.beyond_the_block.mixin.Client;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.network.ClientNetworking;
 import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,16 +29,13 @@ public class MouseScrollMixin {
         // Only affect shovels
         if (!(stack.getItem() instanceof ShovelItem)) return;
 
-        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).get();
-        var pc = config.pathConfig;
-
-        int current = PathToolHelper.getWidth(stack, config);
+        int current = PathToolHelper.getWidth(stack, Configs.server());
 
         // Scroll up increases, scroll down decreases
         int newWidth = vertical > 0 ? current + 1 : current - 1;
 
         // Clamp width to config limits
-        newWidth = Math.max(pc.minWidth, Math.min(pc.maxWidth, newWidth));
+        newWidth = Math.max(Configs.server().features.paths.minWidth, Math.min(Configs.server().features.paths.maxWidth, newWidth));
 
         // Only update if changed
         if (newWidth != current) {
@@ -47,7 +43,7 @@ public class MouseScrollMixin {
             ClientNetworking.sendWidthUpdate(newWidth);
 
 
-            if (pc.showWidthHud) {
+            if (Configs.client().hud.paths.showWidthHud) {
                 client.player.sendMessage(
                         Text.literal("Path Width = " + newWidth),
                         true

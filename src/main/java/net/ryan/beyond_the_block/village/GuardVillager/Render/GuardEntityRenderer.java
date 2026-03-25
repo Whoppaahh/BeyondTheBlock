@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.village.GuardVillager.Render;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.BipedEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -14,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 import net.ryan.beyond_the_block.village.ModVillagers;
 import org.jetbrains.annotations.Nullable;
@@ -66,7 +65,7 @@ public class GuardEntityRenderer extends BipedEntityRenderer<GuardEntity, BipedE
     @Nullable
     @Override
     public Identifier getTexture(GuardEntity entity) {
-        if(AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.visuals.guardVariants) {
+        if(Configs.client().visuals.guards.variants) {
             int index = Math.abs(entity.getUuid().hashCode()) % GUARD_TEXTURES.size();
             return GUARD_TEXTURES.get(index);
         }

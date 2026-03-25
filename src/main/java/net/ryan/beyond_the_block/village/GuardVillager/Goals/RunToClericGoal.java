@@ -1,11 +1,10 @@
 package net.ryan.beyond_the_block.village.GuardVillager.Goals;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class RunToClericGoal extends Goal {
                 if (mob != null) {
                     if (mob.getVillagerData().getProfession() == VillagerProfession.CLERIC && guard.getHealth() < guard.getMaxHealth() && guard.getTarget() == null && !guard.hasStatusEffect(StatusEffects.REGENERATION)) {
                         this.cleric = mob;
-                        return AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.clericHealing;
+                        return Configs.server().features.guards.clericHealing;
                     }
                 }
             }

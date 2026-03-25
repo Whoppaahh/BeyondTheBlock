@@ -25,6 +25,8 @@ public enum ModArmourMaterials implements ArmorMaterial {
             3.0F, 0.3F, () -> Ingredient.ofItems(ModItems.CHROMITE_ITEM)),
     MIRANITE("miranite", 40, new int[]{5, 8, 10, 5}, 30, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
             3.0F, 0.3F, () -> Ingredient.ofItems(ModItems.MIRANITE_ITEM)),
+    NOCTURNITE("nocturnite", 60, new int[]{8, 15, 10, 5}, 30, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
+            3.0F, 0.3F, () -> Ingredient.ofItems(ModItems.NOCTURNITE_ITEM)),
     XIRION("xirion", 30, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
             3.0F, 0.1F, () -> Ingredient.ofItems(ModItems.XIRION_ITEM)),
     SANTA("santa", 0, new int[]{0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,

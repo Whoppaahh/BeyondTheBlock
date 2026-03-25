@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -23,7 +22,7 @@ import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.event.GuardVillagersEvents;
 import net.ryan.beyond_the_block.village.GuardVillager.Goals.AttackEntityDaytimeGoal;
@@ -56,14 +55,14 @@ public abstract class ServerWorldMixin extends World implements StructureWorldAc
 
     @Inject(method = "spawnEntity", at = @At("TAIL"))
     private void onSpawn(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.raidAnimals) {
+        if (Configs.server().features.guards.raidAnimals) {
             if (entity instanceof RaiderEntity raiderEntity)
                 if (raiderEntity.hasActiveRaid()) {
                     raiderEntity.targetSelector.add(5, new ActiveTargetGoal<>(raiderEntity, AnimalEntity.class, false));
                 }
         }
 
-        if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.attackAllMobs) {
+        if (Configs.server().features.guards.attackAllMobs) {
             if (entity instanceof HostileEntity mob && !(entity instanceof SpiderEntity)) {
                 mob.targetSelector.add(2, new ActiveTargetGoal<>(mob, GuardEntity.class, false));
             }
@@ -73,7 +72,7 @@ public abstract class ServerWorldMixin extends World implements StructureWorldAc
         }
 
         if (entity instanceof IllagerEntity illager) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.illagersRunFromPolarBears) {
+            if (Configs.server().features.guards.illagersRunFromPolarBears) {
                 illager.goalSelector.add(2, new FleeEntityGoal<>(illager, PolarBearEntity.class, 6.0F, 1.0D, 1.2D));
             }
 
@@ -81,14 +80,14 @@ public abstract class ServerWorldMixin extends World implements StructureWorldAc
         }
 
         if (entity instanceof VillagerEntity villagerEntity) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.villagersRunFromPolarBears)
+            if (Configs.server().features.guards.villagersRunFromPolarBears)
                 villagerEntity.goalSelector.add(2, new FleeEntityGoal<>(villagerEntity, PolarBearEntity.class, 6.0F, 1.0D, 1.2D));
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.witchesVillager)
+            if (Configs.server().features.guards.witchesVillager)
                 villagerEntity.goalSelector.add(2, new FleeEntityGoal<>(villagerEntity, WitchEntity.class, 6.0F, 1.0D, 1.2D));
 
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.blackSmithHealing)
+            if (Configs.server().features.guards.blackSmithHealing)
                 villagerEntity.goalSelector.add(1, new HealGolemGoal(villagerEntity));
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.clericHealing)
+            if (Configs.server().features.guards.clericHealing)
                 villagerEntity.goalSelector.add(1, new HealGuardAndPlayerGoal(villagerEntity, 1.0D, 100, 0, 10.0F));
         }
 
@@ -109,7 +108,7 @@ public abstract class ServerWorldMixin extends World implements StructureWorldAc
         }
 
         if (entity instanceof WitchEntity witch) {
-            if (AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.witchesVillager) {
+            if (Configs.server().features.guards.witchesVillager) {
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, VillagerEntity.class, true));
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, IronGolemEntity.class, true));
                 witch.targetSelector.add(3, new ActiveTargetGoal<>(witch, GuardEntity.class, true));

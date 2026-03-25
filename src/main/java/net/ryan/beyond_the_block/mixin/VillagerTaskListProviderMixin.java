@@ -4,13 +4,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.Task.RepairGolemTask;
 import net.ryan.beyond_the_block.village.GuardVillager.Task.ShareGossipWithGuard;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +41,7 @@ public class VillagerTaskListProviderMixin {
 
     @Inject(method = "createWorkTasks", cancellable = true, at = @At("RETURN"))
     private static void createWorkTasks(VillagerProfession profession, float speed, CallbackInfoReturnable<ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>>> cir) {
-        if (profession == VillagerProfession.TOOLSMITH || profession == VillagerProfession.WEAPONSMITH && AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.blackSmithHealing) {
+        if (profession == VillagerProfession.TOOLSMITH || profession == VillagerProfession.WEAPONSMITH && Configs.server().features.guards.blackSmithHealing) {
             List<Pair<Integer, ? extends Task<? super VillagerEntity>>> villagerList = new ArrayList<>(cir.getReturnValue());
             villagerList.add(Pair.of(2, new CompositeTask<>(ImmutableMap.of(), ImmutableSet.of(MemoryModuleType.INTERACTION_TARGET), CompositeTask.Order.ORDERED, CompositeTask.RunMode.RUN_ONE, ImmutableList.of(Pair.of(new RepairGolemTask(), 1), Pair.of(new GatherItemsVillagerTask(), 1)))));
             cir.setReturnValue(ImmutableList.copyOf(villagerList));

@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block.mixin.Client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -9,7 +8,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +33,7 @@ public class TitleScreenMixin {
             )
     )
     private Identifier modifyTitleTexture(Identifier original) {
-        return AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.titleLogo ?
+        return Configs.client().visuals.title.customLogo ?
                 TRANSPARENT : original;
 
     }
@@ -47,7 +46,7 @@ public class TitleScreenMixin {
             )
     )
     private Identifier modifyEditionTexture(Identifier original) {
-        return AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.titleLogo ?
+        return Configs.client().visuals.title.customLogo ?
                 TRANSPARENT : original;
 
     }
@@ -59,7 +58,7 @@ public class TitleScreenMixin {
             shift = At.Shift.BEFORE
     ))
     private void renderCustomLogo(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if(!AutoConfig.getConfigHolder(ModConfig.class).getConfig().misc.titleLogo) return;
+        if(!Configs.client().visuals.title.customLogo) return;
 
         MinecraftClient client = MinecraftClient.getInstance();
         int screenWidth = client.getWindow().getScaledWidth();

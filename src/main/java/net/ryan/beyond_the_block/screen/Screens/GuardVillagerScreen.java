@@ -2,7 +2,6 @@ package net.ryan.beyond_the_block.screen.Screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -16,7 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import net.ryan.beyond_the_block.screen.Handlers.Guard.GuardVillagerScreenHandler;
 import net.ryan.beyond_the_block.utils.GUI.GuardGUIButton;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
@@ -53,7 +52,7 @@ public class GuardVillagerScreen extends HandledScreen<GuardVillagerScreenHandle
         isFollowing = guardEntity.isFollowing();
         isPatrolling = guardEntity.isPatrolling();
 
-        if (!AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.followHero || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)) {
+        if (!Configs.server().features.guards.followHero || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)) {
             this.addDrawableChild(new GuardGUIButton(this.x + 120, this.height / 2 - 40 + 5,
                     20, 18, 0, 0, 19,
                     GUARD_FOLLOWING_ICON, GUARD_NOT_FOLLOWING_ICON, true, guardEntity,
@@ -65,7 +64,7 @@ public class GuardVillagerScreen extends HandledScreen<GuardVillagerScreenHandle
                     })
             );
         }
-        if (!AutoConfig.getConfigHolder(ModConfig.class).getConfig().guards.behavior.setGuardPatrolHotv || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)) {
+        if (!Configs.server().features.guards.setGuardPatrolHotv || player.hasStatusEffect(StatusEffects.HERO_OF_THE_VILLAGE)) {
             this.addDrawableChild(new GuardGUIButton(this.x + 145, this.height / 2 - 40 + 5,
                     20, 18, 0, 0, 19,
                     PATROL_ICON, NOT_PATROLLING_ICON, false, guardEntity,

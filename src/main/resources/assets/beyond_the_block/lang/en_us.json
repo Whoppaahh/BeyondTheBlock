@@ -1,5 +1,8 @@
 {
 
+  "block.beyond_the_block.water_torch": "Water Torch",
+  "block.beyond_the_block.wall_water_torch": "Water Torch",
+
   "itemGroup.beyond_the_block.mod_blocks_tab": "BTB Blocks",
   "itemGroup.beyond_the_block.mod_tools_tab" : "BTB Tools",
   "itemGroup.beyond_the_block.mod_armour_tab" : "BTB Armours",

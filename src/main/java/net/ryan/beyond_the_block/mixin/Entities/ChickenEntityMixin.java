@@ -1,13 +1,12 @@
 package net.ryan.beyond_the_block.mixin.Entities;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.ModConfig;
+import net.ryan.beyond_the_block.config.Configs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,13 +23,11 @@ public abstract class ChickenEntityMixin extends AnimalEntity {
     private void beyond$dropFeathers(CallbackInfo ci) {
         if (this.world.isClient) return;
 
-        var cfg = AutoConfig.getConfigHolder(ModConfig.class).getConfig().passiveDropsConfig;
-
-        if (!cfg.enableChickenFeathers) return;
+        if (!Configs.server().features.drops.enableChickenFeathers) return;
 
         // Every N ticks, do final chance check
-        if (this.age % cfg.chickenFeatherInterval == 0) {
-            if (this.random.nextFloat() < cfg.chickenFeatherChance) {
+        if (this.age % Configs.server().features.drops.chickenFeatherInterval == 0) {
+            if (this.random.nextFloat() < Configs.server().features.drops.chickenFeatherChance) {
                 this.dropStack(new ItemStack(Items.FEATHER));
             }
         }

@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BowItem;
@@ -12,6 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -21,18 +25,19 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.mixin.Accessors.ArrowEntityAccessor;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.HomingTrackedData;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+@SuppressWarnings({"FieldMayBeFinal", "unused"})
 @Mixin(ArrowEntity.class)
 public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
 
@@ -40,6 +45,10 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
         super(type, world);
     }
 
+    @Shadow
+    private Potion potion;
+
+    private static final double AOE_RADIUS = 3.0;
     @Unique private static final double HOMING_RADIUS = 30.0;
     @Unique private static final double MIN_SPEED = 0.1;
     @Unique private static final int SCAN_COOLDOWN_TICKS = 10;
@@ -52,7 +61,37 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
     @Unique private int homingTargetsHit = 0;
     @Unique private final List<UUID> hitTargets = new ArrayList<>();
 
+    // Apply potion effects to all nearby living entities
+    private void applyAOE(Vec3d pos, Potion potion, Iterable<StatusEffectInstance> customEffects, LivingEntity owner, LivingEntity target) {
+        ArrowEntity self = (ArrowEntity)(Object)this;
 
+        List<LivingEntity> nearby = self.world.getEntitiesByClass(
+                LivingEntity.class,
+                new Box(
+                        pos.x - AOE_RADIUS, pos.y - AOE_RADIUS, pos.z - AOE_RADIUS,
+                        pos.x + AOE_RADIUS, pos.y + AOE_RADIUS, pos.z + AOE_RADIUS
+                ),
+                e -> e.isAlive() && e != owner && e != target // avoid hitting the shooter
+        );
+
+        for (LivingEntity entity : nearby) {
+            // Apply potion effects from the arrow's Potion
+            for (StatusEffectInstance effect : potion.getEffects()) {
+                entity.addStatusEffect(new StatusEffectInstance(
+                        effect.getEffectType(),
+                        Math.max(effect.getDuration() / 8, 1),
+                        effect.getAmplifier(),
+                        effect.isAmbient(),
+                        effect.shouldShowParticles()
+                ), owner);
+            }
+
+            // Apply any custom effects added to the arrow
+            for (StatusEffectInstance effect : customEffects) {
+                entity.addStatusEffect(effect, owner);
+            }
+        }
+    }
     @Unique
     private void updateHomingMaxTargets() {
         if (this.getOwner() instanceof LivingEntity shooter) {
@@ -215,9 +254,32 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
         return hit.getType() == HitResult.Type.MISS || hit.getPos().squaredDistanceTo(end) < 1.0;
     }
 
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void tickAOE(CallbackInfo ci) {
+        ArrowEntity self = (ArrowEntity)(Object)this;
+        Set<StatusEffectInstance> effects = ((ArrowEntityAccessor) self).getEffects();
+        if (!self.world.isClient && self.isOnGround() && !effects.isEmpty() && potion != null) {
+            Entity ownerEntity = self.getEffectCause();
+            LivingEntity owner = ownerEntity instanceof LivingEntity le ? le : null;
+            applyAOE(self.getPos(), potion, effects, owner, null);
+            // Clear potion so it doesn't repeatedly apply
+            effects.clear();
+            potion = Potions.EMPTY;
+        }
+    }
+
+
     @Inject(method = "onHit", at = @At("HEAD"))
     private void onHitMerged(LivingEntity target, CallbackInfo ci) {
         if (this.getWorld().isClient || target == null) return;
+
+        ArrowEntity self = (ArrowEntity)(Object)this;
+        Set<StatusEffectInstance> effects = ((ArrowEntityAccessor) self).getEffects();
+        if (potion == null || (potion == Potions.EMPTY && effects.isEmpty())) return;
+        Entity ownerEntity = self.getEffectCause();
+        LivingEntity lie = ownerEntity instanceof LivingEntity le ? le : null;
+
+        applyAOE(self.getPos(), potion, effects, lie, target);
 
         // Lightning enchantment logic
         Entity owner = this.getOwner();

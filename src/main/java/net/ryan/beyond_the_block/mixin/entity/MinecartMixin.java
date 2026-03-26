@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.block.SpeedRailBlock;
+import net.ryan.beyond_the_block.content.block.SpeedRailBlock;
 import net.ryan.beyond_the_block.utils.Accessors.MinecartSpeedAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

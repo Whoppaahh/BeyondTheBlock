@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

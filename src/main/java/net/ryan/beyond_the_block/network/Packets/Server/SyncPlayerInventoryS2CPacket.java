@@ -6,7 +6,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,8 +16,12 @@
 	"environment": "*",
 	"accessWidener": "beyond_the_block.accesswidener",
 	"entrypoints": {
-		"main": ["net.ryan.beyond_the_block.BeyondTheBlock"],
-		"client": ["net.ryan.beyond_the_block.BeyondTheBlockClient"],
+		"main": [
+			"net.ryan.beyond_the_block.core.BeyondTheBlock"
+		],
+		"client": [
+			"net.ryan.beyond_the_block.core.BeyondTheBlockClient"
+		],
 		"fabric-datagen": ["net.ryan.beyond_the_block.datagen.ModDataGeneration"],
 		"modmenu": [
 			"net.ryan.beyond_the_block.config.ui.ModMenu"

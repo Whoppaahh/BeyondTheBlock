@@ -7,7 +7,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.PersistentState;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.HashSet;
 import java.util.Set;

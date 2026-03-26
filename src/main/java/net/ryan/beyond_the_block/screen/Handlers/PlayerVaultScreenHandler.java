@@ -9,7 +9,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.block.Entity.PlayerVaultBlockEntity;
+import net.ryan.beyond_the_block.content.block.Entity.PlayerVaultBlockEntity;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.GUI.BigSlot;
 

@@ -6,8 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
-import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.item.ModItems;
+import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.item.ModItems;
 
 import java.util.List;
 import java.util.function.Consumer;

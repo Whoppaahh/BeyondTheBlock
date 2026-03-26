@@ -13,7 +13,7 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 import net.ryan.beyond_the_block.mixin.accessors.EntityRendererAccessor;
 import net.ryan.beyond_the_block.utils.GlowManager;
 import org.spongepowered.asm.mixin.Mixin;

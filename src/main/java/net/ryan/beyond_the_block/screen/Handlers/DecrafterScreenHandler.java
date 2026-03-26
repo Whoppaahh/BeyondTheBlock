@@ -13,7 +13,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.ryan.beyond_the_block.block.Entity.DecrafterBlockEntity;
+import net.ryan.beyond_the_block.content.block.Entity.DecrafterBlockEntity;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 
 import java.util.List;

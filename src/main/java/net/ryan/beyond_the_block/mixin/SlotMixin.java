@@ -10,7 +10,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.theft_detection.TheftDetector;
 import net.ryan.beyond_the_block.feature.theft_detection.VillageContainerTagger;
 import org.spongepowered.asm.mixin.Final;

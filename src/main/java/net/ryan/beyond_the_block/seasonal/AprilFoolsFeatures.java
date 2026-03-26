@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.ryan.beyond_the_block.item.Tools.ModSwordItem;
+import net.ryan.beyond_the_block.content.item.Tools.ModSwordItem;
 import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
 
 import java.util.List;

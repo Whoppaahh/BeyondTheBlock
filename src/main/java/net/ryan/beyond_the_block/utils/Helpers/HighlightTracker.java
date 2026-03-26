@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper.*;
+import static net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper.*;
 
 public class HighlightTracker {
     public static final Set<BlockPos> BLOCKS_TO_HIGHLIGHT = new HashSet<>();

@@ -4,8 +4,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.block.ModBlocks;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.config.access.Configs;
 
 import java.util.List;

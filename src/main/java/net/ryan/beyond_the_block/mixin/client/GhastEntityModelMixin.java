@@ -3,7 +3,7 @@ package net.ryan.beyond_the_block.mixin.client;
 import net.minecraft.client.render.entity.model.GhastEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.GhastEntity;
-import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

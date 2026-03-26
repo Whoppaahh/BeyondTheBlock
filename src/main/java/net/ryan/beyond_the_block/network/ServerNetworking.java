@@ -11,7 +11,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 import net.ryan.beyond_the_block.network.Packets.Client.GuardFollowC2SPacket;
 import net.ryan.beyond_the_block.network.Packets.Client.GuardPatrolC2SPacket;
 import net.ryan.beyond_the_block.network.Packets.Client.LeapOfFaithC2SPacket;

@@ -14,7 +14,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.screen.Handlers.Guard.GuardVillagerScreenHandler;
 import net.ryan.beyond_the_block.utils.GUI.GuardGUIButton;

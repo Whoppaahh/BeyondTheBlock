@@ -6,7 +6,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.item.AnimatedItem.AnimatedItem;
+import net.ryan.beyond_the_block.content.item.AnimatedItem.AnimatedItem;
 
 public class TeleportWithStaffC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender){

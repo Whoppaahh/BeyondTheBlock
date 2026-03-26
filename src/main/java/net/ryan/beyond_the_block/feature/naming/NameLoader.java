@@ -7,7 +7,7 @@ import com.google.gson.JsonParser;
 import net.minecraft.resource.Resource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -12,8 +12,8 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.block.Entity.GemBlockEntity;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.content.block.Entity.GemBlockEntity;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.ModTags;
 

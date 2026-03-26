@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
-import net.ryan.beyond_the_block.block.ModBlocks;
+import net.ryan.beyond_the_block.content.block.ModBlocks;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public ModBlockTagProvider(FabricDataGenerator dataGenerator) {

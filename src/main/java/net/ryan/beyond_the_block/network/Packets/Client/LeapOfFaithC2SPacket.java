@@ -5,7 +5,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithEnchantment;
 
 public class LeapOfFaithC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender){

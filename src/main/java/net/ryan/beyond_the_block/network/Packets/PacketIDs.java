@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.network.Packets;
 
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class PacketIDs {
     public static final Identifier SYNC_RESTORE_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_restore");

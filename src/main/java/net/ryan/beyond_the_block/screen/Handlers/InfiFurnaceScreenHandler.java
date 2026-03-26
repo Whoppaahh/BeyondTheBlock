@@ -10,7 +10,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.block.Entity.InfiFurnaceBlockEntity;
+import net.ryan.beyond_the_block.content.block.Entity.InfiFurnaceBlockEntity;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 
 public class InfiFurnaceScreenHandler extends ScreenHandler {

@@ -10,7 +10,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.effect.ModEffects;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 
 import java.util.*;
 

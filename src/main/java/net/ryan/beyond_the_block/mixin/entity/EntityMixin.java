@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
 import net.ryan.beyond_the_block.feature.horses.StayNearData;
 import net.ryan.beyond_the_block.feature.naming.EntityTagManager;

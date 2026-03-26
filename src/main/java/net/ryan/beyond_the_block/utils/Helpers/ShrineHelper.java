@@ -15,8 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.block.Shrine.ShrineCoreBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.content.block.Shrine.ShrineCoreBlock;
 import net.ryan.beyond_the_block.config.access.Configs;
 
 import java.util.ArrayList;

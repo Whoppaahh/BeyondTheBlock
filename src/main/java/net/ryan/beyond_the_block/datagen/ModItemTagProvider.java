@@ -3,7 +3,7 @@ package net.ryan.beyond_the_block.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
-import net.ryan.beyond_the_block.item.ModItems;
+import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.utils.ModTags;
 
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {

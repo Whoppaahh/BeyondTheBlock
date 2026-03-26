@@ -6,9 +6,9 @@ import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.item.ModItems;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.item.ModItems;
 
 import java.util.function.BiConsumer;
 

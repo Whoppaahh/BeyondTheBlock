@@ -23,7 +23,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.event.GuardVillagersEvents;
 import net.ryan.beyond_the_block.village.GuardVillager.Goals.AttackEntityDaytimeGoal;
 import net.ryan.beyond_the_block.village.GuardVillager.Goals.HealGolemGoal;

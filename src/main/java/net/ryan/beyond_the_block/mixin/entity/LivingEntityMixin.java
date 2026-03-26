@@ -1,42 +1,19 @@
 package net.ryan.beyond_the_block.mixin.entity;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.effect.Beneficial.SoulLinkEffect;
-import net.ryan.beyond_the_block.effect.ModEffects;
-import net.ryan.beyond_the_block.enchantment.ModEnchantments;
-import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
 import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
-import net.ryan.beyond_the_block.utils.ProjectileHelpers.ArrowHitsAccess;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {

@@ -18,10 +18,10 @@ public class SystemRegistrar {
     public static BleedingParticleHandler BLEEDING_HANDLER = new BleedingParticleHandler();
 
     public static void register() {
-        ServerTickEvents.END_WORLD_TICK.register(END_WORLD_TICK_HANDLER);
-        ServerTickEvents.END_SERVER_TICK.register(END_SERVER_TICK_HANDLER);
-        ServerChunkEvents.CHUNK_LOAD.register(CHUNK_LOAD_HANDLER);
-        registerSeasonalFeatures();
+
+
+
+
     }
 
     private static final ServerTickEvents.EndWorldTick END_WORLD_TICK_HANDLER = world -> {

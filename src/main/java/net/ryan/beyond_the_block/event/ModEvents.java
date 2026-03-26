@@ -96,34 +96,9 @@ public class ModEvents {
     // -------------------
     // BLOCK EVENT HANDLERS
     // -------------------
-    private static ActionResult onBlockMined(PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) {
-        ItemStack stack = player.getStackInHand(hand);
-        int miningLevel = EnchantmentHelper.getLevel(ModEnchantments.STONE_BREAKER, stack);
-        if (miningLevel > 0) {
-            MyEnchantmentHelper.handleInstantMining(player, stack, pos, world, world.getBlockState(pos));
-        }
-        return ActionResult.PASS;
-    }
 
-    private static boolean onBlockBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity) {
-        ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
-        int choppingLevel = EnchantmentHelper.getLevel(ModEnchantments.TIMBER_CUT, stack);
-        if (choppingLevel > 0) {
-            MyEnchantmentHelper.handleTreeBreaking(player, stack, pos, world);
-            return false;
-        }
 
-        int flameSweepLevel = EnchantmentHelper.getLevel(ModEnchantments.FLAME_SWEEP, stack);
-        if (flameSweepLevel > 0 && stack.getItem() instanceof AxeItem && state.isIn(BlockTags.LOGS_THAT_BURN)) {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-            Block.dropStack(world, pos, new ItemStack(Items.CHARCOAL, flameSweepLevel));
-            if (world instanceof ServerWorld sw) {
-                sw.spawnParticles(ParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 5, 0.2, 0.2, 0.2, 0.05);
-            }
-        }
-        return true;
-    }
 
     public static void queueAdjacentSand(World world, BlockPos lavaPos) {
         if (!(world instanceof ServerWorld)) return;

@@ -55,16 +55,5 @@ public class EntityEventRegistrar {
         });
     }
 
-    private static ActionResult onEntityUsed(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
-        if (world.isClient) return ActionResult.PASS;
 
-        if (!(entity instanceof ArmorStandEntity armorStand)) return ActionResult.PASS;
-
-        if (player.isSneaking()) {
-            transferArmourPartial(player, armorStand, world);
-            return ActionResult.SUCCESS;
-        }
-
-        return ActionResult.PASS;
-    }
 }

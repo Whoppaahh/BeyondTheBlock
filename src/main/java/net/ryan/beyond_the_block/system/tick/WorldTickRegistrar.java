@@ -2,8 +2,8 @@ package net.ryan.beyond_the_block.system.tick;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
-import net.ryan.beyond_the_block.core.bootstrap.SystemRegistrar;
 import net.ryan.beyond_the_block.feature.theft.VillageContainerScannerManager;
+import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 
 public class WorldTickRegistrar {
     public static void register() {
@@ -13,7 +13,7 @@ public class WorldTickRegistrar {
         if (world.isClient) return;
         var handler = RiddleComponents.get(world);
         if (handler != null) handler.tick(world);
-        SystemRegistrar.BLEEDING_HANDLER.onWorldTick(world);
+        BleedingParticleHandler.INSTANCE.onWorldTick(world);
         VillageContainerScannerManager.tick(world);
     };
 }

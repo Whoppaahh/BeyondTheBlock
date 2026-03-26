@@ -8,7 +8,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.mixin.accessors.AnimalAgeAccessor;
-import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.network.sync.breeding.BreedingInfoSync;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

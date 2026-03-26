@@ -23,12 +23,9 @@ import net.minecraft.world.World;
 
 public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
 
-    private final M iceModel;
 
     public FreezeEffectLayer(FeatureRendererContext<T, M> context, M baseModel) {
         super(context);
-
-        this.iceModel = baseModel;
     }
 
     @Override
@@ -40,27 +37,13 @@ public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>>
         // Only render if the entity has the freeze effect
         if (!entity.hasStatusEffect(ModEffects.FREEZE)) return;
 
-        float healthRatio = entity.getHealth() / entity.getMaxHealth();
-        int crackLevel = (healthRatio < 0.25f) ? 3 :
-                (healthRatio < 0.50f) ? 2 :
-                        (healthRatio < 0.75f) ? 1 : 0;
-
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(new Identifier("minecraft", "textures/block/frosted_ice" + "_" + crackLevel + ".png")));
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(FreezeRenderUtil.getFreezeTexture(entity)));
 
         // Render the copied model (ice overlay)
-        iceModel.animateModel(entity, limbAngle, limbDistance, tickDelta);
-        iceModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+        this.getContextModel().animateModel(entity, limbAngle, limbDistance, tickDelta);
+        this.getContextModel().setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
         matrices.push();
-        if (entity instanceof SlimeEntity || entity instanceof MagmaCubeEntity) {
-            matrices.scale(1.5f, 1.5f, 1.5f);
-            matrices.translate(0, -0.425f, 0);
-        } else {
-            matrices.scale(1f, 1f, 1f);
-//            if (entity instanceof SheepEntity) {
-//                matrices.translate(0, -0.425f, 0);
-//            }
-        }
-        iceModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, FreezeRenderUtil.getFreezeAlpha());
         matrices.pop();
     }
 

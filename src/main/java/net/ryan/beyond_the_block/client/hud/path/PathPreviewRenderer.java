@@ -9,6 +9,7 @@ import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.feature.paths.PathPreviewState;
 
 public class PathPreviewRenderer {
+
     public static void renderPathPreview(MatrixStack matrices) {
         MinecraftClient client = MinecraftClient.getInstance();
         Camera camera = client.gameRenderer.getCamera();

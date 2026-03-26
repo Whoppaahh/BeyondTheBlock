@@ -1,23 +1,15 @@
 package net.ryan.beyond_the_block.client.render.layer;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
-import net.ryan.beyond_the_block.client.hud.path.PathPreviewRenderer;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.core.BeyondTheBlockClient;
-import net.ryan.beyond_the_block.feature.paths.PathPreviewState;
-import net.ryan.beyond_the_block.feature.paths.client.PathPreviewController;
 
 public class BlockRenderLayerRegistrar {
 
@@ -39,25 +31,6 @@ public class BlockRenderLayerRegistrar {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getTranslucent());
 
-        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
-            if (world != null && pos != null && world.getBlockEntity(pos) instanceof DyedWaterCauldronBlockEntity be) {
-                return be.getColor();
-            }
-            return 0x3F76E4; // default water tint
-        }, ModBlocks.DYED_WATER_CAULDRON_BLOCK);
-
-
-        // Backup tick retry (stops after success)
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (!modOresLayersRegistered) attemptRegisterModOres();
-            PathPreviewController.updatePathPreview(client);
-        });
-
-        WorldRenderEvents.AFTER_ENTITIES.register((context) -> {
-            if(PathPreviewState.hasPreview() && Configs.client().hud.paths.previewMode){
-                PathPreviewRenderer.renderPathPreview(context.matrixStack());
-            }
-        });
     }
     private static void attemptRegisterModOres() {
         if (modOresLayersRegistered) return;

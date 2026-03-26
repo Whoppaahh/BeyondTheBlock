@@ -6,8 +6,16 @@ import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRe
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.CreeperEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.SheepEntityModel;
+import net.minecraft.client.render.entity.model.SlimeEntityModel;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.ryan.beyond_the_block.client.bootstrap.ClientBootstrap;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
 import net.ryan.beyond_the_block.client.screen.*;
@@ -15,6 +23,8 @@ import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
 import net.ryan.beyond_the_block.content.effect.Beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.content.effect.FreezeEffectLayer;
+import net.ryan.beyond_the_block.content.effect.FrozenSheepWoolLayer;
+import net.ryan.beyond_the_block.content.effect.FrozenSlimeLayer;
 import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithEnchantment;
 import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.network.ClientNetworking;
@@ -48,6 +58,16 @@ public class BeyondTheBlockClient implements ClientModInitializer {
                     LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>> livingRenderer =
                             (LivingEntityRenderer<LivingEntity, EntityModel<LivingEntity>>) renderer;
                     helper.register(new FreezeEffectLayer<>(livingRenderer, livingRenderer.getModel()));
+                    if(entityType == EntityType.SHEEP){
+                        helper.register(new FrozenSheepWoolLayer(
+                                (FeatureRendererContext<SheepEntity, SheepEntityModel<SheepEntity>>)renderer
+                        ));
+                    }
+                    if(entityType == EntityType.SLIME){
+                        helper.register(new FrozenSlimeLayer(
+                                (FeatureRendererContext<SlimeEntity, SlimeEntityModel<SlimeEntity>>)renderer
+                        ));
+                    }
                 }
         );
     }

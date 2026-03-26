@@ -16,6 +16,7 @@ import java.util.*;
 
 public class BleedingParticleHandler {
 
+    public static final BleedingParticleHandler INSTANCE = new BleedingParticleHandler();
     private static final float BLOOD_HEALTH_FRACTION = Configs.client().visuals.blood.healthFraction;
     private static final int BLOOD_INTERVAL = 10;
 

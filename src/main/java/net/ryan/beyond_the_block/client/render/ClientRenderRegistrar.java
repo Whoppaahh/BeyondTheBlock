@@ -31,7 +31,7 @@ import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
 import net.ryan.beyond_the_block.content.entity.ModEntities;
 import net.ryan.beyond_the_block.content.item.Armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.content.item.ModItems;
-import net.ryan.beyond_the_block.content.village.GuardVillager.Render.GuardEntityRenderer;
+import net.ryan.beyond_the_block.client.render.entity.GuardEntityRenderer;
 import net.ryan.beyond_the_block.content.village.ModVillagers;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.core.BeyondTheBlockClient;

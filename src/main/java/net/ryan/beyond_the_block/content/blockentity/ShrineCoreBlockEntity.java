@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.screen.handler.RiddleCoreScreenHandler;
 import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
@@ -59,9 +60,8 @@ public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInv
         if (!blockEntity.initialised && !world.isClient) {
             blockEntity.initialised = true;
             if (world instanceof ServerWorld serverWorld) {
-                RiddleDataManager handler = RiddleDataManager.get(serverWorld, BeyondTheBlock.RIDDLE_COMPONENTS);
+                RiddleDataManager handler = RiddleDataManager.get(serverWorld, ContentRegistrar.RIDDLE_COMPONENTS);
                 handler.setShrinePos(pos);
-                //EmeraldEmpire.LOGGER.info("ShrineCoreBlockEntity initialized at: " + pos);
             }
         }
     }
@@ -115,7 +115,7 @@ public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInv
     }
     private PacketByteBuf createRiddleSyncPacket() {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, ContentRegistrar.RIDDLE_COMPONENTS);
         // Active riddles
         Map<UUID, Riddle> active = handler.getActiveRiddles();
         buf.writeInt(active.size());  // Write the size of active riddles

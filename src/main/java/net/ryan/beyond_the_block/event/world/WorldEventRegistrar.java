@@ -1,0 +1,95 @@
+package net.ryan.beyond_the_block.event.world;
+
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.ZombieHorseEntity;
+import net.minecraft.util.WorldSavePath;
+import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.IronCladVisionEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.MindWardEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.ShadowsVeilEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.Armour.leggings.NightstrideEnchantment;
+import net.ryan.beyond_the_block.content.entity.ModEntities;
+import net.ryan.beyond_the_block.content.entity.SheepColours;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.event.ModEvents;
+import net.ryan.beyond_the_block.feature.cauldrons.HoneyDripHelper;
+import net.ryan.beyond_the_block.feature.cauldrons.IceConversionHelper;
+import net.ryan.beyond_the_block.feature.cauldrons.MagmaDripHelper;
+import net.ryan.beyond_the_block.feature.cauldrons.PowderSnowCauldronHelper;
+import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
+import net.ryan.beyond_the_block.utils.Helpers.BlockConversionHandler;
+import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+public class WorldEventRegistrar {
+    private static void registerBlockConversions() {
+        BlockConversionHandler.register();
+        UseBlockCallback.EVENT.register(BlockConversionHandler::handleBlockConversion);
+
+    }
+
+    private static void registerServerTickEvents() {
+        ServerTickEvents.END_WORLD_TICK.register(world -> {
+            NightstrideEnchantment.registerTickHandler(world);
+            IronCladVisionEnchantment.registerTickHandler(world);
+            MindWardEnchantment.registerTickHandler(world);
+            ShadowsVeilEnchantment.registerTickHandler(world);
+
+            RestoreManager.tick(world);
+            HoneyDripHelper.tick(world);
+            PowderSnowCauldronHelper.tick(world);
+            MagmaDripHelper.tick(world);
+            IceConversionHelper.tick(world);
+        });
+
+
+        ServerTickEvents.END_SERVER_TICK.register(PathSpeedHelper::tickSpeed);
+        ServerEntityEvents.ENTITY_LOAD.register(SheepColours::randomiseColours);
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            if (!(entity instanceof ZombieEntity zombie)) return;
+
+            // Prevent re-processing
+            if (zombie.hasVehicle()) return;
+
+            // Optional: only natural-ish zombies
+            if (zombie.isPersistent()) return; // skips named / special cases
+
+            // Surface check (optional)
+            if (!world.isSkyVisible(zombie.getBlockPos())) return;
+
+            if (world.random.nextFloat() < 0.2F) {
+
+                ZombieHorseEntity horse = world.random.nextFloat() < 0.5F
+                        ? ModEntities.WITHER_SKELETON_HORSE.create(world)
+                        : ModEntities.WITHER_ZOMBIE_HORSE.create(world);
+
+                if (horse == null) return;
+
+                horse.refreshPositionAndAngles(
+                        zombie.getX(),
+                        zombie.getY(),
+                        zombie.getZ(),
+                        zombie.getYaw(),
+                        zombie.getPitch()
+                );
+                horse.setTame(true);
+                horse.setPersistent();
+                world.spawnEntity(horse);
+
+                zombie.startRiding(horse, true);
+
+            }
+        });
+    }
+
+
+
+}

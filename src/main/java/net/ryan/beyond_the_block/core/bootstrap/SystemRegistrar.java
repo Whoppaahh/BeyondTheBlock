@@ -9,18 +9,19 @@ import net.ryan.beyond_the_block.feature.seasonal.AprilFoolsFeatures;
 import net.ryan.beyond_the_block.feature.seasonal.ChristmasFeatures;
 import net.ryan.beyond_the_block.feature.seasonal.HalloweenFeatures;
 import net.ryan.beyond_the_block.feature.seasonal.ValentinesFeatures;
-import net.ryan.beyond_the_block.feature.theft_detection.VillageContainerScannerManager;
+import net.ryan.beyond_the_block.feature.theft.VillageContainerScannerManager;
 import net.ryan.beyond_the_block.feature.xp_orbs.HomingXPManager;
 import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 
 public class SystemRegistrar {
 
-    private static BleedingParticleHandler BLEEDING_HANDLER;
+    public static BleedingParticleHandler BLEEDING_HANDLER = new BleedingParticleHandler();
 
     public static void register() {
         ServerTickEvents.END_WORLD_TICK.register(END_WORLD_TICK_HANDLER);
         ServerTickEvents.END_SERVER_TICK.register(END_SERVER_TICK_HANDLER);
         ServerChunkEvents.CHUNK_LOAD.register(CHUNK_LOAD_HANDLER);
+        registerSeasonalFeatures();
     }
 
     private static final ServerTickEvents.EndWorldTick END_WORLD_TICK_HANDLER = world -> {
@@ -38,7 +39,7 @@ public class SystemRegistrar {
             (ServerWorld world, WorldChunk chunk) -> VillageContainerScannerManager.queueChunkForScan(world, chunk.getPos());
 
 
-    private void registerSeasonalFeatures() {
+    private static void registerSeasonalFeatures() {
         ValentinesFeatures.register();
         AprilFoolsFeatures.register();
         HalloweenFeatures.register();

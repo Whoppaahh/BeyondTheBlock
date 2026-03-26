@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -29,7 +30,7 @@ public class RiddleComponents {
 
     public static RiddleDataManager get(World world) {
         if (!(world instanceof ServerWorld serverWorld)) return null;
-        return RiddleDataManager.get(serverWorld, BeyondTheBlock.RIDDLE_COMPONENTS);
+        return RiddleDataManager.get(serverWorld, ContentRegistrar.RIDDLE_COMPONENTS);
     }
 
     public void loadFromJson() {

@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.world.Feature;
+package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;

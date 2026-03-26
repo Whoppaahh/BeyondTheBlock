@@ -12,7 +12,7 @@ import net.minecraft.text.Text;
 import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
 
-public class ModMenu implements ModMenuApi {
+public class ModMenuIntegration implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {

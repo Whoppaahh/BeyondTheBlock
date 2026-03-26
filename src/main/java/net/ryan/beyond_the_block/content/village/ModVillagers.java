@@ -43,8 +43,8 @@ import net.ryan.beyond_the_block.content.village.GuardVillager.Goals.AttackEntit
 import net.ryan.beyond_the_block.content.village.GuardVillager.Goals.HealGolemGoal;
 import net.ryan.beyond_the_block.content.village.GuardVillager.Goals.HealGuardAndPlayerGoal;
 import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
-import net.ryan.beyond_the_block.content.village.GuardVillager.Render.GuardEntityArmourModel;
-import net.ryan.beyond_the_block.content.village.GuardVillager.Render.GuardEntityModel;
+import net.ryan.beyond_the_block.client.render.entity.GuardEntityArmourModel;
+import net.ryan.beyond_the_block.client.render.entity.GuardEntityModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.event.GuardVillagersEvents;
 import org.jetbrains.annotations.Nullable;

@@ -1,10 +1,10 @@
-package net.ryan.beyond_the_block.content.world.Gen;
+package net.ryan.beyond_the_block.content.world.gen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.tag.BiomeTags;
 import net.minecraft.world.gen.GenerationStep;
-import net.ryan.beyond_the_block.content.world.Feature.ModPlacedFeatures;
+import net.ryan.beyond_the_block.content.world.feature.ModPlacedFeatures;
 
 public class ModOreGeneration {
 

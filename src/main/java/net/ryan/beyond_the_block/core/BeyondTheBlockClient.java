@@ -20,6 +20,7 @@ import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.network.ClientNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
+import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +28,6 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
     public static final String MOD_ID = "beyond_the_block";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-
-
-
 
     @Override
     public void onInitializeClient() {

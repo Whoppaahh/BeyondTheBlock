@@ -43,7 +43,6 @@ public class BeyondTheBlock implements ModInitializer {
     private void setupConfig() {
         AutoConfig.register(ConfigClient.class, JanksonConfigSerializer::new);
         AutoConfig.register(ConfigServer.class, JanksonConfigSerializer::new);
-        BLEEDING_HANDLER = new BleedingParticleHandler();
         //holder.registerSaveListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         //holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         ServerLifecycleEvents.SERVER_STARTED.register(NameLoader::load);

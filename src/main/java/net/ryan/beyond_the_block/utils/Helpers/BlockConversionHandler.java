@@ -191,5 +191,6 @@ public class BlockConversionHandler {
                 || EnchantmentHelper.getLevel(ModEnchantments.BARKSKIN, stack) > 0;
     }
 
+
     private record ConversionContext(World world, BlockPos pos, BlockState state, ItemStack held) {}
 }

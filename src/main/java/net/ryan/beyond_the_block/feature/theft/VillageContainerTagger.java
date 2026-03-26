@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.feature.theft_detection;
+package net.ryan.beyond_the_block.feature.theft;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;

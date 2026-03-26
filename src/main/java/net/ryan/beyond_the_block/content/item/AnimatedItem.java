@@ -23,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.world.Dimension.ModDimensions;
+import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.screen.handler.StaffScreenHandler;
 import org.lwjgl.glfw.GLFW;
 import software.bernie.geckolib3.core.IAnimatable;

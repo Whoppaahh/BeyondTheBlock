@@ -33,6 +33,7 @@ import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
@@ -122,7 +123,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
     public void setStack(int slot, ItemStack stack) {
         items.set(slot, stack);
         if (!stack.isEmpty() && world != null && !world.isClient) {
-            RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, BeyondTheBlock.RIDDLE_COMPONENTS);
+            RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, ContentRegistrar.RIDDLE_COMPONENTS);
             sync(); // auto-sync
             updateLastSynced(handler.getLastUpdated());
         }
@@ -193,7 +194,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         if (world == null || world.isClient) return;
         UUID playerID = player.getUuid();
 
-        RiddleDataManager handler = RiddleDataManager.get(player.getWorld(), BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get(player.getWorld(), ContentRegistrar.RIDDLE_COMPONENTS);
         Riddle riddle = handler.getRiddle(playerID);
 
         Integer slot = getSlotForPlayer(playerID);
@@ -236,7 +237,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         if (world == null || world.isClient) return;
         UUID playerID = player.getUuid();
 
-        RiddleDataManager handler = RiddleDataManager.get(player.getWorld(), BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get(player.getWorld(), ContentRegistrar.RIDDLE_COMPONENTS);
         Riddle riddle = handler.getRiddle(playerID);
         Integer slot = getSlotForPlayer(playerID);
         Direction direction = slot != null ? headDirections.getOrDefault(slot, Direction.NORTH) : null;
@@ -314,7 +315,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         if (world.isClient) return;
         if (!(world instanceof ServerWorld serverWorld)) return;
 
-        RiddleDataManager handler = RiddleDataManager.get(serverWorld, BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get(serverWorld, ContentRegistrar.RIDDLE_COMPONENTS);
 
         if (!blockEntity.initialised || blockEntity.needsSync(handler.getLastUpdated())) {
             blockEntity.initialised = true;

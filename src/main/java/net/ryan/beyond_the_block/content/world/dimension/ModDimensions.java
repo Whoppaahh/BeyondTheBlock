@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.world.Dimension;
+package net.ryan.beyond_the_block.content.world.dimension;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

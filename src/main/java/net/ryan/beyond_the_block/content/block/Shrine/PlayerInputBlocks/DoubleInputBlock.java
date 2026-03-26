@@ -25,6 +25,7 @@ import net.ryan.beyond_the_block.content.blockentity.ShrineHeadsBlockEntity;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.feature.shrines.ShrineHelper;
 
 import java.util.UUID;
@@ -141,7 +142,7 @@ public class DoubleInputBlock extends BlockWithEntity implements BlockEntityProv
         }
         UUID playerID = player.getUuid();
 
-        RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, ContentRegistrar.RIDDLE_COMPONENTS);
         handler.markCompleted(playerID, handler.getRiddle(playerID).getId());
 
         ShrineHelper.findShrineCore(world, pos).ifPresent(corePos -> {

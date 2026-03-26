@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractHorseEntity.class)
-public class HorseEntityBehaviourMixin implements HorseAccessor {
+public abstract class HorseEntityBehaviourMixin implements HorseAccessor {
     @Unique
     private StayNearData btb$stayData;
     @Unique private float beyond$baseStepHeight = -1f;

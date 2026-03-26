@@ -12,12 +12,13 @@ import net.ryan.beyond_the_block.content.recipes.ModRecipes;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.content.village.ModVillagers;
-import net.ryan.beyond_the_block.content.world.Dimension.ModDimensions;
-import net.ryan.beyond_the_block.content.world.Feature.ModConfiguredFeatures;
-import net.ryan.beyond_the_block.content.world.Gen.ModOreGeneration;
+import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
+import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
+import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
+import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
 import net.ryan.beyond_the_block.utils.ModTags;
@@ -29,7 +30,6 @@ public class ContentRegistrar {
     private static final int ECLIPSED_BLOOM_FUEL = 32767;
 
     public static final RiddleComponents RIDDLE_COMPONENTS = new RiddleComponents();
-
 
     public static void register() {
         ModConfiguredFeatures.registerConfiguredFeatures();
@@ -50,12 +50,13 @@ public class ContentRegistrar {
         ModSounds.registerSounds();
         SandToGlassManager.register();
 
+        registerFuel();
         RIDDLE_COMPONENTS.loadFromJson();
         ServerNetworking.registerC2SPackets();
         ModEvents.register();
     }
 
-    private void registerFuel() {
+    private static void registerFuel() {
         FuelRegistry.INSTANCE.add(ModItems.ASTRACINDER, ASTRACINDER_FUEL);
         FuelRegistry.INSTANCE.add(ModItems.ECLIPSED_BLOOM, ECLIPSED_BLOOM_FUEL);
     }

@@ -24,7 +24,7 @@
 		],
 		"fabric-datagen": ["net.ryan.beyond_the_block.datagen.ModDataGeneration"],
 		"modmenu": [
-			"net.ryan.beyond_the_block.config.ui.ModMenu"
+          "net.ryan.beyond_the_block.config.ui.ModMenuIntegration"
 		]
 	},
 	"mixins": [

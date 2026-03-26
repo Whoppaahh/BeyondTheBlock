@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.village.GuardVillager.Render;
+package net.ryan.beyond_the_block.client.render.entity;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

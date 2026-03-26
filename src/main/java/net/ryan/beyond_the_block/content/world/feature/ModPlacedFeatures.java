@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.world.Feature;
+package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.YOffset;

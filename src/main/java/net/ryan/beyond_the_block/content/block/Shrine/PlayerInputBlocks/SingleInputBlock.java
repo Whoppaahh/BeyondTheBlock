@@ -26,6 +26,7 @@ import net.ryan.beyond_the_block.content.blockentity.SingleInputBlockEntity;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.feature.shrines.ShrineHelper;
 
 import java.util.UUID;
@@ -130,7 +131,7 @@ public class SingleInputBlock extends BlockWithEntity implements BlockEntityProv
     }
     private void completeRiddle(ServerWorld world, PlayerEntity player, BlockPos pos, BlockState state) {
         UUID playerID = player.getUuid();
-        RiddleDataManager handler = RiddleDataManager.get(world, BeyondTheBlock.RIDDLE_COMPONENTS);
+        RiddleDataManager handler = RiddleDataManager.get(world, ContentRegistrar.RIDDLE_COMPONENTS);
         handler.markCompleted(playerID, handler.getRiddle(playerID).getId());
 
         world.removeBlockEntity(pos);
@@ -149,7 +150,7 @@ public class SingleInputBlock extends BlockWithEntity implements BlockEntityProv
             BlockPos headPos = corePos.up().up();
             BlockEntity headEntity = world.getBlockEntity(headPos);
             if (headEntity instanceof ShrineHeadsBlockEntity head) {
-                RiddleDataManager handler = RiddleDataManager.get(world, BeyondTheBlock.RIDDLE_COMPONENTS);
+                RiddleDataManager handler = RiddleDataManager.get(world, ContentRegistrar.RIDDLE_COMPONENTS);
                 head.clearPlayerHead(playerID);
                 head.markDirty();
                 head.sync();

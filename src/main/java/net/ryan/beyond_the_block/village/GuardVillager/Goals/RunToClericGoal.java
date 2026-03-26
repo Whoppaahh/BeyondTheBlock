@@ -4,7 +4,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 import java.util.List;

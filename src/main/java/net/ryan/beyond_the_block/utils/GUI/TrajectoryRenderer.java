@@ -12,7 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.TrajectoryHelper;
 import net.ryan.beyond_the_block.utils.ProjectileHelpers.TrajectoryPath;
 

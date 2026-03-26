@@ -13,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 import net.ryan.beyond_the_block.village.ModVillagers;
 import org.jetbrains.annotations.Nullable;

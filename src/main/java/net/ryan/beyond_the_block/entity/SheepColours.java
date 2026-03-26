@@ -5,7 +5,7 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
-import net.ryan.beyond_the_block.utils.Naming.EntityTagManager;
+import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
 
 public class SheepColours {
     public static void randomiseColours(Entity entity, ServerWorld serverWorld) {

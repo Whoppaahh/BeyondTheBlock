@@ -9,7 +9,7 @@ import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 public class RaiseShieldGoal extends Goal {

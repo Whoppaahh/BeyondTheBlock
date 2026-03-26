@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 
 import java.util.ArrayList;
 import java.util.List;

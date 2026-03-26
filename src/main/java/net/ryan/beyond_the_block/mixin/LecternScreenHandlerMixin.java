@@ -6,7 +6,7 @@ import net.minecraft.item.WrittenBookItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.LecternScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.mixin.Accessors.LecternScreenHandlerAccessor;
+import net.ryan.beyond_the_block.mixin.accessors.LecternScreenHandlerAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

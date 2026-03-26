@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.utils.Accessors;
 
 import net.minecraft.inventory.SimpleInventory;
-import net.ryan.beyond_the_block.utils.Helpers.StayNearData;
+import net.ryan.beyond_the_block.feature.horses.StayNearData;
 
 public interface HorseAccessor {
     void beyond$setSaddledPublic(boolean saddled);

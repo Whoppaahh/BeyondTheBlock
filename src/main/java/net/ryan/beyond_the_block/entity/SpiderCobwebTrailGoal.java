@@ -6,7 +6,7 @@ import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.utils.Helpers.CobwebDecayScheduler;
 
 public class SpiderCobwebTrailGoal extends Goal {

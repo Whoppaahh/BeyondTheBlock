@@ -7,7 +7,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.mixin.Accessors.*;
+import net.ryan.beyond_the_block.mixin.accessors.*;
 import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

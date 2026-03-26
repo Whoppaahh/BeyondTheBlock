@@ -19,7 +19,9 @@
 		"main": ["net.ryan.beyond_the_block.BeyondTheBlock"],
 		"client": ["net.ryan.beyond_the_block.BeyondTheBlockClient"],
 		"fabric-datagen": ["net.ryan.beyond_the_block.datagen.ModDataGeneration"],
-		"modmenu": ["net.ryan.beyond_the_block.config.ModMenu"]
+		"modmenu": [
+			"net.ryan.beyond_the_block.config.ui.ModMenu"
+		]
 	},
 	"mixins": [
       "beyond_the_block.mixins.json",

@@ -6,7 +6,7 @@ import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 
 import java.util.List;
 

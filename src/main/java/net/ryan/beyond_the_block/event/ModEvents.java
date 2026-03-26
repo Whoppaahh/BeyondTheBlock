@@ -53,7 +53,7 @@ import net.ryan.beyond_the_block.enchantment.MyEnchantmentHelper;
 import net.ryan.beyond_the_block.entity.CupidArrowEntity;
 import net.ryan.beyond_the_block.entity.ModEntities;
 import net.ryan.beyond_the_block.entity.SheepColours;
-import net.ryan.beyond_the_block.entity.WitherZombie;
+import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
 import net.ryan.beyond_the_block.utils.FlameTrailPoint;

@@ -10,7 +10,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 public class GuardEntityModel extends BipedEntityModel<GuardEntity> {

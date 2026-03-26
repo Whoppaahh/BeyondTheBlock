@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.seasonal;
 
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.ryan.beyond_the_block.utils.Naming.EntityTagManager;
+import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
 
 public class ValentinesFeatures {
 

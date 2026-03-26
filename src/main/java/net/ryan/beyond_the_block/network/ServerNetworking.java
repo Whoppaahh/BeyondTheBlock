@@ -16,7 +16,7 @@ import net.ryan.beyond_the_block.network.Packets.Client.GuardFollowC2SPacket;
 import net.ryan.beyond_the_block.network.Packets.Client.GuardPatrolC2SPacket;
 import net.ryan.beyond_the_block.network.Packets.Client.LeapOfFaithC2SPacket;
 import net.ryan.beyond_the_block.network.Packets.Client.TeleportWithStaffC2SPacket;
-import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
+import net.ryan.beyond_the_block.feature.paths.PathToolHelper;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 
 import static net.ryan.beyond_the_block.network.Packets.PacketIDs.*;

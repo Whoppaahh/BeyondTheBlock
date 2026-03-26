@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.village.VillagerProfession;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.village.GuardVillager.Task.RepairGolemTask;
 import net.ryan.beyond_the_block.village.GuardVillager.Task.ShareGossipWithGuard;
 import org.spongepowered.asm.mixin.Mixin;

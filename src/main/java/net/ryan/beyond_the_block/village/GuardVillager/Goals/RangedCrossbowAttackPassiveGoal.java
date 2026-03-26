@@ -15,7 +15,7 @@ import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
 import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
 import org.jetbrains.annotations.Nullable;

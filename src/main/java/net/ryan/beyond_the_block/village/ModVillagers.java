@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.poi.PointOfInterestType;
 import net.ryan.beyond_the_block.BeyondTheBlock;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.event.GuardVillagersEvents;
 import net.ryan.beyond_the_block.item.ModItems;
 import net.ryan.beyond_the_block.village.GuardVillager.Goals.AttackEntityDaytimeGoal;

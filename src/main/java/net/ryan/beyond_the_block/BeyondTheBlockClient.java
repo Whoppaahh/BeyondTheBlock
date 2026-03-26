@@ -4,6 +4,7 @@ import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -11,11 +12,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRe
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -23,7 +27,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.tag.TagKey;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +44,7 @@ import net.ryan.beyond_the_block.block.Entity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.block.Entity.ModBlockEntities;
 import net.ryan.beyond_the_block.block.Entity.Render.*;
 import net.ryan.beyond_the_block.block.ModBlocks;
-import net.ryan.beyond_the_block.config.Configs;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.effect.Beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.enchantment.Armour.boots.LeapOfFaithEnchantment;
@@ -58,8 +67,8 @@ import net.ryan.beyond_the_block.utils.GUI.FloatingXPManager;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
 import net.ryan.beyond_the_block.utils.GUI.TrajectoryRenderer;
 import net.ryan.beyond_the_block.utils.Helpers.HighlightTracker;
-import net.ryan.beyond_the_block.utils.Helpers.PathPreviewState;
-import net.ryan.beyond_the_block.utils.Helpers.PathToolHelper;
+import net.ryan.beyond_the_block.feature.paths.PathPreviewState;
+import net.ryan.beyond_the_block.feature.paths.PathToolHelper;
 import net.ryan.beyond_the_block.utils.OutlineRenderer;
 import net.ryan.beyond_the_block.village.GuardVillager.Render.GuardEntityRenderer;
 import net.ryan.beyond_the_block.village.ModVillagers;
@@ -68,12 +77,25 @@ import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BeyondTheBlockClient implements ClientModInitializer {
 
     public static final String MOD_ID = "beyond_the_block";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    private static final Map<String, Text> ENCHANTMENT_DESC_CACHE = new HashMap<>();
+    private static final Map<String, Formatting> GEM_COLORS = Map.ofEntries(
+            Map.entry("miranite", Formatting.GREEN),
+            Map.entry("chromite", Formatting.LIGHT_PURPLE),
+            Map.entry("nocturnite", Formatting.DARK_PURPLE),
+            Map.entry("amberine", Formatting.GOLD),
+            Map.entry("azuros", Formatting.AQUA),
+            Map.entry("indigra", Formatting.BLUE),
+            Map.entry("rosette", Formatting.RED)
+    );
 
     private boolean modOresLayersRegistered = false;
     // New tag for automatic ore registration
@@ -93,6 +115,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         registerBlockRenderLayers();
         registerDynamicLights();
         registerLivingEntityFeatures();
+        registerTooltips();
 
         FloatingXPManager.register();
         OutlineRenderer.init();
@@ -335,4 +358,57 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         return stack != null && (isAmberineArmor(stack) || isAmberineToolOrWeapon(stack)
                 || stack.isOf(ModBlocks.AMBERINE_BLOCK.asItem()) || stack.isOf(ModItems.AMBERINE_ITEM));
     }
+
+
+    // --------------------- Tooltip logic ---------------------
+    private void registerTooltips() {
+        ItemTooltipCallback.EVENT.register(this::handleTooltip);
+    }
+
+    private void handleTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip) {
+        NbtCompound nbt = stack.getNbt();
+        if (nbt != null && nbt.contains("GemList", NbtElement.LIST_TYPE))
+            appendGemInfo(nbt, tooltip);
+        appendEnchantmentInfo(stack, tooltip);
+    }
+
+    private void appendGemInfo(NbtCompound nbt, List<Text> tooltip) {
+        NbtList gems = nbt.getList("GemList", NbtElement.STRING_TYPE);
+        if (gems.isEmpty()) return;
+
+        tooltip.add(Text.literal("Gems Applied:").formatted(Formatting.GRAY));
+        for (NbtElement element : gems) {
+            String gem = element.asString();
+            tooltip.add(Text.literal(gem).formatted(getGemColor(gem)));
+        }
+    }
+
+    private void appendEnchantmentInfo(ItemStack stack, List<Text> tooltip) {
+        if (!stack.hasEnchantments()) return;
+
+        if (Screen.hasShiftDown()) {
+            for (NbtElement element : stack.getEnchantments()) {
+                if (!(element instanceof NbtCompound tag)) continue;
+                String idStr = tag.getString("id");
+                Text cached = ENCHANTMENT_DESC_CACHE.computeIfAbsent(idStr, this::buildEnchantmentDescription);
+                if (cached != null) tooltip.add(cached);
+            }
+        } else {
+            tooltip.add(Text.literal("Hold SHIFT for more info").formatted(Formatting.DARK_GRAY));
+        }
+    }
+
+    private Text buildEnchantmentDescription(String idStr) {
+        Identifier id = Identifier.tryParse(idStr);
+        if (id == null) return null;
+        String key = "enchantment." + id.getNamespace() + "." + id.getPath() + ".desc";
+        return I18n.hasTranslation(key)
+                ? Text.translatable(key).formatted(Formatting.GRAY)
+                : null;
+    }
+
+    private Formatting getGemColor(String gem) {
+        return GEM_COLORS.getOrDefault(gem.toLowerCase(), Formatting.GRAY);
+    }
+
 }

@@ -4,7 +4,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.N
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
-import net.ryan.beyond_the_block.utils.GlowManager;
+import net.ryan.beyond_the_block.client.visual.GlowManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

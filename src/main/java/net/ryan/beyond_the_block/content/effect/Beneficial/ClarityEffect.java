@@ -7,8 +7,8 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.math.BlockPos;
+import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.utils.Helpers.HighlightTracker;
 
 import java.util.HashSet;
 import java.util.Set;

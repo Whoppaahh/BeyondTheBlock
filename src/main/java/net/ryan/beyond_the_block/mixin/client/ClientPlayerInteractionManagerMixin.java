@@ -6,7 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.content.block.Entity.PlayerVaultBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.PlayerVaultBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

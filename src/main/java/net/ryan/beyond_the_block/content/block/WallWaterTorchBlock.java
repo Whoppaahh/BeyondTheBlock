@@ -1,6 +1,9 @@
 package net.ryan.beyond_the_block.content.block;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.WallTorchBlock;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;

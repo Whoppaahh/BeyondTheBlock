@@ -16,7 +16,7 @@ import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Entity.ModdedFluidCauldronBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.ModdedFluidCauldronBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class ModdedFluidCauldronBlock extends LeveledCauldronBlock implements BlockEntityProvider {

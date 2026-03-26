@@ -5,7 +5,6 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.content.enchantment.Armour.WardingGlyphEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Armour.boots.GroundedResistanceEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithEnchantment;
@@ -32,6 +31,7 @@ import net.ryan.beyond_the_block.content.enchantment.Tools.shovels.DarkDigEnchan
 import net.ryan.beyond_the_block.content.enchantment.Tools.shovels.EarthShatterEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Tools.shovels.FertilityEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Tools.swords.*;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModEnchantments {
 

@@ -31,7 +31,7 @@ import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithTra
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.content.particle.ModParticles;
-import net.ryan.beyond_the_block.utils.Helpers.MountUtils;
+import net.ryan.beyond_the_block.feature.horses.MountUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

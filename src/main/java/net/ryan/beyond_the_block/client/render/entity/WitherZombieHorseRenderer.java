@@ -1,0 +1,20 @@
+package net.ryan.beyond_the_block.client.render.entity;
+
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.ZombieHorseEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+
+public class WitherZombieHorseRenderer extends ZombieHorseEntityRenderer {
+    public WitherZombieHorseRenderer(EntityRendererFactory.Context context) {
+        super(context, EntityModelLayers.ZOMBIE_HORSE);
+    }
+    private static final Identifier WITHER_ZOMBIE_HORSE_TEXTURE = new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/horse/wither_zombie_horse.png");
+
+    @Override
+    public Identifier getTexture(AbstractHorseEntity entity) {
+        return WITHER_ZOMBIE_HORSE_TEXTURE;
+    }
+}

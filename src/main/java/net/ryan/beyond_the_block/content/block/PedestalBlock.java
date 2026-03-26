@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Entity.PedestalBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.PedestalBlockEntity;
 
 public class PedestalBlock extends BlockWithEntity implements BlockEntityProvider {
 

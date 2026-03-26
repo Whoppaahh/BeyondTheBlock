@@ -4,8 +4,8 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
-import net.ryan.beyond_the_block.riddles.Riddle;
-import net.ryan.beyond_the_block.riddles.RiddleClientCache;
+import net.ryan.beyond_the_block.content.riddles.Riddle;
+import net.ryan.beyond_the_block.content.riddles.RiddleClientCache;
 
 import java.util.*;
 

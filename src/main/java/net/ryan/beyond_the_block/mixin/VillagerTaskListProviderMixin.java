@@ -10,8 +10,8 @@ import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.village.VillagerProfession;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.village.GuardVillager.Task.RepairGolemTask;
-import net.ryan.beyond_the_block.village.GuardVillager.Task.ShareGossipWithGuard;
+import net.ryan.beyond_the_block.content.village.GuardVillager.Task.RepairGolemTask;
+import net.ryan.beyond_the_block.content.village.GuardVillager.Task.ShareGossipWithGuard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.ryan.beyond_the_block.village.ModVillagers.GUARD_VILLAGER;
+import static net.ryan.beyond_the_block.content.village.ModVillagers.GUARD_VILLAGER;
 
 @Mixin(VillagerTaskListProvider.class)
 public class VillagerTaskListProviderMixin {

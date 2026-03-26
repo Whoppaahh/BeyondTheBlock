@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.config.schema.ConfigServer;
 
 import java.util.List;
 import java.util.Set;

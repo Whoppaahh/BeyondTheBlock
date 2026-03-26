@@ -3,8 +3,8 @@ package net.ryan.beyond_the_block.feature.naming;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.config.schema.ConfigClient;
 
 import java.util.List;
 import java.util.Random;

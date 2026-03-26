@@ -13,7 +13,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.content.block.Cauldrons.DyedWaterCauldronBlock;
 import net.ryan.beyond_the_block.content.block.Cauldrons.ModdedFluidCauldronBlock;
 import net.ryan.beyond_the_block.content.block.Shrine.PlayerInputBlocks.DoubleInputBlock;
@@ -26,6 +25,7 @@ import net.ryan.beyond_the_block.content.block.Sponges.DoubleCompressedSpongeBlo
 import net.ryan.beyond_the_block.content.block.Sponges.TripleCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.block.Sponges.WetCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.item.ModItemGroup;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 
 public class ModBlocks {

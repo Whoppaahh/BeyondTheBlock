@@ -13,8 +13,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
+import net.ryan.beyond_the_block.content.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.content.entity.Model.WitherZombieModel;
 
 public class ModEntities {
 

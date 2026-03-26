@@ -11,7 +11,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.ryan.beyond_the_block.utils.Glowable;
+import net.ryan.beyond_the_block.client.visual.Glowable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

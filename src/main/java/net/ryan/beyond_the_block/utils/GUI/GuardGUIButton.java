@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
 
 public class GuardGUIButton extends TexturedButtonWidget{
         private final Identifier texture;

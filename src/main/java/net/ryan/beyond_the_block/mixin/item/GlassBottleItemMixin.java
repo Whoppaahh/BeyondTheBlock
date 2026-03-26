@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.utils.Helpers.XPUtils;
+import net.ryan.beyond_the_block.feature.xp_orbs.XPUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

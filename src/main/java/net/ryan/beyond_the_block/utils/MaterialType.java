@@ -3,7 +3,7 @@ package net.ryan.beyond_the_block.utils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
-import net.ryan.beyond_the_block.BeyondTheBlock;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public enum MaterialType {
     WOOD(1),

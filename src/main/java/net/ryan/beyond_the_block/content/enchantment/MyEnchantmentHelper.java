@@ -17,9 +17,9 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.DropMode;
+import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;

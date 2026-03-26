@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.utils.GUI.ScaledTextRenderer;
+import net.ryan.beyond_the_block.client.hud.ScaledTextRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

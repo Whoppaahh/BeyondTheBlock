@@ -21,16 +21,16 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.blockentity.ShrineHeadsBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.SingleInputBlockEntity;
+import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
+import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.content.block.Entity.ShrineEntity.PlayerInputEntity.SingleInputBlockEntity;
-import net.ryan.beyond_the_block.content.block.Entity.ShrineEntity.ShrineHeadsBlockEntity;
-import net.ryan.beyond_the_block.riddles.RiddleDataManager;
-import net.ryan.beyond_the_block.sound.ModSounds;
-import net.ryan.beyond_the_block.utils.Helpers.ShrineHelper;
+import net.ryan.beyond_the_block.feature.shrines.ShrineHelper;
 
 import java.util.UUID;
 
-import static net.ryan.beyond_the_block.utils.Helpers.ShrineHelper.createRewardShulkerBox;
+import static net.ryan.beyond_the_block.feature.shrines.ShrineHelper.createRewardShulkerBox;
 
 public class SingleInputBlock extends BlockWithEntity implements BlockEntityProvider {
 

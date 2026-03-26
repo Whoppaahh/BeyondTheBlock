@@ -5,8 +5,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
-import net.ryan.beyond_the_block.BeyondTheBlock;
-import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class SyncGuardStatsS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {

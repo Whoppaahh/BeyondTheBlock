@@ -16,8 +16,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import static net.ryan.beyond_the_block.network.Packets.PacketIDs.LEAP_OF_FAITH_PACKET_ID;
 

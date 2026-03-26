@@ -15,8 +15,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.config.schema.ConfigServer;
 
 import java.util.ArrayList;
 import java.util.HashSet;

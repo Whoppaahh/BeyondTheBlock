@@ -30,7 +30,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.ryan.beyond_the_block.content.block.Entity.PlayerVaultBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.PlayerVaultBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerVaultBlock extends BarrelBlock implements BlockEntityProvider {

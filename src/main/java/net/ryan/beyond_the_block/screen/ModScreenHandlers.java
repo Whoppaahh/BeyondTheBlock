@@ -4,8 +4,8 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.screen.Handlers.*;
-import net.ryan.beyond_the_block.screen.Handlers.Guard.GuardVillagerScreenHandler;
+import net.ryan.beyond_the_block.screen.handler.*;
+import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler;
 
 public class ModScreenHandlers {
 

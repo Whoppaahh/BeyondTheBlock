@@ -8,7 +8,7 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

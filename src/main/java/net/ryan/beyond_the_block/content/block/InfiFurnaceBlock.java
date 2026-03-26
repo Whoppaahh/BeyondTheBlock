@@ -22,8 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Entity.InfiFurnaceBlockEntity;
-import net.ryan.beyond_the_block.content.block.Entity.ModBlockEntities;
+import net.ryan.beyond_the_block.content.blockentity.InfiFurnaceBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class InfiFurnaceBlock extends BlockWithEntity implements BlockEntityProvider {

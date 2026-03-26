@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.mixin.entity;
 
 import net.minecraft.block.entity.BannerBlockEntity;
-import net.ryan.beyond_the_block.utils.Glowable;
+import net.ryan.beyond_the_block.client.visual.Glowable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 

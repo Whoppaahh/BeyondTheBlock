@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
 
 public class GuardPatrolC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender){

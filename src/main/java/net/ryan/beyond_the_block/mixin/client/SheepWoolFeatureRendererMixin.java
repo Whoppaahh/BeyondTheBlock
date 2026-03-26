@@ -10,7 +10,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.utils.Glowable;
+import net.ryan.beyond_the_block.client.visual.Glowable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

@@ -9,7 +9,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.VillageGossipType;
 import net.minecraft.world.RaycastContext;
-import net.ryan.beyond_the_block.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
 
 
 public class TheftDetector {

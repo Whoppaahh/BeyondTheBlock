@@ -19,7 +19,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Entity.DyedWaterCauldronBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.utils.ModTags;
 
 public class DyedWaterCauldronBlock extends LeveledCauldronBlock implements BlockEntityProvider {

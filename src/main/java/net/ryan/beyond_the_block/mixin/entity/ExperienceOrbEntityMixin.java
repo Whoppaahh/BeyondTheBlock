@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.mixin.entity;
 
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.ryan.beyond_the_block.utils.GUI.FloatingXPManager;
+import net.ryan.beyond_the_block.client.hud.FloatingXPManager;
 import net.ryan.beyond_the_block.feature.xp_orbs.OrbExtension;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

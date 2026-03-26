@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.content.block.Entity.AnimatedBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.AnimatedBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class AnimatedBlock extends BlockWithEntity {

@@ -16,7 +16,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.utils.Helpers.SpeedRailValues;
+import net.ryan.beyond_the_block.feature.rails.SpeedRailValues;
 
 public class SpeedRailBlock extends PoweredRailBlock {
 

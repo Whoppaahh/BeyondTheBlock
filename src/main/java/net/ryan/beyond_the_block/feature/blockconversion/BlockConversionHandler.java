@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.feature.furnace.FurnaceUpgradeHandler;
 import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 
 public class BlockConversionHandler {
@@ -30,7 +31,7 @@ public class BlockConversionHandler {
         result = convertCraftingTable(player, world, hand, hit);
         if (result != ActionResult.PASS) return result;
 
-        result = convertFurnace(player, world, hand, hit);
+        result = FurnaceUpgradeHandler.convertFurnace(player, world, hand, hit);
         return result;
     }
 

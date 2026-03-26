@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
 
 public class RestoreProtectionHandler {
-    private static TypedActionResult<ItemStack> onItemUsed(
+    public static TypedActionResult<ItemStack> onItemUsed(
             PlayerEntity player,
             World world,
             Hand hand

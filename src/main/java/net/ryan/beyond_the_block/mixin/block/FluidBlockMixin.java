@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.event.ModEvents;
+import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,7 @@ public abstract class FluidBlockMixin {
         if (!world.isClient && state.getFluidState().isOf(Fluids.LAVA)) {
             boolean isSource = state.getFluidState().isStill();
             if (isSource && world.getBlockState(pos).isOf(Blocks.SAND) || world.getBlockState(pos).isOf(Blocks.RED_SAND)) {
-                ModEvents.queueAdjacentSand(world, pos.toImmutable());
+                BlockConversionHandler.queueAdjacentSand(world, pos.toImmutable());
                 BeyondTheBlock.LOGGER.info("Queing sand to melt - mixin at pos " + pos + " - " + world.getBlockState(pos).getBlock());
             }
         }

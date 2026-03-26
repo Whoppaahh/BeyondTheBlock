@@ -9,6 +9,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.mixin.accessors.AnimalAgeAccessor;
 import net.ryan.beyond_the_block.network.ServerNetworking;
+import net.ryan.beyond_the_block.network.sync.breeding.BreedingInfoSync;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,7 +38,7 @@ public abstract class AnimalEntityBreedingSyncMixin {
             List<ServerPlayerEntity> tracking = net.fabricmc.fabric.api.networking.v1.PlayerLookup.tracking(self).stream().toList();
 
             for (ServerPlayerEntity p : tracking) {
-                ServerNetworking.syncBreedingInfo(p, self, age);
+                BreedingInfoSync.syncBreedingInfo(p, self, age);
             }
         }
     }

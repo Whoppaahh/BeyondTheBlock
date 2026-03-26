@@ -19,7 +19,7 @@ import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
 
 public class FurnaceUpgradeHandler {
-    private static ActionResult convertFurnace(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
+    public static ActionResult convertFurnace(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
         BlockPos pos = hitResult.getBlockPos();
         BlockState state = world.getBlockState(pos);
 

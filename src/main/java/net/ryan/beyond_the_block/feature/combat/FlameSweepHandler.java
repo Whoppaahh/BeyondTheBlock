@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlameSweepHandler {
-    private static ActionResult onEntityAttacked(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hit) {
+    public static ActionResult onEntityAttacked(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hit) {
         if (!(entity instanceof LivingEntity target)) return ActionResult.PASS;
 
         ItemStack stack = player.getStackInHand(hand);

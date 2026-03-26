@@ -62,6 +62,7 @@ import net.ryan.beyond_the_block.content.village.GuardVillager.Goals.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
 import net.ryan.beyond_the_block.network.ServerNetworking;
+import net.ryan.beyond_the_block.network.sync.guard.GuardStatusSync;
 import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler;
 import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -125,7 +126,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
     protected void onStatusEffectApplied(StatusEffectInstance effect, @Nullable Entity source) {
         super.onStatusEffectApplied(effect, source);
         if(!this.getWorld().isClient){
-            ServerNetworking.syncGuardStatus((ServerPlayerEntity) this.getWorld().getPlayerByUuid(getOwnerId()), this);
+            GuardStatusSync.syncGuardStatus((ServerPlayerEntity) this.getWorld().getPlayerByUuid(getOwnerId()), this);
         }
     }
 
@@ -134,7 +135,7 @@ public class GuardEntity extends PathAwareEntity implements CrossbowUser, Ranged
         super.onStatusEffectRemoved(effect);
         if(!this.getWorld().isClient){
             Objects.requireNonNull(this.getServer()).execute(() ->{
-                ServerNetworking.syncGuardStatus((ServerPlayerEntity) this.getWorld().getPlayerByUuid(getOwnerId()), this);
+                GuardStatusSync.syncGuardStatus((ServerPlayerEntity) this.getWorld().getPlayerByUuid(getOwnerId()), this);
             });
         }
     }

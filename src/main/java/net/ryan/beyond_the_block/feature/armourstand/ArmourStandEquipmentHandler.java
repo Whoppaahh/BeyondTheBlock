@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class ArmourStandEquipmentHandler {
-    private static ActionResult onEntityUsed(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
+    public static ActionResult onEntityUsed(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
         if (world.isClient) return ActionResult.PASS;
 
         if (!(entity instanceof ArmorStandEntity armorStand)) return ActionResult.PASS;

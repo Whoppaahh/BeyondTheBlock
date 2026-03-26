@@ -1,12 +1,9 @@
 package net.ryan.beyond_the_block.feature.blockconversion;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -18,12 +15,10 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.blockentity.InfiFurnaceBlockEntity;
-import net.ryan.beyond_the_block.content.item.ModItems;
-import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 
 public class BlockConversionHandler {
     public static ActionResult handleBlockConversion(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {
@@ -97,4 +92,14 @@ public class BlockConversionHandler {
         return ActionResult.PASS;
     }
 
+    public static void queueAdjacentSand(World world, BlockPos lavaPos) {
+        if (!(world instanceof ServerWorld)) return;
+        for (BlockPos neighbor : BlockPos.iterateOutwards(lavaPos, 1, 1, 1)) {
+            BlockState state = world.getBlockState(neighbor);
+            if (state.isOf(Blocks.SAND) || state.isOf(Blocks.RED_SAND)) {
+                BeyondTheBlock.LOGGER.info("Queuing {} at {}", state.getBlock(), neighbor);
+                SandToGlassManager.queueSand(neighbor.toImmutable(), state);
+            }
+        }
+    }
 }

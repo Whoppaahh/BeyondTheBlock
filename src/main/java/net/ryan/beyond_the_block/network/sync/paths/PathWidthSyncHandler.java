@@ -10,7 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.ryan.beyond_the_block.feature.paths.PathToolHelper;
 
 public class PathWidthSyncHandler {
-    private static void syncWidth(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf buf, PacketSender packetSender) {
+    public static void syncWidth(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler serverPlayNetworkHandler, PacketByteBuf buf, PacketSender packetSender) {
         int width = buf.readInt();
         server.execute(() -> {
             ItemStack stack = player.getMainHandStack();

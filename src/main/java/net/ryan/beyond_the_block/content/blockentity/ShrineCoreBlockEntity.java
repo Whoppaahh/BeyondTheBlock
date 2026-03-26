@@ -25,7 +25,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.screen.handler.RiddleCoreScreenHandler;
 import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;

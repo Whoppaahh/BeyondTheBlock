@@ -4,29 +4,25 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.world.World;
 import net.ryan.beyond_the_block.client.hud.BreedingHUDRenderer;
 import net.ryan.beyond_the_block.client.hud.FollowerHudRenderer;
 import net.ryan.beyond_the_block.client.hud.TrajectoryHUD;
 import net.ryan.beyond_the_block.content.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.content.entity.CupidArrowEntity;
-import net.ryan.beyond_the_block.event.ModEvents;
-import org.jetbrains.annotations.Nullable;
+import net.ryan.beyond_the_block.feature.projectile.ArrowRecoveryHandler;
 
 import java.util.List;
 
 import static net.ryan.beyond_the_block.client.hud.FollowerHudRenderer.getFollowers;
 
 public class EntityEventRegistrar {
+
+    public static void register(){
+        registerEntityEvents();
+    }
     private static void registerEntityEvents() {
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(ModEvents::dropArrows);
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(ArrowRecoveryHandler::dropArrows);
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(CupidArrowEntity::onDamage);
         ServerLivingEntityEvents.AFTER_DEATH.register(FreezeEffectLayer::onDeath);
 

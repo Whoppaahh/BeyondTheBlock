@@ -9,7 +9,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 
 public class ArrowRecoveryHandler {
-    private static void dropArrows(ServerWorld world, Entity entity, LivingEntity killed) {
+    public static void dropArrows(ServerWorld world, Entity entity, LivingEntity killed) {
         ArrowHitsAccess acc = (ArrowHitsAccess) killed;
         if (acc.beyondTheBlock$getArrowHits().isEmpty()) return;
 

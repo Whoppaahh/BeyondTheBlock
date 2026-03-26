@@ -11,7 +11,6 @@ import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.core.bootstrap.CommonBootstrap;
 import net.ryan.beyond_the_block.feature.naming.NameLoader;
-import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

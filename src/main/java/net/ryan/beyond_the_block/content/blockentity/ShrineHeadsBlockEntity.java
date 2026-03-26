@@ -32,7 +32,6 @@ import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;

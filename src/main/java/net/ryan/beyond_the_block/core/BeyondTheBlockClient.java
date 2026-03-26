@@ -20,7 +20,6 @@ import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.network.ClientNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.GUI.PlayerHeadManager;
-import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

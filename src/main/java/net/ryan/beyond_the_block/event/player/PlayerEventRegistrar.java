@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.event.player.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
@@ -34,8 +32,8 @@ import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntit
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.feature.armourstand.ArmourStandEquipmentHandler;
+import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import net.ryan.beyond_the_block.feature.cauldrons.ModdedFluidCauldronHandler;
 import net.ryan.beyond_the_block.feature.combat.FlameSweepHandler;
 import net.ryan.beyond_the_block.feature.restore.RestoreProtectionHandler;
@@ -45,6 +43,10 @@ import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerEventRegistrar {
+
+    public static void register(){
+        registerPlayerEvents();
+    }
     private static void registerPlayerEvents() {
         AttackBlockCallback.EVENT.register(PlayerEventRegistrar::onBlockMined);
         AttackEntityCallback.EVENT.register(FlameSweepHandler::onEntityAttacked);
@@ -53,7 +55,7 @@ public class PlayerEventRegistrar {
         UseEntityCallback.EVENT.register(ArmourStandEquipmentHandler::onEntityUsed);
 
 
-        PlayerBlockBreakEvents.BEFORE.register(ModEvents::onBlockBreak);
+        PlayerBlockBreakEvents.BEFORE.register(PlayerEventRegistrar::onBlockBreak);
         PlayerBlockBreakEvents.BEFORE.register(PlayerVaultBlock::handleBreak);
         UseBlockCallback.EVENT.register(DoubleOpenablesHandler::onUse);
 
@@ -145,7 +147,7 @@ public class PlayerEventRegistrar {
         // Lava → sand logic
         if (world instanceof ServerWorld && world.getFluidState(placePos).isOf(Fluids.LAVA)
                 && world.getFluidState(placePos).isStill()) {
-            queueAdjacentSand(world, placePos.toImmutable());
+            BlockConversionHandler.queueAdjacentSand(world, placePos.toImmutable());
         }
 
         BlockPos pos = hit.getBlockPos();

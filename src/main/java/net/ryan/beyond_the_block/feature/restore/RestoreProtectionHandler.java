@@ -1,34 +1,17 @@
 package net.ryan.beyond_the_block.feature.restore;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Cauldrons.DyedWaterCauldronBlock;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
-import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
-import net.ryan.beyond_the_block.feature.cauldrons.ModdedFluidCauldronHandler;
 import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
 
 public class RestoreProtectionHandler {

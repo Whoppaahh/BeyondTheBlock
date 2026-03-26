@@ -1,37 +1,31 @@
 package net.ryan.beyond_the_block.event.world;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
-import net.minecraft.util.WorldSavePath;
 import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.IronCladVisionEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.MindWardEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.ShadowsVeilEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.Armour.leggings.NightstrideEnchantment;
 import net.ryan.beyond_the_block.content.entity.ModEntities;
 import net.ryan.beyond_the_block.content.entity.SheepColours;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.event.ModEvents;
+import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import net.ryan.beyond_the_block.feature.cauldrons.HoneyDripHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.IceConversionHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.MagmaDripHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.PowderSnowCauldronHelper;
 import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
-import net.ryan.beyond_the_block.utils.Helpers.BlockConversionHandler;
 import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-
 public class WorldEventRegistrar {
+
+    public static void register(){
+        registerBlockConversions();
+        registerServerTickEvents();
+    }
     private static void registerBlockConversions() {
-        BlockConversionHandler.register();
         UseBlockCallback.EVENT.register(BlockConversionHandler::handleBlockConversion);
 
     }

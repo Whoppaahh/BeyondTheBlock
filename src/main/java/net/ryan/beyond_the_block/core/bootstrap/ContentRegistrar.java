@@ -18,7 +18,6 @@ import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
-import net.ryan.beyond_the_block.utils.Helpers.BleedingParticleHandler;
 import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
 import net.ryan.beyond_the_block.utils.ModTags;

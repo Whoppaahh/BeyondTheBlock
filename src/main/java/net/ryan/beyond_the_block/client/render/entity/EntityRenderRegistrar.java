@@ -6,6 +6,9 @@ import net.ryan.beyond_the_block.content.entity.ModEntities;
 import net.ryan.beyond_the_block.content.village.ModVillagers;
 
 public class EntityRenderRegistrar {
+    public static void register(){
+        registerEntityRenderers();
+    }
     private static void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.WITHER_ZOMBIE, WitherZombieRenderer::new);
         EntityRendererRegistry.register(ModEntities.WITHER_ZOMBIE_HORSE, WitherZombieHorseRenderer::new);

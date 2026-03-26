@@ -1,21 +1,16 @@
 package net.ryan.beyond_the_block.client.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.client.render.blockentity.BlockEntityRenderRegistrar;
+import net.ryan.beyond_the_block.client.render.entity.EntityRenderRegistrar;
+import net.ryan.beyond_the_block.client.render.layer.BlockRenderLayerRegistrar;
+import net.ryan.beyond_the_block.client.render.light.DynamicLightRegistrar;
 
 public class ClientRenderRegistrar {
-    private static boolean modOresLayersRegistered = false;
-    // New tag for automatic ore registration
-    private static final TagKey<Block> MOD_ORES =
-            TagKey.of(Registry.BLOCK.getKey(), new Identifier(BeyondTheBlock.MOD_ID, "mod_ores"));
 
     public static void register(){
-        registerBlockEntities();
-        registerEntityRenderers();
-        registerBlockRenderLayers();
-        registerDynamicLights();
+        BlockEntityRenderRegistrar.register();
+        EntityRenderRegistrar.register();
+        BlockRenderLayerRegistrar.register();
+        DynamicLightRegistrar.register();
     }
 }

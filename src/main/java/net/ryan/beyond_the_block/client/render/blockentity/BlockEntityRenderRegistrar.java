@@ -4,6 +4,9 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
 
 public class BlockEntityRenderRegistrar {
+    public static void register() {
+        registerBlockEntities();
+    }
     private static void registerBlockEntities() {
         BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BLOCK_ENTITY, PedestalBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.SHRINE_CORE_BLOCK_ENTITY, ShrineCoreBlockEntityRenderer::new);

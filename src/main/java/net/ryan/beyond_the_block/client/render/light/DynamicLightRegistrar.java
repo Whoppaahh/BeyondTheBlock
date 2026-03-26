@@ -10,6 +10,9 @@ import net.ryan.beyond_the_block.content.item.Armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.content.item.ModItems;
 
 public class DynamicLightRegistrar {
+    public static void register(){
+        registerDynamicLights();
+    }
     private static void registerDynamicLights() {
         DynamicLightHandlers.registerDynamicLightHandler(EntityType.PLAYER, player -> {
             int maxLight = 0;

@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:bookshelf" },
+    "title": { "translate": "advancements.beyond_the_block.utility.stacked_knowledge.title" },
+    "description": { "translate": "advancements.beyond_the_block.utility.stacked_knowledge.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "place_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:shelf"
+      }
+    }
+  }
+}

@@ -4,13 +4,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
 
 public interface LeapOfFaithTracker {
-    TrackedData<Integer> emeraldEmpire$getAirJumpCountKey();
+    TrackedData<Integer> btb$getAirJumpCountKey();
     default int getAirJumpCount() {
-        return ((PlayerEntity) this).getDataTracker().get(emeraldEmpire$getAirJumpCountKey());
+        return ((PlayerEntity) this).getDataTracker().get(btb$getAirJumpCountKey());
     }
 
     default void setAirJumpCount(int value) {
-        ((PlayerEntity) this).getDataTracker().set(emeraldEmpire$getAirJumpCountKey(), value);
+        ((PlayerEntity) this).getDataTracker().set(btb$getAirJumpCountKey(), value);
     }
 }
 

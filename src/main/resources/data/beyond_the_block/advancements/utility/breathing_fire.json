@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:torch" },
+    "title": { "translate": "advancements.beyond_the_block.utility.breathing_fire.title" },
+    "description": { "translate": "advancements.beyond_the_block.utility.breathing_fire.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "place_underwater_torch": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:water_torch"
+      }
+    }
+  }
+}

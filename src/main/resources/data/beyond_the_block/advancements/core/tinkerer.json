@@ -1,0 +1,24 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:redstone" },
+    "title": { "translate": "advancements.beyond_the_block.core.tinkerer.title" },
+    "description": { "translate": "advancements.beyond_the_block.core.tinkerer.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_btb_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "beyond_the_block:mod_items"
+          }
+        ]
+      }
+    }
+  }
+}

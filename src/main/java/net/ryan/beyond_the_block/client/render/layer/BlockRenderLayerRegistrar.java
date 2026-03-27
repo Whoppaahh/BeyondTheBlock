@@ -13,7 +13,7 @@ import net.ryan.beyond_the_block.core.BeyondTheBlockClient;
 
 public class BlockRenderLayerRegistrar {
 
-    private static boolean modOresLayersRegistered = false;
+    public static boolean modOresLayersRegistered = false;
     // New tag for automatic ore registration
     private static final TagKey<Block> MOD_ORES =
             TagKey.of(Registry.BLOCK.getKey(), new Identifier(BeyondTheBlock.MOD_ID, "mod_ores"));
@@ -30,9 +30,8 @@ public class BlockRenderLayerRegistrar {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LAVA_LAMP_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MODDED_FLUID_CAULDRON_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DYED_WATER_CAULDRON_BLOCK, RenderLayer.getTranslucent());
-
     }
-    private static void attemptRegisterModOres() {
+    public static void attemptRegisterModOres() {
         if (modOresLayersRegistered) return;
 
         Registry.BLOCK.getEntryList(MOD_ORES).ifPresent(entryList -> {

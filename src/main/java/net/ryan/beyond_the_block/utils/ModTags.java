@@ -1,6 +1,7 @@
 package net.ryan.beyond_the_block.utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -37,6 +38,15 @@ public class ModTags {
         }
     }
 
+    public static class Entities {
+        public static final TagKey<EntityType<?>> BLEEDS_HUMANOID = createEntityTag("bleeds_humanoid");
+        public static final TagKey<EntityType<?>> BLEEDS_PASSIVE = createEntityTag("bleeds_passive");
+
+        private static TagKey<EntityType<?>> createEntityTag(String path) {
+            return TagKey.of(Registry.ENTITY_TYPE.getKey(), Identifier.of(BeyondTheBlock.MOD_ID, path));
+        }
+
+    }
     public static void registerModTags(){
         BeyondTheBlock.LOGGER.info("Registering Mod Tags");
     }

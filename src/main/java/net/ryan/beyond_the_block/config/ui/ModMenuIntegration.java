@@ -63,16 +63,25 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build());
 
             if (config.visuals.blood.enabled) {
-                blood.add(entry.startFloatField(Text.literal("Health Threshold"),
-                                config.visuals.blood.healthFraction)
+                blood.add(entry.startIntField(Text.literal("Health Threshold"),
+                                config.visuals.blood.healthPercentThreshold)
                         .setTooltip(Text.literal("Only show blood when entity health is below this fraction"))
-                        .setDefaultValue(0.25F)
-                        .setSaveConsumer(v -> config.visuals.blood.healthFraction = v)
+                        .setDefaultValue(50)
+                        .setSaveConsumer(v -> config.visuals.blood.healthPercentThreshold = v)
                         .build());
+
+                if (config.visuals.blood.enabled) {
+                    blood.add(entry.startEnumSelector(Text.literal("Entities Affected"),
+                                    ConfigClient.BloodTargetMode.class, ConfigClient.BloodTargetMode.HUMANOID_ONLY)
+                            .setTooltip(Text.literal("Show blood for these entities"))
+                            .setDefaultValue(ConfigClient.BloodTargetMode.HUMANOID_ONLY)
+                            .setSaveConsumer(v -> config.visuals.blood.targetMode = v)
+                            .build());
+                }
+
+                visuals.addEntry(blood.build());
+
             }
-
-            visuals.addEntry(blood.build());
-
             /* ---------- Guard Visuals ---------- */
 
             SubCategoryBuilder guardVisuals = entry.startSubCategory(Text.literal("Guard Visuals"))

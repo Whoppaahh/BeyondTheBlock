@@ -7,19 +7,43 @@ import net.minecraft.world.World;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class VillageContainerScannerManager {
-    private static final ConcurrentLinkedQueue<ChunkPos> chunkScanQueue = new ConcurrentLinkedQueue<>();
+public final class VillageContainerScannerManager {
+    private static final int MAX_CHUNKS_PER_TICK = 8;
+
     public record QueuedChunk(RegistryKey<World> worldKey, ChunkPos chunkPos) {}
 
-    public static void queueChunkForScan(ServerWorld world, ChunkPos chunkPos) {
+    private static final ConcurrentLinkedQueue<QueuedChunk> chunkScanQueue = new ConcurrentLinkedQueue<>();
 
-        chunkScanQueue.offer(chunkPos);
+    private VillageContainerScannerManager() {}
+
+    public static void queueChunkForScan(ServerWorld world, ChunkPos chunkPos) {
+        chunkScanQueue.offer(new QueuedChunk(world.getRegistryKey(), chunkPos));
     }
 
     public static void tick(ServerWorld world) {
-        ChunkPos pos;
-        while ((pos = chunkScanQueue.poll()) != null) {
-            VillageContainerScanner.scanChunk(world, pos);
+        int processed = 0;
+        int scannedOtherWorldEntries = 0;
+
+        while (processed < MAX_CHUNKS_PER_TICK) {
+            QueuedChunk queued = chunkScanQueue.poll();
+            if (queued == null) {
+                break;
+            }
+
+            // Re-queue chunks for other dimensions/worlds
+            if (!queued.worldKey().equals(world.getRegistryKey())) {
+                chunkScanQueue.offer(queued);
+                scannedOtherWorldEntries++;
+
+                // Avoid infinite spinning if the front of the queue belongs to other worlds
+                if (scannedOtherWorldEntries >= chunkScanQueue.size() + 1) {
+                    break;
+                }
+                continue;
+            }
+
+            VillageContainerScanner.scanChunk(world, queued.chunkPos());
+            processed++;
         }
     }
 }

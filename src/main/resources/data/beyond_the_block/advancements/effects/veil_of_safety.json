@@ -1,0 +1,22 @@
+{
+  "parent": "beyond_the_block:effects/altered_state",
+  "display": {
+    "icon": { "item": "minecraft:ghast_tear" },
+    "title": { "translate": "advancements.beyond_the_block.effects.veil_of_safety.title" },
+    "description": { "translate": "advancements.beyond_the_block.effects.veil_of_safety.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ethereal_veil": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "beyond_the_block:ethereal_veil": {}
+        }
+      }
+    }
+  }
+}

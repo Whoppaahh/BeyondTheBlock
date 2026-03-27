@@ -1,5 +1,51 @@
 {
 
+  "advancements.beyond_the_block.core.beyond_the_block.title": "Beyond the Block",
+  "advancements.beyond_the_block.core.beyond_the_block.description": "There’s always more to discover.",
+
+  "advancements.beyond_the_block.core.tinkerer.title": "Tinkerer",
+  "advancements.beyond_the_block.core.tinkerer.description": "Nothing is quite vanilla anymore.",
+
+  "advancements.beyond_the_block.world.absorbent_thinking.title": "Absorbent Thinking",
+  "advancements.beyond_the_block.world.absorbent_thinking.description": "Sometimes you need more sponge.",
+
+  "advancements.beyond_the_block.world.over_prepared.title": "Over-Prepared",
+  "advancements.beyond_the_block.world.over_prepared.description": "Nine wasn’t enough.",
+
+  "advancements.beyond_the_block.effects.altered_state.title": "Altered State",
+  "advancements.beyond_the_block.effects.altered_state.description": "Something has changed.",
+
+  "advancements.beyond_the_block.effects.cold_touch.title": "Cold Touch",
+  "advancements.beyond_the_block.effects.cold_touch.description": "Movement is becoming optional.",
+
+  "advancements.beyond_the_block.effects.shared_fate.title": "Shared Fate",
+  "advancements.beyond_the_block.effects.shared_fate.description": "What happens to one need not end with one.",
+
+  "advancements.beyond_the_block.effects.veil_of_safety.title": "Veil of Safety",
+  "advancements.beyond_the_block.effects.veil_of_safety.description": "Not all protection is visible.",
+
+  "advancements.beyond_the_block.effects.clear_head.title": "Clear Head",
+  "advancements.beyond_the_block.effects.clear_head.description": "Finally, some focus.",
+
+  "advancements.beyond_the_block.effects.fog_of_war.title": "Fog of War",
+  "advancements.beyond_the_block.effects.fog_of_war.description": "Thinking clearly has become difficult.",
+
+  "advancements.beyond_the_block.effects.rotten_brew.title": "Rotten Brew",
+  "advancements.beyond_the_block.effects.rotten_brew.description": "This should not have worked.",
+
+  "advancements.beyond_the_block.enchantments.arcane_upgrades.title": "Arcane Upgrades",
+  "advancements.beyond_the_block.enchantments.arcane_upgrades.description": "Ordinary gear is no longer enough.",
+
+  "advancements.beyond_the_block.utility.stacked_knowledge.title": "Stacked Knowledge",
+  "advancements.beyond_the_block.utility.stacked_knowledge.description": "Storage can look good too.",
+
+  "advancements.beyond_the_block.utility.breathing_fire.title": "Breathing Fire",
+  "advancements.beyond_the_block.utility.breathing_fire.description": "Even underwater, the light remains.",
+
+  "advancements.beyond_the_block.utility.refined_craft.title": "Refined Craft",
+  "advancements.beyond_the_block.utility.refined_craft.description": "Precision matters.",
+
+
   "block.beyond_the_block.water_torch": "Water Torch",
   "block.beyond_the_block.wall_water_torch": "Water Torch",
 

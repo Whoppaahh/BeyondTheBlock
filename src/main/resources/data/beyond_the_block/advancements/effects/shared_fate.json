@@ -1,0 +1,22 @@
+{
+  "parent": "beyond_the_block:effects/altered_state",
+  "display": {
+    "icon": { "item": "minecraft:lead" },
+    "title": { "translate": "advancements.beyond_the_block.effects.shared_fate.title" },
+    "description": { "translate": "advancements.beyond_the_block.effects.shared_fate.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "soul_link": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "beyond_the_block:soul_link": {}
+        }
+      }
+    }
+  }
+}

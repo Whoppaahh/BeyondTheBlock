@@ -33,7 +33,7 @@ public class ModBlocks {
 
 
     public static final Block WATER_TORCH_BLOCK = registerBlock("water_torch", new WaterTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)), ModItemGroup.ModToolTab);
-    public static final Block WALL_WATER_TORCH_BLOCK = registerBlockWithoutBlockItem("wall_water_torch", new WallWaterTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)), ModItemGroup.ModToolTab);
+    public static final Block WALL_WATER_TORCH_BLOCK = registerBlockWithoutBlockItem("wall_water_torch", new WallWaterTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH).dropsLike(ModBlocks.WATER_TORCH_BLOCK)), ModItemGroup.ModToolTab);
 
     public static final Block SPEED_RAIL_BLOCK = registerBlock("speed_rail_block", new SpeedRailBlock(FabricBlockSettings.copyOf(Blocks.POWERED_RAIL)), ModItemGroup.ModBlocksTab);
 

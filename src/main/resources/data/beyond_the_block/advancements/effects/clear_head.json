@@ -1,0 +1,22 @@
+{
+  "parent": "beyond_the_block:effects/altered_state",
+  "display": {
+    "icon": { "item": "minecraft:glass_bottle" },
+    "title": { "translate": "advancements.beyond_the_block.effects.clear_head.title" },
+    "description": { "translate": "advancements.beyond_the_block.effects.clear_head.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "clarity": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "beyond_the_block:clarity": {}
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,6 @@
 package net.ryan.beyond_the_block.content.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.WallTorchBlock;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -15,6 +12,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class WallWaterTorchBlock extends WallTorchBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -28,14 +28,45 @@ public class WallWaterTorchBlock extends WallTorchBlock implements Waterloggable
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
+        super.appendProperties(builder);
+        builder.add(WATERLOGGED);
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        FluidState fluid = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState()
-                .with(WATERLOGGED, fluid.getFluid() == Fluids.WATER);
+        World world = ctx.getWorld();
+        BlockPos pos = ctx.getBlockPos();
+
+        // Only allow placement in water
+        if (world.getFluidState(pos).getFluid() != Fluids.WATER) {
+            return null;
+        }
+
+        BlockState state = super.getPlacementState(ctx);
+        return state == null ? null : state.with(WATERLOGGED, true);
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return super.canPlaceAt(state, world, pos)
+                && world.getFluidState(pos).getFluid() == Fluids.WATER;
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state,
+                                                Direction direction,
+                                                BlockState neighborState,
+                                                WorldAccess world,
+                                                BlockPos pos,
+                                                BlockPos neighborPos) {
+        if (world.getFluidState(pos).getFluid() != Fluids.WATER) {
+            if (world instanceof World realWorld && !realWorld.isClient) {
+                Block.dropStacks(state, realWorld, pos);
+                BeyondTheBlock.LOGGER.info("dropped");
+            }
+            return Blocks.AIR.getDefaultState();
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -48,7 +79,6 @@ public class WallWaterTorchBlock extends WallTorchBlock implements Waterloggable
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (!state.get(WATERLOGGED)) {
-            super.randomDisplayTick(state, world, pos, random);
             return;
         }
 

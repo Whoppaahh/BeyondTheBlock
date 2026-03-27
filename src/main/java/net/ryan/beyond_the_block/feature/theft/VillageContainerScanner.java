@@ -13,13 +13,13 @@ import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.structure.Structure;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class VillageContainerScanner {
+public final class VillageContainerScanner {
 
     private static List<Structure> cachedVillageStructures;
 
-    // All vanilla village biome-specific structure IDs
     private static final Identifier[] VILLAGE_IDS = new Identifier[] {
             new Identifier("minecraft", "village_plains"),
             new Identifier("minecraft", "village_snowy"),
@@ -28,35 +28,58 @@ public class VillageContainerScanner {
             new Identifier("minecraft", "village_taiga")
     };
 
+    private VillageContainerScanner() {}
+
     public static void scanChunk(ServerWorld world, ChunkPos chunkPos) {
         WorldChunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
-        if (chunk == null) return;
+        if (chunk == null) {
+            return;
+        }
+
+        if (chunk.getBlockEntities().isEmpty()) {
+            return;
+        }
+
+        List<Structure> villageStructures = getVillageStructures(world);
+        if (villageStructures.isEmpty()) {
+            return;
+        }
 
         StructureAccessor structureAccessor = world.getStructureAccessor();
 
         for (BlockEntity be : chunk.getBlockEntities().values()) {
-            if (!(be instanceof ChestBlockEntity || be instanceof BarrelBlockEntity)) continue;
-
-
+            if (!(be instanceof ChestBlockEntity || be instanceof BarrelBlockEntity)) {
+                continue;
+            }
 
             BlockPos pos = be.getPos();
 
-            // Check each village biome structure to see if chest is inside
-            for (Identifier villageId : VILLAGE_IDS) {
-                Structure structure = world.getRegistryManager()
-                        .get(Registry.STRUCTURE_KEY)
-                        .get(villageId);
-
-                if (structure == null) continue;
-
-
+            for (Structure structure : villageStructures) {
                 StructureStart start = structureAccessor.getStructureAt(pos, structure);
-
                 if (start != null && start.hasChildren()) {
                     VillageContainerTagger.get(world).markVillageContainer(pos.toImmutable());
-                    break; // no need to check others once tagged
+                    break;
                 }
             }
         }
+    }
+
+    private static List<Structure> getVillageStructures(ServerWorld world) {
+        if (cachedVillageStructures != null) {
+            return cachedVillageStructures;
+        }
+
+        List<Structure> resolved = new ArrayList<>();
+        Registry<Structure> structureRegistry = world.getRegistryManager().get(Registry.STRUCTURE_KEY);
+
+        for (Identifier villageId : VILLAGE_IDS) {
+            Structure structure = structureRegistry.get(villageId);
+            if (structure != null) {
+                resolved.add(structure);
+            }
+        }
+
+        cachedVillageStructures = resolved;
+        return cachedVillageStructures;
     }
 }

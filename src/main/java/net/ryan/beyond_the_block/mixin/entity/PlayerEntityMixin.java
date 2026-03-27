@@ -72,7 +72,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
     }
 
     @Override
-    public TrackedData<Integer> emeraldEmpire$getAirJumpCountKey() {
+    public TrackedData<Integer> btb$getAirJumpCountKey() {
         return AIR_JUMP_COUNT;
     }
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -313,7 +313,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
         // Prevent vanilla interaction (mounting, trading, etc.)
         cir.setReturnValue(ActionResult.SUCCESS);
     }
-
     }
 
 

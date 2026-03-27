@@ -8,6 +8,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
 import net.minecraft.network.packet.s2c.play.RemoveEntityStatusEffectS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -35,19 +37,29 @@ public class FreezeEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
         World world = pLivingEntity.getWorld();
-        if (world.isClient) {
-            // Deal damage every X ticks, like fire
-            if (pLivingEntity.age % TickTimeUtil.randomTicks(1, 20) == 0) { // every second (20 ticks)
-                pLivingEntity.damage(DamageSource.FREEZE, 1.0F); // 1 damage per second, adjust as needed
-            }
-            Vec3d pos = pLivingEntity.getPos();
-            pLivingEntity.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.FROSTED_ICE.getDefaultState()),
-                    pos.x + (pLivingEntity.getRandom().nextDouble() - 0.5) * pLivingEntity.getWidth(),
-                    pos.y + pLivingEntity.getHeight() + pLivingEntity.getRandom().nextDouble(),
-                    pos.z + (pLivingEntity.getRandom().nextDouble() - 0.5) * pLivingEntity.getWidth(),
-                    0.03, 0.01, 0.03);
-            pLivingEntity.setOnFire(false);
+        if (world.isClient) return;
+        // Deal damage every X ticks, like fire
+        if (pLivingEntity.age % TickTimeUtil.randomTicks(1, 20) == 0) { // every second (20 ticks)
+            pLivingEntity.damage(DamageSource.FREEZE, 1.0F); // 1 damage per second, adjust as needed
         }
+        Vec3d pos = pLivingEntity.getPos();
+        pLivingEntity.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.FROSTED_ICE.getDefaultState()),
+                pos.x + (pLivingEntity.getRandom().nextDouble() - 0.5) * pLivingEntity.getWidth(),
+                pos.y + pLivingEntity.getHeight() + pLivingEntity.getRandom().nextDouble(),
+                pos.z + (pLivingEntity.getRandom().nextDouble() - 0.5) * pLivingEntity.getWidth(),
+                0.03, 0.01, 0.03);
+        if(pLivingEntity instanceof FlyingEntity fe){
+            fe.setVelocity(0.0F, Math.max(-0.08, fe.getVelocity().y - 0.08), 0.0);
+        }else if(pLivingEntity instanceof MobEntity mob){
+            mob.getNavigation().stop();
+            mob.setTarget(null);
+        }else{
+            pLivingEntity.setVelocity(0.0F, 0.0, 0.0);
+        }
+
+        pLivingEntity.velocityModified = true;
+        pLivingEntity.setOnFire(false);
+
     }
 
     @Override
@@ -61,9 +73,6 @@ public class FreezeEffect extends StatusEffect {
                         entity,
                         new EntityStatusEffectS2CPacket(entity.getId(), instance)
                 );
-              //  BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Height: " + entity.getHeight());
-              //  BeyondTheBlock.LOGGER.info("Entity: " + entity.getType().getTranslationKey() + " - Width: " + entity.getWidth());
-
             }
         }
     }
@@ -80,6 +89,7 @@ public class FreezeEffect extends StatusEffect {
             FreezeEffectLayer.shatterOnThaw(entity);
         }
     }
+
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return true; // ensures the effect ticks every tick

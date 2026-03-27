@@ -1,0 +1,24 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:sponge" },
+    "title": { "translate": "advancements.beyond_the_block.world.absorbent_thinking.title" },
+    "description": { "translate": "advancements.beyond_the_block.world.absorbent_thinking.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_compressed_sponge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["beyond_the_block:compressed_sponge"]
+          }
+        ]
+      }
+    }
+  }
+}

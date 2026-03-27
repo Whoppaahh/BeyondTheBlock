@@ -13,17 +13,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
 
-    @Inject(method = "damage", at = @At("HEAD"))
+    @Inject(method = "damage", at = @At("RETURN"))
     private void btb$spawnBloodParticles(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-            LivingEntity self = (LivingEntity) (Object) this;
+        LivingEntity self = (LivingEntity) (Object) this;
 
-            if (!self.getWorld().isClient && amount > 0) {
-                Vec3d attackerVec = source.getAttacker() != null
-                        ? source.getAttacker().getPos().subtract(self.getPos())
-                        : new Vec3d(0, 0, 0); // for fire, fall, etc.
+        if (!cir.getReturnValue()) return;
+        if (self.getWorld().isClient || amount <= 0) return;
+        if (!(self.getWorld() instanceof ServerWorld serverWorld)) return;
+        Vec3d attackerVec = source.getAttacker() != null
+                ? source.getAttacker().getPos().subtract(self.getPos())
+                : Vec3d.ZERO; // for fire, fall, etc.
 
-                BleedingParticleHandler.spawnBloodSplatter((ServerWorld) self.getWorld(), self.getPos(), attackerVec, amount);
-            }
+        BleedingParticleHandler.spawnBloodSplatter(serverWorld, self, attackerVec, amount);
     }
-
 }

@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
@@ -23,10 +24,12 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.utils.ReachHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
@@ -85,6 +88,7 @@ public class ServerPlayerInteractionManagerMixin {
         }
     }
 
+    @Unique
     private boolean isDarkArea(ServerWorld world, ServerPlayerEntity player) {
         return world.isNight() || player.getWorld().getLightLevel(player.getBlockPos()) < 5 || !player.getWorld().getDimension().bedWorks();
     }
@@ -139,6 +143,7 @@ public class ServerPlayerInteractionManagerMixin {
 
     }
 
+    @Unique
     private void applyDarkDigEffect(ServerWorld world, BlockState state, BlockEntity blockEntity, BlockPos pos, PlayerEntity player, int level) {
         // Speed up digging (reduce time to break the block) or apply special effects
         if (state.isIn(BlockTags.SHOVEL_MINEABLE)) {
@@ -159,6 +164,7 @@ public class ServerPlayerInteractionManagerMixin {
         }
     }
 
+    @Unique
     private void applyShadowMiningEffect(ServerWorld world, BlockState state, BlockEntity blockEntity, BlockPos pos, PlayerEntity player, int level) {
         // Default behavior: duplicate regular drops
         List<ItemStack> drops = Block.getDroppedStacks(state, world, pos, blockEntity, player, player.getMainHandStack());
@@ -169,6 +175,7 @@ public class ServerPlayerInteractionManagerMixin {
         }
     }
 
+    @Unique
     private void enhanceCropDrops(ServerWorld world, BlockState state, BlockPos pos, int level, boolean isBounty) {
         List<ItemStack> drops = Block.getDroppedStacks(state, world, pos, null);
         List<ItemStack> enhanced = new ArrayList<>(drops);
@@ -186,6 +193,27 @@ public class ServerPlayerInteractionManagerMixin {
         for (ItemStack drop : enhanced) {
             Block.dropStack(world, pos, drop);
         }
+    }
+
+    @Redirect(
+            method = "processBlockBreakingAction",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D"
+            )
+    )
+    private double beyond_the_block$increaseBreakDistanceLimit() {
+        double vanillaSq = ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE;
+        ServerPlayerEntity player = ((ServerPlayerInteractionManagerAccessor) this).getPlayer();
+        double bonus = ReachHelper.getReachBonusDouble(player.getMainHandStack());
+
+        if (bonus <= 0.0f) {
+            return vanillaSq;
+        }
+
+        double vanillaReach = (float) Math.sqrt(vanillaSq);
+        double boostedReach = vanillaReach + bonus;
+        return boostedReach * boostedReach;
     }
 
 }

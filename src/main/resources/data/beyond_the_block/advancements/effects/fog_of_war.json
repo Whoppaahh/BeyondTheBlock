@@ -1,0 +1,22 @@
+{
+  "parent": "beyond_the_block:effects/altered_state",
+  "display": {
+    "icon": { "item": "minecraft:gray_dye" },
+    "title": { "translate": "advancements.beyond_the_block.effects.fog_of_war.title" },
+    "description": { "translate": "advancements.beyond_the_block.effects.fog_of_war.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mind_fog": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "beyond_the_block:mind_fog": {}
+        }
+      }
+    }
+  }
+}

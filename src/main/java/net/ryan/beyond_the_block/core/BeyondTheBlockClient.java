@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -23,6 +24,7 @@ import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
 import net.ryan.beyond_the_block.content.effect.Beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.content.effect.FreezeEffectLayer;
+import net.ryan.beyond_the_block.content.effect.FrozenCreeperLayer;
 import net.ryan.beyond_the_block.content.effect.FrozenSheepWoolLayer;
 import net.ryan.beyond_the_block.content.effect.FrozenSlimeLayer;
 import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithEnchantment;
@@ -66,6 +68,12 @@ public class BeyondTheBlockClient implements ClientModInitializer {
                     if(entityType == EntityType.SLIME){
                         helper.register(new FrozenSlimeLayer(
                                 (FeatureRendererContext<SlimeEntity, SlimeEntityModel<SlimeEntity>>)renderer
+                        ));
+                    }
+                    if(entityType == EntityType.CREEPER){
+                        helper.register(new FrozenCreeperLayer(
+                                (FeatureRendererContext<CreeperEntity, CreeperEntityModel<CreeperEntity>>)renderer,
+                                MinecraftClient.getInstance().getEntityModelLoader()
                         ));
                     }
                 }

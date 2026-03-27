@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.config.schema;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "beyond_the_block-client")
 public class ConfigClient implements ConfigData {
@@ -26,7 +27,15 @@ public class ConfigClient implements ConfigData {
 
     public static class Blood {
         public boolean enabled = true;
-        public float healthFraction = 0.25F;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+        public int healthPercentThreshold = 50;
+        public BloodTargetMode targetMode = BloodTargetMode.HUMANOID_ONLY;
+    }
+    public enum BloodTargetMode {
+        NONE,
+        HUMANOID_ONLY,
+        HUMANOID_AND_PASSIVE,
+        ALL
     }
 
     public static class Title {

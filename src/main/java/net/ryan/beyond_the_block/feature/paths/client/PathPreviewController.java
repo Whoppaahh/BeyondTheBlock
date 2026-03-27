@@ -40,7 +40,7 @@ public class PathPreviewController {
         BlockPos end = hit.getBlockPos();
 
         // Too far? No preview
-        if (!PathToolHelper.withinMaxDistance(start, end,  Configs.syncServerConfig().pathsMaxDistance)) {
+        if (!PathToolHelper.withinMaxDistance(start, end,  Configs.syncedServerConfig().pathsMaxDistance)) {
             PathPreviewState.clear();
             return;
         }
@@ -55,7 +55,7 @@ public class PathPreviewController {
 
         // Terrain-follow for preview
         List<BlockPos> adjusted = full.stream()
-                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos,  Configs.syncServerConfig().pathsUseTerrainFollowing))
+                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos,  Configs.syncedServerConfig().pathsUseTerrainFollowing))
                 .toList();
 
         PathPreviewState.setPositions(adjusted);

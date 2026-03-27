@@ -18,7 +18,7 @@ public final class Configs {
         return AutoConfig.getConfigHolder(ConfigServer.class).getConfig();
     }
 
-    public static SyncedServerConfig syncServerConfig() {
+    public static SyncedServerConfig syncedServerConfig() {
         return ClientSyncedConfigHolder.getOrDefault();
     }
 }

@@ -18,9 +18,11 @@ public class PathPreviewRegistrar {
         });
 
         WorldRenderEvents.AFTER_ENTITIES.register((context) -> {
-            if(PathPreviewState.hasPreview() && Configs.client().hud.paths.previewMode){
-                PathPreviewRenderer.renderPathPreview(context.matrixStack());
-            }
+            if (!PathPreviewState.hasPreview()) return;
+            if (!Configs.client().hud.paths.previewMode) return;
+            if (!Configs.syncedServerConfig().pathsEnabled) return;
+
+            PathPreviewRenderer.renderPathPreview(context.matrixStack());
         });
     }
 }

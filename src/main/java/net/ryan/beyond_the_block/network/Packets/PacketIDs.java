@@ -4,6 +4,8 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class PacketIDs {
+    public static final Identifier SYNC_SERVER_CONFIG_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_server_config");
+
     public static final Identifier SYNC_RESTORE_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_restore");
 
     public static final Identifier SYNC_PATH_WIDTH_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_path_width");

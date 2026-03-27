@@ -19,6 +19,7 @@ import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.ryan.beyond_the_block.client.bootstrap.ClientBootstrap;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
+import net.ryan.beyond_the_block.client.network.ConfigSyncClient;
 import net.ryan.beyond_the_block.client.screen.*;
 import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
@@ -51,6 +52,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
         ClientBootstrap.init();
         OutlineRenderer.init();
+        ConfigSyncClient.init();
     }
 
     @SuppressWarnings("unchecked")

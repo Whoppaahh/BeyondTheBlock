@@ -4,11 +4,13 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
 import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
+import net.ryan.beyond_the_block.config.sync.ServerConfigSync;
 import net.ryan.beyond_the_block.core.bootstrap.CommonBootstrap;
 import net.ryan.beyond_the_block.feature.naming.NameLoader;
 import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
@@ -34,6 +36,10 @@ public class BeyondTheBlock implements ModInitializer {
         CommonBootstrap.init();
         ServerContext.init();
 
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            ServerConfigSync.sendToPlayer(handler.getPlayer());
+        });
+
         LOGGER.info("Beyond The Block initialized successfully!");
     }
 
@@ -46,4 +52,4 @@ public class BeyondTheBlock implements ModInitializer {
         //holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         ServerLifecycleEvents.SERVER_STARTED.register(NameLoader::load);
     }
-    }
+}

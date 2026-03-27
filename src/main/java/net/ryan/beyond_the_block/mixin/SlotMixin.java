@@ -57,7 +57,7 @@ public abstract class SlotMixin {
             int containerLimit = inventory.getMaxCountPerStack();
             // Cap by both per-item and container limits
             int maxAllowed = Math.min(perItemLimit, containerLimit);
-            BeyondTheBlock.LOGGER.info("Max Allowed: " + maxAllowed);
+            BeyondTheBlock.LOGGER.info("Max Allowed: {}", maxAllowed);
             cir.setReturnValue(maxAllowed);
         }
     }

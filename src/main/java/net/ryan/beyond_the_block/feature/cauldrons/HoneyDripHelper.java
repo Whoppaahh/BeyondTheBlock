@@ -5,8 +5,8 @@ import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.ryan.beyond_the_block.content.block.Cauldrons.ModdedFluidCauldronBlock;
-import net.ryan.beyond_the_block.utils.Helpers.HiveTracker;
+import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;
+import net.ryan.beyond_the_block.utils.helpers.HiveTracker;
 
 import java.util.List;
 

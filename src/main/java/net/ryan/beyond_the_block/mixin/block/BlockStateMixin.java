@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

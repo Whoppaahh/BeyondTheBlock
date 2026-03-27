@@ -26,7 +26,7 @@ public class GemScreenHandler extends ScreenHandler {
     private final GemBlockEntity gemEntity;
     private final PropertyDelegate propertyDelegate;
 
-    private List<Identifier> GEM_TEXTURES = new ArrayList<>(List.of(
+    private final List<Identifier> GEM_TEXTURES = new ArrayList<>(List.of(
             new Identifier(BeyondTheBlock.MOD_ID, "gui/slot/emerald"),
             new Identifier(BeyondTheBlock.MOD_ID, "gui/slot/diamond"),
             new Identifier(BeyondTheBlock.MOD_ID, "gui/slot/redstone_dust"),

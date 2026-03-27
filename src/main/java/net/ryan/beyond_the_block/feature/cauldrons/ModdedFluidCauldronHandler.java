@@ -18,7 +18,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.Cauldrons.ModdedFluidCauldronBlock;
+import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 
 public class ModdedFluidCauldronHandler {
@@ -168,10 +168,8 @@ public class ModdedFluidCauldronHandler {
         double z = pos.getZ() + 0.5;
 
         switch (content) {
-            case SLIME -> {
-                sw.spawnParticles(ParticleTypes.ITEM_SLIME, x, y, z,
-                        8, 0.25, 0.1, 0.25, 0.01);
-            }
+            case SLIME -> sw.spawnParticles(ParticleTypes.ITEM_SLIME, x, y, z,
+                    8, 0.25, 0.1, 0.25, 0.01);
             case HONEY -> {
                 sw.spawnParticles(ParticleTypes.DRIPPING_HONEY, x, y, z,
                         10, 0.25, 0.15, 0.25, 0.01);

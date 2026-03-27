@@ -11,7 +11,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.ryan.beyond_the_block.content.blockentity.PlayerVaultBlockEntity;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
-import net.ryan.beyond_the_block.utils.GUI.BigSlot;
+import net.ryan.beyond_the_block.utils.visual.BigSlot;
 
 public class PlayerVaultScreenHandler extends ScreenHandler {
 

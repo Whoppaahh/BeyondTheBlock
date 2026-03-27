@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.block.Shrine.ShrineCoreBlock;
+import net.ryan.beyond_the_block.content.block.shrine.ShrineCoreBlock;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class ShrineHelper {
         }
 
 
-        BeyondTheBlock.LOGGER.info("Loot Table: " + lootTableID);
+        BeyondTheBlock.LOGGER.info("Loot Table: {}", lootTableID);
         // Create a BlockEntityTag to hold the loot table info
         NbtCompound blockEntityTag = new NbtCompound();
         blockEntityTag.putString("LootTable", lootTableID.toString());

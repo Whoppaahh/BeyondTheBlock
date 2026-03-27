@@ -5,27 +5,18 @@ import net.minecraft.network.PacketByteBuf;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyncedServerConfig {
+/**
+ * @param horseSwimmingEnabled Horses
+ * @param pathsEnabled         Paths
+ */
+public record SyncedServerConfig(boolean horseSwimmingEnabled, boolean undeadHorseSwimmingEnabled,
+                                 boolean horsePreventWandering, double horseStayRadius,
+                                 boolean horseRemoveMiningPenalty, boolean horseIncreaseStepHeight,
+                                 boolean pathsEnabled, int pathsMaxDistance, boolean pathsUseTerrainFollowing,
+                                 boolean pathsPreserveDurability, String pathsDefaultPathBlockId,
+                                 List<String> pathsAllowedStartingBlocks, List<String> pathsAllowedEndingBlocks,
+                                 int pathsMinWidth, int pathsMaxWidth) {
     public static final int PROTOCOL_VERSION = 1;
-
-    // Horses
-    public final boolean horseSwimmingEnabled;
-    public final boolean undeadHorseSwimmingEnabled;
-    public final boolean horsePreventWandering;
-    public final double horseStayRadius;
-    public final boolean horseRemoveMiningPenalty;
-    public final boolean horseIncreaseStepHeight;
-
-    // Paths
-    public final boolean pathsEnabled;
-    public final int pathsMaxDistance;
-    public final boolean pathsUseTerrainFollowing;
-    public final boolean pathsPreserveDurability;
-    public final String pathsDefaultPathBlockId;
-    public final List<String> pathsAllowedStartingBlocks;
-    public final List<String> pathsAllowedEndingBlocks;
-    public final int pathsMinWidth;
-    public final int pathsMaxWidth;
 
     public SyncedServerConfig(
             boolean horseSwimmingEnabled,

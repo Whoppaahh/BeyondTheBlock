@@ -74,8 +74,8 @@ public class RiddleComponents {
         return items.subList(0, Math.min(count, items.size()));
     }
     public static String generateSignature(Riddle riddle) {
-        String content = String.join("|", riddle.getPages())
-                + riddle.getRequiredItems().stream()
+        String content = String.join("|", riddle.pages())
+                + riddle.requiredItems().stream()
                 .map(item -> Registry.ITEM.getId(item).toString())
                 .collect(Collectors.joining(","));
         return Hashing.sha256().hashString(content, StandardCharsets.UTF_8).toString();
@@ -113,7 +113,7 @@ public class RiddleComponents {
 
         } while (used.containsValue(signature));
 
-        used.put(riddle.getId(), signature);
+        used.put(riddle.id(), signature);
         return riddle;
     }
 
@@ -124,9 +124,6 @@ public class RiddleComponents {
                 }.getType());
         if (loadedIntros != null) {
             intros.addAll(loadedIntros);
-         //   EmeraldEmpire.LOGGER.info("Loaded {} intros.", loadedIntros.size());
-        } else {
-            //EmeraldEmpire.LOGGER.warn("No intros loaded!");
         }
     }
 
@@ -136,19 +133,12 @@ public class RiddleComponents {
                 }.getType());
         if (loadedOutros != null) {
             outros.addAll(loadedOutros);
-       //     EmeraldEmpire.LOGGER.info("Loaded {} outros.", loadedOutros.size());
-        } else {
-            //EmeraldEmpire.LOGGER.warn("No outros loaded!");
         }
     }
 
     private void loadItemMetaphors() {
         String jsonPath = "data/" + BeyondTheBlock.MOD_ID + "/riddles/item_metaphors.json";
-        try (InputStreamReader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(jsonPath))) {
-            if (reader == null) {
-                BeyondTheBlock.LOGGER.error("Could not find JSON file at: {}", jsonPath);
-                return;
-            }
+        try (InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(jsonPath)))) {
 
             JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
 
@@ -156,26 +146,11 @@ public class RiddleComponents {
                 Identifier id = new Identifier(entry.getKey());
                 Item item = Registry.ITEM.get(id);
                 if (item == Items.AIR) {
-                    BeyondTheBlock.LOGGER.warn("Item {} not found in registry, skipping metaphor", id);
+              //      BeyondTheBlock.LOGGER.warn("Item {} not found in registry, skipping metaphor", id);
                     continue;
                 }
 
-                JsonElement value = entry.getValue();
-                String metaphor;
-
-                if (value.isJsonArray()) {
-                    JsonArray array = value.getAsJsonArray();
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < array.size(); i++) {
-                        if (i > 0) sb.append(" ");
-                        sb.append(array.get(i).getAsString());
-                    }
-                    metaphor = sb.toString();
-                } else if (value.isJsonPrimitive()) {
-                    metaphor = value.getAsString();
-                } else {
-                    metaphor = "???";
-                }
+                String metaphor = getMetaphor(entry);
 
                 itemMetaphors.put(item, metaphor);
             }
@@ -183,6 +158,26 @@ public class RiddleComponents {
         } catch (Exception e) {
             BeyondTheBlock.LOGGER.error("Failed to load item metaphors", e);
         }
+    }
+
+    private static String getMetaphor(Map.Entry<String, JsonElement> entry) {
+        JsonElement value = entry.getValue();
+        String metaphor;
+
+        if (value.isJsonArray()) {
+            JsonArray array = value.getAsJsonArray();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < array.size(); i++) {
+                if (i > 0) sb.append(" ");
+                sb.append(array.get(i).getAsString());
+            }
+            metaphor = sb.toString();
+        } else if (value.isJsonPrimitive()) {
+            metaphor = value.getAsString();
+        } else {
+            metaphor = "???";
+        }
+        return metaphor;
     }
 
 

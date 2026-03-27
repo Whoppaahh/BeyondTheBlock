@@ -6,7 +6,7 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

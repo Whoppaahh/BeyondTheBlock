@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.ryan.beyond_the_block.config.sync.ClientSyncedConfigHolder;
 import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.network.Packets.PacketIDs;
+import net.ryan.beyond_the_block.network.packets.PacketIDs;
 
 public final class ConfigSyncClient {
     private ConfigSyncClient() {
@@ -28,8 +28,6 @@ public final class ConfigSyncClient {
                 }
         );
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            ClientSyncedConfigHolder.clear();
-        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientSyncedConfigHolder.clear());
     }
 }

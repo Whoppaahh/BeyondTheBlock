@@ -74,7 +74,7 @@ public class CupidArrowEntity extends PersistentProjectileEntity{
     public static boolean onDamage(LivingEntity target, DamageSource source, float amount) {
         if (!(target instanceof PlayerEntity player)) return true; // allow by default
 
-        // get direct attacker (may be null for some sources)
+        // get direct attacker (maybe null for some sources)
         var attacker = source.getAttacker();
         if (!(attacker instanceof MobEntity mob)) return true;
 
@@ -82,8 +82,9 @@ public class CupidArrowEntity extends PersistentProjectileEntity{
         if (!mob.hasStatusEffect(ModEffects.CUPID)) return true;
 
         // Cancel the damage and heal the player instead.
-        // amount is the incoming amount before armor/etc; choose whether you want that or something else.
+        // amount is the incoming amount before armour/etc; choose whether you want that or something else.
         player.heal(amount);
+        mob.heal(amount);
 
         // optional: spawn happy particles so it feels like "healing / charm"
 //        if (player.world instanceof ServerWorld serverWorld) {

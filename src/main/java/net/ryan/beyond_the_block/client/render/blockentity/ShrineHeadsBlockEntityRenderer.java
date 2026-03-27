@@ -56,10 +56,8 @@ public class ShrineHeadsBlockEntityRenderer implements BlockEntityRenderer<Shrin
         float depthOffset = 0.5f - (0.0625f * scale); // Push to just kiss the face
 
         switch (face) {
-            case NORTH -> {
-                matrices.translate(0.0, 0.0, -depthOffset);
-                //  matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90)); // flip upside down
-            }
+            case NORTH -> //  matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90)); // flip upside down
+                    matrices.translate(0.0, 0.0, -depthOffset);
             case SOUTH -> {
                 matrices.translate(0.0, 0.0, depthOffset);
                 matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));

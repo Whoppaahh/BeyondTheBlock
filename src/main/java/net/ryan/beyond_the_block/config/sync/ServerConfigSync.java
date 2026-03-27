@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.network.Packets.PacketIDs;
+import net.ryan.beyond_the_block.network.packets.PacketIDs;
 
 public final class ServerConfigSync {
     private ServerConfigSync() {

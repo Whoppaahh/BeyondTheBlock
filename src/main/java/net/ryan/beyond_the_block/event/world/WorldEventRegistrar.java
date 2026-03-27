@@ -5,10 +5,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieHorseEntity;
-import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.IronCladVisionEnchantment;
-import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.MindWardEnchantment;
-import net.ryan.beyond_the_block.content.enchantment.Armour.helmets.ShadowsVeilEnchantment;
-import net.ryan.beyond_the_block.content.enchantment.Armour.leggings.NightstrideEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.armour.helmets.IronCladVisionEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.armour.helmets.MindWardEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.armour.helmets.ShadowsVeilEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.armour.leggings.NightstrideEnchantment;
 import net.ryan.beyond_the_block.content.entity.ModEntities;
 import net.ryan.beyond_the_block.content.entity.SheepColours;
 import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
@@ -17,7 +17,7 @@ import net.ryan.beyond_the_block.feature.cauldrons.IceConversionHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.MagmaDripHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.PowderSnowCauldronHelper;
 import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
-import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 
 public class WorldEventRegistrar {
 

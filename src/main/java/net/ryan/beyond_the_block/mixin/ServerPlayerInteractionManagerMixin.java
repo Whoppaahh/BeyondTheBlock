@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.utils.ReachHelper;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -199,8 +200,8 @@ public class ServerPlayerInteractionManagerMixin {
             method = "processBlockBreakingAction",
             at = @At(
                     value = "FIELD",
-                    target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D"
-            )
+                    target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D",
+                    opcode = Opcodes.GETSTATIC)
     )
     private double beyond_the_block$increaseBreakDistanceLimit() {
         double vanillaSq = ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE;

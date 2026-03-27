@@ -9,7 +9,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.utils.Helpers.DoubleOpenablesHandler;
+import net.ryan.beyond_the_block.utils.helpers.DoubleOpenablesHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

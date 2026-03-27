@@ -10,14 +10,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BipedEntityModel.class)
 public abstract class BipedModelMixin<T extends LivingEntity> {
-    @Inject(method = "setAngles", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "setAngles*", at = @At("HEAD"), cancellable = true)
     private void cancelSetAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
         if (entity.hasStatusEffect(ModEffects.FREEZE)) {
             ci.cancel();
         }
     }
 
-    @Inject(method = "animateModel", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "animateModel*", at = @At("HEAD"), cancellable = true)
     private void cancelAnimateModel(T entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
         if (entity.hasStatusEffect(ModEffects.FREEZE)) {
             ci.cancel();

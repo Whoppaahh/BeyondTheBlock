@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.ryan.beyond_the_block.content.block.InfiFurnaceBlock;
 import net.ryan.beyond_the_block.screen.handler.InfiFurnaceScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static net.ryan.beyond_the_block.utils.Helpers.ItemStackHelper.mergeItemStacks;
+import static net.ryan.beyond_the_block.utils.helpers.ItemStackHelper.mergeItemStacks;
 
 public class MyEnchantmentHelper {
     private static final int BASE_LOG_LIMIT = 50;
@@ -76,9 +76,7 @@ public class MyEnchantmentHelper {
         if (isLog(blockState)) {
             // Recursively break all logs in the tree
             breakTree(world, pos, player, level);
-            BeyondTheBlock.LOGGER.info("Handling Tree Breaking at {}", pos);
-        } else {
-            BeyondTheBlock.LOGGER.info("Not a log: {}", blockState.toString()); // Debugging log
+        //    BeyondTheBlock.LOGGER.info("Handling Tree Breaking at {}", pos);
         }
 
     }
@@ -90,9 +88,7 @@ public class MyEnchantmentHelper {
         if (isLog(blockState)) {
             // Recursively break all logs in the tree
             stripTree(world, pos, player, level);
-            BeyondTheBlock.LOGGER.info("Handling Tree Stripping at {}", pos);
-        } else {
-            BeyondTheBlock.LOGGER.info("Not a log: {}", blockState.toString()); // Debugging log
+      //      BeyondTheBlock.LOGGER.info("Handling Tree Stripping at {}", pos);
         }
 
     }
@@ -170,7 +166,7 @@ public class MyEnchantmentHelper {
                     }
                 }
 
-                BeyondTheBlock.LOGGER.info("Breaking Log: {}", current);
+             //   BeyondTheBlock.LOGGER.info("Breaking Log: {}", current);
 
                 for (BlockPos offset : BlockPos.iterate(current.add(-level, -level, -level), current.add(level, level, level))) {
                     if (!offset.equals(current) && !visited.contains(offset) && isLog(world.getBlockState(offset))) {
@@ -244,7 +240,7 @@ public class MyEnchantmentHelper {
                 }
             }
 
-            BeyondTheBlock.LOGGER.info("Breaking Leaf: {}", leafPos);
+         //   BeyondTheBlock.LOGGER.info("Breaking Leaf: {}", leafPos);
         }
 
         if (collectedDrops != null && !collectedDrops.isEmpty()) {
@@ -289,9 +285,6 @@ public class MyEnchantmentHelper {
                     world.breakBlock(grassPlantPos, true);
                 }
                 world.setBlockState(neighbor, Blocks.FARMLAND.getDefaultState());
-                // EmeraldEmpire.LOGGER.info("Handling Deep Tilling at " + neighbor);
-            } else {
-                //  EmeraldEmpire.LOGGER.info("Not Tillable");
             }
         }
         if (level == 2) {

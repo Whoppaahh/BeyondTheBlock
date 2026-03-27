@@ -71,11 +71,6 @@ public class DecrafterScreenHandler extends ScreenHandler {
                     }
 
                     @Override
-                    public boolean canTakeItems(PlayerEntity playerEntity) {
-                        return true;
-                    }
-
-                    @Override
                     public void onTakeItem(PlayerEntity player, ItemStack stack) {
                         super.onTakeItem(player, stack);
 //                        inventory.setStack(INPUT_SLOT_INDEX, ItemStack.EMPTY);
@@ -194,7 +189,7 @@ public class DecrafterScreenHandler extends ScreenHandler {
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
             if (index < this.inventory.size()) {

@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-import net.ryan.beyond_the_block.content.item.Tools.ModSwordItem;
+import net.ryan.beyond_the_block.content.item.tools.ModSwordItem;
 import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class AprilFoolsFeatures {
 
         });
 
-        // End hook (cleanup)
+        // End hook (clean-up)
         HolidayFeatureRegistry.registerEnd(HolidayManager.Holiday.APRIL_FOOLS, () -> {
             for (ServerWorld world : HolidayManager.currentServer.getWorlds()) {
                 for (LivingEntity living : world.getEntitiesByClass(LivingEntity.class,

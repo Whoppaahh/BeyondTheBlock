@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HeldItemFeatureRenderer.class)
 public class HeldItemFeatureRendererMixin {
 
-    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "render*", at = @At("HEAD"), cancellable = true)
     private void cancelHeldItemRender(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light,
                                       LivingEntity entity, float limbAngle, float limbDistance, float tickDelta,
                                       float customAngle, float headYaw, float headPitch, CallbackInfo ci) {

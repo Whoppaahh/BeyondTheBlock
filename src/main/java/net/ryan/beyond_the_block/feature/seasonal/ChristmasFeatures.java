@@ -13,18 +13,16 @@ public class ChristmasFeatures {
     public static void register() {
 
         // Start hook
-        HolidayFeatureRegistry.registerStart(HolidayManager.Holiday.CHRISTMAS, () -> {
-            ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-                if (!world.isClient && entity instanceof VillagerEntity villager) {
-                    if (villager.getCustomName() == null) {
-                        villager.setCustomName(Text.literal("🎄 Festive Villager"));
-                        ((EntityTagManager) villager).beyondTheBlock$setHasChristmasName(true);
-                    }
-                    villager.equipStack(EquipmentSlot.HEAD, ModBlocks.SANTA_HAT.asItem().getDefaultStack());
+        HolidayFeatureRegistry.registerStart(HolidayManager.Holiday.CHRISTMAS, () -> ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            if (!world.isClient && entity instanceof VillagerEntity villager) {
+                if (villager.getCustomName() == null) {
+                    villager.setCustomName(Text.literal("🎄 Festive Villager"));
                     ((EntityTagManager) villager).beyondTheBlock$setHasChristmasName(true);
                 }
-            });
-        });
+                villager.equipStack(EquipmentSlot.HEAD, ModBlocks.SANTA_HAT.asItem().getDefaultStack());
+                ((EntityTagManager) villager).beyondTheBlock$setHasChristmasName(true);
+            }
+        }));
 
         // End hook
         HolidayFeatureRegistry.registerEnd(HolidayManager.Holiday.CHRISTMAS, () -> {

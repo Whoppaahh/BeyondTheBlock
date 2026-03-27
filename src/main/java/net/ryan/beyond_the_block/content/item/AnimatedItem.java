@@ -36,7 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.TELEPORT_WITH_STAFF_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.TELEPORT_WITH_STAFF_ID;
 
 public class AnimatedItem extends Item implements IAnimatable {
     public AnimationFactory factory = GeckoLibUtil.createFactory(this);

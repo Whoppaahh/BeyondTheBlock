@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.GemScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import net.ryan.beyond_the_block.utils.ModTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,7 +137,7 @@ public class GemBlockEntity extends BlockEntity implements ImplementedInventory,
     private void onInventoryChanged(int slot) {
         if (world == null || world.isClient) return;
 
-        //Return early if no tool present or it's an invalid tool/shouldn't be the case as insert stack prevents no mod swords from being entered
+        //Return early if no tool present, or it's an invalid tool/shouldn't be the case as insert stack prevents no mod swords from being entered
         int TOOL_INPUT_SLOT = 0;
         int TOOL_OUTPUT_SLOT = 4;
 

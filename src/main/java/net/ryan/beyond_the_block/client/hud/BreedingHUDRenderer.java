@@ -13,7 +13,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.utils.Helpers.BreedingSyncState;
+import net.ryan.beyond_the_block.utils.helpers.BreedingSyncState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

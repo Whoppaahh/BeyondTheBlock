@@ -21,7 +21,7 @@ public class SpiderWebAttackGoal extends Goal {
     private LivingEntity target;
     private final Random random = new Random();
 
-    private int cooldown = 60; // ticks between attacks
+    private final int cooldown = 60; // ticks between attacks
     private int timer = 0;
 
     private boolean isCharging = false;

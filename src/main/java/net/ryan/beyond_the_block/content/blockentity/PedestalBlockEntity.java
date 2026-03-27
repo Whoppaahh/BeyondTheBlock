@@ -10,7 +10,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 public class PedestalBlockEntity extends BlockEntity implements ImplementedInventory {

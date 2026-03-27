@@ -6,9 +6,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.GUARD_STATS_SYNC_PACKET_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.GUARD_STATS_SYNC_PACKET_ID;
 
 public class GuardStatusSync {
     public static void syncGuardStatus(ServerPlayerEntity player, GuardEntity guard) {

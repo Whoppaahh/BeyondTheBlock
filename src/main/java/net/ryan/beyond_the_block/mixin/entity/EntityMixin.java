@@ -17,7 +17,7 @@ import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.feature.horses.StayNearData;
 import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
-import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
+import net.ryan.beyond_the_block.utils.accessors.HorseAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

@@ -13,28 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Riddle {
-    private final UUID id;
-    private final List<String> pages;
-    private final List<Item> requiredItems;
-
-    public Riddle(UUID id, List<String> pages, List<Item> requiredItems) {
-        this.id = id;
-        this.pages = pages;
-        this.requiredItems = requiredItems;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public List<String> getPages() {
-        return pages;
-    }
-
-    public List<Item> getRequiredItems() {
-        return requiredItems;
-    }
+public record Riddle(UUID id, List<String> pages, List<Item> requiredItems) {
 
     public NbtCompound toNbt(UUID playerId) {
         NbtCompound tag = new NbtCompound();

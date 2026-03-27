@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.client.visual.Glowable;
-import net.ryan.beyond_the_block.content.block.Cauldrons.DyedWaterCauldronBlock;
+import net.ryan.beyond_the_block.content.block.cauldrons.DyedWaterCauldronBlock;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.block.PlayerVaultBlock;
 import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
@@ -37,9 +37,9 @@ import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import net.ryan.beyond_the_block.feature.cauldrons.ModdedFluidCauldronHandler;
 import net.ryan.beyond_the_block.feature.combat.FlameSweepHandler;
 import net.ryan.beyond_the_block.feature.restore.RestoreProtectionHandler;
-import net.ryan.beyond_the_block.utils.Helpers.BetterLadderPlacement;
-import net.ryan.beyond_the_block.utils.Helpers.DoubleOpenablesHandler;
-import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import net.ryan.beyond_the_block.utils.helpers.BetterLadderPlacement;
+import net.ryan.beyond_the_block.utils.helpers.DoubleOpenablesHandler;
+import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerEventRegistrar {

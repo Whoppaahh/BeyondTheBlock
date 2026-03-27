@@ -27,7 +27,7 @@ public class VillageContainerTagger extends PersistentState {
     public void markVillageContainer(BlockPos pos) {
         if (villageContainers.add(pos.toImmutable())) {
             markDirty();
-            BeyondTheBlock.LOGGER.info("Tagged Village Container at: " + pos);
+            BeyondTheBlock.LOGGER.info("Tagged Village Container at: {}", pos);
         }
     }
 

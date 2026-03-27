@@ -34,7 +34,7 @@ import net.ryan.beyond_the_block.content.block.PlayerVaultBlock;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.PlayerVaultScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

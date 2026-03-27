@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.blockentity.InfiFurnaceBlockEntity;
 import net.ryan.beyond_the_block.content.item.ModItems;
-import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
+import net.ryan.beyond_the_block.utils.accessors.FurnaceAccessor;
 
 public class FurnaceUpgradeHandler {
     public static ActionResult convertFurnace(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {

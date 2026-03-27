@@ -51,10 +51,9 @@ public final class TrajectoryRenderer {
 
         // Choose base color from config and hit kind
         int color;
-        switch (path.hitKind) {
+        switch (path.hitKind()) {
             case BLOCK -> color = Configs.client().hud.trajectory.colorBlock;
             case ENTITY -> color = Configs.client().hud.trajectory.colorEntity;
-            case NONE -> color = Configs.client().hud.trajectory.colorNone;
             default -> color = Configs.client().hud.trajectory.colorNone;
         }
 
@@ -64,7 +63,7 @@ public final class TrajectoryRenderer {
 
         float nx = 0f, ny = 1f, nz = 0f; // arbitrary normal
 
-        List<Vec3d> points = path.points;
+        List<Vec3d> points = path.points();
         int segments = points.size() - 1;
         if (segments <= 0) return;
 
@@ -88,8 +87,8 @@ public final class TrajectoryRenderer {
                 Vec3d o1 = p1.add(side);
                 Vec3d o2 = p2.add(side);
 
-                float t1 = segments <= 1 ? 0f : (float)i / (float)segments;
-                float t2 = segments <= 1 ? 1f : (float)(i + 1) / (float)segments;
+                float t1 = segments == 1 ? 0f : (float)i / (float)segments;
+                float t2 = segments == 1 ? 1f : (float)(i + 1) / (float)segments;
 
                 float a1 = Configs.client().hud.trajectory.gradient ? (0.3f + 0.7f * (1.0f - t1)) : 1.0f;
                 float a2 = Configs.client().hud.trajectory.gradient ? (0.3f + 0.7f * (1.0f - t2)) : 1.0f;
@@ -113,11 +112,11 @@ public final class TrajectoryRenderer {
         }
 
         // Impact highlight (block outline or entity hitbox tint)
-        if (Configs.client().hud.trajectory.showImpactMarker && path.hitKind != TrajectoryPath.HitKind.NONE && path.hitPos != null) {
-            if (path.hitKind == TrajectoryPath.HitKind.BLOCK && path.hitBlock != null) {
-                drawBlockOutline(vc, posMat, normMat, camPos, path.hitBlock, baseR, baseG, baseB);
-            } else if (path.hitKind == TrajectoryPath.HitKind.ENTITY && path.hitEntityId != -1) {
-                drawEntityHitboxOutline(vc, posMat, normMat, camPos, ctx.world(), path.hitEntityId,
+        if (Configs.client().hud.trajectory.showImpactMarker && path.hitKind() != TrajectoryPath.HitKind.NONE && path.hitPos() != null) {
+            if (path.hitKind() == TrajectoryPath.HitKind.BLOCK && path.hitBlock() != null) {
+                drawBlockOutline(vc, posMat, normMat, camPos, path.hitBlock(), baseR, baseG, baseB);
+            } else if (path.hitKind() == TrajectoryPath.HitKind.ENTITY && path.hitEntityId() != -1) {
+                drawEntityHitboxOutline(vc, posMat, normMat, camPos, ctx.world(), path.hitEntityId(),
                         baseR, baseG, baseB);
             }
         }

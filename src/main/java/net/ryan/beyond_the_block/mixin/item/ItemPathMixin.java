@@ -99,7 +99,7 @@ public class ItemPathMixin {
     @Unique
     private void undoEntry(World world, PathUndoEntry entry) {
         for (PathUndoEntry.BlockChange change : entry.changes) {
-            world.setBlockState(change.pos, change.before, Block.NOTIFY_ALL);
+            world.setBlockState(change.pos(), change.before(), Block.NOTIFY_ALL);
         }
     }
 

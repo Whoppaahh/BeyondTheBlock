@@ -4,7 +4,7 @@ import net.ryan.beyond_the_block.event.entity.EntityEventRegistrar;
 import net.ryan.beyond_the_block.event.player.PlayerEventRegistrar;
 import net.ryan.beyond_the_block.event.server.ServerLifecycleRegistrar;
 import net.ryan.beyond_the_block.event.world.WorldEventRegistrar;
-import net.ryan.beyond_the_block.utils.Helpers.HiveTracker;
+import net.ryan.beyond_the_block.utils.helpers.HiveTracker;
 
 public class ModEvents {
 

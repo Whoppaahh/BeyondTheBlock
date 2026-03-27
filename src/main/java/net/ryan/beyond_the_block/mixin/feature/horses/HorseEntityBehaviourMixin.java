@@ -11,7 +11,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.feature.horses.StayNearData;
-import net.ryan.beyond_the_block.utils.Accessors.HorseAccessor;
+import net.ryan.beyond_the_block.utils.accessors.HorseAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,7 +27,7 @@ public abstract class HorseEntityBehaviourMixin implements HorseAccessor {
     private StayNearData btb$stayData;
     @Unique private float beyond$baseStepHeight = -1f;
 
-    @Inject(method = "getPrimaryPassenger", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getPrimaryPassenger*", at = @At("HEAD"), cancellable = true)
     private void forceFirstPassengerAsController(CallbackInfoReturnable<LivingEntity> cir) {
         AbstractHorseEntity horse = (AbstractHorseEntity)(Object)this;
 

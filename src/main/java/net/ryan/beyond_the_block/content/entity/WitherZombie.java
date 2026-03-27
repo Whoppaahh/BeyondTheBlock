@@ -45,9 +45,7 @@ public class WitherZombie extends SkeletonEntity implements RangedAttackMob {
                                            SpawnReason spawnReason, @Nullable EntityData entityData,
                                            @Nullable NbtCompound entityNbt) {
 
-        EntityData data = super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
-
-//        if (world instanceof ServerWorld serverWorld && this.random.nextFloat() < 0.2F) {
+        //        if (world instanceof ServerWorld serverWorld && this.random.nextFloat() < 0.2F) {
 //            ZombieHorseEntity horse = this.random.nextFloat() < 0.5F
 //                    ? ModEntities.WITHER_SKELETON_HORSE.create(serverWorld)
 //                    : ModEntities.WITHER_ZOMBIE_HORSE.create(serverWorld);
@@ -68,7 +66,7 @@ public class WitherZombie extends SkeletonEntity implements RangedAttackMob {
 //            }
 //        }
 
-        return data;
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     /* ------------------------------------------------------------ */

@@ -13,7 +13,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AnimatedBlockEntity extends BlockEntity implements IAnimatable {
     @SuppressWarnings("removal")
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public AnimatedBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ANIMATED_BLOCK_ENTITY, pos, state);
@@ -21,7 +21,7 @@ public class AnimatedBlockEntity extends BlockEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<AnimatedBlockEntity>
+        animationData.addAnimationController(new AnimationController<>
                 (this, "controller", 0, this::predicate));
     }
     @SuppressWarnings("removal")

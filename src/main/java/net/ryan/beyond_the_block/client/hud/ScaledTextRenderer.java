@@ -35,15 +35,6 @@ public class ScaledTextRenderer {
         return totalWidth;
     }
 
-    public static class Segment {
-        public final String text;
-        public final float scale;
-        public final int color;
-
-        public Segment(String text, float scale, int color) {
-            this.text = text;
-            this.scale = scale;
-            this.color = color;
-        }
+    public record Segment(String text, float scale, int color) {
     }
 }

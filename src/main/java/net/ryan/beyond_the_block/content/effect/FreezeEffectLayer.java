@@ -70,7 +70,7 @@ public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>>
                 );
             }
 
-            // Frosty cloud burst
+            // Frosty cloudburst
             for (int i = 0; i < 15; i++) {
                 double dx = entity.getX();
                 double dy = entity.getY() + entity.getHeight() * 0.5;

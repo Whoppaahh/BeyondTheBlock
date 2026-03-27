@@ -9,21 +9,17 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.ryan.beyond_the_block.content.entity.WitherZombie;
 
 public class WitherZombieModel<T extends HostileEntity> extends BipedEntityModel<T> {
-    private final ModelPart head;
-    private final ModelPart body;
     private final ModelPart rightArm;
     private final ModelPart leftArm;
-    private final ModelPart rightLeg;
-    private final ModelPart leftLeg;
 
     public WitherZombieModel(ModelPart root) {
         super(root);
-        this.head = root.getChild("head");
-        this.body = root.getChild("body");
+        ModelPart head = root.getChild("head");
+        ModelPart body = root.getChild("body");
         this.rightArm = root.getChild("right_arm");
         this.leftArm = root.getChild("left_arm");
-        this.rightLeg = root.getChild("right_leg");
-        this.leftLeg = root.getChild("left_leg");
+        ModelPart rightLeg = root.getChild("right_leg");
+        ModelPart leftLeg = root.getChild("left_leg");
     }
 
     public static TexturedModelData getTexturedModelData() {

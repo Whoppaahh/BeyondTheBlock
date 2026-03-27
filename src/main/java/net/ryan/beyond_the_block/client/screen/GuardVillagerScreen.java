@@ -15,13 +15,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.GuardGUIButton;
+import net.ryan.beyond_the_block.utils.visual.GuardGUIButton;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.GUARD_FOLLOW_PACKET_ID;
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.GUARD_PATROL_PACKET_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.GUARD_FOLLOW_PACKET_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.GUARD_PATROL_PACKET_ID;
 
 public class GuardVillagerScreen extends HandledScreen<GuardVillagerScreenHandler> {
 

@@ -10,7 +10,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
+import net.ryan.beyond_the_block.utils.helpers.ServerContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -33,18 +33,18 @@ public class ArmourStandEquipmentHandler {
             ItemStack standItem = armourStand.getEquippedStack(slot);
             ItemStack playerItem = player.getEquippedStack(slot);
 
-            // Armor stand → player (if player slot empty)
+            // Armour stand → player (if player slot empty)
             if (!standItem.isEmpty() && playerItem.isEmpty()) {
                 player.equipStack(slot, standItem.copy());
                 armourStand.equipStack(slot, ItemStack.EMPTY);
             }
-            // Player → armor stand (if armor stand slot empty)
+            // Player → armour stand (if armour stand slot empty)
             else if (standItem.isEmpty() && !playerItem.isEmpty()) {
                 armourStand.equipStack(slot, playerItem.copy());
                 player.equipStack(slot, ItemStack.EMPTY);
             }
             // Swap
-            else if (!standItem.isEmpty() && !playerItem.isEmpty()) {
+            else if (!standItem.isEmpty()) {
                 ItemStack temp = playerItem.copy();
                 player.equipStack(slot, standItem.copy());
                 armourStand.equipStack(slot, temp);

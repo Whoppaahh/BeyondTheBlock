@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.ryan.beyond_the_block.content.effect.Beneficial.SoulLinkEffect;
+import net.ryan.beyond_the_block.content.effect.beneficial.SoulLinkEffect;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import org.spongepowered.asm.mixin.Mixin;

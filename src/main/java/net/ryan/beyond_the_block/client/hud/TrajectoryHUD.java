@@ -24,10 +24,10 @@ public class TrajectoryHUD implements HudRenderCallback {
             Vec3d eye = client.player.getCameraPosVec(tickDelta);
             Vec3d end;
 
-            if (lastPath.hitPos != null) {
-                end = lastPath.hitPos;
+            if (lastPath.hitPos() != null) {
+                end = lastPath.hitPos();
             } else {
-                end = lastPath.points.get(lastPath.points.size() - 1);
+                end = lastPath.points().get(lastPath.points().size() - 1);
             }
 
             double dist = eye.distanceTo(end);

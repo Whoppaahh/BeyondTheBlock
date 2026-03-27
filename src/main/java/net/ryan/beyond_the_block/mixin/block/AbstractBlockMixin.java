@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.utils.Helpers.CobwebDecayScheduler;
+import net.ryan.beyond_the_block.utils.helpers.CobwebDecayScheduler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

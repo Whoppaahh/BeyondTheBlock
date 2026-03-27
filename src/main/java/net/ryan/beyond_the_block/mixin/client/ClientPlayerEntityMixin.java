@@ -60,8 +60,7 @@ public class ClientPlayerEntityMixin {
 
         switch (Configs.client().hud.camera.cameraModeOnMount) {
             case ALWAYS_FIRST -> client.options.setPerspective(net.minecraft.client.option.Perspective.FIRST_PERSON);
-            case ALWAYS_THIRD -> client.options.setPerspective(net.minecraft.client.option.Perspective.THIRD_PERSON_BACK);
-            case PREVIOUS -> client.options.setPerspective(net.minecraft.client.option.Perspective.THIRD_PERSON_BACK);
+            case ALWAYS_THIRD, PREVIOUS -> client.options.setPerspective(net.minecraft.client.option.Perspective.THIRD_PERSON_BACK);
         }
     }
 

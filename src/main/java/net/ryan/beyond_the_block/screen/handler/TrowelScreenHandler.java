@@ -8,7 +8,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
-import net.ryan.beyond_the_block.utils.GUI.TrowelInventory;
+import net.ryan.beyond_the_block.utils.visual.TrowelInventory;
 
 public class TrowelScreenHandler extends ScreenHandler {
 

@@ -11,7 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 
 public class GuardEntityModel extends BipedEntityModel<GuardEntity> {
     private final ModelPart head;

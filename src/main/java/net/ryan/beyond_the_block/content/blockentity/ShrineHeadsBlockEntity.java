@@ -33,7 +33,7 @@ import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -111,8 +111,6 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
                     break;
                 }
             }
-        } else {
-            //EmeraldEmpire.LOGGER.info("Player {} already has a head assigned.", player.getName().getString());
         }
         updatePlayerInputBlocks(player);
         addRiddleBookToLectern(player);
@@ -149,13 +147,6 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
                         if (world != null && !world.isClient) {
                             BlockState state = world.getBlockState(pos);
                             world.setBlockState(pos, state, Block.FORCE_STATE, Block.NOTIFY_ALL);
-                            //   EmeraldEmpire.LOGGER.info("Force updated block state to sync player head visual.");
-                        }
-
-                        //   EmeraldEmpire.LOGGER.info("Cleared head for player: {}", playerID);
-                        //  EmeraldEmpire.LOGGER.info("After clearing, getStack({}): {}", i, getStack(i));
-                        if (getStack(i) != null && !getStack(i).isEmpty()) {
-                            //EmeraldEmpire.LOGGER.warn("getStack({}) is not empty after clear! Stack: {}", i, getStack(i));
                         }
                         if (world != null) {
                             ((ServerWorld) world).spawnParticles(ParticleTypes.ENCHANT,
@@ -178,8 +169,6 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
                 if (tag.contains("SkullOwner")) {
                     NbtCompound skullOwner = tag.getCompound("SkullOwner");
                     if (playerID.toString().equals(skullOwner.getString("Id"))) {
-                        //  EmeraldEmpire.LOGGER.info("Checking slot {}: SkullOwner = {}", i, tag);
-
                         return i;
                     }
                 }
@@ -198,7 +187,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
 
         Integer slot = getSlotForPlayer(playerID);
         Direction direction = slot != null ? headDirections.getOrDefault(slot, Direction.NORTH) : null;
-        ;
+
         // EmeraldEmpire.LOGGER.info("Slot for player {} is {}", playerID, slot);
 
 
@@ -206,7 +195,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
             //EmeraldEmpire.LOGGER.warn("Unable to place input block — missing riddle or direction");
             return;
         }
-        int requiredItems = riddle.getRequiredItems().size();
+        int requiredItems = riddle.requiredItems().size();
         // Determine correct input block (Single or Double Lectern)
         BlockState inputLecternState = (requiredItems == 1)
                 ? ModBlocks.SINGLE_INPUT_BLOCK.getDefaultState()
@@ -220,10 +209,10 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
 
             BlockEntity be = world.getBlockEntity(inputLecternPos);
             if (be instanceof SingleInputBlockEntity single) {
-                single.setRequiredItem(riddle.getRequiredItems().get(0));
+                single.setRequiredItem(riddle.requiredItems().get(0));
                 single.markDirty();
             } else if (be instanceof DoubleInputBlockEntity dbl) {
-                dbl.setRequiredItems(riddle.getRequiredItems().get(0), riddle.getRequiredItems().get(1));
+                dbl.setRequiredItems(riddle.requiredItems().get(0), riddle.requiredItems().get(1));
                 dbl.markDirty();
             }
 
@@ -240,7 +229,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         Riddle riddle = handler.getRiddle(playerID);
         Integer slot = getSlotForPlayer(playerID);
         Direction direction = slot != null ? headDirections.getOrDefault(slot, Direction.NORTH) : null;
-        ;
+
 
         if (riddle == null || direction == null) {
             //EmeraldEmpire.LOGGER.warn("Unable to place riddle book — missing riddle or direction");
@@ -285,10 +274,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
             BlockState updatedState = world.getBlockState(pos);
             world.setBlockState(pos, updatedState.with(LecternBlock.HAS_BOOK, true), Block.NOTIFY_ALL);
             world.updateListeners(pos, updatedState, updatedState, Block.NOTIFY_ALL);
-           // EmeraldEmpire.LOGGER.info("Placed new lectern and set riddle book at: {}", pos);
-        } else {
-           // EmeraldEmpire.LOGGER.error("Failed to create LecternBlockEntity at: {}", pos);
-        }
+           }
     }
 
 
@@ -297,7 +283,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         NbtCompound tag = new NbtCompound();
         NbtList pageList = new NbtList();
 
-        for (String pageText : riddle.getPages()) {
+        for (String pageText : riddle.pages()) {
             pageList.add(NbtString.of(Text.Serializer.toJson(Text.literal(pageText))));
         }
 

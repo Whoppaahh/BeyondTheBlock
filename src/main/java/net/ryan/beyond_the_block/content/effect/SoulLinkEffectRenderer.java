@@ -4,7 +4,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.ParticleTypes;
-import net.ryan.beyond_the_block.content.effect.Beneficial.SoulLinkEffect;
+import net.ryan.beyond_the_block.content.effect.beneficial.SoulLinkEffect;
 
 public class SoulLinkEffectRenderer {
 

@@ -14,7 +14,7 @@ import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleClientCache;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.screen.handler.RiddleCoreScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.ScrollBarWidget;
+import net.ryan.beyond_the_block.utils.visual.ScrollBarWidget;
 
 import java.util.*;
 
@@ -132,7 +132,7 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
             Riddle riddle = entry.getValue();
             drawPlayerHead(matrices, startX, startY, playerId);
             textRenderer.draw(matrices, handler.getPlayerNameFromUUID(playerId) + " - ", startX + 15, startY + 5, 4210752);
-            String shortRiddleID = riddle.getId().toString().substring(0, 8);
+            String shortRiddleID = riddle.id().toString().substring(0, 8);
             textRenderer.draw(matrices, shortRiddleID.toUpperCase(), startX + textRenderer.getWidth(handler.getPlayerNameFromUUID(playerId) + " - ") + 20, startY + 5, 4210752);
             startY += 15;
         }

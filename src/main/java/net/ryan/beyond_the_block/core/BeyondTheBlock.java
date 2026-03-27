@@ -13,7 +13,7 @@ import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.config.sync.ServerConfigSync;
 import net.ryan.beyond_the_block.core.bootstrap.CommonBootstrap;
 import net.ryan.beyond_the_block.feature.naming.NameLoader;
-import net.ryan.beyond_the_block.utils.Helpers.ServerContext;
+import net.ryan.beyond_the_block.utils.helpers.ServerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,9 +36,7 @@ public class BeyondTheBlock implements ModInitializer {
         CommonBootstrap.init();
         ServerContext.init();
 
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            ServerConfigSync.sendToPlayer(handler.getPlayer());
-        });
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> ServerConfigSync.sendToPlayer(handler.getPlayer()));
 
         LOGGER.info("Beyond The Block initialized successfully!");
     }
@@ -48,8 +46,6 @@ public class BeyondTheBlock implements ModInitializer {
     private void setupConfig() {
         AutoConfig.register(ConfigClient.class, JanksonConfigSerializer::new);
         AutoConfig.register(ConfigServer.class, JanksonConfigSerializer::new);
-        //holder.registerSaveListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
-        //holder.registerLoadListener((h, c) -> { c.validateConfig(); return ActionResult.SUCCESS; });
         ServerLifecycleEvents.SERVER_STARTED.register(NameLoader::load);
     }
 }

@@ -2,13 +2,13 @@ package net.ryan.beyond_the_block.network;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.network.Packets.Client.GuardFollowC2SPacket;
-import net.ryan.beyond_the_block.network.Packets.Client.GuardPatrolC2SPacket;
-import net.ryan.beyond_the_block.network.Packets.Client.LeapOfFaithC2SPacket;
-import net.ryan.beyond_the_block.network.Packets.Client.TeleportWithStaffC2SPacket;
+import net.ryan.beyond_the_block.network.packets.Client.GuardFollowC2SPacket;
+import net.ryan.beyond_the_block.network.packets.Client.GuardPatrolC2SPacket;
+import net.ryan.beyond_the_block.network.packets.Client.LeapOfFaithC2SPacket;
+import net.ryan.beyond_the_block.network.packets.Client.TeleportWithStaffC2SPacket;
 import net.ryan.beyond_the_block.network.sync.paths.PathWidthSyncHandler;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.*;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.*;
 
 public class ServerNetworking {
 

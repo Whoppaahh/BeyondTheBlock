@@ -27,7 +27,7 @@ import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.screen.handler.RiddleCoreScreenHandler;
-import net.ryan.beyond_the_block.utils.GUI.ImplementedInventory;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.SYNC_RIDDLES_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.SYNC_RIDDLES_ID;
 
 public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory {
     private final DefaultedList<ItemStack> item = DefaultedList.ofSize(1, Items.WRITTEN_BOOK.getDefaultStack());
@@ -124,13 +124,13 @@ public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInv
             Riddle riddle = entry.getValue();
 
             buf.writeUuid(playerId);       // ✅ Write the player UUID first
-            buf.writeUuid(riddle.getId()); // Then the riddle ID
+            buf.writeUuid(riddle.id()); // Then the riddle ID
 
-            List<String> pages = riddle.getPages();
+            List<String> pages = riddle.pages();
             buf.writeCollection(pages, PacketByteBuf::writeString);
 
             buf.writeCollection(
-                    riddle.getRequiredItems().stream()
+                    riddle.requiredItems().stream()
                             .map(item -> Registry.ITEM.getId(item).toString())
                             .toList(),
                     PacketByteBuf::writeString

@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.furnace.FurnaceUpgradeHandler;
-import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
+import net.ryan.beyond_the_block.utils.helpers.SandToGlassManager;
 
 public class BlockConversionHandler {
     public static ActionResult handleBlockConversion(PlayerEntity player, World world, Hand hand, BlockHitResult hit) {

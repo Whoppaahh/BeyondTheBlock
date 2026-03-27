@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.client.render.entity;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.ryan.beyond_the_block.content.village.GuardVillager.GuardEntity;
+import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 
 public class GuardEntityArmourModel extends BipedEntityModel<GuardEntity> {
 

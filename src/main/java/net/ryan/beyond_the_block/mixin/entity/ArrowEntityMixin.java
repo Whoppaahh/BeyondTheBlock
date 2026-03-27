@@ -35,7 +35,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.*;
 
-@SuppressWarnings({"FieldMayBeFinal", "unused"})
 @Mixin(ArrowEntity.class)
 public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
 
@@ -46,6 +45,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
     @Shadow
     private Potion potion;
 
+    @Unique
     private static final double AOE_RADIUS = 3.0;
     @Unique private static final double HOMING_RADIUS = 30.0;
     @Unique private static final double MIN_SPEED = 0.1;
@@ -60,6 +60,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
     @Unique private final List<UUID> hitTargets = new ArrayList<>();
 
     // Apply potion effects to all nearby living entities
+    @Unique
     private void applyAOE(Vec3d pos, Potion potion, Iterable<StatusEffectInstance> customEffects, LivingEntity owner, LivingEntity target) {
         ArrowEntity self = (ArrowEntity)(Object)this;
 

@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.utils.Accessors.FurnaceAccessor;
+import net.ryan.beyond_the_block.utils.accessors.FurnaceAccessor;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

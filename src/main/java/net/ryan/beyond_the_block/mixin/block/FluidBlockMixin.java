@@ -22,7 +22,7 @@ public abstract class FluidBlockMixin {
             boolean isSource = state.getFluidState().isStill();
             if (isSource && world.getBlockState(pos).isOf(Blocks.SAND) || world.getBlockState(pos).isOf(Blocks.RED_SAND)) {
                 BlockConversionHandler.queueAdjacentSand(world, pos.toImmutable());
-                BeyondTheBlock.LOGGER.info("Queing sand to melt - mixin at pos " + pos + " - " + world.getBlockState(pos).getBlock());
+                BeyondTheBlock.LOGGER.info("Queing sand to melt - mixin at pos {} - {}", pos, world.getBlockState(pos).getBlock());
             }
         }
     }

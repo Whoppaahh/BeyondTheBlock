@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityFreezeMixin {
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("TAIL"), cancellable = true)
     private void freezeStopAI(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
         if (entity.world.isClient) return; // Skip client-side

@@ -10,9 +10,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.item.Armour.ModArmourItem;
-import net.ryan.beyond_the_block.content.item.Armour.ModArmourMaterials;
-import net.ryan.beyond_the_block.content.item.Tools.*;
+import net.ryan.beyond_the_block.content.item.armour.ModArmourItem;
+import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
+import net.ryan.beyond_the_block.content.item.tools.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 

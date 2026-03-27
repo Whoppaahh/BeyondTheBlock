@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.PersistentState;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.network.sync.riddles.RiddleTimeSync;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -116,20 +117,7 @@ public class RiddleDataManager extends PersistentState {
         }
 
         // --- PlayerRiddles ---
-        NbtCompound playerRiddlesTag = new NbtCompound();
-        for (Map.Entry<UUID, Map<UUID, String>> entry : playerRiddlesMap.entrySet()) {
-            UUID playerID = entry.getKey();
-            Map<UUID, String> riddles = entry.getValue();
-
-            NbtCompound riddlesCompound = new NbtCompound();
-
-            for (Map.Entry<UUID, String> riddleEntry : riddles.entrySet()) {
-                riddlesCompound.putString(riddleEntry.getKey().toString(), riddleEntry.getValue());
-            }
-
-
-            playerRiddlesTag.put(playerID.toString(), riddlesCompound);
-        }
+        NbtCompound playerRiddlesTag = getNbtCompound();
         nbt.put("PlayerRiddles", playerRiddlesTag);
 
         // --- CompletedRiddles ---
@@ -154,19 +142,19 @@ public class RiddleDataManager extends PersistentState {
             NbtCompound riddleTag = new NbtCompound();
 
             NbtList pages = new NbtList();
-            for (String page : riddle.getPages()) {
+            for (String page : riddle.pages()) {
                 pages.add(NbtString.of(page));
             }
             riddleTag.put("Pages", pages);
 
             NbtList items = new NbtList();
-            for (Item item : riddle.getRequiredItems()) {
+            for (Item item : riddle.requiredItems()) {
                 items.add(NbtString.of(Registry.ITEM.getId(item).toString()));
             }
             riddleTag.put("Items", items);
 
             // Add the riddle under the player's key
-            playerActiveRiddlesTag.put(riddle.getId().toString(), riddleTag);
+            playerActiveRiddlesTag.put(riddle.id().toString(), riddleTag);
 
             // Now update the activeTag with the player section
             activeTag.put(playerId.toString(), playerActiveRiddlesTag);
@@ -174,6 +162,24 @@ public class RiddleDataManager extends PersistentState {
 
         nbt.put("ActiveRiddles", activeTag);
         return nbt;
+    }
+
+    private static @NotNull NbtCompound getNbtCompound() {
+        NbtCompound playerRiddlesTag = new NbtCompound();
+        for (Map.Entry<UUID, Map<UUID, String>> entry : playerRiddlesMap.entrySet()) {
+            UUID playerID = entry.getKey();
+            Map<UUID, String> riddles = entry.getValue();
+
+            NbtCompound riddlesCompound = new NbtCompound();
+
+            for (Map.Entry<UUID, String> riddleEntry : riddles.entrySet()) {
+                riddlesCompound.putString(riddleEntry.getKey().toString(), riddleEntry.getValue());
+            }
+
+
+            playerRiddlesTag.put(playerID.toString(), riddlesCompound);
+        }
+        return playerRiddlesTag;
     }
 
 

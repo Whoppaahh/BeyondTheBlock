@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 
 /**
  * Overwrites the onStateReplaced method to prevent a special "riddle book" from being dropped
@@ -15,7 +16,6 @@ import org.spongepowered.asm.mixin.Overwrite;
  * the lectern to ensure it is handled correctly.
  *
  * @author YourName
- * @reason Prevents the "riddle book" from being dropped and clears it from the lectern.
  */
 @Mixin(LecternBlock.class)
 public class LecternBlockMixin {
@@ -53,11 +53,13 @@ public class LecternBlockMixin {
     }
 
     // Helper method to check if the book is a riddle book
+    @Unique
     private boolean isRiddleBook(ItemStack book) {
         return book.hasCustomName() && book.getName().getString().equals("Riddle Book");
     }
 
     // Helper method to drop the book
+    @Unique
     private void dropBook(net.minecraft.block.BlockState state, World world, BlockPos pos, ItemStack book) {
 //        Direction direction = state.get(LecternBlock.FACING);
 //        ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5 + direction.getOffsetX() * 0.25,

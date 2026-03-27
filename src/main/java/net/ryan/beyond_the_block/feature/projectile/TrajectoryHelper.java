@@ -88,7 +88,7 @@ public final class TrajectoryHelper {
             Vec3d nextPos = pos.add(velocity);
 
             // Block raycast
-            HitResult blockHit = world.raycast(new RaycastContext(
+            BlockHitResult blockHit = world.raycast(new RaycastContext(
                     pos,
                     nextPos,
                     RaycastContext.ShapeType.COLLIDER,
@@ -110,10 +110,10 @@ public final class TrajectoryHelper {
                     hitPos = entityHit.getPos();
                     hitKind = TrajectoryPath.HitKind.ENTITY;
                     hitEntityId = entityHit.getEntity().getId();
-                } else if (blockCollision) {
+                } else {
                     hitPos = blockHit.getPos();
                     hitKind = TrajectoryPath.HitKind.BLOCK;
-                    hitBlockPos = ((BlockHitResult) blockHit).getBlockPos();
+                    hitBlockPos = blockHit.getBlockPos();
                 }
 
                 points.add(hitPos);

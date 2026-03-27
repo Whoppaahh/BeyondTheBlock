@@ -11,14 +11,14 @@ import net.ryan.beyond_the_block.content.particle.ModParticles;
 import net.ryan.beyond_the_block.content.recipes.ModRecipes;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
-import net.ryan.beyond_the_block.content.village.ModVillagers;
+import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
 import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
-import net.ryan.beyond_the_block.utils.Helpers.SandToGlassManager;
+import net.ryan.beyond_the_block.utils.helpers.SandToGlassManager;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
 import net.ryan.beyond_the_block.utils.ModTags;
 

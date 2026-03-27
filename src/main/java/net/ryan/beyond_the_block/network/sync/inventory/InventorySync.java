@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.SYNC_INVENTORY_PACKET_ID;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.SYNC_INVENTORY_PACKET_ID;
 
 public class InventorySync {
     public static void syncPlayerInventoryWithClient(ServerPlayerEntity player) {

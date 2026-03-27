@@ -27,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.enchantment.Armour.boots.LeapOfFaithTracker;
+import net.ryan.beyond_the_block.content.enchantment.armour.boots.LeapOfFaithTracker;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.content.particle.ModParticles;
@@ -181,7 +181,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
 
         if (level > 0) {
 
-            // Apply slow falling effect when the player is in mid-air
+            // Apply slow falling effect when the player is in midair
             if (!player.isOnGround()) {
                 // Apply slow falling for a short duration (1-2 seconds based on enchantment level)
                 if (level == 1) {
@@ -209,8 +209,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LeapOfFa
 
             // Loop through entities within the radius and apply healing effect
             for (Entity entity : player.world.getEntitiesByClass(Entity.class, player.getBoundingBox().expand(radius), e -> e instanceof LivingEntity)) {
-                if (entity instanceof LivingEntity && entity != player) {
-                    LivingEntity livingEntity = (LivingEntity) entity;
+                if (entity instanceof LivingEntity livingEntity && entity != player) {
 
                     // Only apply healing to players or hostile mobs (you can change this logic if you want)
                     if (livingEntity instanceof PlayerEntity) {

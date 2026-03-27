@@ -8,10 +8,10 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
-import net.ryan.beyond_the_block.network.Packets.Server.*;
-import net.ryan.beyond_the_block.utils.Helpers.RestoreManager;
+import net.ryan.beyond_the_block.network.packets.Server.*;
+import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 
-import static net.ryan.beyond_the_block.network.Packets.PacketIDs.*;
+import static net.ryan.beyond_the_block.network.packets.PacketIDs.*;
 
 public class ClientNetworking {
 

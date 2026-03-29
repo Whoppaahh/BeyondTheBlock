@@ -34,7 +34,9 @@ public class BeyondTheBlock implements ModInitializer {
         LOGGER.info("Initializing Beyond The Block...");
         setupConfig();
         CommonBootstrap.init();
+
         ServerContext.init();
+        ServerConfigSync.init();
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> ServerConfigSync.sendToPlayer(handler.getPlayer()));
 

@@ -31,19 +31,12 @@ public class ItemPathMixin {
     private void beyond_the_block$pathingUseOnBlock(ItemUsageContext context,
                                                     CallbackInfoReturnable<ActionResult> cir) {
         World world = context.getWorld();
-        if (world.isClient()) {
+        if (world.isClient()) return;
             // Server handles placement; client handles preview separately
-            return;
-        }
 
         ItemStack stack = context.getStack();
-        if (!(stack.getItem() instanceof ShovelItem)) {
-            return;
-        }
-
-        if (!Configs.server().features.paths.enabled) {
-            return;
-        }
+        if (!(stack.getItem() instanceof ShovelItem)) return;
+        if (!Configs.server().features.paths.enabled) return;
 
         PlayerEntity player = context.getPlayer();
         if (player == null) return;
@@ -55,43 +48,43 @@ public class ItemPathMixin {
         Set<Block> allowedEnd = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedEndingBlocks);
 
         boolean hasStart = PathToolHelper.hasStart(stack);
+        boolean sneaking = player.isSneaking();
+        boolean validStartBlock = allowedStart.contains(state.getBlock());
+        boolean validEndBlock = allowedEnd.contains(state.getBlock());
 
-        if (player.isSneaking() && PathUndoManager.hasUndo(player)) {
-            PathUndoEntry entry = PathUndoManager.pop(player);
-            undoEntry(world, entry);
-            player.sendMessage(Text.literal("Undid last path"), true);
-            cir.setReturnValue(ActionResult.SUCCESS);
-            return;
-        }
-
-
-        // FIRST CLICK (set start): requires sneaking, no existing start, allowed starting block
-        if (!hasStart && player.isSneaking()) {
-            if (!allowedStart.contains(state.getBlock())) {
-                return; // Let vanilla shovel handle it
-            }
-
+        // FIRST CLICK: start a new path.
+        // This must win over undo if the clicked block is a valid start block.
+        if (!hasStart && sneaking && validStartBlock) {
             PathToolHelper.setStart(stack, pos);
-            // Optional: feedback
-             player.sendMessage(Text.literal("Path start set: " + pos.toShortString()), true);
+            player.sendMessage(Text.literal("Path start set: " + pos.toShortString()), true);
             cir.setReturnValue(ActionResult.SUCCESS);
             return;
         }
 
-        // If there's no stored start yet and this is not the "first click" case, let vanilla behavior happen
+
+        // UNDO: only when there is no active start point and the click was not a valid new start.
+        if (!hasStart && sneaking && !validStartBlock && PathUndoManager.hasUndo(player)) {
+            PathUndoEntry entry = PathUndoManager.pop(player);
+            if (entry != null) {
+                undoEntry(world, entry);
+                player.sendMessage(Text.literal("Undid last path"), true);
+                cir.setReturnValue(ActionResult.SUCCESS);
+            }
+            return;
+        }
+
+        // No active start and not starting a path: let vanilla shovel behavior happen
         if (!hasStart) {
             return;
         }
 
         // SECOND CLICK: build path from stored start to this pos
-        BlockPos start = PathToolHelper.getStart(stack);
-
-        // The block we right-click on must be a valid "ending" block
-        if (!allowedEnd.contains(state.getBlock())) {
-            // You might want to clear the start here or keep it; I'll keep it so the player can try again.
+        if (!validEndBlock) {
+            // Keep the stored start so the player can try another end point
             return;
         }
 
+        BlockPos start = PathToolHelper.getStart(stack);
         PathBuilder.buildPath(world, player, stack, start, pos, Configs.server());
 
         cir.setReturnValue(ActionResult.SUCCESS);

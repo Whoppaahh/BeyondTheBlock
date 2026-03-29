@@ -40,31 +40,23 @@ public class MyEnchantmentHelper {
                 (level >= 2 && blockState.isIn(ConventionalBlockTags.ORES)) ||
                 (level >= 3 && blockState.isOf(Blocks.OBSIDIAN));
 
-        if (canBreak) {
-            // Get drops from the block (respects Fortune)
-            LootContext.Builder lootContextBuilder = new LootContext.Builder((ServerWorld) world)
-                    .parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
-                    .parameter(LootContextParameters.TOOL, tool)
-                    .parameter(LootContextParameters.BLOCK_STATE, blockState)
-                    .parameter(LootContextParameters.THIS_ENTITY, player);
+        if (!canBreak) return;
+        // Get drops from the block (respects Fortune)
+        LootContext.Builder lootContextBuilder = new LootContext.Builder((ServerWorld) world)
+                .parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
+                .parameter(LootContextParameters.TOOL, tool)
+                .parameter(LootContextParameters.BLOCK_STATE, blockState)
+                .parameter(LootContextParameters.THIS_ENTITY, player);
 
-            List<ItemStack> drops = blockState.getBlock().getDroppedStacks(blockState, lootContextBuilder);
+        List<ItemStack> drops = blockState.getBlock().getDroppedStacks(blockState, lootContextBuilder);
 
-            // If Fortune is present, multiply drop counts based on Fortune level
-            int fortuneLevel = EnchantmentHelper.getLevel(Enchantments.FORTUNE, tool);
-            for (ItemStack drop : drops) {
-                // Increase drop count based on Fortune level
-                int adjustedCount = drop.getCount() + fortuneLevel;
-                drop.setCount(adjustedCount > 0 ? adjustedCount : drop.getCount()); // Ensure count doesn't go negative
-                Block.dropStack(world, pos, drop); // Drop the modified stack
-            }
+        // Cooldown, break particles, and actual block breaking
+        player.getItemCooldownManager().set(tool.getItem(), 1);
+        world.syncWorldEvent(2001, pos, Block.getRawIdFromState(blockState)); // Break particles
+        world.breakBlock(pos, false, player); // No need for true, since we're already handling drops
+        giveDropsWithMode(world, pos, player, drops);
+        BeyondTheBlock.LOGGER.info("Handling Instant Mining at {} with level {}", pos, level);
 
-            // Cooldown, break particles, and actual block breaking
-            player.getItemCooldownManager().set(tool.getItem(), 1);
-            world.syncWorldEvent(2001, pos, Block.getRawIdFromState(blockState)); // Break particles
-            world.breakBlock(pos, false, player); // No need for true, since we're already handling drops
-            BeyondTheBlock.LOGGER.info("Handling Instant Mining at {} with level {}", pos, level);
-        }
     }
 
 
@@ -76,10 +68,11 @@ public class MyEnchantmentHelper {
         if (isLog(blockState)) {
             // Recursively break all logs in the tree
             breakTree(world, pos, player, level);
-        //    BeyondTheBlock.LOGGER.info("Handling Tree Breaking at {}", pos);
+            //    BeyondTheBlock.LOGGER.info("Handling Tree Breaking at {}", pos);
         }
 
     }
+
     // Handle tree breaking effect (breaking all logs in the tree)
     public static void handleTreeStripping(PlayerEntity player, ItemStack tool, BlockPos pos, World world) {
         int level = net.minecraft.enchantment.EnchantmentHelper.getLevel(ModEnchantments.BARKSKIN, tool);
@@ -88,7 +81,7 @@ public class MyEnchantmentHelper {
         if (isLog(blockState)) {
             // Recursively break all logs in the tree
             stripTree(world, pos, player, level);
-      //      BeyondTheBlock.LOGGER.info("Handling Tree Stripping at {}", pos);
+            //      BeyondTheBlock.LOGGER.info("Handling Tree Stripping at {}", pos);
         }
 
     }
@@ -106,7 +99,7 @@ public class MyEnchantmentHelper {
             BlockState state = world.getBlockState(current);
             BlockState stripped = getStrippedState(state);
             if (isLog(state)) {
-             world.setBlockState(current, stripped, Block.NOTIFY_ALL);
+                world.setBlockState(current, stripped, Block.NOTIFY_ALL);
 
                 for (BlockPos offset : BlockPos.iterate(current.add(-level, -level, -level), current.add(level, level, level))) {
                     if (!offset.equals(current) && !visited.contains(offset) && isLog(world.getBlockState(offset))) {
@@ -117,6 +110,7 @@ public class MyEnchantmentHelper {
             }
         }
     }
+
     private static @Nullable BlockState getStrippedState(BlockState original) {
         Block block = original.getBlock();
 
@@ -141,6 +135,7 @@ public class MyEnchantmentHelper {
 
         return null; // Not a strippable block
     }
+
     // Break all blocks in a tree structure (log blocks)
     private static void breakTree(World world, BlockPos origin, PlayerEntity player, int level) {
         Set<BlockPos> visited = new HashSet<>();
@@ -166,7 +161,7 @@ public class MyEnchantmentHelper {
                     }
                 }
 
-             //   BeyondTheBlock.LOGGER.info("Breaking Log: {}", current);
+                //   BeyondTheBlock.LOGGER.info("Breaking Log: {}", current);
 
                 for (BlockPos offset : BlockPos.iterate(current.add(-level, -level, -level), current.add(level, level, level))) {
                     if (!offset.equals(current) && !visited.contains(offset) && isLog(world.getBlockState(offset))) {
@@ -185,6 +180,21 @@ public class MyEnchantmentHelper {
         }
     }
 
+    public static void giveDropsWithMode(World world, BlockPos pos, PlayerEntity player, List<ItemStack> drops) {
+        if (drops == null || drops.isEmpty()) return;
+
+        switch (Configs.server().features.enchantments.dropMode) {
+            case NORMAL -> {
+                for (ItemStack stack : drops) {
+                    if (!stack.isEmpty()) {
+                        Block.dropStack(world, pos, stack);
+                    }
+                }
+            }
+            case MERGED -> handleMergedOrDirectDrops(world, pos, player, drops, false);
+            case DIRECT -> handleMergedOrDirectDrops(world, pos, player, drops, true);
+        }
+    }
 
     public static void handleMergedOrDirectDrops(World world, BlockPos origin, PlayerEntity player, List<ItemStack> drops, boolean direct) {
         List<ItemStack> merged = mergeItemStacks(drops);
@@ -216,7 +226,6 @@ public class MyEnchantmentHelper {
     }
 
 
-
     private static void breakNearbyLeaves(World world, BlockPos origin, PlayerEntity player, int level) {
         if (level <= 1) return;
 
@@ -240,14 +249,13 @@ public class MyEnchantmentHelper {
                 }
             }
 
-         //   BeyondTheBlock.LOGGER.info("Breaking Leaf: {}", leafPos);
+            //   BeyondTheBlock.LOGGER.info("Breaking Leaf: {}", leafPos);
         }
 
         if (collectedDrops != null && !collectedDrops.isEmpty()) {
             handleMergedOrDirectDrops(world, origin, player, collectedDrops, dropMode == DropMode.DIRECT);
         }
     }
-
 
 
     public static boolean isLog(BlockState blockState) {
@@ -355,7 +363,7 @@ public class MyEnchantmentHelper {
 
 
     private static void highlightNearbyLeaves(World world, BlockPos origin, Enchantment enchantment, int level, Set<BlockPos> output) {
-        if(enchantment == ModEnchantments.BARKSKIN) return;
+        if (enchantment == ModEnchantments.BARKSKIN) return;
         if (level <= 1) return;
 
         int radius = 2 + level;

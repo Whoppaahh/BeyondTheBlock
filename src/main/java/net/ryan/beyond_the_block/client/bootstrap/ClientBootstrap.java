@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.client.bootstrap;
 
 import net.ryan.beyond_the_block.client.hud.ClientHudRegistrar;
-import net.ryan.beyond_the_block.client.networking.ClientNetworkingRegistrar;
+import net.ryan.beyond_the_block.client.network.ClientNetworkingRegistrar;
 import net.ryan.beyond_the_block.client.render.ClientItemRenderRegistrar;
 import net.ryan.beyond_the_block.client.render.ClientParticleRegistrar;
 import net.ryan.beyond_the_block.client.render.ClientRenderRegistrar;

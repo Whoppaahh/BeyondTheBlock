@@ -62,16 +62,19 @@ public class ConfigServer implements ConfigData {
         public List<String> allowedStartingBlocks = Arrays.asList(
                 "minecraft:grass_block",
                 "minecraft:stone",
-                "minecraft:dirt"
+                "minecraft:dirt",
+                "#minecraft:replaceable_plants"
         );
         public List<String> allowedEndingBlocks = Arrays.asList(
                 "minecraft:grass_block",
-                "minecraft:stone"
+                "minecraft:stone",
+                "minecraft:dirt",
+                "#minecraft:replaceable_plants"
         );
         @ConfigEntry.BoundedDiscrete(min = 1, max = 9)
         public int minWidth = 1;
         @ConfigEntry.BoundedDiscrete(min = 1, max = 9)
-        public int maxWidth = 7;
+        public int maxWidth = 5;
     }
     public static class PassiveDrops {
         public boolean enableChickenFeathers = true;

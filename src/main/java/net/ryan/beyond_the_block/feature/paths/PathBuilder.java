@@ -4,10 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
 
 import java.util.List;
@@ -21,58 +19,51 @@ public final class PathBuilder {
                                  BlockPos start, BlockPos end,
                                  ConfigServer config) {
 
-        if (!(world instanceof ServerWorld serverWorld)) return;
+        if (world.isClient) return;
 
-
-        // Width: sneaking on second click -> configured width, else 1
         int width = PathToolHelper.getWidth(stack, config);
         if (width < 1) width = 1;
 
-        // Limits
-        if (!PathToolHelper.withinMaxDistance(start, end, Configs.server().features.paths.maxDistance)) {
+        if (!PathToolHelper.withinMaxDistance(start, end, config.features.paths.maxDistance)) {
             return;
         }
 
-        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedEndingBlocks);
-        Set<Block> allowedStart = PathToolHelper.resolveBlockList(Configs.server().features.paths.allowedStartingBlocks);
+        Set<Block> allowedStart = PathToolHelper.resolveBlockList(config.features.paths.allowedStartingBlocks);
+        Set<Block> allowedEnd = PathToolHelper.resolveBlockList(config.features.paths.allowedEndingBlocks);
 
-        // Ensure start and end are allowed as per config
-        if (!allowedStart.contains(world.getBlockState(start).getBlock())) return;
-        if (!allowedEnd.contains(world.getBlockState(end).getBlock())) return;
+        List<BlockPos> full = PathToolHelper.computeAffectedPositions(
+                world,
+                start,
+                end,
+                width,
+                config.features.paths.useTerrainFollowing,
+                allowedStart,
+                allowedEnd
+        );
 
-        // Compute center line and then widen it
-        List<BlockPos> center = PathToolHelper.computeLine2D(start, end);
-        var primaryDir = PathToolHelper.getPrimaryDirection(start, end);
-        List<BlockPos> full = PathToolHelper.widenLine(center, width, primaryDir);
+        if (full.isEmpty()) {
+            return;
+        }
 
         int blocksChanged = 0;
-
         PathUndoEntry undo = new PathUndoEntry();
 
-        for (BlockPos pos : full) {
-            BlockPos adjusted = PathToolHelper.adjustToTerrain(world, pos, Configs.server().features.paths.useTerrainFollowing);
+        for (BlockPos adjusted : full) {
             BlockState current = world.getBlockState(adjusted);
-
-            if (!allowedEnd.contains(current.getBlock())) continue;
-
             BlockState target = PathToolHelper.resolvePathBlockFor(world, player, adjusted, config);
 
             if (!current.isOf(target.getBlock())) {
-                // store undo data
                 undo.changes.add(new PathUndoEntry.BlockChange(adjusted.toImmutable(), current, target));
-
                 world.setBlockState(adjusted, target, Block.NOTIFY_ALL);
                 blocksChanged++;
             }
         }
 
-// push undo entry
         if (!undo.changes.isEmpty()) {
             PathUndoManager.push(player, undo);
         }
 
-
-        if (!Configs.server().features.paths.preserveDurability && blocksChanged > 0) {
+        if (!config.features.paths.preserveDurability && blocksChanged > 0) {
             stack.damage(blocksChanged, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
         }
 

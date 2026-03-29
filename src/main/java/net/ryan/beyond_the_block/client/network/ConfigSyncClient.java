@@ -2,6 +2,8 @@ package net.ryan.beyond_the_block.client.network;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.network.PacketByteBuf;
 import net.ryan.beyond_the_block.config.sync.ClientSyncedConfigHolder;
 import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
@@ -29,5 +31,15 @@ public final class ConfigSyncClient {
         );
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientSyncedConfigHolder.clear());
+    }
+
+    public static void requestServerConfig() {
+        ClientPlayNetworking.send(PacketIDs.REQUEST_SERVER_CONFIG_PACKET_ID, PacketByteBufs.create());
+    }
+
+    public static void sendServerConfigUpdate(SyncedServerConfig config) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        config.write(buf);
+        ClientPlayNetworking.send(PacketIDs.UPDATE_SERVER_CONFIG_PACKET_ID, buf);
     }
 }

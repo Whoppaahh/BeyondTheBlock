@@ -17,9 +17,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
+import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,18 +40,18 @@ public final class PathToolHelper {
     }
 
     public static int getWidth(ItemStack stack, ConfigServer config) {
+        return getWidth(stack, config.features.paths.minWidth, config.features.paths.maxWidth);
+    }
+
+    public static int getWidth(ItemStack stack, int minWidth, int maxWidth) {
         NbtCompound nbt = stack.getOrCreateNbt();
 
         if (!nbt.contains(TAG_WIDTH)) {
-            nbt.putInt(TAG_WIDTH, 1); // default
+            nbt.putInt(TAG_WIDTH, 1);
         }
 
         int width = nbt.getInt(TAG_WIDTH);
-
-        // Clamp to config min/max
-        width = Math.max(config.features.paths.minWidth, Math.min(config.features.paths.maxWidth, width));
-
-        return width;
+        return Math.max(minWidth, Math.min(maxWidth, width));
     }
 
     public static void setWidth(ItemStack stack, int width) {
@@ -137,14 +139,14 @@ public final class PathToolHelper {
         return result;
     }
 
-    // Expand a central line into a width-wide stripe
     public static List<BlockPos> widenLine(List<BlockPos> centerLine, int width, Direction primaryDirection) {
         if (width <= 1) return centerLine;
 
         List<BlockPos> out = new ArrayList<>();
-        int half = width / 2;
 
-        // Perpendicular directions in XZ plane
+        int leftCount = (width - 1) / 2;
+        int rightCount = width / 2;
+
         Direction left;
         Direction right;
 
@@ -158,8 +160,12 @@ public final class PathToolHelper {
 
         for (BlockPos center : centerLine) {
             out.add(center);
-            for (int i = 1; i <= half; i++) {
+
+            for (int i = 1; i <= leftCount; i++) {
                 out.add(center.offset(left, i));
+            }
+
+            for (int i = 1; i <= rightCount; i++) {
                 out.add(center.offset(right, i));
             }
         }
@@ -167,7 +173,6 @@ public final class PathToolHelper {
         return out;
     }
 
-    // Determine primary direction from start to end (used for width spreading)
     public static Direction getPrimaryDirection(BlockPos start, BlockPos end) {
         int dx = end.getX() - start.getX();
         int dz = end.getZ() - start.getZ();
@@ -178,6 +183,86 @@ public final class PathToolHelper {
         }
     }
 
+    // --- Shared affected-position generation ---
+
+    public static List<BlockPos> computeAffectedPositions(
+            World world,
+            BlockPos start,
+            BlockPos end,
+            int width,
+            boolean useTerrainFollowing,
+            Set<Block> allowedStart,
+            Set<Block> allowedEnd
+    ) {
+        BlockPos adjustedStart = adjustToTerrain(world, start, useTerrainFollowing);
+        BlockPos adjustedEnd = adjustToTerrain(world, end, useTerrainFollowing);
+
+        if (allowedStart != null && !allowedStart.isEmpty()) {
+            if (!allowedStart.contains(world.getBlockState(adjustedStart).getBlock())) {
+                return List.of();
+            }
+        }
+
+        if (allowedEnd != null && !allowedEnd.isEmpty()) {
+            if (!allowedEnd.contains(world.getBlockState(adjustedEnd).getBlock())) {
+                return List.of();
+            }
+        }
+
+        List<BlockPos> centerLine = computeLine2D(start, end);
+        Direction direction = getPrimaryDirection(start, end);
+        List<BlockPos> widened = widenLine(centerLine, width, direction);
+
+        LinkedHashSet<BlockPos> adjusted = new LinkedHashSet<>();
+        for (BlockPos pos : widened) {
+            BlockPos adjustedPos = adjustToTerrain(world, pos, useTerrainFollowing).toImmutable();
+
+            if (allowedEnd != null && !allowedEnd.isEmpty()) {
+                Block currentBlock = world.getBlockState(adjustedPos).getBlock();
+                if (!allowedEnd.contains(currentBlock)) {
+                    continue;
+                }
+            }
+
+            adjusted.add(adjustedPos);
+        }
+
+        return new ArrayList<>(adjusted);
+    }
+
+    public static List<BlockPos> computeAffectedPositions(
+            World world,
+            BlockPos start,
+            BlockPos end,
+            int width,
+            boolean useTerrainFollowing
+    ) {
+        return computeAffectedPositions(world, start, end, width, useTerrainFollowing, null, null);
+    }
+
+    public static List<BlockPos> computeAffectedPositionsForPreview(
+            World world,
+            ItemStack stack,
+            BlockPos start,
+            BlockPos end,
+            SyncedServerConfig syncedConfig
+    ) {
+        int width = getWidth(stack, syncedConfig.pathsMinWidth(), syncedConfig.pathsMaxWidth());
+
+        Set<Block> allowedStart = resolveBlockList(syncedConfig.pathsAllowedStartingBlocks());
+        Set<Block> allowedEnd = resolveBlockList(syncedConfig.pathsAllowedEndingBlocks());
+
+        return computeAffectedPositions(
+                world,
+                start,
+                end,
+                width,
+                syncedConfig.pathsUseTerrainFollowing(),
+                allowedStart,
+                allowedEnd
+        );
+    }
+
     // --- Terrain following ---
 
     public static BlockPos adjustToTerrain(World world, BlockPos pos, boolean useTerrainFollowing) {
@@ -185,39 +270,83 @@ public final class PathToolHelper {
             return pos;
         }
 
-        int topY = world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1;
-        if (topY < world.getBottomY()) {
-            return pos;
+        int minY = world.getBottomY();
+        int maxY = world.getTopY() - 1;
+
+        BlockPos.Mutable cursor = pos.mutableCopy();
+
+        // Clamp Y into world bounds
+        if (cursor.getY() < minY) cursor.setY(minY);
+        if (cursor.getY() > maxY) cursor.setY(maxY);
+
+        // If already valid surface, use it
+        if (isWalkableSurface(world, cursor)) {
+            return cursor.toImmutable();
         }
-        return new BlockPos(pos.getX(), topY, pos.getZ());
+
+        // Search nearby (down first, then up)
+        for (int offset = 1; offset <= 8; offset++) {
+
+            int downY = cursor.getY() - offset;
+            if (downY >= minY) {
+                BlockPos.Mutable down = new BlockPos.Mutable(cursor.getX(), downY, cursor.getZ());
+                if (isWalkableSurface(world, down)) {
+                    return down.toImmutable();
+                }
+            }
+
+            int upY = cursor.getY() + offset;
+            if (upY <= maxY) {
+                BlockPos.Mutable up = new BlockPos.Mutable(cursor.getX(), upY, cursor.getZ());
+                if (isWalkableSurface(world, up)) {
+                    return up.toImmutable();
+                }
+            }
+        }
+
+        // Fallback (only if nothing found nearby)
+        int fallbackTopY = world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1;
+        return new BlockPos(pos.getX(), fallbackTopY, pos.getZ());
+    }
+
+    private static boolean isWalkableSurface(World world, BlockPos pos) {
+        BlockState floor = world.getBlockState(pos);
+
+        // Must be solid ground
+        if (floor.isAir() || !floor.getMaterial().isSolid()) {
+            return false;
+        }
+
+        // Space above must be clear
+        BlockPos above = pos.up();
+        if (!world.getBlockState(above).getCollisionShape(world, above).isEmpty()) {
+            return false;
+        }
+
+        // Headroom (prevents clipping into ceilings)
+        BlockPos above2 = above.up();
+        return world.getBlockState(above2).getCollisionShape(world, above2).isEmpty();
     }
 
     // --- Path material resolution ---
 
     public static BlockState resolvePathBlockFor(World world, PlayerEntity player, BlockPos pos, ConfigServer config) {
-        // 1. Offhand block has priority
         ItemStack offhand = player.getOffHandStack();
         if (offhand.getItem() instanceof BlockItem blockItem) {
             return blockItem.getBlock().getDefaultState();
         }
 
-        // 2. Biome-based
         Biome biome = world.getBiome(pos).value();
-        // You can refine these heuristics as you like
         Biome.Precipitation precipitation = biome.getPrecipitation();
         if (precipitation == Biome.Precipitation.SNOW) {
             return Blocks.SNOW.getDefaultState();
         }
 
-        // A simple category-ish heuristic: "dry" biomes -> sandstone-ish
-        // If you want, check RegistryKey or tags for more precise logic.
-        // Here we just approximate based on temperature.
         float temperature = biome.getTemperature();
         if (temperature >= 1.5f) {
             return Blocks.SANDSTONE.getDefaultState();
         }
 
-        // 3. Fallback default from config
         return resolveDefaultPathBlock(config);
     }
 
@@ -230,4 +359,3 @@ public final class PathToolHelper {
         return dist <= maxDist;
     }
 }
-

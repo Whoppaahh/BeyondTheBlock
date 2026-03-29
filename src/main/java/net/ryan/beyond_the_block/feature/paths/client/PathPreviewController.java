@@ -6,6 +6,7 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
 import net.ryan.beyond_the_block.feature.paths.PathPreviewState;
 import net.ryan.beyond_the_block.feature.paths.PathToolHelper;
 
@@ -24,40 +25,34 @@ public class PathPreviewController {
             return;
         }
 
-        // Must have a starting point set
         if (!PathToolHelper.hasStart(stack)) {
             PathPreviewState.clear();
             return;
         }
 
-        // Must be looking at a block
         if (!(client.crosshairTarget instanceof BlockHitResult hit)) {
             PathPreviewState.clear();
             return;
         }
 
+        SyncedServerConfig synced = Configs.syncedServerConfig();
+
         BlockPos start = PathToolHelper.getStart(stack);
         BlockPos end = hit.getBlockPos();
 
-        // Too far? No preview
-        if (!PathToolHelper.withinMaxDistance(start, end, Configs.syncedServerConfig().pathsMaxDistance())) {
+        if (!PathToolHelper.withinMaxDistance(start, end, synced.pathsMaxDistance())) {
             PathPreviewState.clear();
             return;
         }
 
-        // Compute width
-        int width = PathToolHelper.getWidth(stack, Configs.server());
+        List<BlockPos> affected = PathToolHelper.computeAffectedPositionsForPreview(
+                client.world,
+                stack,
+                start,
+                end,
+                synced
+        );
 
-        // Compute line & widened area
-        List<BlockPos> centerLine = PathToolHelper.computeLine2D(start, end);
-        var direction = PathToolHelper.getPrimaryDirection(start, end);
-        List<BlockPos> full = PathToolHelper.widenLine(centerLine, width, direction);
-
-        // Terrain-follow for preview
-        List<BlockPos> adjusted = full.stream()
-                .map(pos -> PathToolHelper.adjustToTerrain(client.world, pos, Configs.syncedServerConfig().pathsUseTerrainFollowing()))
-                .toList();
-
-        PathPreviewState.setPositions(adjusted);
+        PathPreviewState.setPositions(affected);
     }
 }

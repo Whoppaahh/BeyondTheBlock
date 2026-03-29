@@ -23,8 +23,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.config.DropMode;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +45,6 @@ public class SmeltingStrikeEnchantment extends Enchantment {
         ItemStack tool = player.getMainHandStack();
         if (EnchantmentHelper.getLevel(ModEnchantments.SMELTING_STRIKE, tool) == 0) return true;
 
-        // Use loot context to get normal drops (respects Fortune)
-
         LootContext.Builder lootContextBuilder = new LootContext.Builder(serverWorld)
                 .parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
                 .parameter(LootContextParameters.TOOL, tool)
@@ -52,37 +54,45 @@ public class SmeltingStrikeEnchantment extends Enchantment {
         List<ItemStack> originalDrops = state.getBlock().getDroppedStacks(state, lootContextBuilder);
 
         boolean smeltedAnything = false;
+        List<ItemStack> finalDrops = new ArrayList<>();
 
         for (ItemStack original : originalDrops) {
             Optional<SmeltingRecipe> recipe = world.getRecipeManager().getFirstMatch(
-                    RecipeType.SMELTING, new SimpleInventory(original), world
+                    RecipeType.SMELTING,
+                    new SimpleInventory(original.copy()),
+                    world
             );
 
             if (recipe.isPresent()) {
                 ItemStack smelted = recipe.get().getOutput().copy();
-                smelted.setCount(original.getCount()); // Match the quantity of original drop
-                Block.dropStack(world, pos, smelted);
+                smelted.setCount(smelted.getCount() * original.getCount());
+                finalDrops.add(smelted);
                 smeltedAnything = true;
 
-                // Drop XP scaled by item count
                 float xpPerItem = recipe.get().getExperience();
                 int totalXp = Math.round(xpPerItem * original.getCount());
                 if (totalXp > 0) {
-                    serverWorld.spawnEntity(new ExperienceOrbEntity(serverWorld, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, totalXp));
+                    serverWorld.spawnEntity(new ExperienceOrbEntity(
+                            serverWorld,
+                            pos.getX() + 0.5,
+                            pos.getY() + 0.5,
+                            pos.getZ() + 0.5,
+                            totalXp
+                    ));
                 }
             } else {
-                // Fallback: drop original if no smelting recipe
-                Block.dropStack(world, pos, original);
+                finalDrops.add(original.copy());
             }
         }
 
-        if (smeltedAnything) {
-            world.breakBlock(pos, false); // Remove block, don't drop normal loot again
-            tool.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
-            return false;
+        if (!smeltedAnything) {
+            return true;
         }
 
-        return true;
+        world.breakBlock(pos, false, player);
+        tool.damage(1, player, p -> p.sendToolBreakStatus(player.getActiveHand()));
+        MyEnchantmentHelper.giveDropsWithMode(world, pos, player, finalDrops);
+        return false;
     }
 
 

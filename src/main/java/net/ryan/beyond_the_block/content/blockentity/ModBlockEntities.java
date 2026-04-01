@@ -9,6 +9,32 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModBlockEntities {
 
+    public static final BlockEntityType<ChiseledBookshelfBlockEntity> CHISELED_BOOKSHELF_BLOCK_ENTITY =
+            Registry.register(
+                    Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "chiseled_bookshelf_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(
+                            ChiseledBookshelfBlockEntity::new,
+                            ModBlocks.CHISELED_BOOKSHELF
+                    ).build()
+            );
+
+    public static final BlockEntityType<ShelfBlockEntity> SHELF_BLOCK_ENTITY =
+            Registry.register(Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "shelf_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(ShelfBlockEntity::new,
+                            ModBlocks.OAK_SHELF_BLOCK,
+                            ModBlocks.SPRUCE_SHELF_BLOCK,
+                            ModBlocks.BIRCH_SHELF_BLOCK,
+                            ModBlocks.JUNGLE_SHELF_BLOCK,
+                            ModBlocks.ACACIA_SHELF_BLOCK,
+                            ModBlocks.DARK_OAK_SHELF_BLOCK,
+                            ModBlocks.MANGROVE_SHELF_BLOCK,
+                            ModBlocks.BAMBOO_SHELF_BLOCK,
+                            ModBlocks.CRIMSON_SHELF_BLOCK,
+                            ModBlocks.WARPED_SHELF_BLOCK).build());
+
+
     public static final BlockEntityType<DyedWaterCauldronBlockEntity> DYED_WATER_CAULDRON_BLOCK_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE,
                     new Identifier(BeyondTheBlock.MOD_ID, "dyed_water_cauldron_block_entity"),

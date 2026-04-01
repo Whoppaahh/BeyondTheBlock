@@ -69,26 +69,30 @@ public class ServerPlayerInteractionManagerMixin {
             int level = EnchantmentHelper.getLevel(ModEnchantments.FERTILITY, tool);
             if (level > 0) {
                 if (world instanceof ServerWorld serverWorld) {
+                    if(player.isSneaking())return;
                     if (state.getBlock() instanceof Fertilizable fertilizable) {
                         if (fertilizable.isFertilizable(world, pos, state, world.isClient)) {
-                            BeyondTheBlock.LOGGER.warn("Fertilizable is fertilizable");
                             if (fertilizable.canGrow(world, world.random, pos, state)) {
                                 fertilizable.grow(serverWorld, serverWorld.random, pos, state);
-                                BeyondTheBlock.LOGGER.info("Growing block");
                                 cir.setReturnValue(ActionResult.SUCCESS);
                                 return;
                             }
                         } else {
-                            BeyondTheBlock.LOGGER.warn("Can't grow anymore");
-                            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(state.getBlock().asItem())));
+                            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(block.asItem())));
                             cir.setReturnValue(ActionResult.SUCCESS);
                             return;
                         }
                     } else {
                         // if (world.random.nextFloat() < 0.3f) {
-                        if (block instanceof PlantBlock) {
-                            BeyondTheBlock.LOGGER.warn("Can't grow shovel - " + block.asItem());
-                            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(state.getBlock().asItem())));
+                        if (block instanceof PlantBlock
+                        || block instanceof CactusBlock
+                        || block instanceof SugarCaneBlock
+                        || block instanceof GourdBlock
+                        || block instanceof KelpPlantBlock
+                        || block instanceof LeavesBlock
+                        || block instanceof VineBlock
+                        || block instanceof TallPlantBlock){
+                            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(block.asItem())));
                             cir.setReturnValue(ActionResult.SUCCESS);
                             return;
                         }

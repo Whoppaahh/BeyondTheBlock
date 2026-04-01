@@ -23,12 +23,17 @@ public class MouseScrollMixin {
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null || client.player == null || client.world == null) return;
+        // Do not interfere with scrolling in menus/screens
+        if (client.currentScreen != null) return;
 
         ItemStack stack = client.player.getMainHandStack();
 
         // Only affect shovels
         if (!(stack.getItem() instanceof ShovelItem)) return;
 
+        // Only modify path width while sneaking
+        // Otherwise let vanilla hotbar scrolling behave normally
+        if (!client.player.isSneaking()) return;
         int current = PathToolHelper.getWidth(stack, Configs.server());
 
         // Scroll up increases, scroll down decreases

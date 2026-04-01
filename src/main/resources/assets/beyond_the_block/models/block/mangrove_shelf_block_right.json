@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/template_shelf_right",
+  "textures": {
+    "all": "beyond_the_block:block/mangrove_shelf",
+    "particle": "minecraft:block/stripped_mangrove_log"
+  }
+}

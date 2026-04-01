@@ -47,22 +47,31 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
 
     @Unique
     private static final double AOE_RADIUS = 3.0;
-    @Unique private static final double HOMING_RADIUS = 30.0;
-    @Unique private static final double MIN_SPEED = 0.1;
-    @Unique private static final int SCAN_COOLDOWN_TICKS = 10;
-    @Unique private static final double MAX_TURN_DEGREES = 15.0;
+    @Unique
+    private static final double HOMING_RADIUS = 30.0;
+    @Unique
+    private static final double MIN_SPEED = 0.1;
+    @Unique
+    private static final int SCAN_COOLDOWN_TICKS = 10;
+    @Unique
+    private static final double MAX_TURN_DEGREES = 15.0;
 
-    @Unique private UUID homingTargetUuid = null;
-    @Unique private int targetScanCooldown = 0;
+    @Unique
+    private UUID homingTargetUuid = null;
+    @Unique
+    private int targetScanCooldown = 0;
 
-    @Unique private int homingMaxTargets = 1; // from enchantment level
-    @Unique private int homingTargetsHit = 0;
-    @Unique private final List<UUID> hitTargets = new ArrayList<>();
+    @Unique
+    private int homingMaxTargets = 1; // from enchantment level
+    @Unique
+    private int homingTargetsHit = 0;
+    @Unique
+    private final List<UUID> hitTargets = new ArrayList<>();
 
     // Apply potion effects to all nearby living entities
     @Unique
     private void applyAOE(Vec3d pos, Potion potion, Iterable<StatusEffectInstance> customEffects, LivingEntity owner, LivingEntity target) {
-        ArrowEntity self = (ArrowEntity)(Object)this;
+        ArrowEntity self = (ArrowEntity) (Object) this;
 
         List<LivingEntity> nearby = self.world.getEntitiesByClass(
                 LivingEntity.class,
@@ -91,6 +100,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
             }
         }
     }
+
     @Unique
     private void updateHomingMaxTargets() {
         if (this.getOwner() instanceof LivingEntity shooter) {
@@ -235,7 +245,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
         Box searchBox = new Box(pos, pos).expand(HOMING_RADIUS);
 
         return this.getWorld().getEntitiesByClass(LivingEntity.class, searchBox, e -> isValidTarget(e) && canSee(e)
-                && !hitTargets.contains(e.getUuid()))
+                        && !hitTargets.contains(e.getUuid()))
                 .stream()
                 .min(Comparator.comparingDouble(e -> {
                     Vec3d to = e.getEyePos().subtract(pos).normalize();
@@ -255,7 +265,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tickAOE(CallbackInfo ci) {
-        ArrowEntity self = (ArrowEntity)(Object)this;
+        ArrowEntity self = (ArrowEntity) (Object) this;
         Set<StatusEffectInstance> effects = ((ArrowEntityAccessor) self).getEffects();
         if (!self.world.isClient && self.isOnGround() && !effects.isEmpty() && potion != null) {
             Entity ownerEntity = self.getEffectCause();
@@ -272,14 +282,14 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
     private void onHitMerged(LivingEntity target, CallbackInfo ci) {
         if (this.getWorld().isClient || target == null) return;
 
-        ArrowEntity self = (ArrowEntity)(Object)this;
+        ArrowEntity self = (ArrowEntity) (Object) this;
         Set<StatusEffectInstance> effects = ((ArrowEntityAccessor) self).getEffects();
-        if (potion == null || (potion == Potions.EMPTY && effects.isEmpty())) return;
-        Entity ownerEntity = self.getEffectCause();
-        LivingEntity lie = ownerEntity instanceof LivingEntity le ? le : null;
+        if (potion != null || (potion != Potions.EMPTY && effects.isEmpty())) {
+            Entity ownerEntity = self.getEffectCause();
+            LivingEntity lie = ownerEntity instanceof LivingEntity le ? le : null;
 
-        applyAOE(self.getPos(), potion, effects, lie, target);
-
+            applyAOE(self.getPos(), potion, effects, lie, target);
+        }
         // Lightning enchantment logic
         Entity owner = this.getOwner();
         if (owner instanceof LivingEntity shooter) {

@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/template_shelf_inventory",
+  "textures": {
+    "all": "beyond_the_block:block/birch_shelf",
+    "particle": "minecraft:block/stripped_birch_log"
+  }
+}

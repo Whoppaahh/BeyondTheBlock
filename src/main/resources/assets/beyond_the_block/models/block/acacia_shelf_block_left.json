@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/template_shelf_left",
+  "textures": {
+    "all": "beyond_the_block:block/acacia_shelf",
+    "particle": "minecraft:block/stripped_acacia_log"
+  }
+}

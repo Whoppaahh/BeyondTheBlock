@@ -10,11 +10,79 @@
     "hidden": false
   },
   "criteria": {
-    "place_shelf": {
+    "place_oak_shelf": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "beyond_the_block:shelf"
+        "block": "beyond_the_block:oak_shelf_block"
+      }
+    },
+    "place_spruce_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:spruce_shelf_block"
+      }
+    },
+    "place_birch_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:birch_shelf_block"
+      }
+    },
+    "place_jungle_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:jungle_shelf_block"
+      }
+    },
+    "place_acacia_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:acacia_shelf_block"
+      }
+    },
+    "place_dark_oak_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:dark_oak_shelf_block"
+      }
+    },
+    "place_mangrove_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:mangrove_shelf_block"
+      }
+    },
+    "place_bamboo_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:bamboo_shelf_block"
+      }
+    },
+    "place_crimson_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:crimson_shelf_block"
+      }
+    },
+    "place_warped_shelf": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "beyond_the_block:warped_shelf_block"
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "place_oak_shelf",
+      "place_spruce_shelf",
+      "place_birch_shelf",
+      "place_jungle_shelf",
+      "place_acacia_shelf",
+      "place_dark_oak_shelf",
+      "place_mangrove_shelf",
+      "place_bamboo_shelf",
+      "place_crimson_shelf",
+      "place_warped_shelf"
+    ]
+  ]
 }

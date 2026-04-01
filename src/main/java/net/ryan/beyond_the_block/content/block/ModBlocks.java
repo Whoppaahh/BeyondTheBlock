@@ -27,8 +27,25 @@ import net.ryan.beyond_the_block.content.block.sponges.WetCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.item.ModItemGroup;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ModBlocks {
+
+    public static final Block CHISELED_BOOKSHELF = registerBlock("chiseled_bookshelf", new ChiseledBookshelfBlock(FabricBlockSettings.of(Material.WOOD)), ModItemGroup.ModBlocksTab);
+
+
+    public static final Block OAK_SHELF_BLOCK = registerBlock("oak_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block SPRUCE_SHELF_BLOCK = registerBlock("spruce_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block BIRCH_SHELF_BLOCK = registerBlock("birch_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block JUNGLE_SHELF_BLOCK = registerBlock("jungle_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block ACACIA_SHELF_BLOCK = registerBlock("acacia_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block DARK_OAK_SHELF_BLOCK = registerBlock("dark_oak_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block MANGROVE_SHELF_BLOCK = registerBlock("mangrove_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block BAMBOO_SHELF_BLOCK = registerBlock("bamboo_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block CRIMSON_SHELF_BLOCK = registerBlock("crimson_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
+    public static final Block WARPED_SHELF_BLOCK = registerBlock("warped_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
 
 
 

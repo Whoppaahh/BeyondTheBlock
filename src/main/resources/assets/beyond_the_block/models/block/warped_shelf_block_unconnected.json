@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/template_shelf_unconnected",
+  "textures": {
+    "all": "beyond_the_block:block/warped_shelf",
+    "particle": "minecraft:block/stripped_warped_log"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block" }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block", "y": 90 }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block", "y": 180 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block", "y": 270 }
+    },
+
+    {
+      "when": { "AND": [ { "facing": "north" }, { "powered": "false" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unpowered" }
+    },
+    {
+      "when": { "AND": [ { "facing": "east" }, { "powered": "false" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unpowered", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "facing": "south" }, { "powered": "false" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unpowered", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "facing": "west" }, { "powered": "false" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unpowered", "y": 270 }
+    },
+
+    {
+      "when": { "AND": [ { "facing": "north" }, { "powered": "true" }, { "side_chain": "unconnected" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unconnected" }
+    },
+    {
+      "when": { "AND": [ { "facing": "east" }, { "powered": "true" }, { "side_chain": "unconnected" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unconnected", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "facing": "south" }, { "powered": "true" }, { "side_chain": "unconnected" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unconnected", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "facing": "west" }, { "powered": "true" }, { "side_chain": "unconnected" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_unconnected", "y": 270 }
+    },
+
+    {
+      "when": { "AND": [ { "facing": "north" }, { "powered": "true" }, { "side_chain": "left" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_left" }
+    },
+    {
+      "when": { "AND": [ { "facing": "east" }, { "powered": "true" }, { "side_chain": "left" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_left", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "facing": "south" }, { "powered": "true" }, { "side_chain": "left" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_left", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "facing": "west" }, { "powered": "true" }, { "side_chain": "left" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_left", "y": 270 }
+    },
+
+    {
+      "when": { "AND": [ { "facing": "north" }, { "powered": "true" }, { "side_chain": "center" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_center" }
+    },
+    {
+      "when": { "AND": [ { "facing": "east" }, { "powered": "true" }, { "side_chain": "center" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_center", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "facing": "south" }, { "powered": "true" }, { "side_chain": "center" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_center", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "facing": "west" }, { "powered": "true" }, { "side_chain": "center" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_center", "y": 270 }
+    },
+
+    {
+      "when": { "AND": [ { "facing": "north" }, { "powered": "true" }, { "side_chain": "right" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_right" }
+    },
+    {
+      "when": { "AND": [ { "facing": "east" }, { "powered": "true" }, { "side_chain": "right" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_right", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "facing": "south" }, { "powered": "true" }, { "side_chain": "right" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_right", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "facing": "west" }, { "powered": "true" }, { "side_chain": "right" } ] },
+      "apply": { "model": "beyond_the_block:block/bamboo_shelf_block_right", "y": 270 }
+    }
+  ]
+}

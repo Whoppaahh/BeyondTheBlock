@@ -28,7 +28,22 @@ public class ChiseledBookshelfBlockEntity extends BlockEntity implements SidedIn
     }
 
     public int getComparatorOutput() {
-        return this.lastInteractedSlot >= 0 ? this.lastInteractedSlot + 1 : 0;
+        return this.getOccupiedSlotCount();
+        //return this.lastInteractedSlot >= 0 ? this.lastInteractedSlot + 1 : 0;
+    }
+
+    public int getOccupiedSlotCount(){
+        int count = 0;
+        for(ItemStack stack : items){
+            if(!stack.isEmpty()){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getEnchantingPower() {
+        return getOccupiedSlotCount();
     }
 
     public int getLastInteractedSlot() {

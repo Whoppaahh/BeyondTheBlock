@@ -132,42 +132,75 @@ public class ChiseledBookshelfBlock extends Block implements BlockEntityProvider
         }
 
         ItemStack heldStack = player.getStackInHand(hand);
-        ItemStack slotStack = shelf.getStack(slot);
+        ItemStack shelfStack = shelf.getStack(slot);
 
-        if (!slotStack.isEmpty()) {
-            if (!world.isClient) {
-                ItemStack removed = shelf.removeStack(slot, 1);
-                if (!player.getAbilities().creativeMode) {
-                    if (!player.getInventory().insertStack(removed.copy())) {
-                        player.dropItem(removed.copy(), false);
-                    }
-                }
+        boolean heldIsValidBook = isValidBook(heldStack);
+        boolean heldIsEmpty = heldStack.isEmpty();
+        boolean slotIsEmpty = shelfStack.isEmpty();
 
-                world.playSound(null, pos, SoundEvents.BLOCK_WOOD_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            }
-
-            return ActionResult.success(world.isClient);
-        }
-
-        if (!isValidBook(heldStack)) {
+        if (world.isClient) {
+            if (heldIsEmpty && !slotIsEmpty) return ActionResult.SUCCESS;
+            if (heldIsValidBook && slotIsEmpty) return ActionResult.SUCCESS;
+            if (heldIsValidBook && !slotIsEmpty) return ActionResult.SUCCESS;
             return ActionResult.CONSUME;
         }
 
-        if (!world.isClient) {
-            ItemStack singleBook = heldStack.copy();
-            singleBook.setCount(1);
-            shelf.setStack(slot, singleBook);
+        // Empty hand -> remove only
+        if (heldIsEmpty) {
+            if (!slotIsEmpty) {
+                ItemStack removed = shelf.removeStack(slot, 1);
+                if (!player.getInventory().insertStack(removed.copy())) {
+                    player.dropItem(removed.copy(), false);
+                }
+
+                world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+                return ActionResult.CONSUME;
+            }
+
+            return ActionResult.CONSUME;
+        }
+
+        // Invalid item in hand -> no interaction
+        if (!heldIsValidBook) {
+            return ActionResult.CONSUME;
+        }
+
+        // Valid book in hand + empty slot -> insert
+        if (slotIsEmpty) {
+            ItemStack insert = heldStack.copy();
+            insert.setCount(1);
+            shelf.setStack(slot, insert);
 
             if (!player.getAbilities().creativeMode) {
                 heldStack.decrement(1);
             }
 
-            world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
             world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            return ActionResult.CONSUME;
         }
 
-        return ActionResult.success(world.isClient);
+        // Valid book in hand + occupied slot -> swap
+        ItemStack oldShelfStack = shelfStack.copy();
+        ItemStack newShelfStack = heldStack.copy();
+        newShelfStack.setCount(1);
+
+        shelf.setStack(slot, newShelfStack);
+
+        if (!player.getAbilities().creativeMode) {
+            heldStack.decrement(1);
+
+            if (heldStack.isEmpty()) {
+                player.setStackInHand(hand, oldShelfStack);
+            } else if (!player.getInventory().insertStack(oldShelfStack.copy())) {
+                player.dropItem(oldShelfStack.copy(), false);
+            }
+        }
+
+        world.playSound(null, pos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        return ActionResult.CONSUME;
     }
 
     public static boolean isValidBook(ItemStack stack) {

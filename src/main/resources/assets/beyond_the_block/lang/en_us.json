@@ -255,7 +255,7 @@
   "enchantment.beyond_the_block.silent_steps.desc": "Suppresses footstep sounds and reduces detection by mobs.",
 
   "enchantment.beyond_the_block.durability_boost": "Durability Boost",
-  "enchantment.beyond_the_block.durability_boost.desc": "Slightly extends the durability of the enchanted item.",
+  "enchantment.beyond_the_block.durability_boost.desc": "Grants all worn armour a chance to avoid durability loss.",
   "enchantment.beyond_the_block.echo_guard": "Echo Guard",
   "enchantment.beyond_the_block.echo_guard.desc": "Creates a delayed echo shield that absorbs the next attack.",
 

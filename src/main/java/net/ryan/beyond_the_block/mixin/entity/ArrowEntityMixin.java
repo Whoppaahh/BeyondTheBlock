@@ -9,7 +9,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BowItem;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.ParticleTypes;
@@ -294,7 +296,7 @@ public abstract class ArrowEntityMixin extends PersistentProjectileEntity {
         Entity owner = this.getOwner();
         if (owner instanceof LivingEntity shooter) {
             ItemStack mainHand = shooter.getMainHandStack();
-            if (mainHand.getItem() instanceof BowItem) {
+            if (mainHand.getItem() instanceof BowItem || mainHand.getItem() instanceof CrossbowItem) {
                 int level = EnchantmentHelper.getLevel(ModEnchantments.WRATH_OF_THOR, mainHand);
                 if (level > 0) {
                     BlockPos pos = target.getBlockPos();

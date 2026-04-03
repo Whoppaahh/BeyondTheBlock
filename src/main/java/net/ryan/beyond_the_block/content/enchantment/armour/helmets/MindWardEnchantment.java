@@ -17,7 +17,6 @@ import java.util.*;
 
 public class MindWardEnchantment extends Enchantment {
 
-    private static final Map<UUID, Set<UUID>> playerToGlowing = new HashMap<>();
 
     public MindWardEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot... slotTypes) {
         super(weight, type, slotTypes);
@@ -28,41 +27,4 @@ public class MindWardEnchantment extends Enchantment {
         return stack.getItem() instanceof ArmorItem armour && armour.getSlotType() == EquipmentSlot.HEAD || stack.isOf(Items.BOOK);
     }
 
-    public static void registerTickHandler(ServerWorld world) {
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            if (!MyEnchantmentHelper.hasArmorEnchantment(player, ModEnchantments.MIND_WARD)) {
-                // Remove all glows if previously tracked
-                Set<UUID> previouslyGlowing = playerToGlowing.getOrDefault(player.getUuid(), Set.of());
-                for (UUID entityId : previouslyGlowing) {
-                    Entity entity = world.getEntity(entityId);
-                    if (entity != null) {
-                        GlowPacketHelper.setGlowing(player, entity, false);
-                    }
-                }
-                playerToGlowing.remove(player.getUuid());
-                continue;
-            }
-
-            Set<UUID> currentlyGlowing = new HashSet<>();
-            List<Entity> invisibles = world.getOtherEntities(player, player.getBoundingBox().expand(10), Entity::isInvisible);
-
-            for (Entity entity : invisibles) {
-                GlowPacketHelper.setGlowing(player, entity, true);
-                currentlyGlowing.add(entity.getUuid());
-            }
-
-            // Remove glow from entities no longer qualifying
-            Set<UUID> previous = playerToGlowing.getOrDefault(player.getUuid(), Set.of());
-            for (UUID oldUuid : previous) {
-                if (!currentlyGlowing.contains(oldUuid)) {
-                    Entity entity = world.getEntity(oldUuid);
-                    if (entity != null) {
-                        GlowPacketHelper.setGlowing(player, entity, false);
-                    }
-                }
-            }
-
-            playerToGlowing.put(player.getUuid(), currentlyGlowing);
-        }
-    }
 }

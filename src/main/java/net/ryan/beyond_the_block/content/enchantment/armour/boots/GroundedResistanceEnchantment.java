@@ -17,15 +17,6 @@ public class GroundedResistanceEnchantment extends Enchantment {
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.getItem() instanceof ArmorItem armour && armour.getSlotType() == EquipmentSlot.FEET || stack.isOf(Items.BOOK);
     }
-    @Override
-    public void onUserDamaged(LivingEntity user, Entity attacker, int level) {
-        if (!user.getWorld().isClient && user.isOnGround()) {
-            float reducedDamage = 0.1f * level; // Reduce damage by a factor based on the enchantment level
-            user.setHealth(user.getHealth() - reducedDamage);
-        }
-
-        super.onUserDamaged(user, attacker, level);
-    }
 
     @Override
     public int getMaxLevel() {

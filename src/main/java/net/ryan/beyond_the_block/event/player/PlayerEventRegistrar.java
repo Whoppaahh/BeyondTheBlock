@@ -25,9 +25,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.client.visual.Glowable;
-import net.ryan.beyond_the_block.content.block.cauldrons.DyedWaterCauldronBlock;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.block.PlayerVaultBlock;
+import net.ryan.beyond_the_block.content.block.cauldrons.DyedWaterCauldronBlock;
 import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
@@ -35,7 +35,7 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.armourstand.ArmourStandEquipmentHandler;
 import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import net.ryan.beyond_the_block.feature.cauldrons.ModdedFluidCauldronHandler;
-import net.ryan.beyond_the_block.feature.combat.FlameSweepHandler;
+import net.ryan.beyond_the_block.feature.combat.CombatEnchantmentHandler;
 import net.ryan.beyond_the_block.feature.restore.RestoreProtectionHandler;
 import net.ryan.beyond_the_block.utils.helpers.BetterLadderPlacement;
 import net.ryan.beyond_the_block.utils.helpers.DoubleOpenablesHandler;
@@ -49,7 +49,7 @@ public class PlayerEventRegistrar {
     }
     private static void registerPlayerEvents() {
         AttackBlockCallback.EVENT.register(PlayerEventRegistrar::onBlockMined);
-        AttackEntityCallback.EVENT.register(FlameSweepHandler::onEntityAttacked);
+        AttackEntityCallback.EVENT.register(CombatEnchantmentHandler::onEntityAttacked);
         UseBlockCallback.EVENT.register(PlayerEventRegistrar::onBlockUsed);
         UseItemCallback.EVENT.register(RestoreProtectionHandler::onItemUsed);
         UseEntityCallback.EVENT.register(ArmourStandEquipmentHandler::onEntityUsed);

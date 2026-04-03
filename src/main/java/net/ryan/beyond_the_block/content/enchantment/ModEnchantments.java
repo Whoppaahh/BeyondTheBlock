@@ -24,6 +24,7 @@ import net.ryan.beyond_the_block.content.enchantment.tools.axes.NightfallCleaveE
 import net.ryan.beyond_the_block.content.enchantment.tools.axes.TimbercutEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.hoes.DeepTillEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.hoes.GardensBountyEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.tools.hoes.NightCultivationEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.pickaxes.ShadowMiningEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.pickaxes.SmeltingStrikeEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.pickaxes.StonebreakerEnchantment;
@@ -32,6 +33,8 @@ import net.ryan.beyond_the_block.content.enchantment.tools.shovels.EarthShatterE
 import net.ryan.beyond_the_block.content.enchantment.tools.shovels.FertilityEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.swords.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.feature.combat.TemporalSliceHandler;
+import net.ryan.beyond_the_block.utils.helpers.NightstrideHelper;
 
 public class ModEnchantments {
 
@@ -118,7 +121,7 @@ public class ModEnchantments {
             new GardensBountyEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
     public static Enchantment NIGHT_CULTIVATION = register("night_cultivation",
-            new DeepTillEnchantment(Enchantment.Rarity.COMMON,
+            new NightCultivationEnchantment(Enchantment.Rarity.COMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
     //endregion
     //region Pickaxes
@@ -164,6 +167,7 @@ public class ModEnchantments {
     }
 
     public static void registerModEnchantments() {
+        TemporalSliceHandler.register();
         System.out.println("Registering Enchantments for " + BeyondTheBlock.MOD_ID);
     }
 }

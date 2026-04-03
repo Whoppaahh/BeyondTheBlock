@@ -25,7 +25,7 @@ public class PhantomSlashEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.isOf(Items.BOOK);
+        return stack.getItem() instanceof SwordItem || stack.isOf(Items.BOOK);
     }
 
     @Override
@@ -47,11 +47,35 @@ public class PhantomSlashEnchantment extends Enchantment {
             if (world.isAir(targetPos) && world.getBlockState(targetPos.down()).isFullCube(world, targetPos)) {
                 // Teleport the player to the new position
                 player.teleport(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+                lookAtEntity(player, livingTarget);
 
                 // Optional: Add a visual effect or sound to indicate teleportation (for feedback)
                  player.world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
             }
         }
+    }
+
+    private static void lookAtEntity(PlayerEntity player, LivingEntity target) {
+        Vec3d from = player.getEyePos();
+        Vec3d to = target.getEyePos();
+
+        Vec3d delta = to.subtract(from);
+
+        double dx = delta.x;
+        double dy = delta.y;
+        double dz = delta.z;
+
+        double horizontal = Math.sqrt(dx * dx + dz * dz);
+
+        float yaw = (float)(Math.toDegrees(Math.atan2(dz, dx)) - 90.0F);
+        float pitch = (float)(-Math.toDegrees(Math.atan2(dy, horizontal)));
+
+        player.setYaw(yaw);
+        player.setPitch(pitch);
+
+        // Important for server → client sync
+        player.prevYaw = yaw;
+        player.prevPitch = pitch;
     }
 
     private static @NotNull BlockPos getBlockPos(int level, PlayerEntity player) {

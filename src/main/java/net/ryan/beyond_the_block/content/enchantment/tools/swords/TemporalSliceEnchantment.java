@@ -5,6 +5,7 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -20,10 +21,16 @@ public class TemporalSliceEnchantment extends Enchantment {
         return stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.isOf(Items.BOOK);
     }
 
-    //Logic handled by EnchantmentHelper and EnchantmentEventListener
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        if (!(target instanceof LivingEntity livingTarget)) {
+            super.onTargetDamaged(user, target, level);
+            return;
+        }
 
+        float bonusDamage = 2.0F * level;
+        livingTarget.damage(DamageSource.mob(user), bonusDamage);
+
+        super.onTargetDamaged(user, target, level);
     }
-
 }

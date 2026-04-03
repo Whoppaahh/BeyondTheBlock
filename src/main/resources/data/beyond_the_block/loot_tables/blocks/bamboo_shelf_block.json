@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_the_block:shelf_block"
+          "name": "beyond_the_block:bamboo_shelf_block"
         }
       ],
       "conditions": [

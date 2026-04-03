@@ -14,35 +14,43 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
 
-    @Inject(method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At("HEAD"), cancellable = true)
-    private void ApplyDurabilityBoost(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(
+            method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void beyond_the_block$applyDurabilityBoost(int amount,
+                                                       Random random,
+                                                       @Nullable ServerPlayerEntity player,
+                                                       CallbackInfoReturnable<Boolean> cir) {
         ItemStack stack = (ItemStack) (Object) this;
 
-        // Check if this is a chestplate
-        if (stack.getItem() instanceof ArmorItem && player != null) {
+        if (player == null || amount <= 0) return;
+        if (!(stack.getItem() instanceof ArmorItem)) return;
 
-            ItemStack chestplate = player.getEquippedStack(EquipmentSlot.CHEST);
 
-            int level = EnchantmentHelper.getLevel(ModEnchantments.DURABILITY_BOOST, chestplate);
-            if (level > 0) {
-                // Reduce damage taken based on level. Each level reduces 25%, e.g., level 2 = 50% reduction
-                float reduction = 1.0f - (0.25f * level);
-                int reducedAmount = Math.max(1, Math.round(amount * reduction));
+        int level = EnchantmentHelper.getLevel(ModEnchantments.DURABILITY_BOOST, player.getEquippedStack(EquipmentSlot.CHEST));
+        if (level <= 0) return;
 
-                stack.setDamage(stack.getDamage() + reducedAmount);
-                if (stack.getDamage() >= stack.getMaxDamage()) {
-                    stack.decrement(1);
-                }
 
-                cir.setReturnValue(true); // prevent default logic from running
-            }
-        }
+        float ignoreChance = switch (level) {
+            case 1 -> 0.25f;
+            case 2 -> 0.50f;
+            default -> 0.75f;
+        };
+
+        if (random.nextFloat() >= ignoreChance) return;
+
+
+        // Cancel durability loss entirely for this call.
+        cir.setReturnValue(false);
     }
 
     @Inject(method = "writeNbt", at = @At("TAIL"))

@@ -184,7 +184,8 @@ public abstract class EntityMixin implements EntityTagManager {
 
     @Inject(method = "playStepSound", at = @At("HEAD"), cancellable = true)
     private void cancelStepSound(BlockPos pos, BlockState state, CallbackInfo ci) {
-        if (!((Object) this instanceof PlayerEntity player)) return;
+        Entity self = (Entity) (Object) this;
+        if (!(self instanceof PlayerEntity player)) return;
 
         ItemStack boots = player.getEquippedStack(EquipmentSlot.FEET);
         if (EnchantmentHelper.getLevel(ModEnchantments.SILENT_STEPS, boots) > 0 || player.hasStatusEffect(StatusEffects.INVISIBILITY)) {
@@ -195,8 +196,10 @@ public abstract class EntityMixin implements EntityTagManager {
     @Inject(method = "spawnSprintingParticles", at = @At("HEAD"), cancellable = true)
     private void onSpawnSprintingParticles(CallbackInfo ci) {
         Entity self = (Entity) (Object) this;
-        if (self instanceof PlayerEntity player && player.hasStatusEffect(StatusEffects.INVISIBILITY)) {
-            ci.cancel(); // prevent sprinting particles
+        if (!(self instanceof PlayerEntity player)) return;
+        ItemStack boots = player.getEquippedStack(EquipmentSlot.FEET);
+        if (EnchantmentHelper.getLevel(ModEnchantments.SILENT_STEPS, boots) > 0 || player.hasStatusEffect(StatusEffects.INVISIBILITY)) {
+            ci.cancel(); // Suppress the sprinting particles
         }
     }
 }

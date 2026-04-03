@@ -17,6 +17,8 @@ import net.ryan.beyond_the_block.feature.cauldrons.IceConversionHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.MagmaDripHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.PowderSnowCauldronHelper;
 import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
+import net.ryan.beyond_the_block.utils.helpers.HelmetEnchantmentHandler;
+import net.ryan.beyond_the_block.utils.helpers.NightstrideHelper;
 import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
 
 public class WorldEventRegistrar {
@@ -32,10 +34,8 @@ public class WorldEventRegistrar {
 
     private static void registerServerTickEvents() {
         ServerTickEvents.END_WORLD_TICK.register(world -> {
-            NightstrideEnchantment.registerTickHandler(world);
-            IronCladVisionEnchantment.registerTickHandler(world);
-            MindWardEnchantment.registerTickHandler(world);
-            ShadowsVeilEnchantment.registerTickHandler(world);
+            NightstrideHelper.register();
+            HelmetEnchantmentHandler.register();
 
             RestoreManager.tick(world);
             HoneyDripHelper.tick(world);

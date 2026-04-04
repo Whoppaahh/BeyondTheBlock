@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.content.riddles;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
@@ -15,9 +16,13 @@ import java.util.UUID;
 
 public record Riddle(UUID id, List<String> pages, List<Item> requiredItems) {
 
-    public NbtCompound toNbt(UUID playerId) {
+    public Riddle {
+        pages = List.copyOf(pages);
+        requiredItems = List.copyOf(requiredItems);
+    }
+
+    public NbtCompound toNbt() {
         NbtCompound tag = new NbtCompound();
-        tag.putUuid("Player", playerId);
         tag.putUuid("Id", id);
 
         NbtList pagesList = new NbtList();
@@ -39,13 +44,13 @@ public record Riddle(UUID id, List<String> pages, List<Item> requiredItems) {
         UUID riddleId = tag.getUuid("Id");
 
         List<String> pages = new ArrayList<>();
-        NbtList pagesList = tag.getList("Pages", NbtList.STRING_TYPE);
+        NbtList pagesList = tag.getList("Pages", NbtElement.STRING_TYPE);
         for (int i = 0; i < pagesList.size(); i++) {
             pages.add(pagesList.getString(i));
         }
 
         List<String> itemIds = new ArrayList<>();
-        NbtList itemsList = tag.getList("Items", NbtList.STRING_TYPE);
+        NbtList itemsList = tag.getList("Items", NbtElement.STRING_TYPE);
         for (int i = 0; i < itemsList.size(); i++) {
             itemIds.add(itemsList.getString(i));
         }
@@ -53,28 +58,32 @@ public record Riddle(UUID id, List<String> pages, List<Item> requiredItems) {
         return fromStored(riddleId, pages, itemIds);
     }
 
-    public static UUID getPlayerId(NbtCompound tag) {
-        return tag.getUuid("Player");
-    }
-
-    // Static method to create a Riddle from stored data (NBT)
     public static Riddle fromStored(UUID riddleId, List<String> pages, List<String> itemIds) {
         List<Item> items = new ArrayList<>();
+
         for (String itemId : itemIds) {
-            Identifier identifier = new Identifier(itemId);
-            if (!Registry.ITEM.getIds().contains(identifier)) {
-                BeyondTheBlock.LOGGER.warn("Item {} not found in Registry.ITEM", identifier);
+            Identifier identifier;
+            try {
+                identifier = new Identifier(itemId);
+            } catch (Exception e) {
+                BeyondTheBlock.LOGGER.warn("Invalid item identifier '{}' in stored riddle {}", itemId, riddleId);
                 continue;
             }
+
+            if (!Registry.ITEM.containsId(identifier)) {
+                BeyondTheBlock.LOGGER.warn("Item {} not found in Registry.ITEM for riddle {}", identifier, riddleId);
+                continue;
+            }
+
             Item item = Registry.ITEM.get(identifier);
             if (item == Items.AIR) {
-                BeyondTheBlock.LOGGER.warn("Item {} resolved to AIR, skipping", identifier);
+                BeyondTheBlock.LOGGER.warn("Item {} resolved to AIR for riddle {}, skipping", identifier, riddleId);
                 continue;
             }
 
             items.add(item);
         }
+
         return new Riddle(riddleId, pages, items);
     }
-
 }

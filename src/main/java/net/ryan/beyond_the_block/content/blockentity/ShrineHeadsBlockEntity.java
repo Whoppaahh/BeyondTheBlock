@@ -122,7 +122,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
         if (!stack.isEmpty() && world != null && !world.isClient) {
             RiddleDataManager handler = RiddleDataManager.get((ServerWorld) world, ContentRegistrar.RIDDLE_COMPONENTS);
             sync(); // auto-sync
-            updateLastSynced(handler.getLastUpdated());
+            updateLastSynced(handler.getLastUpdatedWorldTime());
         }
     }
 
@@ -302,7 +302,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
 
         RiddleDataManager handler = RiddleDataManager.get(serverWorld, ContentRegistrar.RIDDLE_COMPONENTS);
 
-        if (!blockEntity.initialised || blockEntity.needsSync(handler.getLastUpdated())) {
+        if (!blockEntity.initialised || blockEntity.needsSync(handler.getLastUpdatedWorldTime())) {
             blockEntity.initialised = true;
             int index = 0;
 
@@ -327,7 +327,7 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
             }
             blockEntity.markDirty();
             blockEntity.sync();
-            blockEntity.updateLastSynced(handler.getLastUpdated());
+            blockEntity.updateLastSynced(handler.getLastUpdatedWorldTime());
         }
     }
 

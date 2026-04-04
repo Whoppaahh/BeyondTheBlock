@@ -69,8 +69,8 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
         int scrollHeight = backgroundHeight - 85;
         entriesPerPage = 2;
 
-        activeRiddlesScroll = new ScrollBarWidget(scrollX, scrollY, scrollHeight, RiddleClientCache.activeRiddles.size(), entriesPerPage);
-        completedRiddlesScroll = new ScrollBarWidget(scrollX, scrollY, scrollHeight, RiddleClientCache.completedRiddles.size(), entriesPerPage);
+        activeRiddlesScroll = new ScrollBarWidget(scrollX, scrollY, scrollHeight, RiddleClientCache.getActiveRiddles().size(), entriesPerPage);
+        completedRiddlesScroll = new ScrollBarWidget(scrollX, scrollY, scrollHeight, RiddleClientCache.getCompletedRiddles().size(), entriesPerPage);
     }
 
     private void switchTab(Tab tab) {
@@ -102,7 +102,7 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
     }
 
     private void renderInfoTab(MatrixStack matrices) {
-        long seconds = RiddleDataManager.getSecondsUntilNextDay();
+        long seconds = RiddleClientCache.getSecondsUntilNextDay();
         long minutes = seconds / 60;
         long remainingSeconds = seconds % 60;
         String timeString = "Generating Riddle in: " + minutes + "m " + remainingSeconds + "s";
@@ -111,12 +111,12 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
         int startX = this.titleX + 15;
 
         textRenderer.draw(matrices, timeString, startX, startY, 4210752);
-        textRenderer.draw(matrices, "Active Riddles: " + RiddleClientCache.activeRiddles.size(), startX, startY + 10, 4210752);
-        textRenderer.draw(matrices, "Completed Riddles: " + RiddleClientCache.completedRiddles.size(), startX, startY + 20, 4210752);
+        textRenderer.draw(matrices, "Active Riddles: " + RiddleClientCache.getActiveRiddles().size(), startX, startY + 10, 4210752);
+        textRenderer.draw(matrices, "Completed Riddles: " + RiddleClientCache.getCompletedRiddles().size(), startX, startY + 20, 4210752);
     }
 
     private void renderActiveTab(MatrixStack matrices) {
-        Map<UUID, Riddle> activeRiddles = RiddleClientCache.activeRiddles;
+        Map<UUID, Riddle> activeRiddles = RiddleClientCache.getActiveRiddles();
         int offset = activeRiddlesScroll.getScrollOffset();
         int startY = this.y + 30;
         int startX = this.titleX + 15;
@@ -139,7 +139,7 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
     }
 
     private void renderCompletedTab(MatrixStack matrices) {
-        Map<UUID, Set<UUID>> completedRiddles = RiddleClientCache.completedRiddles;
+        Map<UUID, Set<UUID>> completedRiddles = RiddleClientCache.getCompletedRiddles();
         int offset = completedRiddlesScroll.getScrollOffset();
         int startY = this.y + 30;
         int startX = this.titleX + 15;
@@ -168,12 +168,12 @@ public class RiddleCoreScreen extends HandledScreen<RiddleCoreScreenHandler> {
         super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
         if (currentTab == Tab.ACTIVE
-                && RiddleClientCache.activeRiddles.size() > entriesPerPage) {
+                && RiddleClientCache.getActiveRiddles().size() > entriesPerPage) {
             if (client != null) {
                 activeRiddlesScroll.render(matrices, client);
             }
         } else if (currentTab == Tab.COMPLETED
-                && RiddleClientCache.completedRiddles.size() > entriesPerPage) {
+                && RiddleClientCache.getActiveRiddles().size() > entriesPerPage) {
             if (client != null) {
                 completedRiddlesScroll.render(matrices, client);
             }

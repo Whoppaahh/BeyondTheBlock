@@ -12,8 +12,6 @@ import static net.ryan.beyond_the_block.network.packets.PacketIDs.*;
 
 public class ServerNetworking {
 
-    public static ServerPlayerEntity serverPlayer;
-
     // Register the C2S packets
     public static void registerC2SPackets() {
 

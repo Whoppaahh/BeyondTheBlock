@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.content.riddles;
 
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
@@ -10,7 +9,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.PersistentState;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.network.sync.riddles.RiddleTimeSync;
@@ -21,24 +19,22 @@ import java.util.*;
 public class RiddleDataManager extends PersistentState {
     public static final String ID = "shrine_riddle_data";
 
-    private static long syncedTimeOfDay = 0;
-    private BlockPos shrinePos = null;
-    private static final Map<UUID, Riddle> activeRiddles = new HashMap<>();
-    private static final Map<UUID, Set<UUID>> completedRiddles = new HashMap<>();
-    private final RiddleComponents components;
-    public static long lastGenerationTime = -1;
-    private static long lastUpdated = System.currentTimeMillis();
-    // A map to keep track of player UUIDs and the set of riddle signatures they've seen
-    public static final Map<UUID, Map<UUID, String>> playerRiddlesMap = new HashMap<>();
+    private long syncedTimeOfDay = 0L;
+    private long lastGenerationTime = -1L;
+    private long lastUpdatedWorldTime = 0L;
 
+    private BlockPos shrinePos = null;
+
+    private final Map<UUID, Riddle> activeRiddles = new HashMap<>();
+    private final Map<UUID, Set<UUID>> completedRiddles = new HashMap<>();
+    private final Map<UUID, Set<String>> seenSignaturesByPlayer = new HashMap<>();
+
+    private final RiddleComponents components;
 
     public RiddleDataManager(RiddleComponents components) {
         this.components = components;
     }
 
-    public static void updateTime(long timeOfDay){
-        syncedTimeOfDay = timeOfDay;
-    }
     public static RiddleDataManager get(ServerWorld world, RiddleComponents components) {
         return world.getPersistentStateManager().getOrCreate(
                 nbt -> createFromNbt(nbt, components),
@@ -48,67 +44,67 @@ public class RiddleDataManager extends PersistentState {
     }
 
     public static RiddleDataManager createFromNbt(NbtCompound nbt, RiddleComponents components) {
-        RiddleDataManager handler = new RiddleDataManager(components);
+        RiddleDataManager manager = new RiddleDataManager(components);
 
         if (nbt.contains("ShrinePos")) {
-            handler.shrinePos = BlockPos.fromLong(nbt.getLong("ShrinePos"));
+            manager.shrinePos = BlockPos.fromLong(nbt.getLong("ShrinePos"));
         }
-        playerRiddlesMap.clear();
-        completedRiddles.clear();
-        activeRiddles.clear();
 
-        // --- PlayerRiddles ---
-        NbtCompound playerRiddlesTag = nbt.getCompound("PlayerRiddles");
-        for (String playerIdStr : playerRiddlesTag.getKeys()) {
+        if (nbt.contains("SyncedTimeOfDay")) {
+            manager.syncedTimeOfDay = nbt.getLong("SyncedTimeOfDay");
+        }
+
+        if (nbt.contains("LastGenerationTime")) {
+            manager.lastGenerationTime = nbt.getLong("LastGenerationTime");
+        }
+
+        if (nbt.contains("LastUpdatedWorldTime")) {
+            manager.lastUpdatedWorldTime = nbt.getLong("LastUpdatedWorldTime");
+        }
+
+        // Seen signatures
+        NbtCompound seenTag = nbt.getCompound("SeenSignatures");
+        for (String playerIdStr : seenTag.getKeys()) {
             UUID playerId = UUID.fromString(playerIdStr);
-            NbtCompound riddlesCompound = playerRiddlesTag.getCompound(playerIdStr);
+            NbtList list = seenTag.getList(playerIdStr, NbtElement.STRING_TYPE);
 
-            Map<UUID, String> riddles = new HashMap<>();
-            for (String riddleIDString : riddlesCompound.getKeys()) {
-                UUID riddleID = UUID.fromString(riddleIDString);
-                String signature = riddlesCompound.getString(riddleIDString);
-                riddles.put(riddleID, signature);
+            Set<String> signatures = new HashSet<>();
+            for (NbtElement element : list) {
+                signatures.add(element.asString());
             }
 
-            playerRiddlesMap.put(playerId, riddles);
+            manager.seenSignaturesByPlayer.put(playerId, signatures);
         }
 
-        // --- CompletedRiddles ---
+        // Completed riddles
         NbtCompound completedTag = nbt.getCompound("CompletedRiddles");
         for (String playerIdStr : completedTag.getKeys()) {
             UUID playerId = UUID.fromString(playerIdStr);
             NbtList list = completedTag.getList(playerIdStr, NbtElement.STRING_TYPE);
+
             Set<UUID> riddleIds = new HashSet<>();
             for (NbtElement element : list) {
                 riddleIds.add(UUID.fromString(element.asString()));
             }
-            completedRiddles.put(playerId, riddleIds);
+
+            manager.completedRiddles.put(playerId, riddleIds);
         }
 
-        // --- ActiveRiddles ---
+        // Active riddles
         NbtCompound activeTag = nbt.getCompound("ActiveRiddles");
         for (String playerIdStr : activeTag.getKeys()) {
             UUID playerId = UUID.fromString(playerIdStr);
-            NbtCompound playerRiddles = activeTag.getCompound(playerIdStr);
+            NbtCompound playerActiveTag = activeTag.getCompound(playerIdStr);
 
-            for (String riddleIdStr : playerRiddles.getKeys()) {
-                UUID riddleId = UUID.fromString(riddleIdStr);
-                NbtCompound riddleTag = playerRiddles.getCompound(riddleIdStr);
-
-                List<String> pages = riddleTag.getList("Pages", NbtElement.STRING_TYPE)
-                        .stream().map(NbtElement::asString).toList();
-
-                List<String> itemIds = riddleTag.getList("Items", NbtElement.STRING_TYPE)
-                        .stream().map(NbtElement::asString).toList();
-
-                Riddle riddle = Riddle.fromStored(riddleId, pages, itemIds);
-
-                activeRiddles.put(playerId, riddle);
+            for (String riddleIdStr : playerActiveTag.getKeys()) {
+                NbtCompound riddleTag = playerActiveTag.getCompound(riddleIdStr);
+                Riddle riddle = Riddle.fromNbt(riddleTag);
+                manager.activeRiddles.put(playerId, riddle);
             }
         }
-        return handler;
-    }
 
+        return manager;
+    }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -116,122 +112,119 @@ public class RiddleDataManager extends PersistentState {
             nbt.putLong("ShrinePos", shrinePos.asLong());
         }
 
-        // --- PlayerRiddles ---
-        NbtCompound playerRiddlesTag = getNbtCompound();
-        nbt.put("PlayerRiddles", playerRiddlesTag);
+        nbt.putLong("SyncedTimeOfDay", syncedTimeOfDay);
+        nbt.putLong("LastGenerationTime", lastGenerationTime);
+        nbt.putLong("LastUpdatedWorldTime", lastUpdatedWorldTime);
 
-        // --- CompletedRiddles ---
+        // Seen signatures
+        NbtCompound seenTag = new NbtCompound();
+        for (Map.Entry<UUID, Set<String>> entry : seenSignaturesByPlayer.entrySet()) {
+            NbtList list = new NbtList();
+            for (String signature : entry.getValue()) {
+                list.add(NbtString.of(signature));
+            }
+            seenTag.put(entry.getKey().toString(), list);
+        }
+        nbt.put("SeenSignatures", seenTag);
+
+        // Completed riddles
         NbtCompound completedTag = new NbtCompound();
         for (Map.Entry<UUID, Set<UUID>> entry : completedRiddles.entrySet()) {
-            NbtList completedList = new NbtList();
+            NbtList list = new NbtList();
             for (UUID riddleId : entry.getValue()) {
-                completedList.add(NbtString.of(riddleId.toString()));
+                list.add(NbtString.of(riddleId.toString()));
             }
-            completedTag.put(entry.getKey().toString(), completedList);
+            completedTag.put(entry.getKey().toString(), list);
         }
         nbt.put("CompletedRiddles", completedTag);
 
-        // --- ActiveRiddles ---
+        // Active riddles
         NbtCompound activeTag = new NbtCompound();
         for (Map.Entry<UUID, Riddle> entry : activeRiddles.entrySet()) {
             UUID playerId = entry.getKey();
             Riddle riddle = entry.getValue();
 
-            NbtCompound playerActiveRiddlesTag = activeTag.getCompound(playerId.toString()); // Get the player section or create one if it doesn't exist
+            NbtCompound playerActiveTag = activeTag.contains(playerId.toString())
+                    ? activeTag.getCompound(playerId.toString())
+                    : new NbtCompound();
 
-            NbtCompound riddleTag = new NbtCompound();
-
-            NbtList pages = new NbtList();
-            for (String page : riddle.pages()) {
-                pages.add(NbtString.of(page));
-            }
-            riddleTag.put("Pages", pages);
-
-            NbtList items = new NbtList();
-            for (Item item : riddle.requiredItems()) {
-                items.add(NbtString.of(Registry.ITEM.getId(item).toString()));
-            }
-            riddleTag.put("Items", items);
-
-            // Add the riddle under the player's key
-            playerActiveRiddlesTag.put(riddle.id().toString(), riddleTag);
-
-            // Now update the activeTag with the player section
-            activeTag.put(playerId.toString(), playerActiveRiddlesTag);
+            playerActiveTag.put(riddle.id().toString(), riddle.toNbt());
+            activeTag.put(playerId.toString(), playerActiveTag);
         }
-
         nbt.put("ActiveRiddles", activeTag);
+
         return nbt;
     }
 
-    private static @NotNull NbtCompound getNbtCompound() {
-        NbtCompound playerRiddlesTag = new NbtCompound();
-        for (Map.Entry<UUID, Map<UUID, String>> entry : playerRiddlesMap.entrySet()) {
-            UUID playerID = entry.getKey();
-            Map<UUID, String> riddles = entry.getValue();
-
-            NbtCompound riddlesCompound = new NbtCompound();
-
-            for (Map.Entry<UUID, String> riddleEntry : riddles.entrySet()) {
-                riddlesCompound.putString(riddleEntry.getKey().toString(), riddleEntry.getValue());
-            }
-
-
-            playerRiddlesTag.put(playerID.toString(), riddlesCompound);
-        }
-        return playerRiddlesTag;
+    public void updateTime(long timeOfDay) {
+        this.syncedTimeOfDay = timeOfDay;
+        markDirty();
     }
-
 
     public void setShrinePos(BlockPos pos) {
         this.shrinePos = pos;
-        this.markDirty();
+        markDirty();
     }
 
-    public static long getEstimatedTimeOfDay() {
-        long elapsed = (System.currentTimeMillis() - lastUpdated) / 50; // convert ms to ticks
-        return (syncedTimeOfDay + elapsed) % Configs.server().features.shrines.generationInterval;
+    public BlockPos getShrinePos() {
+        return shrinePos;
     }
 
-    public static long getSecondsUntilNextDay() {
-        long ticksRemaining = Configs.server().features.shrines.generationInterval - getEstimatedTimeOfDay();
-        return ticksRemaining / 20;
+    public long getEstimatedTimeOfDay(ServerWorld world) {
+        return world.getTimeOfDay() % Configs.server().features.shrines.generationInterval;
+    }
+
+    public long getSecondsUntilNextDay(ServerWorld world) {
+        long ticksRemaining = Configs.server().features.shrines.generationInterval - getEstimatedTimeOfDay(world);
+        return ticksRemaining / 20L;
     }
 
     public void tick(ServerWorld world) {
-        long timeOfDay = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval; //24000 for full day
+        long timeOfDay = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval;
 
         if (timeOfDay < 100 && lastGenerationTime != world.getTimeOfDay() && shrinePos != null) {
             lastGenerationTime = world.getTimeOfDay();
             generateDailyRiddle(world);
         }
-        if (world.getTime() % 200 == 0) { // Every 10 seconds
-            long time = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval;
+
+        if (world.getTime() % 200 == 0) {
+            long syncedTime = world.getTimeOfDay() % Configs.server().features.shrines.generationInterval;
+            syncedTimeOfDay = syncedTime;
 
             for (ServerPlayerEntity player : world.getPlayers()) {
-                RiddleTimeSync.syncRiddleTime(player, time);
+                RiddleTimeSync.syncRiddleTime(player, syncedTime);
             }
         }
-
     }
 
     private void generateDailyRiddle(ServerWorld world) {
         List<ServerPlayerEntity> players = world.getPlayers();
-        if (players.isEmpty()) return;
+        if (players.isEmpty()) {
+            return;
+        }
 
         final int MAX_RIDDLES = 4;
-        int assignedRiddles = 0; //Counter to track the number of players assigned riddles
+        int assignedRiddles = 0;
 
         for (ServerPlayerEntity player : players) {
-            UUID persistentId = player.getUuid();
-            if (!activeRiddles.containsKey(persistentId)) {
-                Riddle riddle = components.createRandomRiddle(persistentId);
-                activeRiddles.put(persistentId, riddle);
-                lastUpdated = System.currentTimeMillis();
-                markDirty();
-                assignedRiddles++;
+            UUID playerId = player.getUuid();
+
+            if (activeRiddles.containsKey(playerId)) {
+                continue;
             }
-            //Stop assigning riddles if 4 players have been assigned one
+
+            Set<String> seenSignatures = seenSignaturesByPlayer.computeIfAbsent(playerId, id -> new HashSet<>());
+            Optional<Riddle> maybeRiddle = components.createRandomRiddle(seenSignatures);
+
+            if (maybeRiddle.isEmpty()) {
+                continue;
+            }
+
+            activeRiddles.put(playerId, maybeRiddle.get());
+            lastUpdatedWorldTime = world.getTimeOfDay();
+            markDirty();
+            assignedRiddles++;
+
             if (assignedRiddles >= MAX_RIDDLES) {
                 break;
             }
@@ -240,11 +233,12 @@ public class RiddleDataManager extends PersistentState {
         if (shrinePos != null) {
             world.playSound(null, shrinePos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 1.0f, 1.0f);
         }
-        this.markDirty();
+
+        markDirty();
     }
 
-    public long getLastUpdated() {
-        return lastUpdated;
+    public long getLastUpdatedWorldTime() {
+        return lastUpdatedWorldTime;
     }
 
     public Riddle getRiddle(UUID playerId) {
@@ -256,16 +250,26 @@ public class RiddleDataManager extends PersistentState {
     }
 
     public Map<UUID, Set<UUID>> getCompletedRiddles() {
-        return Collections.unmodifiableMap(completedRiddles);
+        Map<UUID, Set<UUID>> copy = new HashMap<>();
+        for (Map.Entry<UUID, Set<UUID>> entry : completedRiddles.entrySet()) {
+            copy.put(entry.getKey(), Collections.unmodifiableSet(entry.getValue()));
+        }
+        return Collections.unmodifiableMap(copy);
+    }
+
+    public boolean hasCompleted(UUID playerId, UUID riddleId) {
+        return completedRiddles.getOrDefault(playerId, Collections.emptySet()).contains(riddleId);
     }
 
     public void markCompleted(UUID playerId, UUID riddleId) {
-        completedRiddles.computeIfAbsent(UUID.fromString(playerId.toString()), id -> new HashSet<>()).add(UUID.fromString(riddleId.toString()));
+        completedRiddles.computeIfAbsent(playerId, id -> new HashSet<>()).add(riddleId);
         activeRiddles.remove(playerId);
-        this.markDirty();
+        markDirty();
     }
 
-    public BlockPos getShrinePos() {
-        return shrinePos;
+    public void clearActiveRiddle(UUID playerId) {
+        if (activeRiddles.remove(playerId) != null) {
+            markDirty();
+        }
     }
 }

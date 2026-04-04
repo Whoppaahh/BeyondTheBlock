@@ -95,7 +95,7 @@ public class SingleInputBlock extends BlockWithEntity implements BlockEntityProv
         Item requiredItem = blockEntity.getRequiredItem();
 
         if (requiredItem == null || heldStack.getItem() != requiredItem) {
-            //EmeraldEmpire.LOGGER.info("This item is not what the shrine seeks");
+            //BeyondTheBlock.LOGGER.info("This item is not what the shrine seeks");
             blockEntity.clear();
             ShrineHelper.applyRandomHarmfulEffect(player);
             return ActionResult.FAIL;
@@ -156,7 +156,7 @@ public class SingleInputBlock extends BlockWithEntity implements BlockEntityProv
                 world.updateListeners(head.getPos(), head.getCachedState(), head.getCachedState(), 3);
                 world.getChunkManager().markForUpdate(head.getPos());
 
-                head.updateLastSynced(handler.getLastUpdated());
+                head.updateLastSynced(handler.getLastUpdatedWorldTime());
             }
         });
     }
@@ -171,7 +171,7 @@ public class SingleInputBlock extends BlockWithEntity implements BlockEntityProv
             lectern.markDirty();
             world.setBlockState(lecternPos, lecternState.with(LecternBlock.HAS_BOOK, false), Block.NOTIFY_ALL);
             world.updateListeners(lecternPos, lecternState, lecternState, Block.NOTIFY_ALL);
-            //EmeraldEmpire.LOGGER.info("Cleared riddle book at: {}", lecternPos);
+            //BeyondTheBlock.LOGGER.info("Cleared riddle book at: {}", lecternPos);
         }
     }
 

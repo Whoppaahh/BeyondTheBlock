@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 
 import java.util.function.BiConsumer;
 
@@ -23,10 +24,7 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
 
     @Override
     public void accept(BiConsumer<Identifier, LootTable.Builder> exporter) {
-
-        // ===== MATERIAL FAMILIES =====
         generateOreFamily(exporter,
-                "miranite",
                 ModBlocks.MIRANITE_BLOCK,
                 ModBlocks.RAW_MIRANITE_BLOCK,
                 ModBlocks.MIRANITE_ORE,
@@ -38,7 +36,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "chromite",
                 ModBlocks.CHROMITE_BLOCK,
                 null,
                 ModBlocks.CHROMITE_ORE,
@@ -50,7 +47,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "nocturnite",
                 ModBlocks.NOCTURNITE_BLOCK,
                 null,
                 ModBlocks.NOCTURNITE_ORE,
@@ -62,7 +58,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "amberine",
                 ModBlocks.AMBERINE_BLOCK,
                 null,
                 ModBlocks.AMBERINE_ORE,
@@ -74,7 +69,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "rosette",
                 ModBlocks.ROSETTE_BLOCK,
                 ModBlocks.RAW_ROSETTE_BLOCK,
                 ModBlocks.ROSETTE_ORE,
@@ -86,7 +80,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "azuros",
                 ModBlocks.AZUROS_BLOCK,
                 ModBlocks.RAW_AZUROS_BLOCK,
                 ModBlocks.AZUROS_ORE,
@@ -98,7 +91,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "indigra",
                 ModBlocks.INDIGRA_BLOCK,
                 null,
                 ModBlocks.INDIGRA_ORE,
@@ -110,7 +102,6 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         );
 
         generateOreFamily(exporter,
-                "xirion",
                 ModBlocks.XIRION_BLOCK,
                 null,
                 ModBlocks.XIRION_ORE,
@@ -118,15 +109,26 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
                 ModBlocks.NETHER_XIRION_ORE,
                 ModBlocks.END_XIRION_ORE,
                 ModItems.XIRION_ITEM,
-                null // direct drop
+                null
         );
-    }
 
-    // ===== FAMILY GENERATOR =====
+        exportDropSelf(exporter, ModBlocks.RUBY_BLOCK);
+        exportOre(exporter, ModBlocks.RUBY_ORE, ModItems.RUBY_ITEM);
+        exportOre(exporter, ModBlocks.DEEPSLATE_RUBY_ORE, ModItems.RUBY_ITEM);
+
+        generateSelfDropFamily(exporter, ModDatagenFamilies.SHELVES);
+        generateSelfDropFamily(exporter, ModDatagenFamilies.SPONGES);
+        generateSelfDropFamily(exporter, ModDatagenFamilies.SHRINE_BLOCKS);
+        generateSelfDropFamily(exporter, ModDatagenFamilies.SIMPLE_UTILITY_BLOCKS);
+        generateSelfDropFamily(exporter, ModDatagenFamilies.MACHINE_STYLE_BLOCKS);
+        generateSelfDropFamily(exporter, ModDatagenFamilies.RAIL_STYLE_BLOCKS);
+
+        exportDropSelf(exporter, ModBlocks.CHISELED_BOOKSHELF);
+        exportDropSelf(exporter, ModBlocks.WATER_TORCH_BLOCK);
+    }
 
     private void generateOreFamily(
             BiConsumer<Identifier, LootTable.Builder> exporter,
-            String name,
             Block storageBlock,
             Block rawStorageBlock,
             Block overworldOre,
@@ -136,52 +138,48 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
             Item refinedItem,
             Item rawItem
     ) {
-
-        // Storage block -> drops itself
         exportDropSelf(exporter, storageBlock);
 
-        // Raw storage block (if exists) -> drops raw item x9
         if (rawStorageBlock != null && rawItem != null) {
             exportRawStorage(exporter, rawStorageBlock, rawItem);
         }
 
-        // Ore logic
         if (overworldOre != null) {
             exportOre(exporter, overworldOre, rawItem != null ? rawItem : refinedItem);
         }
-
         if (deepslateOre != null) {
             exportOre(exporter, deepslateOre, rawItem != null ? rawItem : refinedItem);
         }
-
         if (netherOre != null) {
             exportOre(exporter, netherOre, rawItem != null ? rawItem : refinedItem);
         }
-
         if (endOre != null) {
             exportOre(exporter, endOre, rawItem != null ? rawItem : refinedItem);
         }
     }
 
-    // ===== EXPORT HELPERS =====
+    private void generateSelfDropFamily(BiConsumer<Identifier, LootTable.Builder> exporter, Iterable<Block> blocks) {
+        for (Block block : blocks) {
+            exportDropSelf(exporter, block);
+        }
+    }
 
     private void exportDropSelf(BiConsumer<Identifier, LootTable.Builder> exporter, Block block) {
-        exporter.accept(id(block),
-                BlockLootTableGenerator.drops(block));
+        exporter.accept(id(block), BlockLootTableGenerator.drops(block));
     }
 
     private void exportRawStorage(BiConsumer<Identifier, LootTable.Builder> exporter, Block block, Item rawItem) {
-        exporter.accept(id(block),
-                BlockLootTableGenerator.drops(rawItem)); // You can upgrade this to count=9 later if desired
+        exporter.accept(id(block), BlockLootTableGenerator.drops(rawItem));
     }
 
     private void exportOre(BiConsumer<Identifier, LootTable.Builder> exporter, Block ore, Item dropItem) {
-        exporter.accept(id(ore),
-                BlockLootTableGenerator.dropsWithSilkTouch(ore, ItemEntry.builder(dropItem)));
+        exporter.accept(id(ore), BlockLootTableGenerator.dropsWithSilkTouch(ore, ItemEntry.builder(dropItem)));
     }
 
     private Identifier id(Block block) {
-        return new Identifier(BeyondTheBlock.MOD_ID,
-                "blocks/" + block.getTranslationKey().replace("block." + BeyondTheBlock.MOD_ID + ".", ""));
+        return new Identifier(
+                BeyondTheBlock.MOD_ID,
+                "blocks/" + block.getTranslationKey().replace("block." + BeyondTheBlock.MOD_ID + ".", "")
+        );
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void generateTags() {
         generateMiningTags();
+        generateFamilyMiningTags();
         generateToolRequirementTags();
         generateOreTags();
         generateMiscTags();
@@ -30,6 +32,21 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         addAll(builder, allOreBlocks());
         addAll(builder, allStorageBlocks());
         addAll(builder, allRawStorageBlocks());
+    }
+
+    private void generateFamilyMiningTags() {
+        FabricTagProvider<Block>.FabricTagBuilder<Block> axeMineable = getOrCreateTagBuilder(BlockTags.AXE_MINEABLE);
+        addAll(axeMineable, ModDatagenFamilies.SHELVES);
+        axeMineable.add(ModBlocks.CHISELED_BOOKSHELF);
+
+        FabricTagProvider<Block>.FabricTagBuilder<Block> hoeMineable = getOrCreateTagBuilder(BlockTags.HOE_MINEABLE);
+        addAll(hoeMineable, ModDatagenFamilies.SPONGES);
+
+        FabricTagProvider<Block>.FabricTagBuilder<Block> pickaxeMineable = getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE);
+        addAll(pickaxeMineable, ModDatagenFamilies.SHRINE_BLOCKS);
+        addAll(pickaxeMineable, ModDatagenFamilies.SIMPLE_UTILITY_BLOCKS);
+        addAll(pickaxeMineable, ModDatagenFamilies.MACHINE_STYLE_BLOCKS);
+        addAll(pickaxeMineable, ModDatagenFamilies.RAIL_STYLE_BLOCKS);
     }
 
     private void generateToolRequirementTags() {
@@ -61,51 +78,42 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     private List<Block> allOreBlocks() {
         return List.of(
-                // Ruby
                 ModBlocks.RUBY_ORE,
                 ModBlocks.DEEPSLATE_RUBY_ORE,
 
-                // Miranite
                 ModBlocks.MIRANITE_ORE,
                 ModBlocks.DEEPSLATE_MIRANITE_ORE,
                 ModBlocks.NETHER_MIRANITE_ORE,
                 ModBlocks.END_MIRANITE_ORE,
 
-                // Chromite
                 ModBlocks.CHROMITE_ORE,
                 ModBlocks.DEEPSLATE_CHROMITE_ORE,
                 ModBlocks.NETHER_CHROMITE_ORE,
                 ModBlocks.END_CHROMITE_ORE,
 
-                // Nocturnite
                 ModBlocks.NOCTURNITE_ORE,
                 ModBlocks.DEEPSLATE_NOCTURNITE_ORE,
                 ModBlocks.NETHER_NOCTURNITE_ORE,
                 ModBlocks.END_NOCTURNITE_ORE,
 
-                // Amberine
                 ModBlocks.AMBERINE_ORE,
                 ModBlocks.DEEPSLATE_AMBERINE_ORE,
 
-                // Rosette
                 ModBlocks.ROSETTE_ORE,
                 ModBlocks.DEEPSLATE_ROSETTE_ORE,
                 ModBlocks.NETHER_ROSETTE_ORE,
                 ModBlocks.END_ROSETTE_ORE,
 
-                // Azuros
                 ModBlocks.AZUROS_ORE,
                 ModBlocks.DEEPSLATE_AZUROS_ORE,
                 ModBlocks.NETHER_AZUROS_ORE,
                 ModBlocks.END_AZUROS_ORE,
 
-                // Indigra
                 ModBlocks.INDIGRA_ORE,
                 ModBlocks.DEEPSLATE_INDIGRA_ORE,
                 ModBlocks.NETHER_INDIGRA_ORE,
                 ModBlocks.END_INDIGRA_ORE,
 
-                // Xirion
                 ModBlocks.XIRION_ORE,
                 ModBlocks.DEEPSLATE_XIRION_ORE,
                 ModBlocks.NETHER_XIRION_ORE,
@@ -153,6 +161,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.NETHER_AZUROS_ORE,
                 ModBlocks.END_AZUROS_ORE,
                 ModBlocks.AZUROS_BLOCK,
+                ModBlocks.RAW_AZUROS_BLOCK,
 
                 ModBlocks.XIRION_ORE,
                 ModBlocks.DEEPSLATE_XIRION_ORE,

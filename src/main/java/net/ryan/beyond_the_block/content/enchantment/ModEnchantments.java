@@ -168,6 +168,6 @@ public class ModEnchantments {
 
     public static void registerModEnchantments() {
         TemporalSliceHandler.register();
-        System.out.println("Registering Enchantments for " + BeyondTheBlock.MOD_ID);
+        BeyondTheBlock.LOGGER.info("Registering Enchantments for " + BeyondTheBlock.MOD_ID);
     }
 }

@@ -1,0 +1,22 @@
+{
+  "parent": "beyond_the_block:effects/altered_state",
+  "display": {
+    "icon": { "item": "minecraft:clock" },
+    "title": { "translate": "advancements.beyond_the_block.effects.lost_time.title" },
+    "description": { "translate": "advancements.beyond_the_block.effects.lost_time.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "time_dilation": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "beyond_the_block:time_dilation": {}
+        }
+      }
+    }
+  }
+}

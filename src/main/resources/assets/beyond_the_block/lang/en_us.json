@@ -1,5 +1,30 @@
 {
 
+  "advancements.beyond_the_block.effects.lost_time.title": "Lost Time",
+  "advancements.beyond_the_block.effects.lost_time.description": "The seconds didn’t pass correctly.",
+
+  "advancements.beyond_the_block.core.specialist.title": "Specialist",
+  "advancements.beyond_the_block.core.specialist.description": "A tool for every situation.",
+
+  "advancements.beyond_the_block.effects.afterimage.title": "Afterimage",
+  "advancements.beyond_the_block.effects.afterimage.description": "The echo arrived before you did.",
+
+  "advancements.beyond_the_block.effects.reflected_pain.title": "Reflected Pain",
+  "advancements.beyond_the_block.effects.reflected_pain.description": "Harming you comes at a cost.",
+
+  "advancements.beyond_the_block.effects.blood_loss.title": "Blood Loss",
+  "advancements.beyond_the_block.effects.blood_loss.description": "Some wounds stay open.",
+
+
+  "advancements.beyond_the_block.effects.rotten_inside.title": "Rotten Inside",
+  "advancements.beyond_the_block.effects.rotten_inside.description": "That did not sit well.",
+
+  "advancements.beyond_the_block.combat.first_blood.title": "First Blood",
+  "advancements.beyond_the_block.combat.first_blood.description": "New rules, same danger.",
+
+  "advancements.beyond_the_block.combat.under_pressure.title": "Under Pressure",
+  "advancements.beyond_the_block.combat.under_pressure.description": "You’re not the only one with advantages.",
+
   "advancements.beyond_the_block.core.beyond_the_block.title": "Beyond the Block",
   "advancements.beyond_the_block.core.beyond_the_block.description": "There’s always more to discover.",
 

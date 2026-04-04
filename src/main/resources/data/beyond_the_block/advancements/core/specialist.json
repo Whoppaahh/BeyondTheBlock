@@ -1,0 +1,54 @@
+{
+  "parent": "beyond_the_block:core/tinkerer",
+  "display": {
+    "icon": { "item": "minecraft:anvil" },
+    "title": { "translate": "advancements.beyond_the_block.core.specialist.title" },
+    "description": { "translate": "advancements.beyond_the_block.core.specialist.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_compressed_sponge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["beyond_the_block:compressed_sponge"]
+          }
+        ]
+      }
+    },
+    "has_sawmill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["beyond_the_block:sawmill"]
+          }
+        ]
+      }
+    },
+    "has_shelf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["beyond_the_block:shelf"]
+          }
+        ]
+      }
+    },
+    "has_underwater_torch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["beyond_the_block:water_torch"]
+          }
+        ]
+      }
+    }
+  }
+}

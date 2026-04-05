@@ -24,8 +24,8 @@ import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.content.item.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.GemScreenHandler;
-import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import net.ryan.beyond_the_block.utils.ModTags;
+import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

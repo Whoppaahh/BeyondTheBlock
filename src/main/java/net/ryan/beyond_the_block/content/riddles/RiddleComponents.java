@@ -1,11 +1,7 @@
 package net.ryan.beyond_the_block.content.riddles;
 
 import com.google.common.hash.Hashing;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;

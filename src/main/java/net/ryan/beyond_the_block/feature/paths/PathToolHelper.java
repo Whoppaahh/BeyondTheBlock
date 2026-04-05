@@ -19,11 +19,7 @@ import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public final class PathToolHelper {
 

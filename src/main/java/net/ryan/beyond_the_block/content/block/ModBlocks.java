@@ -27,9 +27,6 @@ import net.ryan.beyond_the_block.content.block.sponges.WetCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.item.ModItemGroup;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ModBlocks {
 

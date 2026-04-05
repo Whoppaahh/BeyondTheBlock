@@ -34,7 +34,6 @@ import net.ryan.beyond_the_block.content.enchantment.tools.shovels.FertilityEnch
 import net.ryan.beyond_the_block.content.enchantment.tools.swords.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.combat.TemporalSliceHandler;
-import net.ryan.beyond_the_block.utils.helpers.NightstrideHelper;
 
 public class ModEnchantments {
 

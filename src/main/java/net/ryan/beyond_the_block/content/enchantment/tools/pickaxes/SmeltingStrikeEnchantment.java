@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block.content.enchantment.tools.pickaxes;
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.Enchantment;
@@ -23,8 +22,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.DropMode;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
 

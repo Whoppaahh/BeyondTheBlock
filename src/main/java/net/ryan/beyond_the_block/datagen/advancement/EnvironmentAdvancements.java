@@ -6,7 +6,6 @@ import net.minecraft.advancement.criterion.ChangedDimensionCriterion;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;

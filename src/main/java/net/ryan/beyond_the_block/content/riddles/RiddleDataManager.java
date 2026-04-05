@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.PersistentState;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.network.sync.riddles.RiddleTimeSync;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 

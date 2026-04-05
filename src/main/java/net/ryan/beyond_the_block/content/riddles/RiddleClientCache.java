@@ -2,11 +2,7 @@ package net.ryan.beyond_the_block.content.riddles;
 
 import net.ryan.beyond_the_block.config.access.Configs;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public final class RiddleClientCache {
     private static Map<UUID, Riddle> activeRiddles = Map.of();

@@ -9,7 +9,6 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

@@ -6,8 +6,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
 
 public class DynamicLightRegistrar {
     public static void register(){

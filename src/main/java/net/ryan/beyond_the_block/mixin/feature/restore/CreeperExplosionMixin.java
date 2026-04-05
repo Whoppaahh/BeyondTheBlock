@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.feature.restore;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.Entity;

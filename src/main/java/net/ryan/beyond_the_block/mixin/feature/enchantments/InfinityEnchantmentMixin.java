@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.feature.enchantments;
 
 import net.minecraft.enchantment.InfinityEnchantment;
 import org.spongepowered.asm.mixin.Mixin;

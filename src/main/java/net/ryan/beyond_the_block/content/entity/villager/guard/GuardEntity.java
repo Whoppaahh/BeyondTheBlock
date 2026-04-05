@@ -60,7 +60,7 @@ import net.minecraft.world.World;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.entity.villager.guard.goals.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
+import net.ryan.beyond_the_block.mixin.accessors.CrossbowAccessor;
 import net.ryan.beyond_the_block.network.sync.guard.GuardStatusSync;
 import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler;
 import net.ryan.beyond_the_block.utils.accessors.HorseAccessor;

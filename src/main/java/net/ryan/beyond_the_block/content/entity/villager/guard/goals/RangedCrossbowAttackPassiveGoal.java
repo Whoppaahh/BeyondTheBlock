@@ -17,7 +17,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.mixin.CrossbowAccessor;
+import net.ryan.beyond_the_block.mixin.accessors.CrossbowAccessor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;

@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.feature.combat;
+package net.ryan.beyond_the_block.feature.combat.handlers;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

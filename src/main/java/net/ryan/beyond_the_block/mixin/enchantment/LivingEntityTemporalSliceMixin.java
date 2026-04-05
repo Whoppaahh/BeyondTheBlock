@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
-import net.ryan.beyond_the_block.feature.combat.TemporalSliceHandler;
+import net.ryan.beyond_the_block.feature.combat.handlers.TemporalSliceHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

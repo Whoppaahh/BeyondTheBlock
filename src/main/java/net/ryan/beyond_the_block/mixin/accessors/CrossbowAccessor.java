@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.accessors;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.CrossbowItem;

@@ -10,6 +10,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.feature.combat.handlers.FlameSweepHandler;
 import org.jetbrains.annotations.Nullable;
 
 public final class CombatEnchantmentHandler {

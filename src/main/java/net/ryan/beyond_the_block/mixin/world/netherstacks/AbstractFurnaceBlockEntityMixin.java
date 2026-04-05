@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.world.netherstacks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;

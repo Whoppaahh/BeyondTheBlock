@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.feature.riddles;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

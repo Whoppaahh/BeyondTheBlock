@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.feature.combat;
+package net.ryan.beyond_the_block.feature.combat.handlers;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;

@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
+import net.ryan.beyond_the_block.mixin.accessors.ServerPlayerInteractionManagerAccessor;
 import net.ryan.beyond_the_block.utils.ReachHelper;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;

@@ -10,6 +10,7 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.content.effect.ModEffects;
 import net.ryan.beyond_the_block.feature.horses.StayNearData;
 import net.ryan.beyond_the_block.utils.accessors.HorseAccessor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,6 +31,11 @@ public abstract class HorseEntityBehaviourMixin implements HorseAccessor {
     @Inject(method = "getPrimaryPassenger*", at = @At("HEAD"), cancellable = true)
     private void forceFirstPassengerAsController(CallbackInfoReturnable<LivingEntity> cir) {
         AbstractHorseEntity horse = (AbstractHorseEntity)(Object)this;
+
+        if (horse.hasStatusEffect(ModEffects.FREEZE)) {
+            cir.setReturnValue(null);
+            return;
+        }
 
         if (horse.getPassengerList().isEmpty()) {
             return; // let vanilla handle null

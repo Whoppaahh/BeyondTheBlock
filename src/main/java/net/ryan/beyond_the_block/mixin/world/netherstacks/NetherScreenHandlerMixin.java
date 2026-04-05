@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.world.netherstacks;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ScreenHandler.class)
-public abstract class ScreenHandlerMixin {
+public abstract class NetherScreenHandlerMixin {
 
     @Inject(method = "insertItem", at = @At("HEAD"), cancellable = true)
     private void beyond$insertRespectingNetherRules(

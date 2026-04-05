@@ -5,53 +5,42 @@ import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
 
 public final class FrozenMomentumHandler {
     private FrozenMomentumHandler() {}
 
-    public static Float getMovementSpeedOverride(PlayerEntity player) {
+    public static Float getMovementSpeedBonus(PlayerEntity player) {
         int level = EnchantmentHelper.getLevel(
                 ModEnchantments.FROZEN_MOMENTUM,
                 player.getEquippedStack(EquipmentSlot.LEGS)
         );
         if (level <= 0) return null;
 
-        BlockState state = player.getWorld().getBlockState(player.getBlockPos().down());
-        if (!(state.isOf(Blocks.SNOW) || state.isOf(Blocks.ICE) || state.isOf(Blocks.PACKED_ICE))) {
+        if (!isOnFrozenSurface(player)) {
             return null;
         }
 
-        float speed = 0.1f;
-        if (level == 1) speed += 0.1f;
-        else if (level >= 2) speed += 0.2f;
-
-        return speed;
+        if (level == 1) {
+            return 0.03f;
+        } else {
+            return 0.06f;
+        }
     }
 
-    public static void onTravel(PlayerEntity player, Vec3d movementInput) {
-        int level = EnchantmentHelper.getLevel(
-                ModEnchantments.FROZEN_MOMENTUM,
-                player.getEquippedStack(EquipmentSlot.LEGS)
-        );
-        if (level <= 0) return;
+    public static boolean isOnFrozenSurface(PlayerEntity player) {
+        BlockState feetState = player.getWorld().getBlockState(player.getBlockPos());
+        BlockState belowState = player.getWorld().getBlockState(player.getBlockPos().down());
 
-        BlockState state = player.getWorld().getBlockState(player.getBlockPos().down());
+        return isFrozenBlock(feetState) || isFrozenBlock(belowState);
+    }
 
-        double boost;
-        if (state.isOf(Blocks.ICE) || state.isOf(Blocks.PACKED_ICE)) {
-            boost = 0.03;
-        } else if (state.isOf(Blocks.SNOW)) {
-            boost = 0.015;
-        } else {
-            return;
-        }
-
-        Vec3d input = new Vec3d(movementInput.x, 0, movementInput.z);
-        if (input.lengthSquared() < 1.0E-6) return;
-
-        Vec3d normalized = input.normalize().multiply(boost);
-        player.addVelocity(normalized.x, 0.0, normalized.z);
+    private static boolean isFrozenBlock(BlockState state) {
+        return state.isOf(Blocks.SNOW)
+                || state.isOf(Blocks.SNOW_BLOCK)
+                || state.isOf(Blocks.SNOW_BLOCK)
+                || state.isOf(Blocks.ICE)
+                || state.isOf(Blocks.PACKED_ICE)
+                || state.isOf(Blocks.BLUE_ICE);
     }
 }

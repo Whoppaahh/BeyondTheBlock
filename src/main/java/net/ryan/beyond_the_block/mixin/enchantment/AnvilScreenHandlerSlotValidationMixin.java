@@ -56,6 +56,9 @@ public abstract class AnvilScreenHandlerSlotValidationMixin {
             }
         };
 
+        newLeft.id = oldLeft.id;
+        newRight.id = oldRight.id;
+
         slots.set(0, newLeft);
         slots.set(1, newRight);
     }

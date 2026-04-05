@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin;
+package net.ryan.beyond_the_block.mixin.world.netherstacks;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.server.MinecraftServer;

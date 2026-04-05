@@ -14,19 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerMovementEnchantmentsMixin {
 
-    @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getMovementSpeed", at = @At("RETURN"), cancellable = true)
     private void btb$movementSpeed(CallbackInfoReturnable<Float> cir) {
         PlayerEntity player = (PlayerEntity)(Object)this;
-        Float override = FrozenMomentumHandler.getMovementSpeedOverride(player);
-        if (override != null) {
-            cir.setReturnValue(override);
+        Float bonus = FrozenMomentumHandler.getMovementSpeedBonus(player);
+        if (bonus != null) {
+            cir.setReturnValue(cir.getReturnValue() + bonus);
         }
-    }
-
-    @Inject(method = "travel", at = @At("HEAD"))
-    private void btb$travel(Vec3d movementInput, CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity)(Object)this;
-        FrozenMomentumHandler.onTravel(player, movementInput);
     }
 
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)

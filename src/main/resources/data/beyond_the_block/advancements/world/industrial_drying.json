@@ -1,0 +1,25 @@
+{
+  "parent": "beyond_the_block:world/absorbent_thinking",
+  "display": {
+    "icon": { "item": "minecraft:furnace" },
+    "title": { "translate": "advancements.beyond_the_block.world.industrial_drying.title" },
+    "description": { "translate": "advancements.beyond_the_block.world.industrial_drying.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "dry_sponge": {
+      "trigger": "beyond_the_block:sponge_dried",
+      "conditions": {
+        "input": {
+          "items": ["minecraft:wet_sponge"]
+        },
+        "output": {
+          "items": ["minecraft:sponge"]
+        }
+      }
+    }
+  }
+}

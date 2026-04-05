@@ -1,6 +1,7 @@
 package net.ryan.beyond_the_block.core.bootstrap;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.ryan.beyond_the_block.advancements.ModCriteria;
 import net.ryan.beyond_the_block.content.block.ModBlocks;
 import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
 import net.ryan.beyond_the_block.content.effect.ModEffects;
@@ -48,6 +49,7 @@ public class ContentRegistrar {
         ModScreenHandlers.registerScreenHandlers();
         ModSounds.registerSounds();
         SandToGlassManager.register();
+        ModCriteria.init();
 
         registerFuel();
         RIDDLE_COMPONENTS.loadFromJson();

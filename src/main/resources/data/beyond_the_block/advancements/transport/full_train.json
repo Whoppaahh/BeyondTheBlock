@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:transport/chain_reaction",
+  "display": {
+    "icon": { "item": "minecraft:furnace_minecart" },
+    "title": { "translate": "advancements.beyond_the_block.transport.full_train.title" },
+    "description": { "translate": "advancements.beyond_the_block.transport.full_train.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "link_five_carts": {
+      "trigger": "beyond_the_block:minecart_linked",
+      "conditions": {
+        "min_carts": 5
+      }
+    }
+  }
+}

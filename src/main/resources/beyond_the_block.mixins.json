@@ -71,7 +71,7 @@
     "feature.blocks.LivingEntityWaterTorchMixin",
     "feature.enchantments.InfinityEnchantmentMixin",
     "feature.enchantments.LivingEntityEnchantmentMixin",
-    "feature.enchantments.LivingEntityHorseInteractionMixin",
+    "feature.horses.LivingEntityHorseInteractionMixin",
     "feature.enchantments.LivingEntityStatusMixin",
     "feature.enchantments.freeze.DrownedFreezeAttackMixin",
     "feature.enchantments.freeze.IllusionerFreezeAttackMixin",

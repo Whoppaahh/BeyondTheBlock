@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:chain" },
+    "title": { "translate": "advancements.beyond_the_block.transport.chain_reaction.title" },
+    "description": { "translate": "advancements.beyond_the_block.transport.chain_reaction.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "link_two_carts": {
+      "trigger": "beyond_the_block:minecart_linked",
+      "conditions": {
+        "min_carts": 2
+      }
+    }
+  }
+}

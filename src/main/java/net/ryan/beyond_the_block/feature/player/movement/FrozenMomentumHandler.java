@@ -38,7 +38,6 @@ public final class FrozenMomentumHandler {
     private static boolean isFrozenBlock(BlockState state) {
         return state.isOf(Blocks.SNOW)
                 || state.isOf(Blocks.SNOW_BLOCK)
-                || state.isOf(Blocks.SNOW_BLOCK)
                 || state.isOf(Blocks.ICE)
                 || state.isOf(Blocks.PACKED_ICE)
                 || state.isOf(Blocks.BLUE_ICE);

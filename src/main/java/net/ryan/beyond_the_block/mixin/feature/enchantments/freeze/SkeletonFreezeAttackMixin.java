@@ -2,7 +2,6 @@ package net.ryan.beyond_the_block.mixin.feature.enchantments.freeze;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
 import net.ryan.beyond_the_block.feature.status.FreezeStateHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +13,7 @@ public abstract class SkeletonFreezeAttackMixin {
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void beyond_the_block$preventFrozenSkeletonAttack(LivingEntity target, float pullProgress, CallbackInfo ci) {
-        SkeletonEntity self = (SkeletonEntity) (Object) this;
+        AbstractSkeletonEntity self = (AbstractSkeletonEntity) (Object) this;
         if (FreezeStateHandler.isFrozen(self)) {
             ci.cancel();
         }

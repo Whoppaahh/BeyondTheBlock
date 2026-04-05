@@ -1,0 +1,26 @@
+{
+  "parent": "beyond_the_block:world/over_prepared",
+  "display": {
+    "icon": { "item": "minecraft:lava_bucket" },
+    "title": { "translate": "advancements.beyond_the_block.world.instant_evaporation.title" },
+    "description": { "translate": "advancements.beyond_the_block.world.instant_evaporation.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "dry_sponge_in_nether": {
+      "trigger": "beyond_the_block:sponge_dried",
+      "conditions": {
+        "dimension": "minecraft:the_nether",
+        "input": {
+          "items": ["minecraft:wet_sponge"]
+        },
+        "output": {
+          "items": ["minecraft:sponge"]
+        }
+      }
+    }
+  }
+}

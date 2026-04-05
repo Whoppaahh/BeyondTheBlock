@@ -1,0 +1,21 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:saddle" },
+    "title": { "translate": "advancements.beyond_the_block.horses.double_saddle.title" },
+    "description": { "translate": "advancements.beyond_the_block.horses.double_saddle.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ride_double_passenger_horse": {
+      "trigger": "beyond_the_block:mounted_entity",
+      "conditions": {
+        "entity_type": "minecraft:horse",
+        "min_passengers": 2
+      }
+    }
+  }
+}

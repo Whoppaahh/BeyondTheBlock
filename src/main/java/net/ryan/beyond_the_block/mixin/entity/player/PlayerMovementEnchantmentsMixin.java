@@ -42,7 +42,5 @@ public abstract class PlayerMovementEnchantmentsMixin {
     private void btb$tickMovementEnchantments(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         GracefulMovementHandler.onTick(player);
-        // Radiant Aura can also live here if you want one movement/support mixin,
-        // but I prefer a separate support mixin.
     }
 }

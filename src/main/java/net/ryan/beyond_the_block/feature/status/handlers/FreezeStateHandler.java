@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.feature.status;
+package net.ryan.beyond_the_block.feature.status.handlers;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.FlyingEntity;

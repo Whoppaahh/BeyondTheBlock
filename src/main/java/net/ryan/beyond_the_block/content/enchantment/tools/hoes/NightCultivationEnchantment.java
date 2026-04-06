@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.content.enchantment.tools.hoes;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -24,6 +25,10 @@ public class NightCultivationEnchantment extends Enchantment {
 
 
         super.onTargetDamaged(user, target, level);
+    }
+    @Override
+    public boolean canAccept(Enchantment other) {
+        return !(other instanceof GardensBountyEnchantment) && super.canAccept(other);
     }
 
     @Override

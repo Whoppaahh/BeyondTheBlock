@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.mixin.feature.enchantments.freeze;
 
 import net.minecraft.entity.LivingEntity;
-import net.ryan.beyond_the_block.feature.status.FreezeStateHandler;
+import net.ryan.beyond_the_block.feature.status.handlers.FreezeStateHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

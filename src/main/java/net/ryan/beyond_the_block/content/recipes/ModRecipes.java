@@ -21,6 +21,8 @@ public class ModRecipes {
     public static final RecipeSerializer<CustomBlastingRecipe> CUSTOM_BLASTING_SERIALISER =
             Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(BeyondTheBlock.MOD_ID, "custom_blasting"), new CustomBlastingRecipeSerialiser());
 
+    public static final RecipeSerializer<WoodcuttingRecipe> WOODCUTTING_RECIPE_SERIALISER =
+            Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(BeyondTheBlock.MOD_ID, "woodcutting"), new WoodcuttingRecipeSerialiser());
 
 
     public static void registerModRecipes() {

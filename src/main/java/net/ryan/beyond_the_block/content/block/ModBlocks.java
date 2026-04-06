@@ -30,8 +30,8 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModBlocks {
 
+    public static final Block WOODCUTTER_BLOCK = registerBlock("woodcutter", new WoodcutterBlock(FabricBlockSettings.copy(Blocks.STONECUTTER)), ModItemGroup.ModBlocksTab);
     public static final Block CHISELED_BOOKSHELF = registerBlock("chiseled_bookshelf", new ChiseledBookshelfBlock(FabricBlockSettings.of(Material.WOOD)), ModItemGroup.ModBlocksTab);
-
 
     public static final Block OAK_SHELF_BLOCK = registerBlock("oak_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);
     public static final Block SPRUCE_SHELF_BLOCK = registerBlock("spruce_shelf_block", new ShelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)), ModItemGroup.ModBlocksTab);

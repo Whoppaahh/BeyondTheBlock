@@ -9,6 +9,16 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModBlockEntities {
 
+    public static final BlockEntityType<WoodcutterBlockEntity> WOODCUTTER_BLOCK_ENTITY =
+            Registry.register(
+                    Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "woodcutter_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(
+                            WoodcutterBlockEntity::new,
+                            ModBlocks.WOODCUTTER_BLOCK
+                    ).build()
+            );
+
     public static final BlockEntityType<ChiseledBookshelfBlockEntity> CHISELED_BOOKSHELF_BLOCK_ENTITY =
             Registry.register(
                     Registry.BLOCK_ENTITY_TYPE,

@@ -1,0 +1,6 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "ingredient": { "item": "minecraft:oak_log" },
+  "result": "minecraft:oak_planks",
+  "count": 4
+}

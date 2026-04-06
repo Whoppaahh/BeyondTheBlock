@@ -48,8 +48,8 @@ public class WoodcutterBlockEntity extends BlockEntity implements ImplementedInv
         return selectedRecipe;
     }
 
-    public void setSelectedRecipe(int i) {
-        this.selectedRecipe = i;
+    public void setSelectedRecipe(int selectedRecipe) {
+        this.selectedRecipe = selectedRecipe;
     }
 
     @Override

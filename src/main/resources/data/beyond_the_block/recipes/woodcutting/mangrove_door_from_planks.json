@@ -1,0 +1,9 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:mangrove_planks"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:mangrove_door"
+}

@@ -9,6 +9,9 @@ import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler
 
 public class ModScreenHandlers {
 
+    public static final ScreenHandlerType<WoodcutterScreenHandler> WOODCUTTER_SCREEN_HANDLER =
+            new ScreenHandlerType<>(WoodcutterScreenHandler::new);
+
     public static final ScreenHandlerType<GemScreenHandler> GEM_SCREEN_HANDLER =
             new ExtendedScreenHandlerType<>(GemScreenHandler::new);
 
@@ -34,6 +37,7 @@ public class ModScreenHandlers {
             new ExtendedScreenHandlerType<>(DecrafterScreenHandler::new);
 
     public static void registerScreenHandlers() {
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier("woodcutter_screen"), WOODCUTTER_SCREEN_HANDLER);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("guard_screen"), GUARD_SCREEN_HANDLER);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("gem_screen"), GEM_SCREEN_HANDLER);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("riddle_core_screen"), RIDDLE_CORE_SCREEN_HANDLER);

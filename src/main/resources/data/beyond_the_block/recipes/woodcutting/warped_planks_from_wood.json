@@ -1,0 +1,9 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "count": 6,
+  "ingredient": {
+    "item": "minecraft:warped_hyphae"
+  },
+  "ingredient_count": 1,
+  "result": "minecraft:warped_planks"
+}

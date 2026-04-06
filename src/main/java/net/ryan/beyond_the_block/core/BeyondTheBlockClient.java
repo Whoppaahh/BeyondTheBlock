@@ -83,6 +83,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
     }
 
     private void registerScreens() {
+        HandledScreens.register(ModScreenHandlers.WOODCUTTER_SCREEN_HANDLER, WoodcutterScreen::new);
         HandledScreens.register(ModScreenHandlers.TROWEL_SCREEN_HANDLER, TrowelScreen::new);
         HandledScreens.register(ModScreenHandlers.GEM_SCREEN_HANDLER, GemScreen::new);
         HandledScreens.register(ModScreenHandlers.GUARD_SCREEN_HANDLER, GuardVillagerScreen::new);

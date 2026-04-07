@@ -5,7 +5,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.feature.naming.EntityTagManager;
 
 public class ChristmasFeatures {

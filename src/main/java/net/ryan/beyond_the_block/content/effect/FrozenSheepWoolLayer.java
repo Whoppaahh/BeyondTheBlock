@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.model.SheepEntityModel;
 import net.minecraft.client.render.entity.model.SheepWoolEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.SheepEntity;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class FrozenSheepWoolLayer extends FeatureRenderer<SheepEntity, SheepEntityModel<SheepEntity>> {
 

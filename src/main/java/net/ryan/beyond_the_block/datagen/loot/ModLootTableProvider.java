@@ -9,8 +9,10 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModItems;
+import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
+import net.ryan.beyond_the_block.content.registry.family.WoodSet;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 
@@ -24,6 +26,10 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
 
     @Override
     public void accept(BiConsumer<Identifier, LootTable.Builder> exporter) {
+        generateStandardWoodLoot(exporter, ModBlocks.CHERRY_SET);
+        generateStandardWoodLoot(exporter, ModBlocks.PALE_OAK_SET);
+        generateBambooWoodLoot(exporter, ModBlocks.BAMBOO_WOOD_SET);
+
         generateOreFamily(exporter,
                 ModBlocks.MIRANITE_BLOCK,
                 ModBlocks.RAW_MIRANITE_BLOCK,
@@ -125,6 +131,39 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
 
         exportDropSelf(exporter, ModBlocks.CHISELED_BOOKSHELF);
         exportDropSelf(exporter, ModBlocks.WATER_TORCH_BLOCK);
+    }
+
+    private void generateStandardWoodLoot(BiConsumer<Identifier, LootTable.Builder> exporter, WoodSet set) {
+        exportDropSelf(exporter, set.log());
+        exportDropSelf(exporter, set.wood());
+        exportDropSelf(exporter, set.strippedLog());
+        exportDropSelf(exporter, set.strippedWood());
+        exportDropSelf(exporter, set.planks());
+        exportDropSelf(exporter, set.slab());
+        exportDropSelf(exporter, set.stairs());
+        exportDropSelf(exporter, set.fence());
+        exportDropSelf(exporter, set.fenceGate());
+        exportDropSelf(exporter, set.door());
+        exportDropSelf(exporter, set.trapdoor());
+        exportDropSelf(exporter, set.button());
+        exportDropSelf(exporter, set.pressurePlate());
+    }
+
+    private void generateBambooWoodLoot(BiConsumer<Identifier, LootTable.Builder> exporter, BambooWoodSet set) {
+        exportDropSelf(exporter, set.bambooBlock());
+        exportDropSelf(exporter, set.strippedBambooBlock());
+        exportDropSelf(exporter, set.planks());
+        exportDropSelf(exporter, set.slab());
+        exportDropSelf(exporter, set.stairs());
+        exportDropSelf(exporter, set.fence());
+        exportDropSelf(exporter, set.fenceGate());
+        exportDropSelf(exporter, set.door());
+        exportDropSelf(exporter, set.trapdoor());
+        exportDropSelf(exporter, set.button());
+        exportDropSelf(exporter, set.pressurePlate());
+        exportDropSelf(exporter, set.mosaic());
+        exportDropSelf(exporter, set.mosaicSlab());
+        exportDropSelf(exporter, set.mosaicStairs());
     }
 
     private void generateOreFamily(

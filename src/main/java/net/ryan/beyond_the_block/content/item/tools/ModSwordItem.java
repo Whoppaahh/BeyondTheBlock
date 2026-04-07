@@ -15,9 +15,9 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.content.item.ModItems;
-import net.ryan.beyond_the_block.content.particle.ModParticles;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModParticles;
 
 public class ModSwordItem extends SwordItem {
     public ModSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {

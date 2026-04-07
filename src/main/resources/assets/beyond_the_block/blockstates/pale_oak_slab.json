@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "beyond_the_block:block/pale_oak_slab"
+    },
+    "type=double": {
+      "model": "beyond_the_block:block/pale_oak_planks"
+    },
+    "type=top": {
+      "model": "beyond_the_block:block/pale_oak_slab_top"
+    }
+  }
+}

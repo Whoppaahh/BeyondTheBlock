@@ -1,6 +1,6 @@
 package net.ryan.beyond_the_block.content.block.sponges;
 
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 public class DoubleCompressedSpongeBlock extends AbstractCompressedSpongeBlock {
     public DoubleCompressedSpongeBlock(Settings settings) {

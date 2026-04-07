@@ -13,7 +13,7 @@
     "place_sawmill": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "beyond_the_block:sawmill"
+        "block": "beyond_the_block:woodcutter"
       }
     }
   }

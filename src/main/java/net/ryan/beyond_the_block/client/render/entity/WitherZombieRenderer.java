@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.content.entity.ModEntities;
+import net.ryan.beyond_the_block.content.registry.ModEntities;
 import net.ryan.beyond_the_block.content.entity.WitherZombie;
 import net.ryan.beyond_the_block.content.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;

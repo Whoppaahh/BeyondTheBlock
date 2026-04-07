@@ -6,9 +6,10 @@ import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
-
+import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
+import net.ryan.beyond_the_block.content.registry.family.WoodSet;
 import java.util.List;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
@@ -24,6 +25,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         generateToolRequirementTags();
         generateOreTags();
         generateMiscTags();
+        generateWoodFamilyTags();
+    }
+
+    private void generateWoodFamilyTags() {
+        addStandardWoodSetTags(ModBlocks.CHERRY_SET);
+        addStandardWoodSetTags(ModBlocks.PALE_OAK_SET);
+        addBambooWoodSetTags(ModBlocks.BAMBOO_WOOD_SET);
     }
 
     private void generateMiningTags() {
@@ -74,6 +82,50 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         for (T entry : entries) {
             builder.add(entry);
         }
+    }
+
+    private void addStandardWoodSetTags(WoodSet set) {
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+                .add(set.log(), set.wood(), set.strippedLog(), set.strippedWood(),
+                        set.planks(), set.slab(), set.stairs(), set.fence(), set.fenceGate(),
+                        set.door(), set.trapdoor(), set.button(), set.pressurePlate());
+
+        getOrCreateTagBuilder(BlockTags.LOGS)
+                .add(set.log(), set.wood(), set.strippedLog(), set.strippedWood());
+
+        getOrCreateTagBuilder(BlockTags.PLANKS).add(set.planks());
+        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(set.slab());
+        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(set.stairs());
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(set.fence());
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(set.fenceGate());
+        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(set.door());
+        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(set.trapdoor());
+        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(set.button());
+        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate());
+    }
+
+    private void addBambooWoodSetTags(BambooWoodSet set) {
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+                .add(set.bambooBlock(), set.strippedBambooBlock(),
+                        set.planks(), set.slab(), set.stairs(), set.fence(), set.fenceGate(),
+                        set.door(), set.trapdoor(), set.button(), set.pressurePlate(),
+                        set.mosaic(), set.mosaicSlab(), set.mosaicStairs());
+
+        getOrCreateTagBuilder(BlockTags.PLANKS)
+                .add(set.planks(), set.mosaic());
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
+                .add(set.slab(), set.mosaicSlab());
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
+                .add(set.stairs(), set.mosaicStairs());
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(set.fence());
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(set.fenceGate());
+        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(set.door());
+        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(set.trapdoor());
+        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(set.button());
+        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate());
     }
 
     private List<Block> allOreBlocks() {

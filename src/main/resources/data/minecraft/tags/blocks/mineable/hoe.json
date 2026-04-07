@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-
+    "beyond_the_block:compressed_sponge",
+    "beyond_the_block:double_compressed_sponge",
+    "beyond_the_block:triple_compressed_sponge",
+    "beyond_the_block:wet_compressed_sponge",
+    "beyond_the_block:wet_double_compressed_sponge",
+    "beyond_the_block:wet_triple_compressed_sponge"
   ]
 }

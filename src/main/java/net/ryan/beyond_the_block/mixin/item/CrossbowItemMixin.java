@@ -8,7 +8,7 @@ import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.feature.player.ranged.InfinityArrowRules;
 import net.ryan.beyond_the_block.feature.projectile.HomingTrackedData;
 import org.spongepowered.asm.mixin.Mixin;

@@ -3,13 +3,13 @@ package net.ryan.beyond_the_block.datagen.models;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.item.ModItems;
-
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModItems;
+import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.content.registry.family.WoodSet;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -83,6 +83,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModBlocks.NETHER_XIRION_ORE,
                 ModBlocks.END_XIRION_ORE
         ));
+        generateStandardWoodSet(blockStateModelGenerator, "cherry_log", "stripped_cherry_log", ModBlocks.CHERRY_SET);
+        generateStandardWoodSet(blockStateModelGenerator, "pale_oak_log", "stripped_pale_oak_log", ModBlocks.PALE_OAK_SET);
+        generateBambooWoodSet(blockStateModelGenerator);
     }
 
     @Override
@@ -194,6 +197,88 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.XIRION_SHOVEL
         ));
     }
+
+
+    private void generateStandardWoodSet(BlockStateModelGenerator gen, String logTextureBase, String strippedLogTextureBase, WoodSet set) {
+        registerLog(gen, set.log(), logTextureBase);
+        registerWood(gen, set.wood(), logTextureBase);
+        registerLog(gen, set.strippedLog(), strippedLogTextureBase);
+        registerWood(gen, set.strippedWood(), strippedLogTextureBase);
+
+        var pool = gen.registerCubeAllModelTexturePool(set.planks());
+        pool.slab(set.slab());
+        pool.stairs(set.stairs());
+        pool.fence(set.fence());
+        pool.fenceGate(set.fenceGate());
+        pool.button(set.button());
+        pool.pressurePlate(set.pressurePlate());
+
+        gen.registerDoor(set.door());
+        gen.registerTrapdoor(set.trapdoor());
+    }
+
+    private void generateBambooWoodSet(BlockStateModelGenerator gen) {
+        registerLog(gen, ModBlocks.BAMBOO_WOOD_SET.bambooBlock(), "bamboo" + "_block");
+
+        var plankPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_WOOD_SET.planks());
+        plankPool.slab(ModBlocks.BAMBOO_WOOD_SET.slab());
+        plankPool.stairs(ModBlocks.BAMBOO_WOOD_SET.stairs());
+        plankPool.fence(ModBlocks.BAMBOO_WOOD_SET.fence());
+        plankPool.fenceGate(ModBlocks.BAMBOO_WOOD_SET.fenceGate());
+        plankPool.button(ModBlocks.BAMBOO_WOOD_SET.button());
+        plankPool.pressurePlate(ModBlocks.BAMBOO_WOOD_SET.pressurePlate());
+
+        gen.registerDoor(ModBlocks.BAMBOO_WOOD_SET.door());
+        gen.registerTrapdoor(ModBlocks.BAMBOO_WOOD_SET.trapdoor());
+
+        var mosaicPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_WOOD_SET.mosaic());
+        mosaicPool.slab(ModBlocks.BAMBOO_WOOD_SET.mosaicSlab());
+        mosaicPool.stairs(ModBlocks.BAMBOO_WOOD_SET.mosaicStairs());
+    }
+
+    private void registerLog(BlockStateModelGenerator gen, Block block, String textureName) {
+        Identifier side = modId("block/" + textureName);
+        Identifier end = modId("block/" + textureName + "_top");
+
+        Identifier modelId = Models.CUBE_COLUMN.upload(
+                block,
+                new TextureMap()
+                        .put(TextureKey.SIDE, side)
+                        .put(TextureKey.END, end),
+                gen.modelCollector
+        );
+
+        gen.blockStateCollector.accept(
+                BlockStateModelGenerator.createAxisRotatedBlockState(block, modelId)
+        );
+
+        gen.registerParentedItemModel(block, modelId);
+    }
+
+    private void registerWood(BlockStateModelGenerator gen, Block block, String logTextureName) {
+        Identifier logTexture = modId("block/" + logTextureName);
+
+        Identifier modelId = Models.CUBE_COLUMN.upload(
+                block,
+                new TextureMap()
+                        .put(TextureKey.SIDE, logTexture)
+                        .put(TextureKey.END, logTexture),
+                gen.modelCollector
+        );
+
+        gen.blockStateCollector.accept(
+                BlockStateModelGenerator.createAxisRotatedBlockState(block, modelId)
+        );
+
+        gen.registerParentedItemModel(block, modelId);
+    }
+
+    private Identifier modId(String path) {
+        return new Identifier(BeyondTheBlock.MOD_ID, path);
+    }
+
+
+
 
     private void registerCubeAllBlocks(BlockStateModelGenerator generator, List<Block> blocks) {
         for (Block block : blocks) {

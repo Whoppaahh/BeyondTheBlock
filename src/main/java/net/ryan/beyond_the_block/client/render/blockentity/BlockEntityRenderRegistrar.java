@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.client.render.blockentity;
 
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 
 public class BlockEntityRenderRegistrar {
     public static void register() {

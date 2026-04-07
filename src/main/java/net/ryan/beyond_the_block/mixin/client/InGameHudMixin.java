@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.ryan.beyond_the_block.client.hud.FloatingXPManager;
 import net.ryan.beyond_the_block.client.hud.ScaledTextRenderer;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

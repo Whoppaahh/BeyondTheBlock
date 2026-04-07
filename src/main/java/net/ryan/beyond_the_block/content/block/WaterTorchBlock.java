@@ -14,6 +14,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 public class WaterTorchBlock extends TorchBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;

@@ -14,6 +14,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.ryan.beyond_the_block.content.block.ChiseledBookshelfBlock;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 
 public class ChiseledBookshelfBlockEntity extends BlockEntity implements SidedInventory {
     public static final int SIZE = 6;

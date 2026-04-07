@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.client.render;
 
 import net.ryan.beyond_the_block.client.render.item.AnimatedBlockItemRenderer;
 import net.ryan.beyond_the_block.client.render.item.AnimatedItemRenderer;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 

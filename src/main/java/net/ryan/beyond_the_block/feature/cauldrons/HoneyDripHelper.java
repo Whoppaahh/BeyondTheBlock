@@ -10,7 +10,7 @@ import net.ryan.beyond_the_block.utils.helpers.HiveTracker;
 
 import java.util.List;
 
-import static net.ryan.beyond_the_block.content.block.ModBlocks.MODDED_FLUID_CAULDRON_BLOCK;
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.MODDED_FLUID_CAULDRON_BLOCK;
 
 public class HoneyDripHelper {
     private static int dripCount = 0;

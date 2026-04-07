@@ -23,6 +23,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;

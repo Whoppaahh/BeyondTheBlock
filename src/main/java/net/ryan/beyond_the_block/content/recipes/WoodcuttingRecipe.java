@@ -8,6 +8,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.registry.ModRecipes;
 
 public class WoodcuttingRecipe implements Recipe<Inventory> {
 

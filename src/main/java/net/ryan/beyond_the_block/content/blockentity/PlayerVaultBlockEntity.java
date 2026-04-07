@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.PlayerVaultBlock;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.PlayerVaultScreenHandler;

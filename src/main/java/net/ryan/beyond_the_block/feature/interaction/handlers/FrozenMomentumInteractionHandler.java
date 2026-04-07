@@ -6,7 +6,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 
 public final class FrozenMomentumInteractionHandler {
 

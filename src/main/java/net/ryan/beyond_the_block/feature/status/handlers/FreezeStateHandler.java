@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.ai.control.LookControl;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public final class FreezeStateHandler {
 

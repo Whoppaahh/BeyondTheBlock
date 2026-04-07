@@ -5,7 +5,7 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.List;

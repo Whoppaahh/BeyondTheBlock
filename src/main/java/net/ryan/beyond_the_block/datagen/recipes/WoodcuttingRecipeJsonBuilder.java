@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.content.recipes.ModRecipes;
+import net.ryan.beyond_the_block.content.registry.ModRecipes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;

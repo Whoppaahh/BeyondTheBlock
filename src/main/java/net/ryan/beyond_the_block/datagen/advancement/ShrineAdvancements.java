@@ -5,7 +5,7 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.function.Consumer;

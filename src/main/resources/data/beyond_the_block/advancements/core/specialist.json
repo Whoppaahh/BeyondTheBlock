@@ -25,7 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["beyond_the_block:sawmill"]
+            "items": ["beyond_the_block:woodcutter"]
           }
         ]
       }
@@ -35,7 +35,31 @@
       "conditions": {
         "items": [
           {
-            "items": ["beyond_the_block:shelf"]
+            "items": ["beyond_the_block:oak_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:dark_oak_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:jungle_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:birch_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:acacia_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:mangrove_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:crimson_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:warped_shelf_block"]
+          },
+          {
+            "items": ["beyond_the_block:bamboo_shelf_block"]
           }
         ]
       }

@@ -6,7 +6,7 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.feature.interaction.BreakContext;
 
 public final class BreakSuppressionHandler {

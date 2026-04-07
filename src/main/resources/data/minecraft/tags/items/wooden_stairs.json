@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:cherry_stairs",
+    "beyond_the_block:pale_oak_stairs",
+    "beyond_the_block:bamboo_stairs",
+    "beyond_the_block:bamboo_mosaic_stairs"
+  ]
+}

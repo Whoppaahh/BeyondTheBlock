@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "beyond_the_block:block/bamboo_mosaic_slab"
+    },
+    "type=double": {
+      "model": "beyond_the_block:block/bamboo_mosaic"
+    },
+    "type=top": {
+      "model": "beyond_the_block:block/bamboo_mosaic_slab_top"
+    }
+  }
+}

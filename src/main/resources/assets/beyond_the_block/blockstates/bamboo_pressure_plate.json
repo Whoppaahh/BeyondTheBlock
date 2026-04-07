@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "beyond_the_block:block/bamboo_pressure_plate"
+    },
+    "powered=true": {
+      "model": "beyond_the_block:block/bamboo_pressure_plate_down"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class DyedWaterCauldronBlockEntity extends BlockEntity {

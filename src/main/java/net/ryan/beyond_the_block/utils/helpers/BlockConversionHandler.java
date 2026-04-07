@@ -20,12 +20,12 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.block.PlayerVaultBlock;
 import net.ryan.beyond_the_block.content.blockentity.InfiFurnaceBlockEntity;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.content.enchantment.MyEnchantmentHelper;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.utils.accessors.FurnaceAccessor;
 
 import java.util.function.BiFunction;

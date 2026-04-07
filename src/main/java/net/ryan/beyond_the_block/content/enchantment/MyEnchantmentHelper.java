@@ -18,6 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.config.DropMode;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.jetbrains.annotations.Nullable;
 

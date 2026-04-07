@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.ParticleTypes;
 import net.ryan.beyond_the_block.content.effect.beneficial.SoulLinkEffect;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class SoulLinkEffectRenderer {
 

@@ -6,7 +6,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.server.world.ServerWorld;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

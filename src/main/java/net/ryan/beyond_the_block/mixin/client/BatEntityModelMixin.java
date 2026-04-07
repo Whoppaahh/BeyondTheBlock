@@ -3,7 +3,7 @@ package net.ryan.beyond_the_block.mixin.client;
 import net.minecraft.client.render.entity.model.BatEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.BatEntity;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

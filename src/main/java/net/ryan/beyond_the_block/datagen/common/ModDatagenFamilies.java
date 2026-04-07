@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.datagen.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 import java.util.List;
 

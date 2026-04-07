@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class FrozenSlimeLayer extends FeatureRenderer<SlimeEntity, SlimeEntityModel<SlimeEntity>> {
 

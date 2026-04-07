@@ -10,7 +10,7 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.blockentity.ShrineHeadsBlockEntity;
 
 public class ShrineHeadsBlock extends BlockWithEntity implements BlockEntityProvider {

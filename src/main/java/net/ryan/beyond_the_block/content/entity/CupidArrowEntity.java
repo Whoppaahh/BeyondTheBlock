@@ -15,8 +15,9 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModEntities;
 
 public class CupidArrowEntity extends PersistentProjectileEntity{
 

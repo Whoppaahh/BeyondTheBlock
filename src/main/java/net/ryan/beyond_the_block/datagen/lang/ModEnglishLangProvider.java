@@ -10,10 +10,10 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.content.block.ModBlocks;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
-import net.ryan.beyond_the_block.content.enchantment.ModEnchantments;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.io.IOException;

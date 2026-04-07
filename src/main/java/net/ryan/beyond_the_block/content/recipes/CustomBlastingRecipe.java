@@ -6,6 +6,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.content.registry.ModRecipes;
 
 public class CustomBlastingRecipe extends BlastingRecipe {
     private final ItemStack output;

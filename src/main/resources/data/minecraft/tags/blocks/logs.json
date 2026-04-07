@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:cherry_log",
+    "beyond_the_block:cherry_wood",
+    "beyond_the_block:stripped_cherry_log",
+    "beyond_the_block:stripped_cherry_wood",
+    "beyond_the_block:pale_oak_log",
+    "beyond_the_block:pale_oak_wood",
+    "beyond_the_block:stripped_pale_oak_log",
+    "beyond_the_block:stripped_pale_oak_wood"
+  ]
+}

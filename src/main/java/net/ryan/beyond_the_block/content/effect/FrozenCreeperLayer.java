@@ -7,6 +7,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class FrozenCreeperLayer extends EnergySwirlOverlayFeatureRenderer<CreeperEntity, CreeperEntityModel<CreeperEntity>> {
 

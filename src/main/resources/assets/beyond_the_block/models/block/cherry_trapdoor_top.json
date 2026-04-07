@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_trapdoor_top",
+  "textures": {
+    "texture": "beyond_the_block:block/cherry_trapdoor"
+  }
+}

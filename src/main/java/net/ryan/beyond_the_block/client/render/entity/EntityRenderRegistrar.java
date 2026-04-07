@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.client.render.entity;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.ryan.beyond_the_block.client.render.item.CupidArrowEntityRenderer;
-import net.ryan.beyond_the_block.content.entity.ModEntities;
+import net.ryan.beyond_the_block.content.registry.ModEntities;
 import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
 
 public class EntityRenderRegistrar {

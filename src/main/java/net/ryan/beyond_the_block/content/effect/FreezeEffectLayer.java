@@ -17,6 +17,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
 

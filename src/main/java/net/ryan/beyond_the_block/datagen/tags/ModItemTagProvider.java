@@ -4,9 +4,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.item.Item;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.utils.ModTags;
-
+import net.minecraft.tag.ItemTags;
+import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
+import net.ryan.beyond_the_block.content.registry.family.WoodSet;
 import java.util.List;
 
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
@@ -19,6 +22,13 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     protected void generateTags() {
         generateCustomTags();
         generateToolTags();
+        generateWoodItemTags();
+    }
+
+    private void generateWoodItemTags() {
+        addStandardWoodSetTags(ModBlocks.CHERRY_SET);
+        addStandardWoodSetTags(ModBlocks.PALE_OAK_SET);
+        addBambooWoodSetTags(ModBlocks.BAMBOO_WOOD_SET);
     }
 
     private void generateCustomTags() {
@@ -131,5 +141,36 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         for (T entry : entries) {
             builder.add(entry);
         }
+    }
+
+    private void addStandardWoodSetTags(WoodSet set) {
+        getOrCreateTagBuilder(ItemTags.LOGS)
+                .add(set.log().asItem(), set.wood().asItem(), set.strippedLog().asItem(), set.strippedWood().asItem());
+
+        getOrCreateTagBuilder(ItemTags.PLANKS).add(set.planks().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(set.slab().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(set.stairs().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(set.fence().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_DOORS).add(set.door().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(set.trapdoor().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(set.button().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate().asItem());
+    }
+
+    private void addBambooWoodSetTags(BambooWoodSet set) {
+        getOrCreateTagBuilder(ItemTags.PLANKS)
+                .add(set.planks().asItem(), set.mosaic().asItem());
+
+        getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
+                .add(set.slab().asItem(), set.mosaicSlab().asItem());
+
+        getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
+                .add(set.stairs().asItem(), set.mosaicStairs().asItem());
+
+        getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(set.fence().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_DOORS).add(set.door().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(set.trapdoor().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(set.button().asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate().asItem());
     }
 }

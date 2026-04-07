@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.blockentity.ModBlockEntities;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.blockentity.ShrineCoreBlockEntity;
 
 public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvider {

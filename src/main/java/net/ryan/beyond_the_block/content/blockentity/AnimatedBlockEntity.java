@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.content.blockentity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;

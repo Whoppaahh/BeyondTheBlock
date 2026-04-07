@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.client.render;
 
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.ryan.beyond_the_block.content.particle.*;
+import net.ryan.beyond_the_block.content.registry.ModParticles;
 
 public class ClientParticleRegistrar {
     public static void register() {

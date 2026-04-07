@@ -10,7 +10,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.SmithingRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.item.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 
 public class GemSmithingRecipe extends SmithingRecipe {
     private final Ingredient base;

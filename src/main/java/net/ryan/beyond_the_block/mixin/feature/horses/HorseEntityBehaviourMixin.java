@@ -10,7 +10,7 @@ import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 import net.ryan.beyond_the_block.feature.horses.StayNearData;
 import net.ryan.beyond_the_block.utils.accessors.HorseAccessor;
 import org.spongepowered.asm.mixin.Mixin;

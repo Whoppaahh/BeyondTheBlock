@@ -2,7 +2,7 @@ package net.ryan.beyond_the_block.feature.status.handlers;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public final class EtherealVeilHandler {
 

@@ -16,7 +16,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.effect.FreezeEffectLayer;
-import net.ryan.beyond_the_block.content.effect.ModEffects;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 import net.ryan.beyond_the_block.feature.status.handlers.FreezeStateHandler;
 import net.ryan.beyond_the_block.utils.TickTimeUtil;
 

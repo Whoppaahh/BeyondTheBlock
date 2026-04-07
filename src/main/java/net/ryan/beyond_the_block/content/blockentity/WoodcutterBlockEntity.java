@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.content.recipes.WoodcuttingRecipe;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.screen.handler.WoodcutterScreenHandler;
 import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
 

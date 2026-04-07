@@ -2,6 +2,6 @@
   "parent": "beyond_the_block:block/template_shelf_center",
   "textures": {
     "all": "beyond_the_block:block/bamboo_shelf",
-    "particle": "minecraft:block/stripped_bamboo_log"
+    "particle": "beyond_the_block:block/stripped_bamboo_block"
   }
 }

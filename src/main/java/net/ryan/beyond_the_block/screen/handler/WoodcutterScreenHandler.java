@@ -10,8 +10,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.blockentity.WoodcutterBlockEntity;
-import net.ryan.beyond_the_block.content.registry.ModRecipes;
 import net.ryan.beyond_the_block.content.recipes.WoodcuttingRecipe;
+import net.ryan.beyond_the_block.content.registry.ModRecipes;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 
 import java.util.ArrayList;

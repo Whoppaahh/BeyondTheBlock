@@ -42,7 +42,9 @@ public class ModBlockEntities {
                             ModBlocks.MANGROVE_SHELF_BLOCK,
                             ModBlocks.BAMBOO_SHELF_BLOCK,
                             ModBlocks.CRIMSON_SHELF_BLOCK,
-                            ModBlocks.WARPED_SHELF_BLOCK).build());
+                            ModBlocks.WARPED_SHELF_BLOCK,
+                            ModBlocks.CHERRY_SHELF_BLOCK,
+                            ModBlocks.PALE_OAK_SHELF_BLOCK).build());
 
 
     public static final BlockEntityType<DyedWaterCauldronBlockEntity> DYED_WATER_CAULDRON_BLOCK_ENTITY =

@@ -7,9 +7,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
-import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
 import net.ryan.beyond_the_block.content.registry.family.WoodSet;
+import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
+
 import java.util.List;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {

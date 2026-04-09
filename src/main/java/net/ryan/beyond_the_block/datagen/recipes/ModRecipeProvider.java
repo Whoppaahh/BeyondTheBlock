@@ -2,7 +2,6 @@ package net.ryan.beyond_the_block.datagen.recipes;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -363,9 +362,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerShelfRecipe(exporter, ModBlocks.ACACIA_SHELF_SET, Items.ACACIA_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.DARK_OAK_SHELF_SET, Items.DARK_OAK_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.MANGROVE_SHELF_SET, Items.MANGROVE_PLANKS);
-        //offerShelfRecipe(exporter, ModBlocks.BAMBOO_SHELF_SET, Items.BAMBOO_PLANKS);
+        offerShelfRecipe(exporter, ModBlocks.BAMBOO_SHELF_SET, ModBlocks.BAMBOO_PLANKS.asItem());
         offerShelfRecipe(exporter, ModBlocks.CRIMSON_SHELF_SET, Items.CRIMSON_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.WARPED_SHELF_SET, Items.WARPED_PLANKS);
+        offerShelfRecipe(exporter, ModBlocks.CHERRY_SHELF_SET, ModBlocks.CHERRY_PLANKS.asItem());
+        offerShelfRecipe(exporter, ModBlocks.PALE_OAK_SHELF_SET, ModBlocks.PALE_OAK_PLANKS.asItem());
     }
 
     private void generateSpongeRecipes(Consumer<RecipeJsonProvider> exporter) {

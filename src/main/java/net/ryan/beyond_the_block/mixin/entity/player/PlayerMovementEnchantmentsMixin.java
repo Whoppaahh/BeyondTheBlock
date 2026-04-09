@@ -2,7 +2,6 @@ package net.ryan.beyond_the_block.mixin.entity.player;
 
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.feature.player.movement.FrozenMomentumHandler;
 import net.ryan.beyond_the_block.feature.player.movement.GracefulMovementHandler;
 import org.spongepowered.asm.mixin.Mixin;

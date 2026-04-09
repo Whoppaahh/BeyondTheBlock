@@ -11,8 +11,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 public class MagmaDripHelper {
 

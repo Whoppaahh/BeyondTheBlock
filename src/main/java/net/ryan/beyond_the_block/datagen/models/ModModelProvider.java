@@ -5,11 +5,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.registry.ModItems;
-import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.registry.family.WoodSet;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+
 import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {

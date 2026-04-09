@@ -4,9 +4,9 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.particle.ParticleTypes;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 
 public final class EchoGuardHandler {

@@ -8,6 +8,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.SignType;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.block.*;
@@ -89,6 +90,8 @@ public class ModBlocks {
     public static final ShelfSet BAMBOO_SHELF_SET = registerShelfSet("bamboo", ModItemGroup.ModBlocksTab);
     public static final ShelfSet CRIMSON_SHELF_SET = registerShelfSet("crimson", ModItemGroup.ModBlocksTab);
     public static final ShelfSet WARPED_SHELF_SET = registerShelfSet("warped", ModItemGroup.ModBlocksTab);
+    public static final ShelfSet CHERRY_SHELF_SET = registerShelfSet("cherry", ModItemGroup.ModBlocksTab);
+    public static final ShelfSet PALE_OAK_SHELF_SET = registerShelfSet("pale_oak", ModItemGroup.ModBlocksTab);
 
     public static final Block OAK_SHELF_BLOCK = OAK_SHELF_SET.shelf();
     public static final Block SPRUCE_SHELF_BLOCK = SPRUCE_SHELF_SET.shelf();
@@ -100,7 +103,8 @@ public class ModBlocks {
     public static final Block BAMBOO_SHELF_BLOCK = BAMBOO_SHELF_SET.shelf();
     public static final Block CRIMSON_SHELF_BLOCK = CRIMSON_SHELF_SET.shelf();
     public static final Block WARPED_SHELF_BLOCK = WARPED_SHELF_SET.shelf();
-
+    public static final Block CHERRY_SHELF_BLOCK = CHERRY_SHELF_SET.shelf();
+    public static final Block PALE_OAK_SHELF_BLOCK = PALE_OAK_SHELF_SET.shelf();
 
      //BACKPORTED / CUSTOM WOOD FAMILIES
 
@@ -136,17 +140,17 @@ public class ModBlocks {
     public static final Block PALE_OAK_BUTTON = PALE_OAK_SET.button();
     public static final Block PALE_OAK_PRESSURE_PLATE = PALE_OAK_SET.pressurePlate();
 
-    public static final Block BAMBOO_BLOCK_CUSTOM = BAMBOO_WOOD_SET.bambooBlock();
-    public static final Block STRIPPED_BAMBOO_BLOCK_CUSTOM = BAMBOO_WOOD_SET.strippedBambooBlock();
-    public static final Block BAMBOO_PLANKS_CUSTOM = BAMBOO_WOOD_SET.planks();
-    public static final Block BAMBOO_SLAB_CUSTOM = BAMBOO_WOOD_SET.slab();
-    public static final Block BAMBOO_STAIRS_CUSTOM = BAMBOO_WOOD_SET.stairs();
-    public static final Block BAMBOO_FENCE_CUSTOM = BAMBOO_WOOD_SET.fence();
-    public static final Block BAMBOO_FENCE_GATE_CUSTOM = BAMBOO_WOOD_SET.fenceGate();
-    public static final Block BAMBOO_DOOR_CUSTOM = BAMBOO_WOOD_SET.door();
-    public static final Block BAMBOO_TRAPDOOR_CUSTOM = BAMBOO_WOOD_SET.trapdoor();
-    public static final Block BAMBOO_BUTTON_CUSTOM = BAMBOO_WOOD_SET.button();
-    public static final Block BAMBOO_PRESSURE_PLATE_CUSTOM = BAMBOO_WOOD_SET.pressurePlate();
+    public static final Block BAMBOO_BLOCK = BAMBOO_WOOD_SET.bambooBlock();
+    public static final Block STRIPPED_BAMBOO_BLOCK = BAMBOO_WOOD_SET.strippedBambooBlock();
+    public static final Block BAMBOO_PLANKS = BAMBOO_WOOD_SET.planks();
+    public static final Block BAMBOO_SLAB = BAMBOO_WOOD_SET.slab();
+    public static final Block BAMBOO_STAIRS = BAMBOO_WOOD_SET.stairs();
+    public static final Block BAMBOO_FENCE = BAMBOO_WOOD_SET.fence();
+    public static final Block BAMBOO_FENCE_GATE = BAMBOO_WOOD_SET.fenceGate();
+    public static final Block BAMBOO_DOOR = BAMBOO_WOOD_SET.door();
+    public static final Block BAMBOO_TRAPDOOR = BAMBOO_WOOD_SET.trapdoor();
+    public static final Block BAMBOO_BUTTON = BAMBOO_WOOD_SET.button();
+    public static final Block BAMBOO_PRESSURE_PLATE = BAMBOO_WOOD_SET.pressurePlate();
     public static final Block BAMBOO_MOSAIC = BAMBOO_WOOD_SET.mosaic();
     public static final Block BAMBOO_MOSAIC_SLAB = BAMBOO_WOOD_SET.mosaicSlab();
     public static final Block BAMBOO_MOSAIC_STAIRS = BAMBOO_WOOD_SET.mosaicStairs();
@@ -556,6 +560,7 @@ public class ModBlocks {
      *  WOOD BLOCK FACTORIES
      * ============================================================
      */
+
 
     private static Block createLogBlock() {
         return new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG));

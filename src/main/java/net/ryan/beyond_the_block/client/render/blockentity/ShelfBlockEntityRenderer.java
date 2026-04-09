@@ -60,7 +60,7 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfBlockE
             matrices.translate(x, 0f, 0.33f);
 
             // Slightly smaller than item frame display
-            matrices.scale(0.33f, 0.33f, 0.33f);
+            matrices.scale(0.5f, 0.5f, 0.5f);
 
             BakedModel model = client.getItemRenderer().getModel(
                     stack,

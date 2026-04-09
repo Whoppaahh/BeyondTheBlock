@@ -1,0 +1,9 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "count": 1,
+  "ingredient": {
+    "item": "beyond_the_block:pale_oak_planks"
+  },
+  "ingredient_count": 1,
+  "result": "beyond_the_block:pale_oak_fence_gate"
+}

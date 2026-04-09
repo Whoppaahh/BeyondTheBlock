@@ -1,0 +1,9 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "count": 6,
+  "ingredient": {
+    "item": "beyond_the_block:stripped_pale_oak_log"
+  },
+  "ingredient_count": 1,
+  "result": "beyond_the_block:pale_oak_planks"
+}

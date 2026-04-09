@@ -6,8 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.blockentity.ChiseledBookshelfBlockEntity;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 public final class EnchantingPowerHelper {
     private EnchantingPowerHelper() {

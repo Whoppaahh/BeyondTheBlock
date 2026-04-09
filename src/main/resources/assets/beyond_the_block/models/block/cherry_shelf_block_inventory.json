@@ -1,0 +1,7 @@
+{
+  "parent": "beyond_the_block:block/template_shelf_inventory",
+  "textures": {
+    "all": "beyond_the_block:block/cherry_shelf",
+    "particle": "beyond_the_block:block/stripped_cherry_log"
+  }
+}

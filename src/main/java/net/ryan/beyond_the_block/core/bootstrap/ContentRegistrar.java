@@ -2,15 +2,8 @@ package net.ryan.beyond_the_block.core.bootstrap;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.ryan.beyond_the_block.advancements.ModCriteria;
-import net.ryan.beyond_the_block.content.registry.ModBlocks;
-import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
-import net.ryan.beyond_the_block.content.registry.ModEffects;
-import net.ryan.beyond_the_block.content.registry.ModEnchantments;
-import net.ryan.beyond_the_block.content.registry.ModEntities;
 import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
-import net.ryan.beyond_the_block.content.registry.ModItems;
-import net.ryan.beyond_the_block.content.registry.ModParticles;
-import net.ryan.beyond_the_block.content.registry.ModRecipes;
+import net.ryan.beyond_the_block.content.registry.*;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;

@@ -9,10 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.content.item.AnimatedBlockItem;
-import net.ryan.beyond_the_block.content.item.AnimatedItem;
-import net.ryan.beyond_the_block.content.item.CupidArrowItem;
-import net.ryan.beyond_the_block.content.item.ModItemGroup;
+import net.ryan.beyond_the_block.content.item.*;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourItem;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.content.item.tools.*;
@@ -21,6 +18,7 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModItems {
 
+    public static final Item TRIM_TEMPLATE_ITEM = registerItem("trim_template", new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     public static final Item TROWEL_ITEM = registerItem("trowel", new TrowelItem(new FabricItemSettings().group(ModItemGroup.ModToolTab)));
     public static final Item SANTA_HELMET = registerItem("santa_helmet", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroup.ModArmourTab)));
     public static final Item SANTA_CHESTPLATE = registerItem("santa_chestplate", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroup.ModArmourTab)));

@@ -4,12 +4,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.item.Item;
+import net.minecraft.tag.ItemTags;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.registry.ModItems;
-import net.ryan.beyond_the_block.utils.ModTags;
-import net.minecraft.tag.ItemTags;
 import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
 import net.ryan.beyond_the_block.content.registry.family.WoodSet;
+import net.ryan.beyond_the_block.utils.ModTags;
+
 import java.util.List;
 
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {

@@ -5,8 +5,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.ryan.beyond_the_block.content.registry.ModEffects;
 import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
+import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 import static net.ryan.beyond_the_block.network.packets.PacketIDs.GUARD_STATS_SYNC_PACKET_ID;
 

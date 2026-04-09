@@ -18,7 +18,9 @@ public final class ModDatagenFamilies {
             ModBlocks.MANGROVE_SHELF_BLOCK,
             ModBlocks.BAMBOO_SHELF_BLOCK,
             ModBlocks.CRIMSON_SHELF_BLOCK,
-            ModBlocks.WARPED_SHELF_BLOCK
+            ModBlocks.WARPED_SHELF_BLOCK,
+            ModBlocks.CHERRY_SHELF_BLOCK,
+            ModBlocks.PALE_OAK_SHELF_BLOCK
     );
 
     public static final List<Block> SPONGES = List.of(

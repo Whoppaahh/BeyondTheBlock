@@ -1,17 +1,8 @@
 package net.ryan.beyond_the_block.feature.interaction.handlers;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.CactusBlock;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.GourdBlock;
-import net.minecraft.block.KelpPlantBlock;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.PlantBlock;
-import net.minecraft.block.SugarCaneBlock;
-import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.VineBlock;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.block.*;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.server.network.ServerPlayerEntity;

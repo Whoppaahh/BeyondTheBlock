@@ -110,6 +110,7 @@
     "defaultRequire": 1
   },
   "client": [
-    "accessors.EntityRendererAccessor"
+    "accessors.EntityRendererAccessor",
+    "accessors.TexturedRenderLayersAccessor"
   ]
 }

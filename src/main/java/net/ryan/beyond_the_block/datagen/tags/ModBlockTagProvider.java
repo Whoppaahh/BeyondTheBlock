@@ -103,6 +103,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(set.trapdoor());
         getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(set.button());
         getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate());
+        getOrCreateTagBuilder(BlockTags.STANDING_SIGNS).add(set.sign());
+        getOrCreateTagBuilder(BlockTags.WALL_SIGNS).add(set.wallSign());
     }
 
     private void addBambooWoodSetTags(BambooWoodSet set) {
@@ -127,6 +129,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(set.trapdoor());
         getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(set.button());
         getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate());
+        getOrCreateTagBuilder(BlockTags.STANDING_SIGNS).add(set.sign());
+        getOrCreateTagBuilder(BlockTags.WALL_SIGNS).add(set.wallSign());
     }
 
     private List<Block> allOreBlocks() {

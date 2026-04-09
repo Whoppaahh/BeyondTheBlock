@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.ryan.beyond_the_block.advancements.ModCriteria;
 import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
 import net.ryan.beyond_the_block.content.registry.*;
+import net.ryan.beyond_the_block.content.registry.family.ModSignTypes;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
@@ -26,6 +27,7 @@ public class ContentRegistrar {
 
     public static void register() {
         ModConfiguredFeatures.registerConfiguredFeatures();
+        ModSignTypes.init();
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
         ModItems.registerModItems();

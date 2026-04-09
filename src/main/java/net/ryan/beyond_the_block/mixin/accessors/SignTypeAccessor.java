@@ -6,6 +6,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SignType.class)
 public interface SignTypeAccessor {
+    @Invoker("<init>")
+    static SignType btb$create(String name) {
+        throw new AssertionError();
+    }
     @Invoker("register")
     static SignType btb$register(SignType type) {
         throw new AssertionError();

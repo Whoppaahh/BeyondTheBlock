@@ -119,9 +119,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         );
 
         // Backported/custom sets using your family records
-        offerStandardWoodSet(exporter, "cherry", ModBlocks.CHERRY_SET, Items.OAK_SIGN);// replace later
-        offerStandardWoodSet(exporter, "pale_oak", ModBlocks.PALE_OAK_SET, Items.OAK_SIGN); // replace later if/when you add pale oak sign item
-        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_WOOD_SET, Items.OAK_SIGN);// replace later
+        offerStandardWoodSet(exporter, "cherry", ModBlocks.CHERRY_SET, ModBlocks.CHERRY_SET.sign().asItem());// replace later
+        offerStandardWoodSet(exporter, "pale_oak", ModBlocks.PALE_OAK_SET, ModBlocks.CHERRY_SET.sign().asItem()); // replace later if/when you add pale oak sign item
+        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_WOOD_SET, ModBlocks.CHERRY_SET.sign().asItem());// replace later
     }
 
     private static void offerStandardWoodSet(

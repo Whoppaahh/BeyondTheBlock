@@ -156,6 +156,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(set.trapdoor().asItem());
         getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(set.button().asItem());
         getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate().asItem());
+        getOrCreateTagBuilder(ItemTags.SIGNS).add(set.signItem());
     }
 
     private void addBambooWoodSetTags(BambooWoodSet set) {
@@ -173,5 +174,6 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(set.trapdoor().asItem());
         getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(set.button().asItem());
         getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(set.pressurePlate().asItem());
+        getOrCreateTagBuilder(ItemTags.SIGNS).add(set.signItem());
     }
 }

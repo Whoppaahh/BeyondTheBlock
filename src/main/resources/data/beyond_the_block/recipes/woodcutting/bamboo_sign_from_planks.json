@@ -5,5 +5,5 @@
     "item": "beyond_the_block:bamboo_planks"
   },
   "ingredient_count": 1,
-  "result": "minecraft:oak_sign"
+  "result": "beyond_the_block:bamboo_sign"
 }

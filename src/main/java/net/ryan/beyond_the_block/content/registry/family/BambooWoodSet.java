@@ -1,6 +1,7 @@
 package net.ryan.beyond_the_block.content.registry.family;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 public record BambooWoodSet(
         Block bambooBlock,
@@ -16,5 +17,8 @@ public record BambooWoodSet(
         Block pressurePlate,
         Block mosaic,
         Block mosaicSlab,
-        Block mosaicStairs
+        Block mosaicStairs,
+        Block sign,
+        Block wallSign,
+        Item signItem
 ) {}

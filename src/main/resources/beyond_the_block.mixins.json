@@ -11,6 +11,7 @@
     "accessors.AbstractFurnaceAccessor",
     "accessors.AnimalAgeAccessor",
     "accessors.BarrelBlockEntityAccessor",
+    "accessors.BlockEntityTypeAccessor",
     "accessors.ChestBlockEntityAccessor",
     "accessors.CrossbowAccessor",
     "accessors.DispenserBlockEntityAccessor",

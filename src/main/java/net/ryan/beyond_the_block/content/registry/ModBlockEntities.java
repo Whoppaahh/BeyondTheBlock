@@ -1,13 +1,34 @@
 package net.ryan.beyond_the_block.content.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.blockentity.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.mixin.accessors.BlockEntityTypeAccessor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ModBlockEntities {
+
+    public static final BlockEntityType<SignBlockEntity> MOD_SIGN_BLOCK_ENTITY =
+            Registry.register(
+                    Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "mod_sign"),
+                    FabricBlockEntityTypeBuilder.create(
+                            SignBlockEntity::new,
+                            ModBlocks.CHERRY_SIGN,
+                            ModBlocks.CHERRY_WALL_SIGN,
+                            ModBlocks.PALE_OAK_SIGN,
+                            ModBlocks.PALE_OAK_WALL_SIGN,
+                            ModBlocks.BAMBOO_SIGN,
+                            ModBlocks.BAMBOO_WALL_SIGN
+                    ).build()
+            );
 
     public static final BlockEntityType<WoodcutterBlockEntity> WOODCUTTER_BLOCK_ENTITY =
             Registry.register(
@@ -110,6 +131,18 @@ public class ModBlockEntities {
                             ModBlocks.ANIMATED_BLOCK).build());
 
     public static void registerModBlockEntities() {
+        BlockEntityTypeAccessor accessor = (BlockEntityTypeAccessor) BlockEntityType.SIGN;
+
+        Set<Block> blocks = new HashSet<>(accessor.btb$getBlocks());
+        blocks.add(ModBlocks.CHERRY_SIGN);
+        blocks.add(ModBlocks.CHERRY_WALL_SIGN);
+        blocks.add(ModBlocks.PALE_OAK_SIGN);
+        blocks.add(ModBlocks.PALE_OAK_WALL_SIGN);
+        blocks.add(ModBlocks.BAMBOO_SIGN);
+        blocks.add(ModBlocks.BAMBOO_WALL_SIGN);
+
+        accessor.btb$setBlocks(blocks);
+
         BeyondTheBlock.LOGGER.info("Registering Block Entities for " + BeyondTheBlock.MOD_ID);
     }
 }

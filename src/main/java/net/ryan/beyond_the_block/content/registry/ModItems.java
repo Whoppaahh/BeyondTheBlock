@@ -23,7 +23,7 @@ import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_WALL_HANG
 public class ModItems {
 
     public static final Item OAK_HANGING_SIGN_ITEM = registerItem("oak_hanging_sign",
-            new HangingSignItem(new Item.Settings(), OAK_HANGING_SIGN, OAK_WALL_HANGING_SIGN));
+            new HangingSignItem(new FabricItemSettings().group(ModItemGroup.ModBlocksTab), OAK_HANGING_SIGN, OAK_WALL_HANGING_SIGN));
 
 
     public static final Item CHERRY_BOAT = registerItem("cherry_boat",

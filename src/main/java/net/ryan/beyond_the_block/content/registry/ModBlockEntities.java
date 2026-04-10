@@ -25,9 +25,9 @@ public class ModBlockEntities {
                     FabricBlockEntityTypeBuilder.create(
                             HangingSignBlockEntity::new,
                             OAK_HANGING_SIGN,
-                            OAK_WALL_HANGING_SIGN,
-                            SPRUCE_HANGING_SIGN,
-                            SPRUCE_WALL_HANGING_SIGN
+                            OAK_WALL_HANGING_SIGN
+                           // SPRUCE_HANGING_SIGN,
+                           // SPRUCE_WALL_HANGING_SIGN
                             // ...all others
                     ).build()
             );
@@ -159,6 +159,14 @@ public class ModBlockEntities {
         blocks.add(ModBlocks.BAMBOO_WALL_SIGN);
 
         accessor.btb$setBlocks(blocks);
+
+        BlockEntityTypeAccessor accessor1 = (BlockEntityTypeAccessor) ModBlockEntities.HANGING_SIGN;
+
+        Set<Block> blocks1 = new HashSet<>(accessor1.btb$getBlocks());
+        blocks1.add(ModBlocks.OAK_HANGING_SIGN);
+        blocks1.add(ModBlocks.OAK_WALL_HANGING_SIGN);
+
+        accessor.btb$setBlocks(blocks1);
 
         BeyondTheBlock.LOGGER.info("Registering Block Entities for " + BeyondTheBlock.MOD_ID);
     }

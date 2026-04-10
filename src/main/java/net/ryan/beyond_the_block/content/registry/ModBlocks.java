@@ -8,6 +8,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SignItem;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.SignType;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -34,12 +35,24 @@ public class ModBlocks {
     //GENERAL / UTILITY BLOCKS
     public static final Block OAK_HANGING_SIGN = registerBlockWithoutBlockItem(
             "oak_hanging_sign",
-            new HangingSignBlock(FabricBlockSettings.of(Material.WOOD), SignType.OAK)
+            new HangingSignBlock(
+                    FabricBlockSettings.of(Material.WOOD)
+                            .noCollision()
+                            .strength(1.0F)
+                            .sounds(BlockSoundGroup.WOOD),
+                    SignType.OAK
+            )
     );
 
     public static final Block OAK_WALL_HANGING_SIGN = registerBlockWithoutBlockItem(
             "oak_wall_hanging_sign",
-            new WallHangingSignBlock(FabricBlockSettings.of(Material.WOOD), SignType.OAK)
+            new WallHangingSignBlock(
+                    FabricBlockSettings.of(Material.WOOD)
+                            .noCollision()
+                            .strength(1.0F)
+                            .sounds(BlockSoundGroup.WOOD),
+                    SignType.OAK
+            )
     );
 
 

@@ -13,10 +13,30 @@ import net.ryan.beyond_the_block.content.item.*;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourItem;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
 import net.ryan.beyond_the_block.content.item.tools.*;
+import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 
 public class ModItems {
+
+    public static final Item CHERRY_BOAT = registerItem("cherry_boat",
+            new ModBoatItem(ModBoatVariant.CHERRY, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
+    public static final Item CHERRY_CHEST_BOAT = registerItem("cherry_chest_boat",
+            new ModChestBoatItem(ModBoatVariant.CHERRY, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
+    public static final Item PALE_OAK_BOAT = registerItem("pale_oak_boat",
+            new ModBoatItem(ModBoatVariant.PALE_OAK, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
+    public static final Item PALE_OAK_CHEST_BOAT = registerItem("pale_oak_chest_boat",
+            new ModChestBoatItem(ModBoatVariant.PALE_OAK, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
+    public static final Item BAMBOO_RAFT = registerItem("bamboo_raft",
+            new ModBoatItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
+    public static final Item BAMBOO_CHEST_RAFT = registerItem("bamboo_chest_raft",
+            new ModChestBoatItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+
 
     public static final Item TRIM_TEMPLATE_ITEM = registerItem("trim_template", new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     public static final Item TROWEL_ITEM = registerItem("trowel", new TrowelItem(new FabricItemSettings().group(ModItemGroup.ModToolTab)));

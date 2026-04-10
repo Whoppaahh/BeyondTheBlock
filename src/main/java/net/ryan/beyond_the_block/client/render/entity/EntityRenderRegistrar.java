@@ -16,5 +16,7 @@ public class EntityRenderRegistrar {
         EntityRendererRegistry.register(ModVillagers.GUARD_VILLAGER, GuardEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.COBWEB_PROJECTILE, CobwebProjectileRenderer::new);
         EntityRendererRegistry.register(ModEntities.CUPID_ARROW, CupidArrowEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOD_BOAT, ctx -> new ModBoatRenderer<>(ctx, false));
+        EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT, ctx -> new ModBoatRenderer<>(ctx, true));
     }
 }

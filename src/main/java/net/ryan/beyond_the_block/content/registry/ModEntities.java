@@ -25,6 +25,26 @@ public class ModEntities {
         registerSpawns();
     }
 
+    public static final EntityType<ModBoatEntity> MOD_BOAT =
+            Registry.register(Registry.ENTITY_TYPE,
+            new Identifier(BeyondTheBlock.MOD_ID, "mod_boat"),
+            FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
+    public static final EntityType<ModChestBoatEntity> MOD_CHEST_BOAT =
+            Registry.register(Registry.ENTITY_TYPE,
+            new Identifier(BeyondTheBlock.MOD_ID, "mod_chest_boat"),
+            FabricEntityTypeBuilder.<ModChestBoatEntity>create(SpawnGroup.MISC, ModChestBoatEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
     public static final EntityType<CupidArrowEntity> CUPID_ARROW =
             Registry.register(Registry.ENTITY_TYPE,
                     new Identifier(BeyondTheBlock.MOD_ID, "cupid_arrow"),

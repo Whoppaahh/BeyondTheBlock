@@ -3,18 +3,15 @@ package net.ryan.beyond_the_block.content.item;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.BoatItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.entity.ModBoatEntity;
+import net.ryan.beyond_the_block.content.entity.BoatEntity;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 
 import java.util.List;
@@ -39,7 +36,7 @@ public class ModBoatItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        HitResult hitResult = raycast(world, user, RaycastContext.FluidHandling.ANY);
+        BlockHitResult hitResult = raycast(world, user, RaycastContext.FluidHandling.ANY);
 
         if (hitResult.getType() != HitResult.Type.BLOCK) {
             return TypedActionResult.pass(itemStack);
@@ -61,8 +58,7 @@ public class ModBoatItem extends Item {
             }
         }
 
-        BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-        ModBoatEntity boatEntity = new ModBoatEntity(world, blockHitResult.getPos().x, blockHitResult.getPos().y, blockHitResult.getPos().z);
+        BoatEntity boatEntity = new BoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
         boatEntity.setVariant(this.variant);
         boatEntity.setYaw(user.getYaw());
 

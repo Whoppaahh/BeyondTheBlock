@@ -11,16 +11,26 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.entity.ChestBoatEntity;
+import net.ryan.beyond_the_block.content.entity.RaftEntity;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 
-public class ModChestBoatItem extends Item {
+import java.util.List;
+import java.util.function.Predicate;
+
+public class ModRaftItem extends Item {
+    private static final Predicate<net.minecraft.entity.Entity> RIDERS =
+            entity -> entity.canHit() && entity.isCollidable();
+
     private final ModBoatVariant variant;
 
-    public ModChestBoatItem(ModBoatVariant variant, Settings settings) {
+    public ModRaftItem(ModBoatVariant variant, Settings settings) {
         super(settings);
         this.variant = variant;
         DispenserBlock.registerBehavior(this, DispenserBehavior.NOOP);
+    }
+
+    public ModBoatVariant getVariant() {
+        return this.variant;
     }
 
     @Override
@@ -32,7 +42,23 @@ public class ModChestBoatItem extends Item {
             return TypedActionResult.pass(itemStack);
         }
 
-        ChestBoatEntity boatEntity = new ChestBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        List<net.minecraft.entity.Entity> list = world.getOtherEntities(
+                user,
+                user.getBoundingBox().stretch(user.getRotationVec(1.0F).multiply(5.0D)).expand(1.0D),
+                RIDERS
+        );
+
+        if (!list.isEmpty()) {
+            net.minecraft.util.math.Vec3d cameraPos = user.getCameraPosVec(1.0F);
+
+            for (net.minecraft.entity.Entity entity : list) {
+                if (entity.getBoundingBox().expand(entity.getTargetingMargin()).contains(cameraPos)) {
+                    return TypedActionResult.pass(itemStack);
+                }
+            }
+        }
+
+        RaftEntity boatEntity = new RaftEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
         boatEntity.setVariant(this.variant);
         boatEntity.setYaw(user.getYaw());
 
@@ -51,3 +77,4 @@ public class ModChestBoatItem extends Item {
         return TypedActionResult.success(itemStack, world.isClient());
     }
 }
+

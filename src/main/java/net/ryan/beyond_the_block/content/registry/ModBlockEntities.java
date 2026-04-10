@@ -13,7 +13,24 @@ import net.ryan.beyond_the_block.mixin.accessors.BlockEntityTypeAccessor;
 import java.util.HashSet;
 import java.util.Set;
 
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_HANGING_SIGN;
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_WALL_HANGING_SIGN;
+
 public class ModBlockEntities {
+
+    public static final BlockEntityType<HangingSignBlockEntity> HANGING_SIGN =
+            Registry.register(
+                    Registry.BLOCK_ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "hanging_sign"),
+                    FabricBlockEntityTypeBuilder.create(
+                            HangingSignBlockEntity::new,
+                            OAK_HANGING_SIGN,
+                            OAK_WALL_HANGING_SIGN,
+                            SPRUCE_HANGING_SIGN,
+                            SPRUCE_WALL_HANGING_SIGN
+                            // ...all others
+                    ).build()
+            );
 
     public static final BlockEntityType<SignBlockEntity> MOD_SIGN_BLOCK_ENTITY =
             Registry.register(

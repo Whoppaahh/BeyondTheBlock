@@ -24,6 +24,7 @@ import net.ryan.beyond_the_block.content.block.sponges.CompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.block.sponges.DoubleCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.block.sponges.TripleCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.block.sponges.WetCompressedSpongeBlock;
+import net.ryan.beyond_the_block.content.item.HangingSignItem;
 import net.ryan.beyond_the_block.content.item.ModItemGroup;
 import net.ryan.beyond_the_block.content.registry.family.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
@@ -31,6 +32,17 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 public class ModBlocks {
 
     //GENERAL / UTILITY BLOCKS
+    public static final Block OAK_HANGING_SIGN = registerBlockWithoutBlockItem(
+            "oak_hanging_sign",
+            new HangingSignBlock(FabricBlockSettings.of(Material.WOOD), SignType.OAK)
+    );
+
+    public static final Block OAK_WALL_HANGING_SIGN = registerBlockWithoutBlockItem(
+            "oak_wall_hanging_sign",
+            new WallHangingSignBlock(FabricBlockSettings.of(Material.WOOD), SignType.OAK)
+    );
+
+
 
     public static final Block WOODCUTTER_BLOCK = registerBlock(
             "woodcutter",

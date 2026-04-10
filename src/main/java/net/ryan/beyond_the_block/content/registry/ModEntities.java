@@ -14,6 +14,8 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
 import net.ryan.beyond_the_block.content.entity.*;
+import net.ryan.beyond_the_block.content.entity.model.RaftChestEntityModel;
+import net.ryan.beyond_the_block.content.entity.model.RaftEntityModel;
 import net.ryan.beyond_the_block.content.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
@@ -25,20 +27,40 @@ public class ModEntities {
         registerSpawns();
     }
 
-    public static final EntityType<ModBoatEntity> MOD_BOAT =
+    public static final EntityType<RaftEntity> MOD_RAFT =
             Registry.register(Registry.ENTITY_TYPE,
-            new Identifier(BeyondTheBlock.MOD_ID, "mod_boat"),
-            FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new)
+            new Identifier(BeyondTheBlock.MOD_ID, "mod_raft"),
+            FabricEntityTypeBuilder.<RaftEntity>create(SpawnGroup.MISC, RaftEntity::new)
                     .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
                     .trackRangeBlocks(10)
                     .trackedUpdateRate(10)
                     .build()
     );
 
-    public static final EntityType<ModChestBoatEntity> MOD_CHEST_BOAT =
+    public static final EntityType<RaftChestEntity> MOD_CHEST_RAFT =
+            Registry.register(Registry.ENTITY_TYPE,
+            new Identifier(BeyondTheBlock.MOD_ID, "mod_chest_raft"),
+            FabricEntityTypeBuilder.<RaftChestEntity>create(SpawnGroup.MISC, RaftChestEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
+    public static final EntityType<BoatEntity> MOD_BOAT =
+            Registry.register(Registry.ENTITY_TYPE,
+            new Identifier(BeyondTheBlock.MOD_ID, "mod_boat"),
+            FabricEntityTypeBuilder.<BoatEntity>create(SpawnGroup.MISC, BoatEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
+    public static final EntityType<ChestBoatEntity> MOD_CHEST_BOAT =
             Registry.register(Registry.ENTITY_TYPE,
             new Identifier(BeyondTheBlock.MOD_ID, "mod_chest_boat"),
-            FabricEntityTypeBuilder.<ModChestBoatEntity>create(SpawnGroup.MISC, ModChestBoatEntity::new)
+            FabricEntityTypeBuilder.<ChestBoatEntity>create(SpawnGroup.MISC, ChestBoatEntity::new)
                     .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
                     .trackRangeBlocks(10)
                     .trackedUpdateRate(10)
@@ -91,6 +113,9 @@ public class ModEntities {
             );
 
     public static final EntityModelLayer WITHER_ZOMBIE_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "wither_zombie"), "main");
+    public static final EntityModelLayer RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "raft"), "main");
+    public static final EntityModelLayer CHEST_RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "chest_raft"), "main");
+
 
     public static final EntityType<CobwebProjectileEntity> COBWEB_PROJECTILE =
             Registry.register(
@@ -110,6 +135,8 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(WITHER_ZOMBIE, WitherZombie.createWitherZombieAttributes());
 
         EntityModelLayerRegistry.registerModelLayer(WITHER_ZOMBIE_MODEL, WitherZombieModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RAFT, RaftEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(CHEST_RAFT, RaftChestEntityModel::getTexturedModelData);
 
     }
 

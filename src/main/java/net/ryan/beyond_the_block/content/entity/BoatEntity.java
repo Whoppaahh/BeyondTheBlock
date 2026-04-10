@@ -4,7 +4,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
@@ -12,16 +11,16 @@ import net.ryan.beyond_the_block.content.registry.ModEntities;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 
-public class ModChestBoatEntity extends ChestBoatEntity {
+public class BoatEntity extends net.minecraft.entity.vehicle.BoatEntity {
     private static final TrackedData<Integer> VARIANT =
-            DataTracker.registerData(ModChestBoatEntity.class, TrackedDataHandlerRegistry.INTEGER);
+            DataTracker.registerData(BoatEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
-    public ModChestBoatEntity(EntityType<? extends ChestBoatEntity> entityType, World world) {
+    public BoatEntity(EntityType<? extends net.minecraft.entity.vehicle.BoatEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public ModChestBoatEntity(World world, double x, double y, double z) {
-        this(ModEntities.MOD_CHEST_BOAT, world);
+    public BoatEntity(World world, double x, double y, double z) {
+        this(ModEntities.MOD_BOAT, world);
         this.setPosition(x, y, z);
         this.prevX = x;
         this.prevY = y;
@@ -45,9 +44,9 @@ public class ModChestBoatEntity extends ChestBoatEntity {
     @Override
     public Item asItem() {
         return switch (this.getVariant()) {
-            case CHERRY -> ModItems.CHERRY_CHEST_BOAT;
-            case PALE_OAK -> ModItems.PALE_OAK_CHEST_BOAT;
-            case BAMBOO -> ModItems.BAMBOO_CHEST_RAFT;
+            case CHERRY -> ModItems.CHERRY_BOAT;
+            case PALE_OAK -> ModItems.PALE_OAK_BOAT;
+            case BAMBOO -> ModItems.BAMBOO_RAFT;
         };
     }
 

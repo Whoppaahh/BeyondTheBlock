@@ -12,12 +12,13 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.entity.ChestBoatEntity;
+import net.ryan.beyond_the_block.content.entity.RaftChestEntity;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 
-public class ModChestBoatItem extends Item {
+public class ModChestRaftItem extends Item {
     private final ModBoatVariant variant;
 
-    public ModChestBoatItem(ModBoatVariant variant, Settings settings) {
+    public ModChestRaftItem(ModBoatVariant variant, Settings settings) {
         super(settings);
         this.variant = variant;
         DispenserBlock.registerBehavior(this, DispenserBehavior.NOOP);
@@ -32,7 +33,7 @@ public class ModChestBoatItem extends Item {
             return TypedActionResult.pass(itemStack);
         }
 
-        ChestBoatEntity boatEntity = new ChestBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        RaftChestEntity boatEntity = new RaftChestEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
         boatEntity.setVariant(this.variant);
         boatEntity.setYaw(user.getYaw());
 

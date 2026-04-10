@@ -10,16 +10,15 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
-import net.ryan.beyond_the_block.content.entity.ModBoatEntity;
-import net.ryan.beyond_the_block.content.entity.ModChestBoatEntity;
+import net.ryan.beyond_the_block.content.entity.BoatEntity;
+import net.ryan.beyond_the_block.content.entity.ChestBoatEntity;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
-public class ModBoatRenderer<T extends BoatEntity> extends EntityRenderer<T> {
+public class ModBoatRenderer<T extends net.minecraft.entity.vehicle.BoatEntity> extends EntityRenderer<T> {
     private final BoatEntityModel model;
     private final boolean chest;
 
@@ -29,8 +28,8 @@ public class ModBoatRenderer<T extends BoatEntity> extends EntityRenderer<T> {
 
         ModelPart modelPart = ctx.getPart(
                 chest
-                        ? EntityModelLayers.createChestBoat(BoatEntity.Type.OAK)
-                        : EntityModelLayers.createBoat(BoatEntity.Type.OAK)
+                        ? EntityModelLayers.createChestBoat(net.minecraft.entity.vehicle.BoatEntity.Type.OAK)
+                        : EntityModelLayers.createBoat(net.minecraft.entity.vehicle.BoatEntity.Type.OAK)
         );
 
         this.model = new BoatEntityModel(modelPart, chest);
@@ -50,10 +49,10 @@ public class ModBoatRenderer<T extends BoatEntity> extends EntityRenderer<T> {
     }
 
     private ModBoatVariant getVariant(T boat) {
-        if (boat instanceof ModBoatEntity modBoat) {
+        if (boat instanceof BoatEntity modBoat) {
             return modBoat.getVariant();
         }
-        if (boat instanceof ModChestBoatEntity modChestBoat) {
+        if (boat instanceof ChestBoatEntity modChestBoat) {
             return modChestBoat.getVariant();
         }
         return ModBoatVariant.CHERRY;

@@ -18,5 +18,7 @@ public class EntityRenderRegistrar {
         EntityRendererRegistry.register(ModEntities.CUPID_ARROW, CupidArrowEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOD_BOAT, ctx -> new ModBoatRenderer<>(ctx, false));
         EntityRendererRegistry.register(ModEntities.MOD_CHEST_BOAT, ctx -> new ModBoatRenderer<>(ctx, true));
+        EntityRendererRegistry.register(ModEntities.MOD_RAFT, ctx -> new RaftEntityRenderer<>(ctx, false));
+        EntityRendererRegistry.register(ModEntities.MOD_CHEST_RAFT, ctx -> new RaftEntityRenderer<>(ctx, true));
     }
 }

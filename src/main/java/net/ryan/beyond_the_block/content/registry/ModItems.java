@@ -16,8 +16,15 @@ import net.ryan.beyond_the_block.content.item.tools.*;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_HANGING_SIGN;
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_WALL_HANGING_SIGN;
+
 
 public class ModItems {
+
+    public static final Item OAK_HANGING_SIGN_ITEM = registerItem("oak_hanging_sign",
+            new HangingSignItem(new Item.Settings(), OAK_HANGING_SIGN, OAK_WALL_HANGING_SIGN));
+
 
     public static final Item CHERRY_BOAT = registerItem("cherry_boat",
             new ModBoatItem(ModBoatVariant.CHERRY, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
@@ -32,10 +39,10 @@ public class ModItems {
             new ModChestBoatItem(ModBoatVariant.PALE_OAK, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 
     public static final Item BAMBOO_RAFT = registerItem("bamboo_raft",
-            new ModBoatItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+            new ModRaftItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 
     public static final Item BAMBOO_CHEST_RAFT = registerItem("bamboo_chest_raft",
-            new ModChestBoatItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
+            new ModChestRaftItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 
 
     public static final Item TRIM_TEMPLATE_ITEM = registerItem("trim_template", new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));

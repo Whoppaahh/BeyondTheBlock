@@ -158,15 +158,10 @@ public class ModBlockEntities {
         blocks.add(ModBlocks.BAMBOO_SIGN);
         blocks.add(ModBlocks.BAMBOO_WALL_SIGN);
 
+        blocks.add(OAK_HANGING_SIGN);
+        blocks.add(OAK_WALL_HANGING_SIGN);
+
         accessor.btb$setBlocks(blocks);
-
-        BlockEntityTypeAccessor accessor1 = (BlockEntityTypeAccessor) ModBlockEntities.HANGING_SIGN;
-
-        Set<Block> blocks1 = new HashSet<>(accessor1.btb$getBlocks());
-        blocks1.add(ModBlocks.OAK_HANGING_SIGN);
-        blocks1.add(ModBlocks.OAK_WALL_HANGING_SIGN);
-
-        accessor.btb$setBlocks(blocks1);
 
         BeyondTheBlock.LOGGER.info("Registering Block Entities for " + BeyondTheBlock.MOD_ID);
     }

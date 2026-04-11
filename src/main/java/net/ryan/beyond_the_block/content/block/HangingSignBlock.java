@@ -117,6 +117,7 @@ public class HangingSignBlock extends AbstractSignBlock {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof HangingSignBlockEntity signBlockEntity) {
             if (!world.isClient) {
+                signBlockEntity.setEditor(player.getUuid());
                 player.openEditSignScreen(signBlockEntity);
             }
             return ActionResult.success(world.isClient);

@@ -19,5 +19,8 @@ public record WoodSet(
         Block pressurePlate,
         Block sign,
         Block wallSign,
-        Item signItem
+        Item signItem,
+        Block hangingSign,
+        Block wallHangingSign,
+        Item hangingSignItem
 ) {}

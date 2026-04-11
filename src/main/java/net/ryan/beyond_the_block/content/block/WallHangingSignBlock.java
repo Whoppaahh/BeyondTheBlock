@@ -5,16 +5,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.*;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SignType;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.content.blockentity.HangingSignBlockEntity;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 public class WallHangingSignBlock extends AbstractSignBlock {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -49,7 +46,7 @@ public class WallHangingSignBlock extends AbstractSignBlock {
 
         for (Direction direction : ctx.getPlacementDirections()) {
             if (direction.getAxis().isHorizontal()) {
-                Direction facing = direction.getOpposite();
+                Direction facing = direction;
                 BlockState state = this.getDefaultState()
                         .with(FACING, facing)
                         .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
@@ -61,6 +58,12 @@ public class WallHangingSignBlock extends AbstractSignBlock {
         }
 
         return null;
+    }
+
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        Item item = ModBlocks.HANGING_SIGN_ITEMS.get(this.getSignType());
+        return item != null ? new ItemStack(item) : ItemStack.EMPTY;
     }
 
     @Override
@@ -117,15 +120,72 @@ public class WallHangingSignBlock extends AbstractSignBlock {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(hand);
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof HangingSignBlockEntity signBlockEntity) {
-            if (!world.isClient) {
-                signBlockEntity.setEditor(player.getUuid());
-                player.openEditSignScreen(signBlockEntity);
-            }
-            return ActionResult.success(world.isClient);
+
+        if (!(blockEntity instanceof HangingSignBlockEntity signBlockEntity)) {
+            return ActionResult.PASS;
         }
-        return ActionResult.PASS;
+
+        // Glow ink sac
+        if (stack.isOf(Items.GLOW_INK_SAC)) {
+            if (!signBlockEntity.isGlowingText()) {
+                if (!world.isClient) {
+                    signBlockEntity.setGlowingText(true);
+                    signBlockEntity.markDirty();
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+
+                    if (!player.getAbilities().creativeMode) {
+                        stack.decrement(1);
+                    }
+                }
+                return ActionResult.success(world.isClient);
+            }
+            return ActionResult.CONSUME;
+        }
+
+        // Normal ink sac removes glow
+        if (stack.isOf(Items.INK_SAC)) {
+            if (signBlockEntity.isGlowingText()) {
+                if (!world.isClient) {
+                    signBlockEntity.setGlowingText(false);
+                    signBlockEntity.markDirty();
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+
+                    if (!player.getAbilities().creativeMode) {
+                        stack.decrement(1);
+                    }
+                }
+                return ActionResult.success(world.isClient);
+            }
+            return ActionResult.CONSUME;
+        }
+
+        // Dyes
+        if (stack.getItem() instanceof DyeItem dyeItem) {
+            DyeColor newColor = dyeItem.getColor();
+            if (signBlockEntity.getTextColor() != newColor) {
+                if (!world.isClient) {
+                    signBlockEntity.setTextColor(newColor);
+                    signBlockEntity.markDirty();
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+
+                    if (!player.getAbilities().creativeMode) {
+                        stack.decrement(1);
+                    }
+                }
+                return ActionResult.success(world.isClient);
+            }
+            return ActionResult.CONSUME;
+        }
+
+        // Otherwise open editor
+        if (!world.isClient) {
+            signBlockEntity.setEditor(player.getUuid());
+            player.openEditSignScreen(signBlockEntity);
+        }
+
+        return ActionResult.success(world.isClient);
     }
 
     @Override

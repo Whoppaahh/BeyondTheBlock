@@ -13,10 +13,8 @@ import net.ryan.beyond_the_block.mixin.accessors.BlockEntityTypeAccessor;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_HANGING_SIGN;
-import static net.ryan.beyond_the_block.content.registry.ModBlocks.OAK_WALL_HANGING_SIGN;
-
 public class ModBlockEntities {
+
 
     public static final BlockEntityType<HangingSignBlockEntity> HANGING_SIGN =
             Registry.register(
@@ -24,11 +22,31 @@ public class ModBlockEntities {
                     new Identifier(BeyondTheBlock.MOD_ID, "hanging_sign"),
                     FabricBlockEntityTypeBuilder.create(
                             HangingSignBlockEntity::new,
-                            OAK_HANGING_SIGN,
-                            OAK_WALL_HANGING_SIGN
-                           // SPRUCE_HANGING_SIGN,
-                           // SPRUCE_WALL_HANGING_SIGN
-                            // ...all others
+                            ModBlocks.CHERRY_SET.hangingSign(),
+                            ModBlocks.CHERRY_SET.wallHangingSign(),
+                            ModBlocks.PALE_OAK_SET.hangingSign(),
+                            ModBlocks.PALE_OAK_SET.wallHangingSign(),
+                            ModBlocks.BAMBOO_WOOD_SET.hangingSign(),
+                            ModBlocks.BAMBOO_WOOD_SET.wallHangingSign(),
+
+                            ModBlocks.OAK_HANGING_SET.hangingSign(),
+                            ModBlocks.OAK_HANGING_SET.wallHangingSign(),
+                            ModBlocks.SPRUCE_HANGING_SET.hangingSign(),
+                            ModBlocks.SPRUCE_HANGING_SET.wallHangingSign(),
+                            ModBlocks.BIRCH_HANGING_SET.hangingSign(),
+                            ModBlocks.BIRCH_HANGING_SET.wallHangingSign(),
+                            ModBlocks.JUNGLE_HANGING_SET.hangingSign(),
+                            ModBlocks.JUNGLE_HANGING_SET.wallHangingSign(),
+                            ModBlocks.ACACIA_HANGING_SET.hangingSign(),
+                            ModBlocks.ACACIA_HANGING_SET.wallHangingSign(),
+                            ModBlocks.DARK_OAK_HANGING_SET.hangingSign(),
+                            ModBlocks.DARK_OAK_HANGING_SET.wallHangingSign(),
+                            ModBlocks.MANGROVE_HANGING_SET.hangingSign(),
+                            ModBlocks.MANGROVE_HANGING_SET.wallHangingSign(),
+                            ModBlocks.CRIMSON_HANGING_SET.hangingSign(),
+                            ModBlocks.CRIMSON_HANGING_SET.wallHangingSign(),
+                            ModBlocks.WARPED_HANGING_SET.hangingSign(),
+                            ModBlocks.WARPED_HANGING_SET.wallHangingSign()
                     ).build()
             );
 
@@ -142,7 +160,7 @@ public class ModBlockEntities {
                     FabricBlockEntityTypeBuilder.create(SingleInputBlockEntity::new, ModBlocks.SINGLE_INPUT_BLOCK).build());
 
     public static BlockEntityType<AnimatedBlockEntity> ANIMATED_BLOCK_ENTITY =
-             Registry.register(Registry.BLOCK_ENTITY_TYPE,
+            Registry.register(Registry.BLOCK_ENTITY_TYPE,
                     new Identifier(BeyondTheBlock.MOD_ID, "animated_block_entity"),
                     FabricBlockEntityTypeBuilder.create(AnimatedBlockEntity::new,
                             ModBlocks.ANIMATED_BLOCK).build());
@@ -158,8 +176,31 @@ public class ModBlockEntities {
         blocks.add(ModBlocks.BAMBOO_SIGN);
         blocks.add(ModBlocks.BAMBOO_WALL_SIGN);
 
-        blocks.add(OAK_HANGING_SIGN);
-        blocks.add(OAK_WALL_HANGING_SIGN);
+        blocks.add(ModBlocks.CHERRY_SET.hangingSign());
+        blocks.add(ModBlocks.CHERRY_SET.wallHangingSign());
+        blocks.add(ModBlocks.PALE_OAK_SET.hangingSign());
+        blocks.add(ModBlocks.PALE_OAK_SET.wallHangingSign());
+        blocks.add(ModBlocks.BAMBOO_WOOD_SET.hangingSign());
+        blocks.add(ModBlocks.BAMBOO_WOOD_SET.wallHangingSign());
+
+        blocks.add(ModBlocks.OAK_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.OAK_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.SPRUCE_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.SPRUCE_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.BIRCH_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.BIRCH_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.JUNGLE_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.JUNGLE_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.ACACIA_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.ACACIA_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.DARK_OAK_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.DARK_OAK_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.MANGROVE_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.MANGROVE_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.CRIMSON_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.CRIMSON_HANGING_SET.wallHangingSign());
+        blocks.add(ModBlocks.WARPED_HANGING_SET.hangingSign());
+        blocks.add(ModBlocks.WARPED_HANGING_SET.wallHangingSign());
 
         accessor.btb$setBlocks(blocks);
 

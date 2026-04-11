@@ -20,5 +20,8 @@ public record BambooWoodSet(
         Block mosaicStairs,
         Block sign,
         Block wallSign,
-        Item signItem
+        Item signItem,
+        Block hangingSign,
+        Block wallHangingSign,
+        Item hangingSignItem
 ) {}

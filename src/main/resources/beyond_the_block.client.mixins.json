@@ -24,6 +24,7 @@
     "LivingEntityRendererMixin",
     "MouseScrollMixin",
     "SheepWoolFeatureRendererMixin",
+    "SignBlockEntityRendererMixin",
     "TitleScreenMixin"
   ],
   "injectors": {

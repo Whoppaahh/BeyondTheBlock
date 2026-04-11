@@ -1,0 +1,9 @@
+{
+  "type": "beyond_the_block:woodcutting",
+  "count": 3,
+  "ingredient": {
+    "item": "minecraft:crimson_planks"
+  },
+  "ingredient_count": 1,
+  "result": "beyond_the_block:crimson_hanging_sign"
+}

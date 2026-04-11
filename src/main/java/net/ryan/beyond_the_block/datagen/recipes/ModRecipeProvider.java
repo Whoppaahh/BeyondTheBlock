@@ -50,7 +50,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.OAK_LOG, Items.OAK_WOOD, Items.STRIPPED_OAK_LOG, Items.STRIPPED_OAK_WOOD,
                 Items.OAK_PLANKS, Items.OAK_SLAB, Items.OAK_STAIRS, Items.OAK_FENCE, Items.OAK_FENCE_GATE,
                 Items.OAK_DOOR, Items.OAK_TRAPDOOR, Items.OAK_BUTTON, Items.OAK_PRESSURE_PLATE,
-                Items.OAK_SIGN
+                Items.OAK_SIGN, ModBlocks.OAK_HANGING_SET.hangingSignItem(), Items.OAK_BOAT, Items.OAK_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -58,7 +58,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.SPRUCE_LOG, Items.SPRUCE_WOOD, Items.STRIPPED_SPRUCE_LOG, Items.STRIPPED_SPRUCE_WOOD,
                 Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB, Items.SPRUCE_STAIRS, Items.SPRUCE_FENCE, Items.SPRUCE_FENCE_GATE,
                 Items.SPRUCE_DOOR, Items.SPRUCE_TRAPDOOR, Items.SPRUCE_BUTTON, Items.SPRUCE_PRESSURE_PLATE,
-                Items.SPRUCE_SIGN
+                Items.SPRUCE_SIGN, ModBlocks.SPRUCE_HANGING_SET.hangingSignItem(), Items.SPRUCE_BOAT, Items.SPRUCE_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -66,7 +66,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.BIRCH_LOG, Items.BIRCH_WOOD, Items.STRIPPED_BIRCH_LOG, Items.STRIPPED_BIRCH_WOOD,
                 Items.BIRCH_PLANKS, Items.BIRCH_SLAB, Items.BIRCH_STAIRS, Items.BIRCH_FENCE, Items.BIRCH_FENCE_GATE,
                 Items.BIRCH_DOOR, Items.BIRCH_TRAPDOOR, Items.BIRCH_BUTTON, Items.BIRCH_PRESSURE_PLATE,
-                Items.BIRCH_SIGN
+                Items.BIRCH_SIGN, ModBlocks.BIRCH_HANGING_SET.hangingSignItem(), Items.BIRCH_BOAT, Items.BIRCH_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -74,7 +74,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.JUNGLE_LOG, Items.JUNGLE_WOOD, Items.STRIPPED_JUNGLE_LOG, Items.STRIPPED_JUNGLE_WOOD,
                 Items.JUNGLE_PLANKS, Items.JUNGLE_SLAB, Items.JUNGLE_STAIRS, Items.JUNGLE_FENCE, Items.JUNGLE_FENCE_GATE,
                 Items.JUNGLE_DOOR, Items.JUNGLE_TRAPDOOR, Items.JUNGLE_BUTTON, Items.JUNGLE_PRESSURE_PLATE,
-                Items.JUNGLE_SIGN
+                Items.JUNGLE_SIGN, ModBlocks.JUNGLE_HANGING_SET.hangingSignItem(), Items.JUNGLE_BOAT, Items.JUNGLE_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -82,7 +82,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.ACACIA_LOG, Items.ACACIA_WOOD, Items.STRIPPED_ACACIA_LOG, Items.STRIPPED_ACACIA_WOOD,
                 Items.ACACIA_PLANKS, Items.ACACIA_SLAB, Items.ACACIA_STAIRS, Items.ACACIA_FENCE, Items.ACACIA_FENCE_GATE,
                 Items.ACACIA_DOOR, Items.ACACIA_TRAPDOOR, Items.ACACIA_BUTTON, Items.ACACIA_PRESSURE_PLATE,
-                Items.ACACIA_SIGN
+                Items.ACACIA_SIGN, ModBlocks.ACACIA_HANGING_SET.hangingSignItem(), Items.ACACIA_BOAT, Items.ACACIA_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -90,7 +90,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.DARK_OAK_LOG, Items.DARK_OAK_WOOD, Items.STRIPPED_DARK_OAK_LOG, Items.STRIPPED_DARK_OAK_WOOD,
                 Items.DARK_OAK_PLANKS, Items.DARK_OAK_SLAB, Items.DARK_OAK_STAIRS, Items.DARK_OAK_FENCE, Items.DARK_OAK_FENCE_GATE,
                 Items.DARK_OAK_DOOR, Items.DARK_OAK_TRAPDOOR, Items.DARK_OAK_BUTTON, Items.DARK_OAK_PRESSURE_PLATE,
-                Items.DARK_OAK_SIGN
+                Items.DARK_OAK_SIGN, ModBlocks.DARK_OAK_HANGING_SET.hangingSignItem(), Items.DARK_OAK_BOAT, Items.DARK_OAK_CHEST_BOAT
         );
 
         offerStandardWoodSet(exporter,
@@ -98,7 +98,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.MANGROVE_LOG, Items.MANGROVE_WOOD, Items.STRIPPED_MANGROVE_LOG, Items.STRIPPED_MANGROVE_WOOD,
                 Items.MANGROVE_PLANKS, Items.MANGROVE_SLAB, Items.MANGROVE_STAIRS, Items.MANGROVE_FENCE, Items.MANGROVE_FENCE_GATE,
                 Items.MANGROVE_DOOR, Items.MANGROVE_TRAPDOOR, Items.MANGROVE_BUTTON, Items.MANGROVE_PRESSURE_PLATE,
-                Items.MANGROVE_SIGN
+                Items.MANGROVE_SIGN, ModBlocks.MANGROVE_HANGING_SET.hangingSignItem(), Items.MANGROVE_BOAT, Items.MANGROVE_CHEST_BOAT
         );
 
         // Vanilla nether woods
@@ -107,7 +107,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.CRIMSON_STEM, Items.CRIMSON_HYPHAE, Items.STRIPPED_CRIMSON_STEM, Items.STRIPPED_CRIMSON_HYPHAE,
                 Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB, Items.CRIMSON_STAIRS, Items.CRIMSON_FENCE, Items.CRIMSON_FENCE_GATE,
                 Items.CRIMSON_DOOR, Items.CRIMSON_TRAPDOOR, Items.CRIMSON_BUTTON, Items.CRIMSON_PRESSURE_PLATE,
-                Items.CRIMSON_SIGN
+                Items.CRIMSON_SIGN, ModBlocks.CRIMSON_HANGING_SET.hangingSignItem(), Items.OAK_BOAT, Items.OAK_CHEST_BOAT
         );
 
         offerNetherWoodSet(exporter,
@@ -115,20 +115,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.WARPED_STEM, Items.WARPED_HYPHAE, Items.STRIPPED_WARPED_STEM, Items.STRIPPED_WARPED_HYPHAE,
                 Items.WARPED_PLANKS, Items.WARPED_SLAB, Items.WARPED_STAIRS, Items.WARPED_FENCE, Items.WARPED_FENCE_GATE,
                 Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_BUTTON, Items.WARPED_PRESSURE_PLATE,
-                Items.WARPED_SIGN
+                Items.WARPED_SIGN, ModBlocks.WARPED_HANGING_SET.hangingSignItem(), Items.OAK_BOAT, Items.OAK_CHEST_BOAT
         );
 
         // Backported/custom sets using your family records
-        offerStandardWoodSet(exporter, "cherry", ModBlocks.CHERRY_SET, ModBlocks.CHERRY_SET.sign().asItem());// replace later
-        offerStandardWoodSet(exporter, "pale_oak", ModBlocks.PALE_OAK_SET, ModBlocks.CHERRY_SET.sign().asItem()); // replace later if/when you add pale oak sign item
-        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_WOOD_SET, ModBlocks.CHERRY_SET.sign().asItem());// replace later
+        offerStandardWoodSet(exporter, "cherry", ModBlocks.CHERRY_SET);// replace later
+        offerStandardWoodSet(exporter, "pale_oak", ModBlocks.PALE_OAK_SET); // replace later if/when you add pale oak sign item
+        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_WOOD_SET);// replace later
     }
 
     private static void offerStandardWoodSet(
             Consumer<RecipeJsonProvider> exporter,
             String name,
-            WoodSet set,
-            Item sign
+            WoodSet set
     ) {
         offerRawWoodToPlanks(
                 exporter,
@@ -152,15 +151,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 set.trapdoor().asItem(),
                 set.button().asItem(),
                 set.pressurePlate().asItem(),
-                sign
+                set.signItem(),
+                set.hangingSignItem()
         );
     }
 
     private static void offerBambooWoodSet(
             Consumer<RecipeJsonProvider> exporter,
             String name,
-            BambooWoodSet set,
-            Item sign
+            BambooWoodSet set
     ) {
         offer(exporter, set.bambooBlock().asItem(), 1, set.planks().asItem(), 6, "woodcutting/" + name + "_planks_from_block");
         offer(exporter, set.strippedBambooBlock().asItem(), 1, set.planks().asItem(), 6, "woodcutting/" + name + "_planks_from_stripped_block");
@@ -177,7 +176,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 set.trapdoor().asItem(),
                 set.button().asItem(),
                 set.pressurePlate().asItem(),
-                sign
+                set.signItem(),
+                set.hangingSignItem()
         );
 
         offerBambooMosaicRecipes(
@@ -206,10 +206,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Item trapdoor,
             Item button,
             Item pressurePlate,
-            Item sign
+            Item sign,
+            Item hangingSign,
+            Item boat,
+            Item chestBoat
     ) {
         offerRawWoodToPlanks(exporter, name, log, wood, strippedLog, strippedWood, planks);
-        offerCommonPlankRecipes(exporter, name, planks, slab, stairs, fence, fenceGate, door, trapdoor, button, pressurePlate, sign);
+        offerCommonPlankRecipes(exporter, name, planks, slab, stairs, fence, fenceGate, door, trapdoor, button, pressurePlate, sign, hangingSign);
     }
 
     private static void offerNetherWoodSet(
@@ -228,10 +231,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Item trapdoor,
             Item button,
             Item pressurePlate,
-            Item sign
+            Item sign,
+            Item hangingSign,
+            Item boat,
+            Item chestBoat
     ) {
         offerRawWoodToPlanks(exporter, name, stem, hyphae, strippedStem, strippedHyphae, planks);
-        offerCommonPlankRecipes(exporter, name, planks, slab, stairs, fence, fenceGate, door, trapdoor, button, pressurePlate, sign);
+        offerCommonPlankRecipes(exporter, name, planks, slab, stairs, fence, fenceGate, door, trapdoor, button, pressurePlate, sign, hangingSign);
     }
 
     private static void offerRawWoodToPlanks(
@@ -261,7 +267,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Item trapdoor,
             Item button,
             Item pressurePlate,
-            Item sign
+            Item sign,
+            Item hangingSign
     ) {
         offer(exporter, planks, 1, slab, 3, "woodcutting/" + name + "_slab_from_planks");
         offer(exporter, planks, 1, stairs, 1, "woodcutting/" + name + "_stairs_from_planks");
@@ -272,6 +279,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offer(exporter, planks, 1, button, 1, "woodcutting/" + name + "_button_from_planks");
         offer(exporter, planks, 1, pressurePlate, 1, "woodcutting/" + name + "_pressure_plate_from_planks");
         offer(exporter, planks, 1, sign, 3, "woodcutting/" + name + "_sign_from_planks");
+        offer(exporter, planks, 1, hangingSign, 3, "woodcutting/" + name + "_hanging_sign_from_planks");
     }
 
     private static void offerBambooMosaicRecipes(

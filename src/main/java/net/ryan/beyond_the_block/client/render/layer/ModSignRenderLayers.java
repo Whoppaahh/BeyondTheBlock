@@ -13,9 +13,9 @@ public final class ModSignRenderLayers {
     private ModSignRenderLayers() {}
 
     public static void register() {
-        registerType(ModSignTypes.CHERRY, "btb_cherry");
-        registerType(ModSignTypes.PALE_OAK, "btb_pale_oak");
-        registerType(ModSignTypes.BAMBOO, "btb_bamboo");
+        registerType(ModSignTypes.CHERRY, "cherry");
+        registerType(ModSignTypes.PALE_OAK, "pale_oak");
+        registerType(ModSignTypes.BAMBOO, "bamboo");
     }
 
     private static void registerType(SignType type, String textureName) {

@@ -30,33 +30,14 @@ import net.ryan.beyond_the_block.content.item.ModItemGroup;
 import net.ryan.beyond_the_block.content.registry.family.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModBlocks {
 
+    public static final Map<SignType, Item> HANGING_SIGN_ITEMS = new HashMap<>();
+
     //GENERAL / UTILITY BLOCKS
-    public static final Block OAK_HANGING_SIGN = registerBlockWithoutBlockItem(
-            "oak_hanging_sign",
-            new HangingSignBlock(
-                    FabricBlockSettings.of(Material.WOOD)
-                            .noCollision()
-                            .strength(1.0F)
-                            .sounds(BlockSoundGroup.WOOD),
-                    SignType.OAK
-            )
-    );
-
-    public static final Block OAK_WALL_HANGING_SIGN = registerBlockWithoutBlockItem(
-            "oak_wall_hanging_sign",
-            new WallHangingSignBlock(
-                    FabricBlockSettings.of(Material.WOOD)
-                            .noCollision()
-                            .strength(1.0F)
-                            .sounds(BlockSoundGroup.WOOD),
-                    SignType.OAK
-            )
-    );
-
-
-
     public static final Block WOODCUTTER_BLOCK = registerBlock(
             "woodcutter",
             new WoodcutterBlock(FabricBlockSettings.copy(Blocks.STONECUTTER)),
@@ -133,6 +114,34 @@ public class ModBlocks {
     public static final Block PALE_OAK_SHELF_BLOCK = PALE_OAK_SHELF_SET.shelf();
 
      //BACKPORTED / CUSTOM WOOD FAMILIES
+
+    public static final HangingSignOnlySet OAK_HANGING_SET =
+            registerVanillaHangingSignSet("oak", SignType.OAK, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet SPRUCE_HANGING_SET =
+            registerVanillaHangingSignSet("spruce", SignType.SPRUCE, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet BIRCH_HANGING_SET =
+            registerVanillaHangingSignSet("birch", SignType.BIRCH, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet JUNGLE_HANGING_SET =
+            registerVanillaHangingSignSet("jungle", SignType.JUNGLE, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet ACACIA_HANGING_SET =
+            registerVanillaHangingSignSet("acacia", SignType.ACACIA, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet DARK_OAK_HANGING_SET =
+            registerVanillaHangingSignSet("dark_oak", SignType.DARK_OAK, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet MANGROVE_HANGING_SET =
+            registerVanillaHangingSignSet("mangrove", SignType.MANGROVE, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet CRIMSON_HANGING_SET =
+            registerVanillaHangingSignSet("crimson", SignType.CRIMSON, ModItemGroup.ModBlocksTab);
+
+    public static final HangingSignOnlySet WARPED_HANGING_SET =
+            registerVanillaHangingSignSet("warped", SignType.WARPED, ModItemGroup.ModBlocksTab);
+
 
     public static final WoodSet CHERRY_SET = registerWoodSet("cherry", ModSignTypes.CHERRY, ModItemGroup.ModBlocksTab);
     public static final WoodSet PALE_OAK_SET = registerWoodSet("pale_oak", ModSignTypes.PALE_OAK, ModItemGroup.ModBlocksTab);
@@ -520,6 +529,42 @@ public class ModBlocks {
      * ============================================================
      */
 
+    private static HangingSignOnlySet registerVanillaHangingSignSet(String name, SignType signType, ItemGroup tab) {
+        Block hangingSign = registerBlockWithoutBlockItem(
+                name + "_hanging_sign",
+                new HangingSignBlock(
+                        FabricBlockSettings.of(Material.WOOD)
+                                .noCollision()
+                                .strength(1.0F)
+                                .sounds(BlockSoundGroup.WOOD),
+                        signType
+                )
+        );
+
+        Block wallHangingSign = registerBlockWithoutBlockItem(
+                name + "_wall_hanging_sign",
+                new WallHangingSignBlock(
+                        FabricBlockSettings.of(Material.WOOD)
+                                .noCollision()
+                                .strength(1.0F)
+                                .sounds(BlockSoundGroup.WOOD),
+                        signType
+                )
+        );
+
+        Item hangingSignItem = Registry.register(
+                Registry.ITEM,
+                new Identifier(BeyondTheBlock.MOD_ID, name + "_hanging_sign"),
+                new HangingSignItem(
+                        new FabricItemSettings().group(tab),
+                        hangingSign,
+                        wallHangingSign
+                )
+        );
+        HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
+        return new HangingSignOnlySet(hangingSign, wallHangingSign, hangingSignItem);
+    }
+
     private static WoodSet registerWoodSet(String name, SignType signType, ItemGroup tab) {
         Block log = registerBlock(name + "_log", createLogBlock(), tab);
         Block wood = registerBlock(name + "_wood", createWoodBlock(), tab);
@@ -540,6 +585,11 @@ public class ModBlocks {
         Block wallSign = registerBlockWithoutBlockItem(name + "_wall_sign", createWallSignBlock(signType));
         Item signItem = registerSignItem(name + "_sign", sign, wallSign, tab);
 
+        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType));
+        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType));
+        Item hangingSignItem = registerHangingSignItem(name + "_hanging_sign", hangingSign, wallHangingSign, tab);
+        HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
+
         return new WoodSet(
                 log,
                 wood,
@@ -554,7 +604,12 @@ public class ModBlocks {
                 trapdoor,
                 button,
                 pressurePlate,
-                sign, wallSign, signItem
+                sign,
+                wallSign,
+                signItem,
+                hangingSign,
+                wallHangingSign,
+                hangingSignItem
         );
     }
 
@@ -580,6 +635,10 @@ public class ModBlocks {
         Block wallSign = registerBlockWithoutBlockItem(name + "_wall_sign", createWallSignBlock(signType));
         Item signItem = registerSignItem(name + "_sign", sign, wallSign, tab);
 
+        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType));
+        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType));
+        Item hangingSignItem = registerHangingSignItem(name + "_hanging_sign", hangingSign, wallHangingSign, tab);
+        HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
         return new BambooWoodSet(
                 bambooBlock,
                 strippedBambooBlock,
@@ -595,7 +654,12 @@ public class ModBlocks {
                 mosaic,
                 mosaicSlab,
                 mosaicStairs,
-                sign, wallSign, signItem
+                sign,
+                wallSign,
+                signItem,
+                hangingSign,
+                wallHangingSign,
+                hangingSignItem
         );
     }
 
@@ -605,11 +669,23 @@ public class ModBlocks {
      * ============================================================
      */
 
+    private static Block createHangingSignBlock(SignType type) {
+        return new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type);
+    }
+    private static Block createWallHangingSignBlock(SignType type) {
+        return new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type);
+    }
+    private static Item registerHangingSignItem(String name, Block sign, Block wallSign, ItemGroup tab) {
+        return Registry.register(
+                Registry.ITEM,
+                new Identifier(BeyondTheBlock.MOD_ID, name),
+                new HangingSignItem(new FabricItemSettings().group(tab).maxCount(16), sign, wallSign)
+        );
+    }
 
     private static Block createSignBlock(SignType type) {
         return new ModSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type);
     }
-
     private static Block createWallSignBlock(SignType type) {
         return new ModWallSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), type);
     }

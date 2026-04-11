@@ -75,7 +75,7 @@ public class HangingSignItem extends Item {
                 return ActionResult.FAIL;
             }
 
-            Direction facing = side.getOpposite();
+            Direction facing = side;
             boolean waterlogged = world.getFluidState(placePos).getFluid() == Fluids.WATER;
 
             placementState = wallBlock.getDefaultState()

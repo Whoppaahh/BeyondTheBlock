@@ -13,6 +13,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
+import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModelLayers;
+import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModels;
 import net.ryan.beyond_the_block.content.entity.*;
 import net.ryan.beyond_the_block.content.entity.model.RaftChestEntityModel;
 import net.ryan.beyond_the_block.content.entity.model.RaftEntityModel;
@@ -116,7 +118,6 @@ public class ModEntities {
     public static final EntityModelLayer RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "raft"), "main");
     public static final EntityModelLayer CHEST_RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "chest_raft"), "main");
 
-
     public static final EntityType<CobwebProjectileEntity> COBWEB_PROJECTILE =
             Registry.register(
                     Registry.ENTITY_TYPE,
@@ -138,6 +139,20 @@ public class ModEntities {
         EntityModelLayerRegistry.registerModelLayer(RAFT, RaftEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(CHEST_RAFT, RaftChestEntityModel::getTexturedModelData);
 
+        EntityModelLayerRegistry.registerModelLayer(
+                HangingSignModelLayers.HANGING_SIGN_CEILING,
+                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.CEILING)
+        );
+
+        EntityModelLayerRegistry.registerModelLayer(
+                HangingSignModelLayers.HANGING_SIGN_CEILING_MIDDLE,
+                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.CEILING_MIDDLE)
+        );
+
+        EntityModelLayerRegistry.registerModelLayer(
+                HangingSignModelLayers.HANGING_SIGN_WALL,
+                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.WALL)
+        );
     }
 
     public static void registerSpawnRestrictions() {

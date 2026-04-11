@@ -3,11 +3,75 @@ package net.ryan.beyond_the_block.datagen.common;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.registry.family.HangingSignDropFamily;
 
 import java.util.List;
 
 public final class ModDatagenFamilies {
 
+    public static final List<HangingSignDropFamily> HANGING_SIGNS = List.of(
+            new HangingSignDropFamily(
+                    ModBlocks.OAK_HANGING_SET.hangingSign(),
+                    ModBlocks.OAK_HANGING_SET.wallHangingSign(),
+                    ModBlocks.OAK_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.SPRUCE_HANGING_SET.hangingSign(),
+                    ModBlocks.SPRUCE_HANGING_SET.wallHangingSign(),
+                    ModBlocks.SPRUCE_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.BIRCH_HANGING_SET.hangingSign(),
+                    ModBlocks.BIRCH_HANGING_SET.wallHangingSign(),
+                    ModBlocks.BIRCH_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.JUNGLE_HANGING_SET.hangingSign(),
+                    ModBlocks.JUNGLE_HANGING_SET.wallHangingSign(),
+                    ModBlocks.JUNGLE_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.ACACIA_HANGING_SET.hangingSign(),
+                    ModBlocks.ACACIA_HANGING_SET.wallHangingSign(),
+                    ModBlocks.ACACIA_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.DARK_OAK_HANGING_SET.hangingSign(),
+                    ModBlocks.DARK_OAK_HANGING_SET.wallHangingSign(),
+                    ModBlocks.DARK_OAK_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.MANGROVE_HANGING_SET.hangingSign(),
+                    ModBlocks.MANGROVE_HANGING_SET.wallHangingSign(),
+                    ModBlocks.MANGROVE_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.CRIMSON_HANGING_SET.hangingSign(),
+                    ModBlocks.CRIMSON_HANGING_SET.wallHangingSign(),
+                    ModBlocks.CRIMSON_HANGING_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.WARPED_HANGING_SET.hangingSign(),
+                    ModBlocks.WARPED_HANGING_SET.wallHangingSign(),
+                    ModBlocks.WARPED_HANGING_SET.hangingSignItem()
+            ),
+
+            new HangingSignDropFamily(
+                    ModBlocks.CHERRY_SET.hangingSign(),
+                    ModBlocks.CHERRY_SET.wallHangingSign(),
+                    ModBlocks.CHERRY_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.PALE_OAK_SET.hangingSign(),
+                    ModBlocks.PALE_OAK_SET.wallHangingSign(),
+                    ModBlocks.PALE_OAK_SET.hangingSignItem()
+            ),
+            new HangingSignDropFamily(
+                    ModBlocks.BAMBOO_WOOD_SET.hangingSign(),
+                    ModBlocks.BAMBOO_WOOD_SET.wallHangingSign(),
+                    ModBlocks.BAMBOO_WOOD_SET.hangingSignItem()
+            )
+    );
     public static final List<Block> SHELVES = List.of(
             ModBlocks.OAK_SHELF_BLOCK,
             ModBlocks.SPRUCE_SHELF_BLOCK,

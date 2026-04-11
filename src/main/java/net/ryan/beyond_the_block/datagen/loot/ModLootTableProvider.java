@@ -12,11 +12,14 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.family.BambooWoodSet;
+import net.ryan.beyond_the_block.content.registry.family.HangingSignDropFamily;
 import net.ryan.beyond_the_block.content.registry.family.WoodSet;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 
 import java.util.function.BiConsumer;
+
+import static net.ryan.beyond_the_block.content.registry.ModBlocks.HANGING_SIGN_ITEMS;
 
 public class ModLootTableProvider extends SimpleFabricLootTableProvider {
 
@@ -129,8 +132,17 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
         generateSelfDropFamily(exporter, ModDatagenFamilies.MACHINE_STYLE_BLOCKS);
         generateSelfDropFamily(exporter, ModDatagenFamilies.RAIL_STYLE_BLOCKS);
 
+        for (HangingSignDropFamily family : ModDatagenFamilies.HANGING_SIGNS) {
+            generateHangingSignDropFamily(exporter, family);
+        }
+
         exportDropSelf(exporter, ModBlocks.CHISELED_BOOKSHELF);
         exportDropSelf(exporter, ModBlocks.WATER_TORCH_BLOCK);
+    }
+
+    private void generateHangingSignDropFamily(BiConsumer<Identifier, LootTable.Builder> exporter, HangingSignDropFamily family) {
+        exporter.accept(id(family.hangingSign()), BlockLootTableGenerator.drops(family.dropItem()));
+        exporter.accept(id(family.wallHangingSign()), BlockLootTableGenerator.drops(family.dropItem()));
     }
 
     private void generateStandardWoodLoot(BiConsumer<Identifier, LootTable.Builder> exporter, WoodSet set) {

@@ -2,8 +2,8 @@
   "type": "beyond_the_block:woodcutting",
   "count": 1,
   "ingredient": {
-    "item": "beyond_the_block:pale_oak_planks"
+    "item": "beyond_the_block:bamboo_planks"
   },
   "ingredient_count": 3,
-  "result": "beyond_the_block:pale_oak_boat"
+  "result": "beyond_the_block:bamboo_raft"
 }

@@ -107,7 +107,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.CRIMSON_STEM, Items.CRIMSON_HYPHAE, Items.STRIPPED_CRIMSON_STEM, Items.STRIPPED_CRIMSON_HYPHAE,
                 Items.CRIMSON_PLANKS, Items.CRIMSON_SLAB, Items.CRIMSON_STAIRS, Items.CRIMSON_FENCE, Items.CRIMSON_FENCE_GATE,
                 Items.CRIMSON_DOOR, Items.CRIMSON_TRAPDOOR, Items.CRIMSON_BUTTON, Items.CRIMSON_PRESSURE_PLATE,
-                Items.CRIMSON_SIGN, ModBlocks.CRIMSON_HANGING_SET.hangingSignItem(), Items.OAK_BOAT, Items.OAK_CHEST_BOAT
+                Items.CRIMSON_SIGN, ModBlocks.CRIMSON_HANGING_SET.hangingSignItem()
         );
 
         offerNetherWoodSet(exporter,
@@ -115,7 +115,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Items.WARPED_STEM, Items.WARPED_HYPHAE, Items.STRIPPED_WARPED_STEM, Items.STRIPPED_WARPED_HYPHAE,
                 Items.WARPED_PLANKS, Items.WARPED_SLAB, Items.WARPED_STAIRS, Items.WARPED_FENCE, Items.WARPED_FENCE_GATE,
                 Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_BUTTON, Items.WARPED_PRESSURE_PLATE,
-                Items.WARPED_SIGN, ModBlocks.WARPED_HANGING_SET.hangingSignItem(), Items.OAK_BOAT, Items.OAK_CHEST_BOAT
+                Items.WARPED_SIGN, ModBlocks.WARPED_HANGING_SET.hangingSignItem()
         );
 
         // Backported/custom sets using your family records
@@ -232,9 +232,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             Item button,
             Item pressurePlate,
             Item sign,
-            Item hangingSign,
-            Item boat,
-            Item chestBoat
+            Item hangingSign
     ) {
         offerRawWoodToPlanks(exporter, name, stem, hyphae, strippedStem, strippedHyphae, planks);
         offerCommonPlankRecipes(exporter, name, planks, slab, stairs, fence, fenceGate, door, trapdoor, button, pressurePlate, sign, hangingSign);

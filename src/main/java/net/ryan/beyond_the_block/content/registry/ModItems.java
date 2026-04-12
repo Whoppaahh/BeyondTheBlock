@@ -37,7 +37,43 @@ public class ModItems {
             new ModChestRaftItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 
 
-    public static final Item TRIM_TEMPLATE_ITEM = registerItem("trim_template", new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("sentry_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item DUNE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("dune_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item COAST_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("coast_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item WILD_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("wild_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item WARD_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("ward_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item EYE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("eye_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item VEX_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("vex_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item TIDE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("tide_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("snout_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item RIB_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("rib_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("spire_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("silence_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("wayfinder_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("shaper_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item HOST_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("host_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item RAISER_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("raiser_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item FLOW_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("flow_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item BOLT_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("bolt_armor_trim_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+
     public static final Item TROWEL_ITEM = registerItem("trowel", new TrowelItem(new FabricItemSettings().group(ModItemGroup.ModToolTab)));
     public static final Item SANTA_HELMET = registerItem("santa_helmet", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroup.ModArmourTab)));
     public static final Item SANTA_CHESTPLATE = registerItem("santa_chestplate", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroup.ModArmourTab)));

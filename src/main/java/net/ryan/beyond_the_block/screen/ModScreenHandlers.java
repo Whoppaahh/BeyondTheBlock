@@ -4,10 +4,14 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.*;
 import net.ryan.beyond_the_block.screen.handler.Guard.GuardVillagerScreenHandler;
 
 public class ModScreenHandlers {
+
+    public static ScreenHandlerType<ArmourTrimSmithingScreenHandler> ARMOUR_TRIM_SMITHING =
+            new ScreenHandlerType<>(ArmourTrimSmithingScreenHandler::new);
 
     public static final ScreenHandlerType<WoodcutterScreenHandler> WOODCUTTER_SCREEN_HANDLER =
             new ScreenHandlerType<>(WoodcutterScreenHandler::new);
@@ -37,14 +41,15 @@ public class ModScreenHandlers {
             new ExtendedScreenHandlerType<>(DecrafterScreenHandler::new);
 
     public static void registerScreenHandlers() {
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("woodcutter_screen"), WOODCUTTER_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("guard_screen"), GUARD_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("gem_screen"), GEM_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("riddle_core_screen"), RIDDLE_CORE_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("player_vault_screen"), PLAYER_VAULT_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("staff_screen"), STAFF_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("infi_furnace_screen"), INFI_SCREEN_HANDLER);
-        Registry.register(Registry.SCREEN_HANDLER, new Identifier("decrafter_screen"), DECRAFTER_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID, "woodcutter_screen"), WOODCUTTER_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"guard_screen"), GUARD_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"gem_screen"), GEM_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"riddle_core_screen"), RIDDLE_CORE_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"player_vault_screen"), PLAYER_VAULT_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"staff_screen"), STAFF_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"infi_furnace_screen"), INFI_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"decrafter_screen"), DECRAFTER_SCREEN_HANDLER);
+        Registry.register(Registry.SCREEN_HANDLER, new Identifier(BeyondTheBlock.MOD_ID,"smithing_screen"), ARMOUR_TRIM_SMITHING);
 
         Registry.register(Registry.SCREEN_HANDLER, new Identifier("trowel_screen"), TROWEL_SCREEN_HANDLER);
     }

@@ -33,6 +33,7 @@
     "block.LadderBlockMixin",
     "block.LecternBlockMixin",
     "block.SignBlockMixin",
+    "block.SmithingTableBlockMixin",
     "block.SweetBerryBlockMixin",
     "block.TrapdoorBlockMixin",
     "enchantment.AnvilScreenHandlerResultSanitizerMixin",

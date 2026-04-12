@@ -92,6 +92,8 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.PLAYER_VAULT_SCREEN_HANDLER, PlayerVaultScreen::new);
         HandledScreens.register(ModScreenHandlers.INFI_SCREEN_HANDLER, InfiFurnaceScreen::new);
         HandledScreens.register(ModScreenHandlers.DECRAFTER_SCREEN_HANDLER, DecrafterScreen::new);
+        HandledScreens.register(ModScreenHandlers.ARMOUR_TRIM_SMITHING, ArmourTrimSmithingScreen::new);
+
     }
 
     private void registerClientTickEvents() {

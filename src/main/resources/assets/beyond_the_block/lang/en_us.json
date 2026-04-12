@@ -380,6 +380,7 @@
   "enchantment.minecraft.sweeping_edge.desc": "Increases sweeping attack damage.",
   "enchantment.minecraft.thorns.desc": "Damages attackers.",
   "enchantment.minecraft.unbreaking.desc": "Increases item durability.",
-  "enchantment.minecraft.vanishing_curse.desc": "Item disappears on death."
+  "enchantment.minecraft.vanishing_curse.desc": "Item disappears on death.",
+  "container.beyond_the_block.armor_trim": "Smithing"
 
 }

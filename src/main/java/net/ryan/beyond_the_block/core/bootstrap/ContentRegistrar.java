@@ -31,6 +31,7 @@ public class ContentRegistrar {
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
         ModItems.registerModItems();
+        ModTrimBootstrap.bootstrap();
         ModVillagers.registerModVillagers();
         ModRecipes.registerModRecipes();
         ModParticles.registerModParticles();

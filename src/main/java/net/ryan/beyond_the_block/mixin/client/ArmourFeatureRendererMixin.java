@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.mixin.client;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -10,30 +9,21 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManager;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimRenderer;
-import net.ryan.beyond_the_block.client.render.trim.ArmourTrimTextureResolver;
 import net.ryan.beyond_the_block.content.registry.ModTrimRegistry;
 import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Mixin(ArmorFeatureRenderer.class)
 public abstract class ArmourFeatureRendererMixin<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> {
 
-    @Unique
-    private static final Set<Identifier> beyond_the_block$verifiedTextures = ConcurrentHashMap.newKeySet();
-
-    @Unique
-    private static final Set<Identifier> beyond_the_block$missingTextures = ConcurrentHashMap.newKeySet();
 
     @Inject(method = "renderArmor", at = @At(
             value = "INVOKE",
@@ -96,11 +86,11 @@ public abstract class ArmourFeatureRendererMixin<T extends LivingEntity, M exten
         }
 
         boolean leggings = slot == EquipmentSlot.LEGS;
-        Identifier texture = ArmourTrimTextureResolver.resolve(trim, leggings);
-
-        if (!beyond_the_block$textureExists(texture)) {
+        Identifier texture = ArmourTrimBakedTextureManager.get(trim, leggings);
+        if (texture == null) {
             return;
         }
+
 
         ArmourTrimRenderer.renderTrim(
                 matrices,
@@ -129,30 +119,5 @@ public abstract class ArmourFeatureRendererMixin<T extends LivingEntity, M exten
         if (entity.hasStatusEffect(StatusEffects.INVISIBILITY)) {
             ci.cancel();
         }
-    }
-
-    @Unique
-    private static boolean beyond_the_block$textureExists(Identifier texture) {
-        if (beyond_the_block$verifiedTextures.contains(texture)) {
-            return true;
-        }
-
-        if (beyond_the_block$missingTextures.contains(texture)) {
-            return false;
-        }
-
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client == null) {
-            return false;
-        }
-
-        Optional<Resource> resource = client.getResourceManager().getResource(texture);
-        if (resource.isPresent()) {
-            beyond_the_block$verifiedTextures.add(texture);
-            return true;
-        }
-
-        beyond_the_block$missingTextures.add(texture);
-        return false;
     }
 }

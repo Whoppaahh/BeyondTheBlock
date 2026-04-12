@@ -1,20 +1,30 @@
 package net.ryan.beyond_the_block.mixin.item;
 
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.random.Random;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
+import net.ryan.beyond_the_block.content.registry.ModTrimRegistry;
+import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
+import net.ryan.beyond_the_block.content.registry.family.ModTrimMaterial;
+import net.ryan.beyond_the_block.content.registry.family.ModTrimPattern;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
 
 
 @Mixin(ItemStack.class)
@@ -92,5 +102,32 @@ public class ItemStackMixin {
 //            }
 //        }
 //    }
+@Inject(method = "getTooltip", at = @At("TAIL"))
+private void beyond_the_block$addTrimTooltip(
+        PlayerEntity player,
+        TooltipContext context,
+        CallbackInfoReturnable<List<Text>> cir
+) {
+    ItemStack stack = (ItemStack)(Object)this;
 
+    ModArmourTrim.getTrim(stack).ifPresent(trim -> {
+        ModTrimPattern pattern = ModTrimRegistry.getPattern(trim.patternId());
+        ModTrimMaterial material = ModTrimRegistry.getMaterial(trim.materialId());
+
+        if (pattern == null || material == null) {
+            return;
+        }
+
+        List<Text> tooltip = cir.getReturnValue();
+
+        tooltip.add(Text.empty());
+        tooltip.add(Text.translatable("item.minecraft.smithing_template.armor_trim")
+                .formatted(Formatting.GRAY));
+        tooltip.add(Text.literal(" ")
+                .append(pattern.displayName())
+                .append(Text.literal(" / "))
+                .append(material.displayName())
+                .formatted(Formatting.BLUE));
+    });
+}
 }

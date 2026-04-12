@@ -381,6 +381,10 @@
   "enchantment.minecraft.thorns.desc": "Damages attackers.",
   "enchantment.minecraft.unbreaking.desc": "Increases item durability.",
   "enchantment.minecraft.vanishing_curse.desc": "Item disappears on death.",
-  "container.beyond_the_block.armor_trim": "Smithing"
-
+  "container.beyond_the_block.armor_trim": "Upgrade Gear",
+  "item.minecraft.smithing_template.armor_trim": "Armour Trim",
+  "item.beyond_the_block.smithing_template.armor_trim.applies_to": "Armour",
+  "item.beyond_the_block.smithing_template.armor_trim.ingredients": "Trim Material",
+  "item.beyond_the_block.smithing_template.netherite_upgrade.applies_to": "Diamond Equipment",
+  "item.beyond_the_block.smithing_template.netherite_upgrade.ingredients": "Netherite Ingot"
 }

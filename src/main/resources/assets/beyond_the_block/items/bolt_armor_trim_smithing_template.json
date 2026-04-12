@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/bolt_armor_trim_smithing_template"
+    "model": "beyond_the_block:item/bolt_armor_trim_smithing_template"
   }
 }

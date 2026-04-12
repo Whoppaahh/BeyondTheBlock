@@ -37,6 +37,8 @@ public class ModItems {
             new ModChestRaftItem(ModBoatVariant.BAMBOO, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 
 
+    public static final Item NETHERITE_UPGRADE_SMITHING_TEMPLATE = registerItem("netherite_upgrade_smithing_template",
+            new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     public static final Item SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("sentry_armor_trim_smithing_template",
             new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
     public static final Item DUNE_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("dune_armor_trim_smithing_template",

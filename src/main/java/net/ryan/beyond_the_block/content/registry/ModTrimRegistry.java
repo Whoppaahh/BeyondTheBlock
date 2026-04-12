@@ -1,6 +1,7 @@
 package net.ryan.beyond_the_block.content.registry;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.registry.family.ModTrimMaterial;
 import net.ryan.beyond_the_block.content.registry.family.ModTrimPattern;
@@ -18,6 +19,10 @@ public final class ModTrimRegistry {
     private static final Map<Item, ModTrimPattern> PATTERNS_BY_TEMPLATE = new LinkedHashMap<>();
 
     private ModTrimRegistry() {
+    }
+
+    public static boolean isNetheriteUpgradeTemplate(ItemStack stack) {
+        return stack.isOf(ModItems.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
     }
 
     public static ModTrimMaterial registerMaterial(ModTrimMaterial material) {

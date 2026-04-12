@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "beyond_the_block:netherite_upgrade_smithing_template"
+    },
+    "C": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "beyond_the_block:netherite_upgrade_smithing_template",
+    "count": 2
+  }
+}

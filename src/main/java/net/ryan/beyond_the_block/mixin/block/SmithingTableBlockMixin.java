@@ -32,7 +32,11 @@ public class SmithingTableBlockMixin {
     ) {
         if (!world.isClient) {
             NamedScreenHandlerFactory factory = new SimpleNamedScreenHandlerFactory(
-                    (syncId, inventory, p) -> new ArmourTrimSmithingScreenHandler(syncId, inventory),
+                    (syncId, inventory, p) -> new ArmourTrimSmithingScreenHandler(
+                            syncId,
+                            inventory,
+                            net.minecraft.screen.ScreenHandlerContext.create(world, pos)
+                    ),
                     Text.translatable("container.beyond_the_block.armor_trim")
             );
 

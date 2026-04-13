@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.utils;
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.EntityPropertiesLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.context.LootContext;
@@ -29,6 +30,7 @@ public class ModLootTableModifiers {
 
     //Entity
     private static final Identifier WARDEN = new Identifier("minecraft", "entities/warden");
+    private static final Identifier ELDER_GUARDIAN = new Identifier("minecraft", "entities/elder_guardian");
 
     //Custom Shrine
     public static final LootFunctionType FilteredEnchantFunction = new LootFunctionType(new FilteredEnchantFunction.Serializer());
@@ -92,6 +94,80 @@ public class ModLootTableModifiers {
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
+
+            // SENTRY - Pillager Outpost
+            if (id.equals(LootTables.PILLAGER_OUTPOST_CHEST)) {
+                addTemplate(tableBuilder, ModItems.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // DUNE - Desert Pyramid
+            if (id.equals(LootTables.DESERT_PYRAMID_CHEST)) {
+                addTemplate(tableBuilder, ModItems.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // COAST - Shipwreck Treasure
+            if (id.equals(LootTables.SHIPWRECK_TREASURE_CHEST)) {
+                addTemplate(tableBuilder, ModItems.COAST_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // WILD - Jungle Temple
+            if (id.equals(LootTables.JUNGLE_TEMPLE_CHEST)) {
+                addTemplate(tableBuilder, ModItems.WILD_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // WARD - Ancient City
+            if (id.equals(LootTables.ANCIENT_CITY_CHEST)) {
+                addTemplate(tableBuilder, ModItems.WARD_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // SILENCE - Ancient City
+            if (id.equals(LootTables.ANCIENT_CITY_CHEST)) {
+                addTemplate(tableBuilder, ModItems.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // VEX - Woodland Mansion
+            if (id.equals(LootTables.WOODLAND_MANSION_CHEST)) {
+                addTemplate(tableBuilder, ModItems.VEX_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // SNOUT - Bastion Treasure
+            if (id.equals(LootTables.BASTION_TREASURE_CHEST)) {
+                addTemplate(tableBuilder, ModItems.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // RIB - Nether Fortress
+            if (id.equals(LootTables.NETHER_BRIDGE_CHEST)) {
+                tableBuilder.pool(LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModItems.RIB_ARMOR_TRIM_SMITHING_TEMPLATE).weight(1)));
+            }
+
+            // EYE - Stronghold Corridor
+            if (id.equals(LootTables.STRONGHOLD_CORRIDOR_CHEST)) {
+                addTemplate(tableBuilder, ModItems.EYE_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // SPIRE - End City
+            if (id.equals(LootTables.END_CITY_TREASURE_CHEST)) {
+                addTemplate(tableBuilder, ModItems.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
+            // Netherite Upgrade - Bastion Treasure
+            if (id.equals(LootTables.BASTION_TREASURE_CHEST)) {
+                addTemplate(tableBuilder, ModItems.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+            }
+
+            // TIDE - no native Ocean Monument chest in 1.19.2
+            // Temporary survival source workaround:
+            if (id.equals(ELDER_GUARDIAN)) {
+                addTemplate(tableBuilder, ModItems.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE);
+            }
+
         });
+    }
+    private static void addTemplate(net.minecraft.loot.LootTable.Builder tableBuilder, net.minecraft.item.Item item) {
+        tableBuilder.pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(ItemEntry.builder(item).weight(1)));
     }
 }

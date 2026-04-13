@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "key": {
+    "#": { "item": "minecraft:diamond" },
+    "S": { "item": "beyond_the_block:vex_armor_trim_smithing_template" },
+    "C": { "item": "minecraft:cobblestone" }
+  },
+  "result": {
+    "item": "beyond_the_block:vex_armor_trim_smithing_template",
+    "count": 2
+  }
+}

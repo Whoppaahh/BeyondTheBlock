@@ -3,6 +3,8 @@ package net.ryan.beyond_the_block.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.ForgingScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -85,7 +87,7 @@ public class ArmourTrimSmithingScreen extends HandledScreen<ArmourTrimSmithingSc
         updatePreviewArmorStand();
 
         if (this.previewArmorStand != null) {
-            net.minecraft.client.gui.screen.ingame.InventoryScreen.drawEntity(
+            InventoryScreen.drawEntity(
                     this.x + 141,
                     this.y + 75,
                     25,
@@ -107,8 +109,9 @@ public class ArmourTrimSmithingScreen extends HandledScreen<ArmourTrimSmithingSc
         drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         if (hasInvalidRecipe()) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderTexture(0, ERROR_TEXTURE);
-            drawTexture(matrices, x + 65, y + 46, 0, 0, 28, 21);
+            drawTexture(matrices, x + 65, y + 46, 0, 0, 28, 21, 28, 21);
         }
     }
 }

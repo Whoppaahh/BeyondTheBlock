@@ -3,8 +3,10 @@ package net.ryan.beyond_the_block.client.render.trim;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
+import net.minecraft.item.ItemStack;
 import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
@@ -12,12 +14,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class ArmourTrimBakedTextureManager {
 
     private static final Map<String, Identifier> CACHE = new ConcurrentHashMap<>();
     private static final Map<String, Boolean> FAILED = new ConcurrentHashMap<>();
+    private static final Set<Identifier> REGISTERED_TEXTURES = ConcurrentHashMap.newKeySet();
 
     private ArmourTrimBakedTextureManager() {
     }
@@ -49,8 +53,16 @@ public final class ArmourTrimBakedTextureManager {
     }
 
     public static void clear() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client != null) {
+            for (Identifier id : REGISTERED_TEXTURES) {
+                client.getTextureManager().destroyTexture(id);
+            }
+        }
+
         CACHE.clear();
         FAILED.clear();
+        REGISTERED_TEXTURES.clear();
     }
 
     private static Identifier bake(String layer, String pattern, String material, String cacheKey) {
@@ -80,6 +92,7 @@ public final class ArmourTrimBakedTextureManager {
 
             Identifier dynamicId = new Identifier(BeyondTheBlock.MOD_ID, "generated/trims/" + cacheKey.replace('|', '/'));
             client.getTextureManager().registerTexture(dynamicId, new NativeImageBackedTexture(bakedImage));
+            REGISTERED_TEXTURES.add(dynamicId);
 
             patternImage.close();
             paletteImage.close();

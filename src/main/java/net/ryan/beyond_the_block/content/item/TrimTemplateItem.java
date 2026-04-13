@@ -4,6 +4,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.ModTrimRegistry;
@@ -28,24 +29,34 @@ public class TrimTemplateItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.applies_to"));
+        tooltip.add(Text.empty());
+
+        tooltip.add(Text.translatable("item.minecraft.smithing_template.applies_to")
+                .formatted(Formatting.GRAY));
 
         if (isNetheriteUpgradeTemplate()) {
             tooltip.add(Text.literal(" ")
-                    .append(Text.translatable("item.beyond_the_block.smithing_template.netherite_upgrade.applies_to")));
-            tooltip.add(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.ingredients"));
+                    .append(Text.translatable("item.beyond_the_block.smithing_template.netherite_upgrade.applies_to"))
+                    .formatted(Formatting.BLUE));
+
+            tooltip.add(Text.translatable("item.minecraft.smithing_template.ingredients")
+                    .formatted(Formatting.GRAY));
+
             tooltip.add(Text.literal(" ")
-                    .append(Text.translatable("item.beyond_the_block.smithing_template.netherite_upgrade.ingredients")));
+                    .append(Text.translatable("item.beyond_the_block.smithing_template.netherite_upgrade.ingredients"))
+                    .formatted(Formatting.BLUE));
             return;
         }
 
-        ModTrimPattern pattern = getPattern();
-        if (pattern != null) {
-            tooltip.add(Text.literal(" ")
-                    .append(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.applies_to")));
-            tooltip.add(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.ingredients"));
-            tooltip.add(Text.literal(" ")
-                    .append(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.ingredients")));
-        }
+        tooltip.add(Text.literal(" ")
+                .append(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.applies_to"))
+                .formatted(Formatting.BLUE));
+
+        tooltip.add(Text.translatable("item.minecraft.smithing_template.ingredients")
+                .formatted(Formatting.GRAY));
+
+        tooltip.add(Text.literal(" ")
+                .append(Text.translatable("item.beyond_the_block.smithing_template.armor_trim.ingredients"))
+                .formatted(Formatting.BLUE));
     }
 }

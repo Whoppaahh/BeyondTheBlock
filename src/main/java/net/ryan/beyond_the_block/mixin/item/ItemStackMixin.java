@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.content.registry.ModTrimRegistry;
@@ -20,6 +21,7 @@ import net.ryan.beyond_the_block.content.registry.family.ModTrimMaterial;
 import net.ryan.beyond_the_block.content.registry.family.ModTrimPattern;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -104,11 +106,15 @@ public class ItemStackMixin {
 //    }
 @Inject(method = "getTooltip", at = @At("TAIL"))
 private void beyond_the_block$addTrimTooltip(
-        PlayerEntity player,
+        @Nullable PlayerEntity player,
         TooltipContext context,
         CallbackInfoReturnable<List<Text>> cir
 ) {
     ItemStack stack = (ItemStack)(Object)this;
+
+    if (!(stack.getItem() instanceof ArmorItem)) {
+        return;
+    }
 
     ModArmourTrim.getTrim(stack).ifPresent(trim -> {
         ModTrimPattern pattern = ModTrimRegistry.getPattern(trim.patternId());
@@ -121,13 +127,33 @@ private void beyond_the_block$addTrimTooltip(
         List<Text> tooltip = cir.getReturnValue();
 
         tooltip.add(Text.empty());
-        tooltip.add(Text.translatable("item.minecraft.smithing_template.armor_trim")
+
+        tooltip.add(Text.translatable("item.minecraft.smithing_template.upgrade")
                 .formatted(Formatting.GRAY));
+
         tooltip.add(Text.literal(" ")
                 .append(pattern.displayName())
-                .append(Text.literal(" / "))
-                .append(material.displayName())
                 .formatted(Formatting.BLUE));
+
+        tooltip.add(Text.literal(" ")
+                .append(material.displayName())
+                .styled(style -> style.withColor(getMaterialTooltipColor(trim.materialId()))));
     });
 }
+    @Unique
+    private static int getMaterialTooltipColor(Identifier materialId) {
+        return switch (materialId.getPath()) {
+            case "quartz" -> 0xE3D4C4;
+            case "iron" -> 0xECECEC;
+            case "netherite" -> 0x625859;
+            case "redstone" -> 0xB02E26;
+            case "copper" -> 0xB4684D;
+            case "gold" -> 0xDEB12D;
+            case "emerald" -> 0x47A036;
+            case "diamond" -> 0x6EECD2;
+            case "lapis" -> 0x416E97;
+            case "amethyst" -> 0x9A5CC6;
+            default -> 0xFFFFFF;
+        };
+    }
 }

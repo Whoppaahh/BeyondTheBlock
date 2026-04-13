@@ -18,6 +18,9 @@ public final class ModTrimRegistry {
     private static final Map<Item, ModTrimMaterial> MATERIALS_BY_INGREDIENT = new LinkedHashMap<>();
     private static final Map<Item, ModTrimPattern> PATTERNS_BY_TEMPLATE = new LinkedHashMap<>();
 
+    private static final Map<Identifier, Integer> PATTERN_INDEX = new LinkedHashMap<>();
+    private static final Map<Identifier, Integer> MATERIAL_INDEX = new LinkedHashMap<>();
+
     private ModTrimRegistry() {
     }
 
@@ -29,6 +32,7 @@ public final class ModTrimRegistry {
         Objects.requireNonNull(material, "material");
         MATERIALS.put(material.id(), material);
         MATERIALS_BY_INGREDIENT.put(material.ingredient(), material);
+        MATERIAL_INDEX.put(material.id(), MATERIAL_INDEX.size() + 1);
         return material;
     }
 
@@ -36,7 +40,16 @@ public final class ModTrimRegistry {
         Objects.requireNonNull(pattern, "pattern");
         PATTERNS.put(pattern.id(), pattern);
         PATTERNS_BY_TEMPLATE.put(pattern.templateItem(), pattern);
+        PATTERN_INDEX.put(pattern.id(), PATTERN_INDEX.size() + 1);
         return pattern;
+    }
+
+    public static int getPatternIndex(Identifier id) {
+        return PATTERN_INDEX.getOrDefault(id, 0);
+    }
+
+    public static int getMaterialIndex(Identifier id) {
+        return MATERIAL_INDEX.getOrDefault(id, 0);
     }
 
     public static ModTrimMaterial getMaterial(Identifier id) {

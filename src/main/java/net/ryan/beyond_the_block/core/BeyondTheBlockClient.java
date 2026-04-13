@@ -4,6 +4,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -17,9 +19,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.client.bootstrap.ClientBootstrap;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
 import net.ryan.beyond_the_block.client.network.ConfigSyncClient;
+import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManager;
+import net.ryan.beyond_the_block.client.render.trim.ArmourTrimItemPredicates;
 import net.ryan.beyond_the_block.client.screen.*;
 import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
@@ -49,10 +56,29 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         registerScreens();
         registerClientTickEvents();
         registerLivingEntityFeatures();
+        registerResourceReloads();
+        ArmourTrimItemPredicates.register();
 
         ClientBootstrap.init();
         OutlineRenderer.init();
         ConfigSyncClient.init();
+
+    }
+
+    private void registerResourceReloads() {
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(
+                new SimpleSynchronousResourceReloadListener() {
+                    @Override
+                    public Identifier getFabricId() {
+                        return new Identifier(BeyondTheBlock.MOD_ID, "armour_trim_baked_textures");
+                    }
+
+                    @Override
+                    public void reload(ResourceManager manager) {
+                        ArmourTrimBakedTextureManager.clear();
+                    }
+                }
+        );
     }
 
     @SuppressWarnings("unchecked")

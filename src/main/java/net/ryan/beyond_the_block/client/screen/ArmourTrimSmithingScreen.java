@@ -8,8 +8,10 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.screen.handler.ArmourTrimSmithingScreenHandler;
 
@@ -96,7 +98,7 @@ public class ArmourTrimSmithingScreen extends HandledScreen<ArmourTrimSmithingSc
                     this.previewArmorStand
             );
         }
-
+        drawSlotHintTooltips(matrices, mouseX, mouseY);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
 
@@ -112,6 +114,54 @@ public class ArmourTrimSmithingScreen extends HandledScreen<ArmourTrimSmithingSc
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderTexture(0, ERROR_TEXTURE);
             drawTexture(matrices, x + 65, y + 46, 0, 0, 28, 21, 28, 21);
+        }
+    }
+
+    private boolean isHoveringSlot(int slotX, int slotY, int mouseX, int mouseY) {
+        int x = this.x + slotX;
+        int y = this.y + slotY;
+        return mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16;
+    }
+
+    private boolean hasNetheriteTemplateSelected() {
+        ItemStack template = this.handler.getSlot(0).getStack();
+        return !template.isEmpty() && template.isOf(ModItems.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+    }
+
+    private void drawSlotHintTooltips(MatrixStack matrices, int mouseX, int mouseY) {
+        // Template slot
+        if (!this.handler.getSlot(0).hasStack() && isHoveringSlot(8, 48, mouseX, mouseY)) {
+            renderTooltip(matrices,
+                    Text.translatable("tooltip.beyond_the_block.smithing.template"),
+                    mouseX, mouseY);
+            return;
+        }
+
+        // Base slot
+        if (!this.handler.getSlot(1).hasStack() && isHoveringSlot(26, 48, mouseX, mouseY)) {
+            if (hasNetheriteTemplateSelected()) {
+                renderTooltip(matrices,
+                        Text.translatable("tooltip.beyond_the_block.smithing.base_upgrade"),
+                        mouseX, mouseY);
+            } else {
+                renderTooltip(matrices,
+                        Text.translatable("tooltip.beyond_the_block.smithing.base_trim"),
+                        mouseX, mouseY);
+            }
+            return;
+        }
+
+        // Addition slot
+        if (!this.handler.getSlot(2).hasStack() && isHoveringSlot(44, 48, mouseX, mouseY)) {
+            if (hasNetheriteTemplateSelected()) {
+                renderTooltip(matrices,
+                        Text.translatable("tooltip.beyond_the_block.smithing.addition_upgrade"),
+                        mouseX, mouseY);
+            } else {
+                renderTooltip(matrices,
+                        Text.translatable("tooltip.beyond_the_block.smithing.addition_trim"),
+                        mouseX, mouseY);
+            }
         }
     }
 }

@@ -44,20 +44,16 @@ public class WallHangingSignBlock extends AbstractSignBlock {
         BlockPos pos = ctx.getBlockPos();
         FluidState fluidState = world.getFluidState(pos);
 
-        for (Direction direction : ctx.getPlacementDirections()) {
-            if (direction.getAxis().isHorizontal()) {
-                Direction facing = direction;
-                BlockState state = this.getDefaultState()
-                        .with(FACING, facing)
-                        .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-
-                if (state.canPlaceAt(world, pos)) {
-                    return state;
-                }
-            }
+        Direction side = ctx.getSide();
+        if (!side.getAxis().isHorizontal()) {
+            return null;
         }
 
-        return null;
+        BlockState state = this.getDefaultState()
+                .with(FACING, side)
+                .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+
+        return state.canPlaceAt(world, pos) ? state : null;
     }
 
     @Override
@@ -76,7 +72,7 @@ public class WallHangingSignBlock extends AbstractSignBlock {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (direction == state.get(FACING).getOpposite() && !this.canPlaceAt(state, world, pos)) {
+        if (direction == state.get(FACING) && !this.canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
         }
 

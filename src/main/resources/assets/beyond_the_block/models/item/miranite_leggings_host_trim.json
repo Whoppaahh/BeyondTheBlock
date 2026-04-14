@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "beyond_the_block:item/miranite_leggings",
+    "layer1": "minecraft:trims/items/patterns/legging/minecraft-host"
+  }
+}

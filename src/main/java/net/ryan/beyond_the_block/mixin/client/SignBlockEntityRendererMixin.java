@@ -110,7 +110,7 @@ public abstract class SignBlockEntityRendererMixin {
         }
 
         if (state.getBlock() instanceof WallHangingSignBlock) {
-            return -state.get(WallHangingSignBlock.FACING).asRotation();
+            return -state.get(WallHangingSignBlock.FACING).asRotation() + 90.0F;
         }
 
         return 0.0F;

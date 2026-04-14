@@ -2,5 +2,103 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "beyond_the_block:item/nocturnite_leggings"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "beyond_the_block:trim_coast": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_coast_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_dune": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_dune_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_eye": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_eye_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_host": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_host_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_raiser": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_raiser_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_rib": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_rib_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_sentry": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_sentry_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_shaper": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_shaper_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_silence": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_silence_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_snout": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_snout_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_spire": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_spire_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_tide": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_tide_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_vex": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_vex_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_ward": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_ward_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_wayfinder": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_wayfinder_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_wild": 1.0
+      },
+      "model": "beyond_the_block:item/nocturnite_leggings_wild_trim"
+    }
+  ]
 }

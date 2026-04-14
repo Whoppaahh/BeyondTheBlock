@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
 
 public final class ArmourTrimItemPredicates {
@@ -41,6 +42,46 @@ public final class ArmourTrimItemPredicates {
         registerVanillaArmor(Items.LEATHER_CHESTPLATE);
         registerVanillaArmor(Items.LEATHER_LEGGINGS);
         registerVanillaArmor(Items.LEATHER_BOOTS);
+
+        registerVanillaArmor(ModItems.NOCTURNITE_HELMET);
+        registerVanillaArmor(ModItems.NOCTURNITE_CHESTPLATE);
+        registerVanillaArmor(ModItems.NOCTURNITE_LEGGINGS);
+        registerVanillaArmor(ModItems.NOCTURNITE_BOOTS);
+
+        registerVanillaArmor(ModItems.RUBY_HELMET);
+        registerVanillaArmor(ModItems.RUBY_CHESTPLATE);
+        registerVanillaArmor(ModItems.RUBY_LEGGINGS);
+        registerVanillaArmor(ModItems.RUBY_BOOTS);
+
+        registerVanillaArmor(ModItems.AMBERINE_HELMET);
+        registerVanillaArmor(ModItems.AMBERINE_CHESTPLATE);
+        registerVanillaArmor(ModItems.AMBERINE_LEGGINGS);
+        registerVanillaArmor(ModItems.AMBERINE_BOOTS);
+
+        registerVanillaArmor(ModItems.AZUROS_HELMET);
+        registerVanillaArmor(ModItems.AZUROS_CHESTPLATE);
+        registerVanillaArmor(ModItems.AZUROS_LEGGINGS);
+        registerVanillaArmor(ModItems.AZUROS_BOOTS);
+
+        registerVanillaArmor(ModItems.ROSETTE_HELMET);
+        registerVanillaArmor(ModItems.ROSETTE_CHESTPLATE);
+        registerVanillaArmor(ModItems.ROSETTE_LEGGINGS);
+        registerVanillaArmor(ModItems.ROSETTE_BOOTS);
+
+        registerVanillaArmor(ModItems.XIRION_HELMET);
+        registerVanillaArmor(ModItems.XIRION_CHESTPLATE);
+        registerVanillaArmor(ModItems.XIRION_LEGGINGS);
+        registerVanillaArmor(ModItems.XIRION_BOOTS);
+
+        registerVanillaArmor(ModItems.CHROMITE_HELMET);
+        registerVanillaArmor(ModItems.CHROMITE_CHESTPLATE);
+        registerVanillaArmor(ModItems.CHROMITE_LEGGINGS);
+        registerVanillaArmor(ModItems.CHROMITE_BOOTS);
+
+        registerVanillaArmor(ModItems.MIRANITE_HELMET);
+        registerVanillaArmor(ModItems.MIRANITE_CHESTPLATE);
+        registerVanillaArmor(ModItems.MIRANITE_LEGGINGS);
+        registerVanillaArmor(ModItems.MIRANITE_BOOTS);
     }
 
     private static void registerVanillaArmor(Item item) {

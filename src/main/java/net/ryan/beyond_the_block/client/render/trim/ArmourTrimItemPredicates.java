@@ -11,7 +11,7 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public final class ArmourTrimItemPredicates {
 
-    private static final Identifier TRIM_MATERIAL = new Identifier(BeyondTheBlock.MOD_ID, "trim_material");
+    private static final Identifier TRIM_PATTERN = new Identifier(BeyondTheBlock.MOD_ID, "trim_pattern");
 
     private ArmourTrimItemPredicates() {
     }
@@ -91,10 +91,9 @@ public final class ArmourTrimItemPredicates {
     }
 
     private static void registerTrimPredicates(Item item) {
-
-        FabricModelPredicateProviderRegistry.register(item, TRIM_MATERIAL, (stack, world, entity, seed) ->
+        FabricModelPredicateProviderRegistry.register(item, TRIM_PATTERN, (stack, world, entity, seed) ->
                 ModArmourTrim.getTrim(stack)
-                        .map(trim -> (float) ModTrimRegistry.getMaterialIndex(trim.materialId()))
+                        .map(trim -> (float) ModTrimRegistry.getPatternIndex(trim.patternId()))
                         .orElse(0.0F)
         );
     }

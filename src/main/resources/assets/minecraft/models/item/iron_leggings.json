@@ -1,0 +1,105 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/iron_leggings"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 1.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_coast_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 2.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_dune_trim"
+    }
+  ,
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 3.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_eye_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 4.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_host_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 5.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_raiser_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 6.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_rib_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 7.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_sentry_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 8.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_shaper_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 9.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_silence_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 10.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_snout_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 11.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_spire_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 12.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_tide_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 13.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_vex_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 14.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_ward_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 15.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_wayfinder_trim"
+    },
+    {
+      "predicate": {
+        "beyond_the_block:trim_pattern": 16.0
+      },
+      "model": "beyond_the_block:item/iron_leggings_wild_trim"
+    }
+  ]
+}

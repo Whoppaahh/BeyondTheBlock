@@ -6,98 +6,97 @@
   "overrides": [
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 1.0
+        "beyond_the_block:trim_coast": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_coast_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 2.0
+        "beyond_the_block:trim_dune": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_dune_trim"
-    }
-  ,
+    },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 3.0
+        "beyond_the_block:trim_eye": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_eye_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 4.0
+        "beyond_the_block:trim_host": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_host_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 5.0
+        "beyond_the_block:trim_raiser": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_raiser_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 6.0
+        "beyond_the_block:trim_rib": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_rib_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 7.0
+        "beyond_the_block:trim_sentry": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_sentry_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 8.0
+        "beyond_the_block:trim_shaper": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_shaper_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 9.0
+        "beyond_the_block:trim_silence": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_silence_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 10.0
+        "beyond_the_block:trim_snout": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_snout_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 11.0
+        "beyond_the_block:trim_spire": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_spire_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 12.0
+        "beyond_the_block:trim_tide": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_tide_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 13.0
+        "beyond_the_block:trim_vex": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_vex_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 14.0
+        "beyond_the_block:trim_ward": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_ward_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 15.0
+        "beyond_the_block:trim_wayfinder": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_wayfinder_trim"
     },
     {
       "predicate": {
-        "beyond_the_block:trim_pattern": 16.0
+        "beyond_the_block:trim_wild": 1.0
       },
       "model": "beyond_the_block:item/iron_boots_wild_trim"
     }

@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.core;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
@@ -39,7 +40,9 @@ import net.ryan.beyond_the_block.content.effect.FrozenSlimeLayer;
 import net.ryan.beyond_the_block.content.effect.beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.content.enchantment.armour.boots.LeapOfFaithEnchantment;
 import net.ryan.beyond_the_block.content.item.AnimatedItem;
+import net.ryan.beyond_the_block.content.particle.FallingLeafParticle;
 import net.ryan.beyond_the_block.content.registry.ModItems;
+import net.ryan.beyond_the_block.content.registry.ModParticles;
 import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
 import net.ryan.beyond_the_block.network.ClientNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
@@ -63,11 +66,24 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         registerResourceReloads();
         ArmourTrimItemPredicates.register();
         registerTrimItemColors();
+        registerClientParticles();
 
         ClientBootstrap.init();
         OutlineRenderer.init();
         ConfigSyncClient.init();
 
+    }
+
+    public static void registerClientParticles() {
+        ParticleFactoryRegistry.getInstance().register(
+                ModParticles.CHERRY_LEAF_PARTICLE,
+                FallingLeafParticle.Factory::new
+        );
+
+        ParticleFactoryRegistry.getInstance().register(
+                ModParticles.PALE_OAK_LEAF_PARTICLE,
+                FallingLeafParticle.Factory::new
+        );
     }
 
     private void registerTrimItemColors() {

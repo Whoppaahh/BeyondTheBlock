@@ -6,6 +6,8 @@
     "beyond_the_block:triple_compressed_sponge",
     "beyond_the_block:wet_compressed_sponge",
     "beyond_the_block:wet_double_compressed_sponge",
-    "beyond_the_block:wet_triple_compressed_sponge"
+    "beyond_the_block:wet_triple_compressed_sponge",
+    "beyond_the_block:cherry_leaves",
+    "beyond_the_block:pale_oak_leaves"
   ]
 }

@@ -12,6 +12,10 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
 
+    public static RegistryEntry<? extends ConfiguredFeature<?, ?>> CHERRY_TREE;
+    public static RegistryEntry<? extends ConfiguredFeature<?, ?>> PALE_OAK_TREE;
+
+
     //region XP
     public static final List<OreFeatureConfig.Target> OVERWORLD_XP_ORES = List.of(
             OreFeatureConfig.createTarget(OreConfiguredFeatures.STONE_ORE_REPLACEABLES, ModBlocks.EXPERIENCE_BLOCK.getDefaultState()),

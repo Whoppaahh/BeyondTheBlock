@@ -7,6 +7,10 @@ import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModParticles {
+    public static final DefaultParticleType CHERRY_LEAF_PARTICLE = registerParticles("cherry_leaf_particle", FabricParticleTypes.simple());
+    public static final DefaultParticleType PALE_OAK_LEAF_PARTICLE = registerParticles("pale_oak_leaf_particle", FabricParticleTypes.simple());
+
+
     public static final DefaultParticleType AMBERINE_PARTICLE = registerParticles("amberine_particle", FabricParticleTypes.simple());
     public static final DefaultParticleType RUBY_PARTICLE = registerParticles("ruby_particle", FabricParticleTypes.simple());
     public static final DefaultParticleType AZUROS_PARTICLE = registerParticles("azuros_particle", FabricParticleTypes.simple());

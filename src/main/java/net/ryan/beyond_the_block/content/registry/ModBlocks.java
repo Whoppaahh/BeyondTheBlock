@@ -28,12 +28,72 @@ import net.ryan.beyond_the_block.content.block.sponges.WetCompressedSpongeBlock;
 import net.ryan.beyond_the_block.content.item.HangingSignItem;
 import net.ryan.beyond_the_block.content.item.ModItemGroup;
 import net.ryan.beyond_the_block.content.registry.family.*;
+import net.ryan.beyond_the_block.content.world.tree.CherrySaplingGenerator;
+import net.ryan.beyond_the_block.content.world.tree.PaleOakSaplingGenerator;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModBlocks {
+
+    public static final Block PINK_PETALS = registerBlock("pink_petals",
+            new PinkPetalsBlock(
+                    FabricBlockSettings.copyOf(Blocks.PINK_TULIP)
+                            .noCollision()
+                            .breakInstantly()
+                            .nonOpaque()
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block CHERRY_SAPLING = registerBlock("cherry_sapling",
+            new SaplingBlock(
+                    new CherrySaplingGenerator(),
+                    FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).nonOpaque().ticksRandomly()
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block PALE_OAK_SAPLING = registerBlock("pale_oak_sapling",
+            new SaplingBlock(
+                    new PaleOakSaplingGenerator(),
+                    FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).nonOpaque().ticksRandomly()
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block POTTED_CHERRY_SAPLING = Registry.register(
+            Registry.BLOCK,
+            new Identifier(BeyondTheBlock.MOD_ID, "potted_cherry_sapling"),
+            new FlowerPotBlock(
+                    CHERRY_SAPLING,
+                    FabricBlockSettings.copyOf(Blocks.POTTED_OAK_SAPLING).nonOpaque()
+            )
+    );
+
+    public static final Block POTTED_PALE_OAK_SAPLING = Registry.register(
+            Registry.BLOCK,
+            new Identifier(BeyondTheBlock.MOD_ID, "potted_pale_oak_sapling"),
+            new FlowerPotBlock(
+                    PALE_OAK_SAPLING,
+                    FabricBlockSettings.copyOf(Blocks.POTTED_OAK_SAPLING).nonOpaque()
+            )
+    );
+
+    public static final Block CHERRY_LEAVES = registerBlock("cherry_leaves",
+            new AmbientLeavesBlock(
+                    FabricBlockSettings.copyOf(Blocks.OAK_LEAVES),
+                    ModParticles.CHERRY_LEAF_PARTICLE,
+                    10
+            ), ModItemGroup.ModBlocksTab);
+
+    public static final Block PALE_OAK_LEAVES = registerBlock("pale_oak_leaves",
+            new AmbientLeavesBlock(
+                    FabricBlockSettings.copyOf(Blocks.OAK_LEAVES),
+                    ModParticles.PALE_OAK_LEAF_PARTICLE,
+                    18
+            ), ModItemGroup.ModBlocksTab);
 
     public static final Map<SignType, Item> HANGING_SIGN_ITEMS = new HashMap<>();
 

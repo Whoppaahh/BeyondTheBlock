@@ -6,17 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_the_block:pink_petals",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:block_state_property",
-                "block": "beyond_the_block:pink_petals",
-                "property": "flower_amount"
-              }
-            }
-          ]
+          "name": "beyond_the_block:pink_petals"
         }
       ],
       "conditions": [

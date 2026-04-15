@@ -34,6 +34,12 @@
     "beyond_the_block:deepslate_chromite_ore",
     "beyond_the_block:nether_chromite_ore",
     "beyond_the_block:end_chromite_ore",
-    "beyond_the_block:chromite_block"
+    "beyond_the_block:chromite_block",
+    "beyond_the_block:resin_block",
+    "beyond_the_block:resin_bricks",
+    "beyond_the_block:chiseled_resin_bricks",
+    "beyond_the_block:resin_brick_stairs",
+    "beyond_the_block:resin_brick_slab",
+    "beyond_the_block:resin_brick_wall"
   ]
 }

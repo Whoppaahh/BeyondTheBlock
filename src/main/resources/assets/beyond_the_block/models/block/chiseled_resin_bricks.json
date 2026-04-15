@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "beyond_the_block:block/chiseled_resin_bricks_top",
+    "side": "beyond_the_block:block/chiseled_resin_bricks"
+  }
+}

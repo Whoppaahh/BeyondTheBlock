@@ -56,6 +56,12 @@
     "beyond_the_block:player_vault",
     "beyond_the_block:infi_furnace",
     "beyond_the_block:decrafter_block",
-    "beyond_the_block:speed_rail_block"
+    "beyond_the_block:speed_rail_block",
+    "beyond_the_block:resin_block",
+    "beyond_the_block:resin_bricks",
+    "beyond_the_block:chiseled_resin_bricks",
+    "beyond_the_block:resin_brick_stairs",
+    "beyond_the_block:resin_brick_slab",
+    "beyond_the_block:resin_brick_wall"
   ]
 }

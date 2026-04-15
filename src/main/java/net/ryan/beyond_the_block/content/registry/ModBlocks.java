@@ -37,6 +37,41 @@ import java.util.Map;
 
 public class ModBlocks {
 
+    public static final Block PALE_MOSS_BLOCK = registerBlock("pale_moss_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.MOSS_BLOCK)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block RESIN_BLOCK = registerBlock("resin_block",
+            new Block(FabricBlockSettings.copyOf(Blocks.HONEYCOMB_BLOCK)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block RESIN_BRICKS = registerBlock("resin_bricks",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block CHISELED_RESIN_BRICKS = registerBlock("chiseled_resin_bricks",
+            new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block RESIN_BRICK_STAIRS = registerBlock("resin_brick_stairs",
+            new StairsBlock(RESIN_BRICKS.getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_BRICK_STAIRS)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block RESIN_BRICK_SLAB = registerBlock("resin_brick_slab",
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_SLAB)),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block RESIN_BRICK_WALL = registerBlock("resin_brick_wall",
+            new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICK_WALL)),
+            ModItemGroup.ModBlocksTab
+    );
+
     public static final Block PINK_PETALS = registerBlock("pink_petals",
             new PinkPetalsBlock(
                     FabricBlockSettings.copyOf(Blocks.PINK_TULIP)

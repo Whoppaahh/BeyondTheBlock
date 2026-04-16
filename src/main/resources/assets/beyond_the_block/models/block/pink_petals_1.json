@@ -1,6 +1,19 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
   "textures": {
-    "cross": "beyond_the_block:block/pink_petals"
-  }
+    "particle": "beyond_the_block:block/pink_petals",
+    "texture": "beyond_the_block:block/pink_petals"
+  },
+  "elements": [
+    {
+      "from": [6, 0, 5],
+      "to": [11, 0.2, 10],
+      "rotation": { "origin": [8, 0, 8], "axis": "y", "angle": 22.5 },
+      "faces": {
+        "up":   { "texture": "#texture", "uv": [4, 4, 12, 12] },
+        "down": { "texture": "#texture", "uv": [4, 4, 12, 12] }
+      }
+    }
+  ]
 }

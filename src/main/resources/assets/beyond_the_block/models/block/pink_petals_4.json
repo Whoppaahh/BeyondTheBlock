@@ -1,6 +1,42 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
   "textures": {
-    "cross": "beyond_the_block:block/pink_petals"
-  }
+    "particle": "beyond_the_block:block/pink_petals",
+    "texture": "beyond_the_block:block/pink_petals"
+  },
+  "elements": [
+    {
+      "from": [3, 0, 3],
+      "to": [7, 0.2, 7],
+      "faces": {
+        "up":   { "texture": "#texture", "uv": [1, 1, 7, 7] },
+        "down": { "texture": "#texture", "uv": [1, 1, 7, 7] }
+      }
+    },
+    {
+      "from": [9, 0, 3],
+      "to": [13, 0.2, 7],
+      "faces": {
+        "up":   { "texture": "#texture", "uv": [9, 1, 15, 7] },
+        "down": { "texture": "#texture", "uv": [9, 1, 15, 7] }
+      }
+    },
+    {
+      "from": [3, 0, 9],
+      "to": [7, 0.2, 13],
+      "faces": {
+        "up":   { "texture": "#texture", "uv": [1, 9, 7, 15] },
+        "down": { "texture": "#texture", "uv": [1, 9, 7, 15] }
+      }
+    },
+    {
+      "from": [9, 0, 9],
+      "to": [13, 0.2, 13],
+      "faces": {
+        "up":   { "texture": "#texture", "uv": [9, 9, 15, 15] },
+        "down": { "texture": "#texture", "uv": [9, 9, 15, 15] }
+      }
+    }
+  ]
 }

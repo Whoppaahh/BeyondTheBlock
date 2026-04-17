@@ -2,11 +2,22 @@ package net.ryan.beyond_the_block.mixin.feature.rails;
 
 import net.minecraft.block.*;
 import net.minecraft.block.enums.RailShape;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.ryan.beyond_the_block.client.render.entity.MinecartChainRenderer;
 import net.ryan.beyond_the_block.content.block.SpeedRailBlock;
+import net.ryan.beyond_the_block.utils.LinkedMinecartComponent;
+import net.ryan.beyond_the_block.utils.MinecartCouplerComponent;
+import net.ryan.beyond_the_block.utils.MinecartLinkingState;
+import net.ryan.beyond_the_block.utils.MinecartTrainUtils;
 import net.ryan.beyond_the_block.utils.accessors.MinecartSpeedAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,8 +27,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.UUID;
+
 @Mixin(AbstractMinecartEntity.class)
-public abstract class MinecartMixin implements MinecartSpeedAccessor {
+public abstract class MinecartMixin implements MinecartSpeedAccessor, MinecartLinkAccess {
 
     @Unique
     private double beyond_the_block$customSpeed = 0.0;
@@ -155,5 +168,135 @@ public abstract class MinecartMixin implements MinecartSpeedAccessor {
         if (nbt.contains("BTBCustomSpeed")) {
             this.beyond_the_block$customSpeed = nbt.getDouble("BTBCustomSpeed");
         }
+    }
+
+    @Unique
+    private final LinkedMinecartComponent beyond_the_block$link = new LinkedMinecartComponent();
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void beyond_the_block$tickLink(CallbackInfo ci) {
+        AbstractMinecartEntity self = (AbstractMinecartEntity)(Object)this;
+
+        if (self.getWorld().isClient) return;
+        if (!beyond_the_block$link.hasLink()) return;
+
+        // Leader election
+        UUID selfId = self.getUuid();
+        UUID linkedId = beyond_the_block$link.getLinkedCart();
+
+        if (linkedId == null || selfId.compareTo(linkedId) > 0) return;
+
+        MinecartTrainUtils.propagateMomentum(self);
+    }
+
+    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+    private void beyond_the_block$writeCouplers(NbtCompound nbt, CallbackInfo ci) {
+        beyond_the_block$couplers.writeNbt(nbt);
+    }
+
+    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+    private void beyond_the_block$readCouplers(NbtCompound nbt, CallbackInfo ci) {
+        beyond_the_block$couplers.readNbt(nbt);
+    }
+
+    @Inject(
+            method = "interact",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void beyond_the_block$handleLink(
+            PlayerEntity player,
+            Hand hand,
+            CallbackInfoReturnable<ActionResult> cir
+    ) {
+        if (!player.isSneaking() || !player.getStackInHand(hand).isEmpty()) return;
+
+        AbstractMinecartEntity self = (AbstractMinecartEntity)(Object)this;
+
+        if (player.getWorld().isClient) {
+            cir.setReturnValue(ActionResult.SUCCESS);
+            return;
+        }
+
+        AbstractMinecartEntity selected = MinecartLinkingState.get(player);
+
+        if (selected == null) {
+            MinecartLinkingState.set(player, self);
+        } else if (selected != self) {
+            beyond_the_block$link.setLinkedCart(selected.getUuid());
+            ((MinecartMixin)(Object)selected)
+                    .beyond_the_block$link
+                    .setLinkedCart(self.getUuid());
+
+            MinecartLinkingState.clear(player);
+        }
+
+        cir.setReturnValue(ActionResult.SUCCESS);
+    }
+
+    @Inject(
+            method = "collidesWith",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void beyond_the_block$disableLinkedCollision(
+            Entity other,
+            CallbackInfoReturnable<Boolean> cir
+    ) {
+        if (other instanceof AbstractMinecartEntity cart &&
+                beyond_the_block$link.hasLink() &&
+                cart.getUuid().equals(beyond_the_block$link.getLinkedCart())) {
+            cir.setReturnValue(false);
+        }
+    }
+
+
+    @Unique
+    private final MinecartCouplerComponent beyond_the_block$couplers =
+            new MinecartCouplerComponent();
+
+    @Override
+    public MinecartCouplerComponent beyond_the_block$getCouplers() {
+        return beyond_the_block$couplers;
+    }
+
+    @Inject(
+            method = "render",
+            at = @At("TAIL")
+    )
+    private void beyond_the_block$renderChain(
+            AbstractMinecartEntity cart,
+            float yaw,
+            float tickDelta,
+            MatrixStack matrices,
+            VertexConsumerProvider consumers,
+            int light,
+            CallbackInfo ci
+    ) {
+        MinecartMixin accessor = (MinecartMixin)(Object) cart;
+
+        if (!accessor.beyond_the_block$hasLink()) return;
+
+        AbstractMinecartEntity other =
+                cart.getWorld()
+                        .getEntity(accessor.beyond_the_block$getLinkedCart());
+
+        if (!(other instanceof AbstractMinecartEntity)) return;
+
+        Vec3d from = cart.getLerpedPos(tickDelta).add(0, 0.4, 0);
+        Vec3d to   = other.getLerpedPos(tickDelta).add(0, 0.4, 0);
+
+        matrices.push();
+        matrices.translate(-from.x, -from.y, -from.z);
+
+        MinecartChainRenderer.render(
+                matrices,
+                consumers,
+                Vec3d.ZERO,
+                to.subtract(from),
+                light
+        );
+
+        matrices.pop();
     }
 }

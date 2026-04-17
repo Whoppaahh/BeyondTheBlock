@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {
+      "when": { "up": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_up" }
+    },
+    {
+      "when": { "down": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_down" }
+    },
+    {
+      "when": { "north": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_north" }
+    },
+    {
+      "when": { "south": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_south" }
+    },
+    {
+      "when": { "east": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_east" }
+    },
+    {
+      "when": { "west": true },
+      "apply": { "model": "beyond_the_block:block/resin_clump_west" }
+    }
+  ]
+}

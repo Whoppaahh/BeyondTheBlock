@@ -37,6 +37,26 @@ import java.util.Map;
 
 public class ModBlocks {
 
+    public static final Block RESIN_CLUMP = registerBlock("resin_clump",
+            new ResinClumpBlock(
+                    FabricBlockSettings.copyOf(Blocks.GLOW_LICHEN)
+                            .noCollision()
+                            .breakInstantly()
+                            .nonOpaque()
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
+    public static final Block PALE_HANGING_MOSS = registerBlock("pale_hanging_moss",
+            new PaleHangingMossBlock(
+                    FabricBlockSettings.copyOf(Blocks.HANGING_ROOTS)
+                            .noCollision()
+                            .breakInstantly()
+                            .nonOpaque()
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
     public static final Block PALE_MOSS_BLOCK = registerBlock("pale_moss_block",
             new Block(FabricBlockSettings.copyOf(Blocks.MOSS_BLOCK)),
             ModItemGroup.ModBlocksTab

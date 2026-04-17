@@ -4,11 +4,33 @@ import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.*;
+import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
 import java.util.List;
 
 public class ModPlacedFeatures {
+
+    public static final RegistryEntry<PlacedFeature> CHERRY_TREE_PLACED = PlacedFeatures.register(
+            "cherry_tree_placed",
+            ModConfiguredFeatures.CHERRY_TREE,
+            PlacedFeatures.createCountExtraModifier(2, 0.1f, 1),
+            SquarePlacementModifier.of(),
+            PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+            PlacedFeatures.wouldSurvive(ModBlocks.CHERRY_SAPLING),
+            BiomePlacementModifier.of()
+    );
+
+    public static final RegistryEntry<PlacedFeature> PALE_OAK_TREE_PLACED = PlacedFeatures.register(
+            "pale_oak_tree_placed",
+            ModConfiguredFeatures.PALE_OAK_TREE,
+            PlacedFeatures.createCountExtraModifier(3, 0.1f, 1),
+            SquarePlacementModifier.of(),
+            PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+            PlacedFeatures.wouldSurvive(ModBlocks.PALE_OAK_SAPLING),
+            BiomePlacementModifier.of()
+    );
 
     //region XP
     public static final RegistryEntry<PlacedFeature> XP_ORE_PLACED = PlacedFeatures.register("xp_ore_placed",

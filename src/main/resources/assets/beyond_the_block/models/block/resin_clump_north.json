@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
+  "textures": {
+    "particle": "beyond_the_block:block/resin_clump",
+    "texture": "beyond_the_block:block/resin_clump"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 0.2],
+      "faces": {
+        "north": { "texture": "#texture", "uv": [0, 0, 16, 16] },
+        "south": { "texture": "#texture", "uv": [0, 0, 16, 16] }
+      }
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
 import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
+import net.ryan.beyond_the_block.content.world.gen.ModTreeGeneration;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
@@ -39,6 +40,7 @@ public class ContentRegistrar {
         ModEffects.registerEffects();
         ModTags.registerModTags();
         ModOreGeneration.generateModOres();
+        ModTreeGeneration.generateModTrees();
         ModLootTableModifiers.modifyLootTables();
         ModDimensions.register();
         ModEntities.registerEntities();

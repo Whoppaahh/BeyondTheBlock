@@ -2,8 +2,13 @@ package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
@@ -12,9 +17,33 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
 
-    public static RegistryEntry<? extends ConfiguredFeature<?, ?>> CHERRY_TREE;
-    public static RegistryEntry<? extends ConfiguredFeature<?, ?>> PALE_OAK_TREE;
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> CHERRY_TREE =
+            ConfiguredFeatures.register("cherry_tree", Feature.TREE,
+                    new TreeFeatureConfig.Builder(
+                            BlockStateProvider.of(ModBlocks.CHERRY_LOG),
+                            new StraightTrunkPlacer(7, 2, 0),
+                            BlockStateProvider.of(ModBlocks.CHERRY_LEAVES),
+                            new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), 4),
+                            new TwoLayersFeatureSize(1, 0, 2)
+                    )
+                            .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
+                            .ignoreVines()
+                            .build()
+            );
 
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> PALE_OAK_TREE =
+            ConfiguredFeatures.register("pale_oak_tree", Feature.TREE,
+                    new TreeFeatureConfig.Builder(
+                            BlockStateProvider.of(ModBlocks.PALE_OAK_LOG),
+                            new StraightTrunkPlacer(6, 2, 0),
+                            BlockStateProvider.of(ModBlocks.PALE_OAK_LEAVES),
+                            new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
+                            new TwoLayersFeatureSize(1, 0, 1)
+                    )
+                            .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
+                            .ignoreVines()
+                            .build()
+            );
 
     //region XP
     public static final List<OreFeatureConfig.Target> OVERWORLD_XP_ORES = List.of(

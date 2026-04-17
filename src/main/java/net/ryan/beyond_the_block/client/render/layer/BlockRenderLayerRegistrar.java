@@ -24,6 +24,8 @@ public class BlockRenderLayerRegistrar {
     }
     private static void registerBlockRenderLayers() {
         // Manual translucency
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RESIN_CLUMP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PALE_HANGING_MOSS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PINK_PETALS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHERRY_SAPLING, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PALE_OAK_SAPLING, RenderLayer.getCutout());

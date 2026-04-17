@@ -7,12 +7,11 @@
   },
   "elements": [
     {
-      "from": [6, 0, 5],
-      "to": [11, 0.2, 10],
-      "rotation": { "origin": [8, 0, 8], "axis": "y", "angle": 22.5 },
+      "from": [0, 0, 0],
+      "to": [8, 0.2, 8],
       "faces": {
-        "up":   { "texture": "#texture", "uv": [4, 4, 12, 12] },
-        "down": { "texture": "#texture", "uv": [4, 4, 12, 12] }
+        "up":   { "texture": "#texture", "uv": [0, 0, 8, 8] },
+        "down": { "texture": "#texture", "uv": [0, 0, 8, 8] }
       }
     }
   ]

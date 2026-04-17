@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.SignType;
 import net.ryan.beyond_the_block.content.registry.family.ModSignTypes;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.mixin.accessors.TexturedRenderLayersAccessor;
+import net.ryan.beyond_the_block.mixin.client.TexturedRenderLayersAccessor;
 
 public final class ModSignRenderLayers {
 

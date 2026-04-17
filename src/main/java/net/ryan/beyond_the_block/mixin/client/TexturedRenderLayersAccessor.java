@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.mixin.accessors;
+package net.ryan.beyond_the_block.mixin.client;
 
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;

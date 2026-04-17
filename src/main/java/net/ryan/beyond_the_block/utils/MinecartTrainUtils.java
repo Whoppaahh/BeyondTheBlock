@@ -1,25 +1,33 @@
 package net.ryan.beyond_the_block.utils;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.ryan.beyond_the_block.utils.accessors.MinecartCouplerAccess;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public final class MinecartTrainUtils {
 
-    private MinecartTrainUtils() {}
+    private MinecartTrainUtils() {
+    }
 
-    /**
-     * Finds the full connected train starting from a cart.
-     */
-    public static List<AbstractMinecartEntity> collectTrain(
-            AbstractMinecartEntity start
-    ) {
-        World world = start.getWorld();
+    public static List<AbstractMinecartEntity> collectTrain(AbstractMinecartEntity start) {
+        List<AbstractMinecartEntity> train = new ArrayList<>();
+
+        if (!(start.getWorld() instanceof ServerWorld serverWorld)) {
+            return train;
+        }
+
         Set<UUID> visited = new HashSet<>();
         Deque<AbstractMinecartEntity> queue = new ArrayDeque<>();
-        List<AbstractMinecartEntity> train = new ArrayList<>();
 
         queue.add(start);
         visited.add(start.getUuid());
@@ -28,46 +36,70 @@ public final class MinecartTrainUtils {
             AbstractMinecartEntity current = queue.poll();
             train.add(current);
 
-            LinkedMinecartComponent link =
-                    ((MinecartLinkAccess) current).beyond_the_block$getLink();
+            MinecartCouplerComponent couplers =
+                    ((MinecartCouplerAccess) current).beyond_the_block$getCouplers();
 
-            if (!link.hasLink()) continue;
+            for (CouplerSide side : CouplerSide.values()) {
+                UUID otherId = couplers.get(side);
+                if (otherId == null || visited.contains(otherId)) {
+                    continue;
+                }
 
-            UUID otherId = link.getLinkedCart();
-            if (visited.contains(otherId)) continue;
+                Entity entity = serverWorld.getEntity(otherId);
+                if (!(entity instanceof AbstractMinecartEntity otherCart)) {
+                    continue;
+                }
 
-            AbstractMinecartEntity other =
-                    (AbstractMinecartEntity) world.getEntity(otherId);
-
-            if (other == null) continue;
-
-            visited.add(otherId);
-            queue.add(other);
+                visited.add(otherId);
+                queue.add(otherCart);
+            }
         }
 
         return train;
     }
 
-    /**
-     * Applies shared momentum across the entire train.
-     */
-    public static void propagateMomentum(
-            AbstractMinecartEntity source
-    ) {
+    public static boolean areInSameTrain(AbstractMinecartEntity a, AbstractMinecartEntity b) {
+        for (AbstractMinecartEntity cart : collectTrain(a)) {
+            if (cart == b) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void propagateMomentum(AbstractMinecartEntity source) {
         List<AbstractMinecartEntity> train = collectTrain(source);
-        if (train.size() <= 1) return;
+        if (train.size() <= 1) {
+            return;
+        }
 
         Vec3d totalVelocity = Vec3d.ZERO;
-
         for (AbstractMinecartEntity cart : train) {
             totalVelocity = totalVelocity.add(cart.getVelocity());
         }
 
-        Vec3d sharedVelocity = totalVelocity.multiply(1.0 / train.size());
+        Vec3d sharedVelocity = totalVelocity.multiply(1.0D / train.size());
 
         for (AbstractMinecartEntity cart : train) {
             cart.setVelocity(sharedVelocity);
             cart.velocityDirty = true;
+            cart.velocityModified = true;
         }
+    }
+
+    public static AbstractMinecartEntity getLeader(AbstractMinecartEntity source) {
+        List<AbstractMinecartEntity> train = collectTrain(source);
+        if (train.isEmpty()) {
+            return source;
+        }
+
+        AbstractMinecartEntity leader = train.get(0);
+        for (AbstractMinecartEntity cart : train) {
+            if (cart.getUuid().compareTo(leader.getUuid()) < 0) {
+                leader = cart;
+            }
+        }
+
+        return leader;
     }
 }

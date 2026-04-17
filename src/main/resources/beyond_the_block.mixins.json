@@ -111,9 +111,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "accessors.EntityRendererAccessor",
-    "accessors.TexturedRenderLayersAccessor"
-  ]
+  }
 }

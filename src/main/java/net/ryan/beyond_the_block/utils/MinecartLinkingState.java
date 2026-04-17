@@ -1,21 +1,25 @@
 package net.ryan.beyond_the_block.utils;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.WeakHashMap;
 
 public final class MinecartLinkingState {
 
-    private static final Map<UUID, Object> STATE = new WeakHashMap<>();
+    private static final Map<UUID, AbstractMinecartEntity> STATE = new HashMap<>();
 
-    public static void set(PlayerEntity player, Object cart) {
+    private MinecartLinkingState() {
+    }
+
+    public static void set(PlayerEntity player, AbstractMinecartEntity cart) {
         STATE.put(player.getUuid(), cart);
     }
 
-    public static <T> T get(PlayerEntity player) {
-        return (T) STATE.get(player.getUuid());
+    public static AbstractMinecartEntity get(PlayerEntity player) {
+        return STATE.get(player.getUuid());
     }
 
     public static void clear(PlayerEntity player) {

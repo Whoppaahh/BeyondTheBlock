@@ -22,9 +22,11 @@
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
+    "MinecartRendererMixin",
     "MouseScrollMixin",
     "SheepWoolFeatureRendererMixin",
     "SignBlockEntityRendererMixin",
+    "TexturedRenderLayersAccessor",
     "TitleScreenMixin"
   ],
   "injectors": {

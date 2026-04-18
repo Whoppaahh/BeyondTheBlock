@@ -5,6 +5,7 @@ import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.utils.accessors.MinecartCouplerAccess;
+import net.ryan.beyond_the_block.utils.accessors.MinecartSpeedAccessor;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -19,6 +20,29 @@ public final class MinecartTrainUtils {
     private MinecartTrainUtils() {
     }
 
+    public static double getSharedCustomSpeed(List<AbstractMinecartEntity> train) {
+        double maxSpeed = 0.0D;
+
+        for (AbstractMinecartEntity cart : train) {
+            if (cart instanceof MinecartSpeedAccessor accessor) {
+                maxSpeed = Math.max(maxSpeed, accessor.beyondTheBlock$getCustomSpeed());
+            }
+        }
+
+        return maxSpeed;
+    }
+
+    public static void applySharedCustomSpeed(List<AbstractMinecartEntity> train, double speed) {
+        for (AbstractMinecartEntity cart : train) {
+            if (cart instanceof MinecartSpeedAccessor accessor) {
+                if (speed > 0.0D) {
+                    accessor.beyondTheBlock$setCustomSpeed(speed);
+                } else {
+                    accessor.beyondTheBlock$clearCustomSpeed();
+                }
+            }
+        }
+    }
     public static List<AbstractMinecartEntity> collectTrain(AbstractMinecartEntity start) {
         List<AbstractMinecartEntity> train = new ArrayList<>();
 

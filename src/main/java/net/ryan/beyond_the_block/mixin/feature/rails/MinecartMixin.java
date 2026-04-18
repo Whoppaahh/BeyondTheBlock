@@ -38,6 +38,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -246,6 +247,14 @@ public abstract class MinecartMixin implements MinecartSpeedAccessor, MinecartCo
         if (leader != self) {
             return;
         }
+
+        List<AbstractMinecartEntity> train = MinecartTrainUtils.collectTrain(self);
+        if (train.isEmpty()) {
+            return;
+        }
+
+        double sharedCustomSpeed = MinecartTrainUtils.getSharedCustomSpeed(train);
+        MinecartTrainUtils.applySharedCustomSpeed(train, sharedCustomSpeed);
 
         MinecartTrainUtils.propagateMomentum(self);
         this.beyond_the_block$enforceCouplerSpacing();

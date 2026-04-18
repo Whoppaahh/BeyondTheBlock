@@ -3,17 +3,24 @@ package net.ryan.beyond_the_block.content.world.feature;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.ThreeLayersFeatureSize;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliage.DarkOakFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.content.world.tree.BtBCherryFoliagePlacer;
+import net.ryan.beyond_the_block.content.world.tree.BtBCherryTrunkPlacer;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ModConfiguredFeatures {
 
@@ -21,9 +28,23 @@ public class ModConfiguredFeatures {
             ConfiguredFeatures.register("cherry_tree", Feature.TREE,
                     new TreeFeatureConfig.Builder(
                             BlockStateProvider.of(ModBlocks.CHERRY_LOG),
-                            new StraightTrunkPlacer(7, 2, 0),
+                            new BtBCherryTrunkPlacer(
+                                    7, 1, 0,
+                                    ConstantIntProvider.create(2),
+                                    UniformIntProvider.create(3, 5),
+                                    UniformIntProvider.create(-4, -2),
+                                    ConstantIntProvider.create(1)
+                            ),
                             BlockStateProvider.of(ModBlocks.CHERRY_LEAVES),
-                            new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), 4),
+                            new BtBCherryFoliagePlacer(
+                                    ConstantIntProvider.create(2),
+                                    ConstantIntProvider.create(0),
+                                    ConstantIntProvider.create(3),
+                                    0.35F,
+                                    0.2F,
+                                    0.35F,
+                                    0.15F
+                            ),
                             new TwoLayersFeatureSize(1, 0, 2)
                     )
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
@@ -35,10 +56,10 @@ public class ModConfiguredFeatures {
             ConfiguredFeatures.register("pale_oak_tree", Feature.TREE,
                     new TreeFeatureConfig.Builder(
                             BlockStateProvider.of(ModBlocks.PALE_OAK_LOG),
-                            new StraightTrunkPlacer(6, 2, 0),
+                            new DarkOakTrunkPlacer(6, 2, 1),
                             BlockStateProvider.of(ModBlocks.PALE_OAK_LEAVES),
-                            new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                            new TwoLayersFeatureSize(1, 0, 1)
+                            new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
+                            new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())
                     )
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
                             .ignoreVines()

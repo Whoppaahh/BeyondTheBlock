@@ -1,18 +1,8 @@
 {
-  "parent": "minecraft:block/block",
-  "render_type": "cutout",
+  "parent": "beyond_the_block:block/flowerbed_3",
   "textures": {
-    "particle": "beyond_the_block:block/pink_petals",
-    "texture": "beyond_the_block:block/pink_petals"
-  },
-  "elements": [
-    {
-      "from": [0, 0, 0],
-      "to": [16, 0.2, 12],
-      "faces": {
-        "up":   { "texture": "#texture", "uv": [0, 0, 16, 12] },
-        "down": { "texture": "#texture", "uv": [0, 0, 16, 12] }
-      }
-    }
-  ]
+    "flowerbed": "beyond_the_block:block/pink_petals",
+    "stem": "beyond_the_block:block/pink_petals_stem",
+    "particle" : "beyond_the_block:block/pink_petals"
+  }
 }

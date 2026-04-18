@@ -1,3 +1,6 @@
 {
-  "parent": "beyond_the_block:block/pink_petals_1"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "beyond_the_block:item/pink_petals"
+  }
 }

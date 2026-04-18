@@ -1,5 +1,6 @@
 {
   "variants": {
-    "": { "model": "beyond_the_block:block/pale_hanging_moss" }
+    "tip=false": { "model": "beyond_the_block:block/pale_hanging_moss" },
+    "tip=true":  { "model": "beyond_the_block:block/pale_hanging_moss_tip" }
   }
 }

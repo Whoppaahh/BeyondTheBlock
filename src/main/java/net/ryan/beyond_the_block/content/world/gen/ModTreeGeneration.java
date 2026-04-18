@@ -17,7 +17,7 @@ public class ModTreeGeneration {
         );
 
         BiomeModifications.addFeature(
-                BiomeSelectors.foundInOverworld().and(BiomeSelectors.tag(BiomeTags.IS_TAIGA).or(BiomeSelectors.tag(BiomeTags.IS_FOREST))),
+                BiomeSelectors.foundInOverworld().and(BiomeSelectors.tag(BiomeTags.IS_FOREST)),
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 ModPlacedFeatures.PALE_OAK_TREE_PLACED.getKey().get()
         );

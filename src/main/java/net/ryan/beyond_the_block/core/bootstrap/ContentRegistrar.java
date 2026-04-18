@@ -11,6 +11,8 @@ import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
 import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
 import net.ryan.beyond_the_block.content.world.gen.ModTreeGeneration;
+import net.ryan.beyond_the_block.content.world.tree.ModFoliagePlacerTypes;
+import net.ryan.beyond_the_block.content.world.tree.ModTrunkPlacerTypes;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
@@ -48,6 +50,8 @@ public class ContentRegistrar {
         ModSounds.registerSounds();
         SandToGlassManager.register();
         ModCriteria.init();
+        ModTrunkPlacerTypes.register();
+        ModFoliagePlacerTypes.register();
 
         registerFuel();
         RIDDLE_COMPONENTS.loadFromJson();

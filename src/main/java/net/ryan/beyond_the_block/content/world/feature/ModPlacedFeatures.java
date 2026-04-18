@@ -25,7 +25,7 @@ public class ModPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> PALE_OAK_TREE_PLACED = PlacedFeatures.register(
             "pale_oak_tree_placed",
             ModConfiguredFeatures.PALE_OAK_TREE,
-            PlacedFeatures.createCountExtraModifier(3, 0.1f, 1),
+            PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
             SquarePlacementModifier.of(),
             PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
             PlacedFeatures.wouldSurvive(ModBlocks.PALE_OAK_SAPLING),

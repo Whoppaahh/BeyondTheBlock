@@ -29,6 +29,17 @@ public class ModEntities {
         registerSpawns();
     }
 
+    public static final EntityType<MinecartChainLinkEntity> MINECART_CHAIN_LINK =
+            Registry.register(
+                    Registry.ENTITY_TYPE,
+                    new Identifier(BeyondTheBlock.MOD_ID, "minecart_chain_link"),
+                    EntityType.Builder.<MinecartChainLinkEntity>create(MinecartChainLinkEntity::new, SpawnGroup.MISC)
+                            .setDimensions(0.1F, 0.1F)
+                            .maxTrackingRange(128)
+                            .trackingTickInterval(1)
+                            .build("minecart_chain_link")
+            );
+
     public static final EntityType<RaftEntity> MOD_RAFT =
             Registry.register(Registry.ENTITY_TYPE,
             new Identifier(BeyondTheBlock.MOD_ID, "mod_raft"),

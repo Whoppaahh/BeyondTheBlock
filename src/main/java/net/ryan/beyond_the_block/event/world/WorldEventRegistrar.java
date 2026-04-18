@@ -1,5 +1,6 @@
 package net.ryan.beyond_the_block.event.world;
 
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -27,6 +28,7 @@ public class WorldEventRegistrar {
         UseBlockCallback.EVENT.register(BlockConversionHandler::handleBlockConversion);
 
     }
+
 
     private static void registerServerTickEvents() {
         ServerTickEvents.END_WORLD_TICK.register(world -> {

@@ -22,7 +22,6 @@
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
     "LivingEntityRendererMixin",
-    "MinecartRendererMixin",
     "MouseScrollMixin",
     "SheepWoolFeatureRendererMixin",
     "SignBlockEntityRendererMixin",

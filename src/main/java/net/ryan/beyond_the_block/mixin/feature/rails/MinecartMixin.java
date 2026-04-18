@@ -248,22 +248,96 @@ public abstract class MinecartMixin implements MinecartSpeedAccessor, MinecartCo
         }
 
         MinecartTrainUtils.propagateMomentum(self);
+        this.beyond_the_block$enforceCouplerSpacing();
     }
 
 
     @Inject(method = "collidesWith", at = @At("HEAD"), cancellable = true)
-    private void beyond_the_block$disableDirectCouplerCollision(
+    private void beyond_the_block$disableTrainCollision(
             Entity other,
             CallbackInfoReturnable<Boolean> cir
     ) {
+        if (!((Object) this instanceof AbstractMinecartEntity self)) {
+            return;
+        }
+
         if (!(other instanceof AbstractMinecartEntity otherCart)) {
             return;
         }
 
-        UUID otherUuid = otherCart.getUuid();
-        if (otherUuid.equals(this.beyond_the_block$couplers.get(CouplerSide.FRONT))
-                || otherUuid.equals(this.beyond_the_block$couplers.get(CouplerSide.BACK))) {
+        if (MinecartTrainUtils.areInSameTrain(self, otherCart)) {
             cir.setReturnValue(false);
+        }
+    }
+
+
+    @Unique
+    private void beyond_the_block$enforceCouplerSpacing() {
+        AbstractMinecartEntity self = (AbstractMinecartEntity) (Object) this;
+
+        if (!(self.getWorld() instanceof ServerWorld serverWorld)) {
+            return;
+        }
+
+        for (CouplerSide side : CouplerSide.values()) {
+            UUID otherId = this.beyond_the_block$couplers.get(side);
+            if (otherId == null) {
+                continue;
+            }
+
+            Entity entity = serverWorld.getEntity(otherId);
+            if (!(entity instanceof AbstractMinecartEntity otherCart)) {
+                continue;
+            }
+
+            // Solve each pair only once
+            if (self.getUuid().compareTo(otherCart.getUuid()) > 0) {
+                continue;
+            }
+
+            Vec3d selfPos = self.getPos();
+            Vec3d otherPos = otherCart.getPos();
+            Vec3d delta = otherPos.subtract(selfPos);
+
+            double distance = delta.length();
+            if (distance < 1.0E-6D) {
+                continue;
+            }
+
+            Vec3d direction = delta.normalize();
+
+            // Ideal spacing between linked minecarts
+            double targetDistance = 1.55D;
+
+            // Positive if stretched, negative if compressed
+            double distanceError = distance - targetDistance;
+
+            Vec3d selfVel = self.getVelocity();
+            Vec3d otherVel = otherCart.getVelocity();
+            Vec3d relativeVelocity = otherVel.subtract(selfVel);
+
+            // Velocity along the coupler axis only
+            double relativeAlongLink = relativeVelocity.dotProduct(direction);
+
+            /*
+             * Spring-damper:
+             * - spring term tries to restore target spacing
+             * - damping term removes oscillation/compression spikes
+             */
+            double springStrength = 0.14D;
+            double dampingStrength = 0.34D;
+
+            double force = (distanceError * springStrength) + (relativeAlongLink * dampingStrength);
+
+            Vec3d impulse = direction.multiply(force * 0.5D);
+
+            self.setVelocity(selfVel.add(impulse));
+            otherCart.setVelocity(otherVel.subtract(impulse));
+
+            self.velocityDirty = true;
+            otherCart.velocityDirty = true;
+            self.velocityModified = true;
+            otherCart.velocityModified = true;
         }
     }
 }

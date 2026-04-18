@@ -81,7 +81,8 @@ public final class MinecartTrainUtils {
         Vec3d sharedVelocity = totalVelocity.multiply(1.0D / train.size());
 
         for (AbstractMinecartEntity cart : train) {
-            cart.setVelocity(sharedVelocity);
+            Vec3d blended = cart.getVelocity().lerp(sharedVelocity, 0.35D);
+            cart.setVelocity(blended);
             cart.velocityDirty = true;
             cart.velocityModified = true;
         }

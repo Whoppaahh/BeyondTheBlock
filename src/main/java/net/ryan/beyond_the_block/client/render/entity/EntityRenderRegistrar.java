@@ -10,6 +10,7 @@ public class EntityRenderRegistrar {
         registerEntityRenderers();
     }
     private static void registerEntityRenderers() {
+        EntityRendererRegistry.register(ModEntities.MINECART_CHAIN_LINK, MinecartChainLinkRenderer::new);
         EntityRendererRegistry.register(ModEntities.WITHER_ZOMBIE, WitherZombieRenderer::new);
         EntityRendererRegistry.register(ModEntities.WITHER_ZOMBIE_HORSE, WitherZombieHorseRenderer::new);
         EntityRendererRegistry.register(ModEntities.WITHER_SKELETON_HORSE, WitherSkeletonHorseRenderer::new);

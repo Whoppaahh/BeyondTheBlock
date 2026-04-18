@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.ryan.beyond_the_block.utils.accessors.MinecartCouplerAccess;
@@ -71,6 +72,13 @@ public final class MinecartLinkingHandler {
 
         firstCouplers.set(firstSide, self.getUuid());
         selfCouplers.set(selfSide, first.getUuid());
+
+        ((MinecartCouplerAccess) first).beyond_the_block$syncCouplers();
+        ((MinecartCouplerAccess) self).beyond_the_block$syncCouplers();
+
+        if (first.getWorld() instanceof ServerWorld serverWorld) {
+            MinecartChainLinkManager.ensureLinkEntity(serverWorld, first, self);
+        }
 
         if (!player.getAbilities().creativeMode) {
             stack.decrement(1);

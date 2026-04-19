@@ -91,27 +91,6 @@ public final class MinecartTrainUtils {
         return false;
     }
 
-    public static void propagateMomentum(AbstractMinecartEntity source) {
-        List<AbstractMinecartEntity> train = collectTrain(source);
-        if (train.size() <= 1) {
-            return;
-        }
-
-        Vec3d totalVelocity = Vec3d.ZERO;
-        for (AbstractMinecartEntity cart : train) {
-            totalVelocity = totalVelocity.add(cart.getVelocity());
-        }
-
-        Vec3d sharedVelocity = totalVelocity.multiply(1.0D / train.size());
-
-        for (AbstractMinecartEntity cart : train) {
-            Vec3d blended = cart.getVelocity().lerp(sharedVelocity, 0.35D);
-            cart.setVelocity(blended);
-            cart.velocityDirty = true;
-            cart.velocityModified = true;
-        }
-    }
-
     public static AbstractMinecartEntity getLeader(AbstractMinecartEntity source) {
         List<AbstractMinecartEntity> train = collectTrain(source);
         if (train.isEmpty()) {

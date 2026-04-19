@@ -9,10 +9,12 @@ import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
+import net.ryan.beyond_the_block.content.world.feature.ModPlacedFeatures;
 import net.ryan.beyond_the_block.content.world.gen.ModOreGeneration;
 import net.ryan.beyond_the_block.content.world.gen.ModTreeGeneration;
 import net.ryan.beyond_the_block.content.world.tree.ModFoliagePlacerTypes;
 import net.ryan.beyond_the_block.content.world.tree.ModTrunkPlacerTypes;
+import net.ryan.beyond_the_block.content.world.tree.decorator.ModTreeDecoratorTypes;
 import net.ryan.beyond_the_block.event.ModEvents;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
@@ -29,7 +31,12 @@ public class ContentRegistrar {
     public static final RiddleComponents RIDDLE_COMPONENTS = new RiddleComponents();
 
     public static void register() {
+        ModTreeDecoratorTypes.register();
+        ModTrunkPlacerTypes.register();
+        ModFoliagePlacerTypes.register();
+
         ModConfiguredFeatures.registerConfiguredFeatures();
+
         ModSignTypes.init();
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
@@ -50,8 +57,7 @@ public class ContentRegistrar {
         ModSounds.registerSounds();
         SandToGlassManager.register();
         ModCriteria.init();
-        ModTrunkPlacerTypes.register();
-        ModFoliagePlacerTypes.register();
+
 
         registerFuel();
         RIDDLE_COMPONENTS.loadFromJson();

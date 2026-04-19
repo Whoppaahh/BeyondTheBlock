@@ -31,6 +31,9 @@ repositories {
 		url "https://maven.terraformersmc.com/"
 	}
 	maven { url "https://maven.shedaniel.me/" } // Needed for Cloth Config
+	maven {
+		url = "https://cursemaven.com"
+	}
 }
 
 loom {
@@ -62,6 +65,8 @@ dependencies {
 
 	modImplementation("com.terraformersmc:modmenu:4.0.6")
 	modImplementation("me.shedaniel.cloth:cloth-config-fabric:8.2.88")
+
+	modImplementation "curse.maven:terrablender-fabric-565956:4205731"
 
 	modImplementation "dev.lambdaurora:lambdynamiclights:2.2.0+1.19.2"
 	include("dev.lambdaurora:lambdynamiclights:2.2.0+1.19.2")

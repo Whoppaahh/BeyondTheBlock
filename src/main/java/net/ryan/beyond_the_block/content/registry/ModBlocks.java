@@ -260,59 +260,7 @@ public class ModBlocks {
 
     public static final WoodSet CHERRY_SET = registerWoodSet("cherry", ModSignTypes.CHERRY, ModItemGroup.ModBlocksTab);
     public static final WoodSet PALE_OAK_SET = registerWoodSet("pale_oak", ModSignTypes.PALE_OAK, ModItemGroup.ModBlocksTab);
-    public static final BambooWoodSet BAMBOO_WOOD_SET = registerBambooWoodSet("bamboo", ModSignTypes.BAMBOO, ModItemGroup.ModBlocksTab);
-
-    public static final Block CHERRY_LOG = CHERRY_SET.log();
-    public static final Block CHERRY_WOOD = CHERRY_SET.wood();
-    public static final Block STRIPPED_CHERRY_LOG = CHERRY_SET.strippedLog();
-    public static final Block STRIPPED_CHERRY_WOOD = CHERRY_SET.strippedWood();
-    public static final Block CHERRY_PLANKS = CHERRY_SET.planks();
-    public static final Block CHERRY_SLAB = CHERRY_SET.slab();
-    public static final Block CHERRY_STAIRS = CHERRY_SET.stairs();
-    public static final Block CHERRY_FENCE = CHERRY_SET.fence();
-    public static final Block CHERRY_FENCE_GATE = CHERRY_SET.fenceGate();
-    public static final Block CHERRY_DOOR = CHERRY_SET.door();
-    public static final Block CHERRY_TRAPDOOR = CHERRY_SET.trapdoor();
-    public static final Block CHERRY_BUTTON = CHERRY_SET.button();
-    public static final Block CHERRY_PRESSURE_PLATE = CHERRY_SET.pressurePlate();
-    public static final Block CHERRY_SIGN = CHERRY_SET.sign();
-    public static final Block CHERRY_WALL_SIGN = CHERRY_SET.wallSign();
-    public static final Item CHERRY_SIGN_ITEM = CHERRY_SET.signItem();
-
-    public static final Block PALE_OAK_LOG = PALE_OAK_SET.log();
-    public static final Block PALE_OAK_WOOD = PALE_OAK_SET.wood();
-    public static final Block STRIPPED_PALE_OAK_LOG = PALE_OAK_SET.strippedLog();
-    public static final Block STRIPPED_PALE_OAK_WOOD = PALE_OAK_SET.strippedWood();
-    public static final Block PALE_OAK_PLANKS = PALE_OAK_SET.planks();
-    public static final Block PALE_OAK_SLAB = PALE_OAK_SET.slab();
-    public static final Block PALE_OAK_STAIRS = PALE_OAK_SET.stairs();
-    public static final Block PALE_OAK_FENCE = PALE_OAK_SET.fence();
-    public static final Block PALE_OAK_FENCE_GATE = PALE_OAK_SET.fenceGate();
-    public static final Block PALE_OAK_DOOR = PALE_OAK_SET.door();
-    public static final Block PALE_OAK_TRAPDOOR = PALE_OAK_SET.trapdoor();
-    public static final Block PALE_OAK_BUTTON = PALE_OAK_SET.button();
-    public static final Block PALE_OAK_PRESSURE_PLATE = PALE_OAK_SET.pressurePlate();
-    public static final Block PALE_OAK_SIGN = PALE_OAK_SET.sign();
-    public static final Block PALE_OAK_WALL_SIGN = PALE_OAK_SET.wallSign();
-    public static final Item PALE_OAK_SIGN_ITEM = PALE_OAK_SET.signItem();
-
-    public static final Block BAMBOO_BLOCK = BAMBOO_WOOD_SET.bambooBlock();
-    public static final Block STRIPPED_BAMBOO_BLOCK = BAMBOO_WOOD_SET.strippedBambooBlock();
-    public static final Block BAMBOO_PLANKS = BAMBOO_WOOD_SET.planks();
-    public static final Block BAMBOO_SLAB = BAMBOO_WOOD_SET.slab();
-    public static final Block BAMBOO_STAIRS = BAMBOO_WOOD_SET.stairs();
-    public static final Block BAMBOO_FENCE = BAMBOO_WOOD_SET.fence();
-    public static final Block BAMBOO_FENCE_GATE = BAMBOO_WOOD_SET.fenceGate();
-    public static final Block BAMBOO_DOOR = BAMBOO_WOOD_SET.door();
-    public static final Block BAMBOO_TRAPDOOR = BAMBOO_WOOD_SET.trapdoor();
-    public static final Block BAMBOO_BUTTON = BAMBOO_WOOD_SET.button();
-    public static final Block BAMBOO_PRESSURE_PLATE = BAMBOO_WOOD_SET.pressurePlate();
-    public static final Block BAMBOO_MOSAIC = BAMBOO_WOOD_SET.mosaic();
-    public static final Block BAMBOO_MOSAIC_SLAB = BAMBOO_WOOD_SET.mosaicSlab();
-    public static final Block BAMBOO_MOSAIC_STAIRS = BAMBOO_WOOD_SET.mosaicStairs();
-    public static final Block BAMBOO_SIGN = BAMBOO_WOOD_SET.sign();
-    public static final Block BAMBOO_WALL_SIGN = BAMBOO_WOOD_SET.wallSign();
-    public static final Item BAMBOO_SIGN_ITEM = BAMBOO_WOOD_SET.signItem();
+    public static final BambooWoodSet BAMBOO_SET = registerBambooWoodSet("bamboo", ModSignTypes.BAMBOO, ModItemGroup.ModBlocksTab);
 
      //TORCHES / RAILS
 
@@ -652,7 +600,8 @@ public class ModBlocks {
                                 .noCollision()
                                 .strength(1.0F)
                                 .sounds(BlockSoundGroup.WOOD),
-                        signType
+                        signType,
+                        new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png")
                 )
         );
 
@@ -663,7 +612,8 @@ public class ModBlocks {
                                 .noCollision()
                                 .strength(1.0F)
                                 .sounds(BlockSoundGroup.WOOD),
-                        signType
+                        signType,
+                        new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png")
                 )
         );
 
@@ -700,8 +650,8 @@ public class ModBlocks {
         Block wallSign = registerBlockWithoutBlockItem(name + "_wall_sign", createWallSignBlock(signType));
         Item signItem = registerSignItem(name + "_sign", sign, wallSign, tab);
 
-        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType));
-        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType));
+        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType, name));
+        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType, name));
         Item hangingSignItem = registerHangingSignItem(name + "_hanging_sign", hangingSign, wallHangingSign, tab);
         HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
 
@@ -750,8 +700,8 @@ public class ModBlocks {
         Block wallSign = registerBlockWithoutBlockItem(name + "_wall_sign", createWallSignBlock(signType));
         Item signItem = registerSignItem(name + "_sign", sign, wallSign, tab);
 
-        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType));
-        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType));
+        Block hangingSign = registerBlockWithoutBlockItem(name + "_hanging_sign", createHangingSignBlock(signType, name));
+        Block wallHangingSign = registerBlockWithoutBlockItem(name + "_wall_hanging_sign", createWallHangingSignBlock(signType, name));
         Item hangingSignItem = registerHangingSignItem(name + "_hanging_sign", hangingSign, wallHangingSign, tab);
         HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
         return new BambooWoodSet(
@@ -784,11 +734,11 @@ public class ModBlocks {
      * ============================================================
      */
 
-    private static Block createHangingSignBlock(SignType type) {
-        return new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type);
+    private static Block createHangingSignBlock(SignType type, String name) {
+        return new HangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type, new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png"));
     }
-    private static Block createWallHangingSignBlock(SignType type) {
-        return new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type);
+    private static Block createWallHangingSignBlock(SignType type, String name) {
+        return new WallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.OAK_SIGN), type, new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png"));
     }
     private static Item registerHangingSignItem(String name, Block sign, Block wallSign, ItemGroup tab) {
         return Registry.register(

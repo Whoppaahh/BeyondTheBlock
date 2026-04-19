@@ -13,14 +13,6 @@
       }
     },
     {
-      "from": [0, 1, 8],
-      "to": [8, 1, 16],
-      "faces": {
-        "up": {"uv": [0, 8, 8, 16], "texture": "#flowerbed"},
-        "down": {"uv": [0, 16, 8, 8], "texture": "#flowerbed"}
-      }
-    },
-    {
       "from": [10.15, 0, 5.25],
       "to": [11.15, 1, 5.25],
       "rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 1]},

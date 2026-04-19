@@ -67,9 +67,9 @@ public final class ModDatagenFamilies {
                     ModBlocks.PALE_OAK_SET.hangingSignItem()
             ),
             new HangingSignDropFamily(
-                    ModBlocks.BAMBOO_WOOD_SET.hangingSign(),
-                    ModBlocks.BAMBOO_WOOD_SET.wallHangingSign(),
-                    ModBlocks.BAMBOO_WOOD_SET.hangingSignItem()
+                    ModBlocks.BAMBOO_SET.hangingSign(),
+                    ModBlocks.BAMBOO_SET.wallHangingSign(),
+                    ModBlocks.BAMBOO_SET.hangingSignItem()
             )
     );
     public static final List<Block> SHELVES = List.of(

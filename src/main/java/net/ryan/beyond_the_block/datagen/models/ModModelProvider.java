@@ -219,22 +219,22 @@ public class ModModelProvider extends FabricModelProvider {
     }
 
     private void generateBambooWoodSet(BlockStateModelGenerator gen) {
-        registerLog(gen, ModBlocks.BAMBOO_WOOD_SET.bambooBlock(), "bamboo" + "_block");
+        registerLog(gen, ModBlocks.BAMBOO_SET.bambooBlock(), "bamboo" + "_block");
 
-        var plankPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_WOOD_SET.planks());
-        plankPool.slab(ModBlocks.BAMBOO_WOOD_SET.slab());
-        plankPool.stairs(ModBlocks.BAMBOO_WOOD_SET.stairs());
-        plankPool.fence(ModBlocks.BAMBOO_WOOD_SET.fence());
-        plankPool.fenceGate(ModBlocks.BAMBOO_WOOD_SET.fenceGate());
-        plankPool.button(ModBlocks.BAMBOO_WOOD_SET.button());
-        plankPool.pressurePlate(ModBlocks.BAMBOO_WOOD_SET.pressurePlate());
+        var plankPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_SET.planks());
+        plankPool.slab(ModBlocks.BAMBOO_SET.slab());
+        plankPool.stairs(ModBlocks.BAMBOO_SET.stairs());
+        plankPool.fence(ModBlocks.BAMBOO_SET.fence());
+        plankPool.fenceGate(ModBlocks.BAMBOO_SET.fenceGate());
+        plankPool.button(ModBlocks.BAMBOO_SET.button());
+        plankPool.pressurePlate(ModBlocks.BAMBOO_SET.pressurePlate());
 
-        gen.registerDoor(ModBlocks.BAMBOO_WOOD_SET.door());
-        gen.registerTrapdoor(ModBlocks.BAMBOO_WOOD_SET.trapdoor());
+        gen.registerDoor(ModBlocks.BAMBOO_SET.door());
+        gen.registerTrapdoor(ModBlocks.BAMBOO_SET.trapdoor());
 
-        var mosaicPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_WOOD_SET.mosaic());
-        mosaicPool.slab(ModBlocks.BAMBOO_WOOD_SET.mosaicSlab());
-        mosaicPool.stairs(ModBlocks.BAMBOO_WOOD_SET.mosaicStairs());
+        var mosaicPool = gen.registerCubeAllModelTexturePool(ModBlocks.BAMBOO_SET.mosaic());
+        mosaicPool.slab(ModBlocks.BAMBOO_SET.mosaicSlab());
+        mosaicPool.stairs(ModBlocks.BAMBOO_SET.mosaicStairs());
     }
 
     private void registerLog(BlockStateModelGenerator gen, Block block, String textureName) {

@@ -26,8 +26,8 @@ public class ModBlockEntities {
                             ModBlocks.CHERRY_SET.wallHangingSign(),
                             ModBlocks.PALE_OAK_SET.hangingSign(),
                             ModBlocks.PALE_OAK_SET.wallHangingSign(),
-                            ModBlocks.BAMBOO_WOOD_SET.hangingSign(),
-                            ModBlocks.BAMBOO_WOOD_SET.wallHangingSign(),
+                            ModBlocks.BAMBOO_SET.hangingSign(),
+                            ModBlocks.BAMBOO_SET.wallHangingSign(),
 
                             ModBlocks.OAK_HANGING_SET.hangingSign(),
                             ModBlocks.OAK_HANGING_SET.wallHangingSign(),
@@ -56,12 +56,12 @@ public class ModBlockEntities {
                     new Identifier(BeyondTheBlock.MOD_ID, "mod_sign"),
                     FabricBlockEntityTypeBuilder.create(
                             SignBlockEntity::new,
-                            ModBlocks.CHERRY_SIGN,
-                            ModBlocks.CHERRY_WALL_SIGN,
-                            ModBlocks.PALE_OAK_SIGN,
-                            ModBlocks.PALE_OAK_WALL_SIGN,
-                            ModBlocks.BAMBOO_SIGN,
-                            ModBlocks.BAMBOO_WALL_SIGN
+                            ModBlocks.CHERRY_SET.sign(),
+                            ModBlocks.CHERRY_SET.wallSign(),
+                            ModBlocks.PALE_OAK_SET.sign(),
+                            ModBlocks.PALE_OAK_SET.wallSign(),
+                            ModBlocks.BAMBOO_SET.sign(),
+                            ModBlocks.BAMBOO_SET.wallSign()
                     ).build()
             );
 
@@ -169,19 +169,19 @@ public class ModBlockEntities {
         BlockEntityTypeAccessor accessor = (BlockEntityTypeAccessor) BlockEntityType.SIGN;
 
         Set<Block> blocks = new HashSet<>(accessor.btb$getBlocks());
-        blocks.add(ModBlocks.CHERRY_SIGN);
-        blocks.add(ModBlocks.CHERRY_WALL_SIGN);
-        blocks.add(ModBlocks.PALE_OAK_SIGN);
-        blocks.add(ModBlocks.PALE_OAK_WALL_SIGN);
-        blocks.add(ModBlocks.BAMBOO_SIGN);
-        blocks.add(ModBlocks.BAMBOO_WALL_SIGN);
+        blocks.add(ModBlocks.CHERRY_SET.sign());
+        blocks.add(ModBlocks.CHERRY_SET.wallSign());
+        blocks.add(ModBlocks.PALE_OAK_SET.sign());
+        blocks.add(ModBlocks.PALE_OAK_SET.wallSign());
+        blocks.add(ModBlocks.BAMBOO_SET.sign());
+        blocks.add(ModBlocks.BAMBOO_SET.wallSign());
 
         blocks.add(ModBlocks.CHERRY_SET.hangingSign());
         blocks.add(ModBlocks.CHERRY_SET.wallHangingSign());
         blocks.add(ModBlocks.PALE_OAK_SET.hangingSign());
         blocks.add(ModBlocks.PALE_OAK_SET.wallHangingSign());
-        blocks.add(ModBlocks.BAMBOO_WOOD_SET.hangingSign());
-        blocks.add(ModBlocks.BAMBOO_WOOD_SET.wallHangingSign());
+        blocks.add(ModBlocks.BAMBOO_SET.hangingSign());
+        blocks.add(ModBlocks.BAMBOO_SET.wallHangingSign());
 
         blocks.add(ModBlocks.OAK_HANGING_SET.hangingSign());
         blocks.add(ModBlocks.OAK_HANGING_SET.wallHangingSign());

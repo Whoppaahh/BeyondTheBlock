@@ -121,7 +121,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         // Backported/custom sets using your family records
         offerStandardWoodSet(exporter, "cherry", ModBlocks.CHERRY_SET);// replace later
         offerStandardWoodSet(exporter, "pale_oak", ModBlocks.PALE_OAK_SET); // replace later if/when you add pale oak sign item
-        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_WOOD_SET);// replace later
+        offerBambooWoodSet(exporter, "bamboo", ModBlocks.BAMBOO_SET);// replace later
     }
 
     private static void offerStandardWoodSet(
@@ -368,11 +368,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerShelfRecipe(exporter, ModBlocks.ACACIA_SHELF_SET, Items.ACACIA_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.DARK_OAK_SHELF_SET, Items.DARK_OAK_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.MANGROVE_SHELF_SET, Items.MANGROVE_PLANKS);
-        offerShelfRecipe(exporter, ModBlocks.BAMBOO_SHELF_SET, ModBlocks.BAMBOO_PLANKS.asItem());
+        offerShelfRecipe(exporter, ModBlocks.BAMBOO_SHELF_SET, ModBlocks.BAMBOO_SET.planks().asItem());
         offerShelfRecipe(exporter, ModBlocks.CRIMSON_SHELF_SET, Items.CRIMSON_PLANKS);
         offerShelfRecipe(exporter, ModBlocks.WARPED_SHELF_SET, Items.WARPED_PLANKS);
-        offerShelfRecipe(exporter, ModBlocks.CHERRY_SHELF_SET, ModBlocks.CHERRY_PLANKS.asItem());
-        offerShelfRecipe(exporter, ModBlocks.PALE_OAK_SHELF_SET, ModBlocks.PALE_OAK_PLANKS.asItem());
+        offerShelfRecipe(exporter, ModBlocks.CHERRY_SHELF_SET, ModBlocks.CHERRY_SET.planks().asItem());
+        offerShelfRecipe(exporter, ModBlocks.PALE_OAK_SHELF_SET, ModBlocks.PALE_OAK_SET.planks().asItem());
     }
 
     private void generateSpongeRecipes(Consumer<RecipeJsonProvider> exporter) {

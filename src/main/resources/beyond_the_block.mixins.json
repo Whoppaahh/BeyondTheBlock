@@ -104,6 +104,7 @@
     "world.ServerWorldAIInjectionMixin",
     "world.ServerWorldCropAuraMixin",
     "world.ServerWorldSpawnMixin",
+    "world.TreeDecoratorTypeInvoker",
     "world.TrunkPlacerTypeInvoker",
     "world.netherstacks.AbstractFurnaceBlockEntityMixin",
     "world.netherstacks.InventoryMixin",

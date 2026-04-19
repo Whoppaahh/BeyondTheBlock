@@ -32,6 +32,24 @@ public class ModPlacedFeatures {
             BiomePlacementModifier.of()
     );
 
+    public static final RegistryEntry<PlacedFeature> PALE_OAK_TREE_NATURAL_PLACED = PlacedFeatures.register(
+            "pale_oak_tree_natural_placed",
+            ModConfiguredFeatures.PALE_OAK_TREE_NATURAL,
+            PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
+            SquarePlacementModifier.of(),
+            PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+            BiomePlacementModifier.of()
+    );
+
+    public static final RegistryEntry<PlacedFeature> PALE_MOSS_PATCH_PLACED = PlacedFeatures.register(
+            "pale_moss_patch_placed",
+            ModConfiguredFeatures.PALE_MOSS_PATCH,
+            CountPlacementModifier.of(3),
+            SquarePlacementModifier.of(),
+            PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+            BiomePlacementModifier.of()
+    );
+
     //region XP
     public static final RegistryEntry<PlacedFeature> XP_ORE_PLACED = PlacedFeatures.register("xp_ore_placed",
             ModConfiguredFeatures.XP_ORE, modifiersWithRarity(6,

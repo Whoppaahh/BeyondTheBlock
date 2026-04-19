@@ -21,8 +21,9 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.content.blockentity.HangingSignBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.utils.HangingSignTextureProvider;
 
-public class WallHangingSignBlock extends AbstractSignBlock {
+public class WallHangingSignBlock extends AbstractSignBlock implements HangingSignTextureProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
@@ -31,11 +32,19 @@ public class WallHangingSignBlock extends AbstractSignBlock {
     private static final VoxelShape WEST_SHAPE = Block.createCuboidShape(14.0D, 1.0D, 1.0D, 16.0D, 15.0D, 15.0D);
     private static final VoxelShape EAST_SHAPE = Block.createCuboidShape(0.0D, 1.0D, 1.0D, 2.0D, 15.0D, 15.0D);
 
-    public WallHangingSignBlock(Settings settings, SignType type) {
+    private final Identifier guiTexture;
+
+    public WallHangingSignBlock(Settings settings, SignType type, Identifier guiTexture) {
         super(settings, type);
+        this.guiTexture = guiTexture;
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(FACING, Direction.NORTH)
                 .with(WATERLOGGED, false));
+    }
+
+    @Override
+    public Identifier beyond_the_block$getGuiTexture() {
+        return this.guiTexture;
     }
 
     @Override

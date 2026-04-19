@@ -19,8 +19,6 @@ import net.ryan.beyond_the_block.datagen.common.ModDatagenFamilies;
 
 import java.util.function.BiConsumer;
 
-import static net.ryan.beyond_the_block.content.registry.ModBlocks.HANGING_SIGN_ITEMS;
-
 public class ModLootTableProvider extends SimpleFabricLootTableProvider {
 
     public ModLootTableProvider(FabricDataGenerator dataGenerator) {
@@ -31,7 +29,7 @@ public class ModLootTableProvider extends SimpleFabricLootTableProvider {
     public void accept(BiConsumer<Identifier, LootTable.Builder> exporter) {
         generateStandardWoodLoot(exporter, ModBlocks.CHERRY_SET);
         generateStandardWoodLoot(exporter, ModBlocks.PALE_OAK_SET);
-        generateBambooWoodLoot(exporter, ModBlocks.BAMBOO_WOOD_SET);
+        generateBambooWoodLoot(exporter, ModBlocks.BAMBOO_SET);
 
         generateOreFamily(exporter,
                 ModBlocks.MIRANITE_BLOCK,

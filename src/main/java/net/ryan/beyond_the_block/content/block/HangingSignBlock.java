@@ -21,21 +21,32 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.content.blockentity.HangingSignBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
+import net.ryan.beyond_the_block.utils.HangingSignTextureProvider;
 
-public class HangingSignBlock extends AbstractSignBlock {
+public class HangingSignBlock extends AbstractSignBlock implements HangingSignTextureProvider {
     public static final IntProperty ROTATION = Properties.ROTATION;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty ATTACHED = BooleanProperty.of("attached");
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 10.0D, 15.0D);
 
-    public HangingSignBlock(Settings settings, SignType type) {
+    private final Identifier guiTexture;
+
+    public HangingSignBlock(Settings settings, SignType type, Identifier guiTexture) {
         super(settings, type);
+        this.guiTexture = guiTexture;
+
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(ROTATION, 0)
                 .with(WATERLOGGED, false)
                 .with(ATTACHED, false));
     }
+
+    @Override
+    public Identifier beyond_the_block$getGuiTexture() {
+        return this.guiTexture;
+    }
+
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {

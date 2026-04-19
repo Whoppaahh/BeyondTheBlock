@@ -32,7 +32,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     private void generateWoodFamilyTags() {
         addStandardWoodSetTags(ModBlocks.CHERRY_SET);
         addStandardWoodSetTags(ModBlocks.PALE_OAK_SET);
-        addBambooWoodSetTags(ModBlocks.BAMBOO_WOOD_SET);
+        addBambooWoodSetTags(ModBlocks.BAMBOO_SET);
     }
 
     private void generateMiningTags() {

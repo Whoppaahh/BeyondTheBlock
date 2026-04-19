@@ -2,21 +2,22 @@ package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
+import net.minecraft.util.math.VerticalSurfaceType;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.ThreeLayersFeatureSize;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.feature.util.CaveSurface;
 import net.minecraft.world.gen.foliage.DarkOakFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
-import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
-import net.ryan.beyond_the_block.content.world.tree.BtBCherryFoliagePlacer;
-import net.ryan.beyond_the_block.content.world.tree.BtBCherryTrunkPlacer;
+import net.ryan.beyond_the_block.content.world.tree.CherryFoliagePlacer;
+import net.ryan.beyond_the_block.content.world.tree.CherryTrunkPlacer;
+import net.ryan.beyond_the_block.content.world.tree.decorator.PaleMossTreeDecorator;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class ModConfiguredFeatures {
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> CHERRY_TREE =
             ConfiguredFeatures.register("cherry_tree", Feature.TREE,
                     new TreeFeatureConfig.Builder(
-                            BlockStateProvider.of(ModBlocks.CHERRY_LOG),
-                            new BtBCherryTrunkPlacer(
+                            BlockStateProvider.of(ModBlocks.CHERRY_SET.log()),
+                            new CherryTrunkPlacer(
                                     7, 1, 0,
                                     ConstantIntProvider.create(2),
                                     UniformIntProvider.create(3, 5),
@@ -36,7 +37,7 @@ public class ModConfiguredFeatures {
                                     ConstantIntProvider.create(1)
                             ),
                             BlockStateProvider.of(ModBlocks.CHERRY_LEAVES),
-                            new BtBCherryFoliagePlacer(
+                            new CherryFoliagePlacer(
                                     ConstantIntProvider.create(2),
                                     ConstantIntProvider.create(0),
                                     ConstantIntProvider.create(3),
@@ -55,7 +56,7 @@ public class ModConfiguredFeatures {
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> PALE_OAK_TREE =
             ConfiguredFeatures.register("pale_oak_tree", Feature.TREE,
                     new TreeFeatureConfig.Builder(
-                            BlockStateProvider.of(ModBlocks.PALE_OAK_LOG),
+                            BlockStateProvider.of(ModBlocks.PALE_OAK_SET.log()),
                             new DarkOakTrunkPlacer(6, 2, 1),
                             BlockStateProvider.of(ModBlocks.PALE_OAK_LEAVES),
                             new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
@@ -64,6 +65,43 @@ public class ModConfiguredFeatures {
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
                             .ignoreVines()
                             .build()
+            );
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> PALE_OAK_TREE_NATURAL =
+            ConfiguredFeatures.register("pale_oak_tree_natural", Feature.TREE,
+                    new TreeFeatureConfig.Builder(
+                            BlockStateProvider.of(ModBlocks.PALE_OAK_SET.log()),
+                            new DarkOakTrunkPlacer(6, 2, 1),
+                            BlockStateProvider.of(ModBlocks.PALE_OAK_LEAVES),
+                            new DarkOakFoliagePlacer(
+                                    ConstantIntProvider.create(0),
+                                    ConstantIntProvider.create(0)
+                            ),
+                            new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())
+                    )
+                            .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
+                            .decorators(List.of(
+                                    new PaleMossTreeDecorator(0.8F, 0.15F, 0.4F)
+                            ))
+                            .ignoreVines()
+                            .build()
+            );
+
+    public static final RegistryEntry<ConfiguredFeature<VegetationPatchFeatureConfig, ?>> PALE_MOSS_PATCH =
+            ConfiguredFeatures.register("pale_moss_patch", Feature.VEGETATION_PATCH,
+                    new VegetationPatchFeatureConfig(
+                            net.minecraft.tag.BlockTags.MOSS_REPLACEABLE,
+                            BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK),
+                            PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
+                                    new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK))),
+                            VerticalSurfaceType.FLOOR,
+                            UniformIntProvider.create(2, 4),
+                            0.3F,
+                            5,
+                            0.0F,
+                            UniformIntProvider.create(2, 4),
+                            1
+                    )
             );
 
     //region XP

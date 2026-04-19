@@ -29,7 +29,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     private void generateWoodItemTags() {
         addStandardWoodSetTags(ModBlocks.CHERRY_SET);
         addStandardWoodSetTags(ModBlocks.PALE_OAK_SET);
-        addBambooWoodSetTags(ModBlocks.BAMBOO_WOOD_SET);
+        addBambooWoodSetTags(ModBlocks.BAMBOO_SET);
     }
 
     private void generateCustomTags() {

@@ -2,7 +2,6 @@
   "parent": "beyond_the_block:block/flowerbed_1",
   "textures": {
     "flowerbed": "beyond_the_block:block/pink_petals",
-    "stem": "beyond_the_block:block/pink_petals_stem",
-    "particle" : "beyond_the_block:block/pink_petals"
+    "stem": "beyond_the_block:block/pink_petals_stem"
   }
 }

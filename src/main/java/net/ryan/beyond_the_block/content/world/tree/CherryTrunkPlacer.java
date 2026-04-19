@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class BtBCherryTrunkPlacer extends TrunkPlacer {
+public class CherryTrunkPlacer extends TrunkPlacer {
 
-    public static final Codec<BtBCherryTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<CherryTrunkPlacer> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.intRange(0, 32).fieldOf("base_height").forGetter(p -> p.baseHeightValue),
                     Codec.intRange(0, 24).fieldOf("first_random_height").forGetter(p -> p.firstRandomHeightValue),
@@ -29,7 +29,7 @@ public class BtBCherryTrunkPlacer extends TrunkPlacer {
                     IntProvider.VALUE_CODEC.fieldOf("branch_horizontal_length").forGetter(p -> p.branchHorizontalLength),
                     UniformIntProvider.CODEC.fieldOf("branch_start_offset_from_top").forGetter(p -> p.branchStartOffsetFromTop),
                     IntProvider.VALUE_CODEC.fieldOf("branch_end_offset_from_top").forGetter(p -> p.branchEndOffsetFromTop)
-            ).apply(instance, BtBCherryTrunkPlacer::new)
+            ).apply(instance, CherryTrunkPlacer::new)
     );
 
     private final int baseHeightValue;
@@ -40,7 +40,7 @@ public class BtBCherryTrunkPlacer extends TrunkPlacer {
     private final UniformIntProvider branchStartOffsetFromTop;
     private final IntProvider branchEndOffsetFromTop;
 
-    public BtBCherryTrunkPlacer(
+    public CherryTrunkPlacer(
             int baseHeight,
             int firstRandomHeight,
             int secondRandomHeight,

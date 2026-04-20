@@ -7,6 +7,8 @@ import net.ryan.beyond_the_block.content.registry.*;
 import net.ryan.beyond_the_block.content.registry.family.ModSignTypes;
 import net.ryan.beyond_the_block.content.riddles.RiddleComponents;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
+import net.ryan.beyond_the_block.content.world.biome.ModBiomeGeneration;
+import net.ryan.beyond_the_block.content.world.biome.ModBiomes;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.content.world.feature.ModConfiguredFeatures;
 import net.ryan.beyond_the_block.content.world.feature.ModPlacedFeatures;
@@ -21,6 +23,7 @@ import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;
 import net.ryan.beyond_the_block.utils.ModTags;
 import net.ryan.beyond_the_block.utils.helpers.SandToGlassManager;
+import terrablender.api.Regions;
 
 
 public class ContentRegistrar {
@@ -36,6 +39,7 @@ public class ContentRegistrar {
         ModFoliagePlacerTypes.register();
 
         ModConfiguredFeatures.registerConfiguredFeatures();
+        ModBiomes.register();
 
         ModSignTypes.init();
         ModBlocks.registerModBlocks();

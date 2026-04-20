@@ -22,6 +22,7 @@ public class ModPlacedFeatures {
             BiomePlacementModifier.of()
     );
 
+
     public static final RegistryEntry<PlacedFeature> PALE_OAK_TREE_PLACED = PlacedFeatures.register(
             "pale_oak_tree_placed",
             ModConfiguredFeatures.PALE_OAK_TREE,

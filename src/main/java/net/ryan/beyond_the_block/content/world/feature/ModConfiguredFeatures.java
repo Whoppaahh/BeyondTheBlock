@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.VerticalSurfaceType;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -63,6 +64,9 @@ public class ModConfiguredFeatures {
                             new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())
                     )
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
+                            .decorators(List.of(
+                                    new PaleMossTreeDecorator(0.8F, 0.15F, 0.4F)
+                            ))
                             .ignoreVines()
                             .build()
             );
@@ -90,7 +94,7 @@ public class ModConfiguredFeatures {
     public static final RegistryEntry<ConfiguredFeature<VegetationPatchFeatureConfig, ?>> PALE_MOSS_PATCH =
             ConfiguredFeatures.register("pale_moss_patch", Feature.VEGETATION_PATCH,
                     new VegetationPatchFeatureConfig(
-                            net.minecraft.tag.BlockTags.MOSS_REPLACEABLE,
+                            BlockTags.MOSS_REPLACEABLE,
                             BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK),
                             PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                                     new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK))),

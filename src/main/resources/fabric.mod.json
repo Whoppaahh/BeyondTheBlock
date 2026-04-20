@@ -25,6 +25,9 @@
 		"fabric-datagen": ["net.ryan.beyond_the_block.datagen.ModDataGeneration"],
 		"modmenu": [
           "net.ryan.beyond_the_block.config.ui.ModMenuIntegration"
+		],
+		"terrablender": [
+			"net.ryan.beyond_the_block.terrablender.TerraBlenderInit"
 		]
 	},
 	"mixins": [

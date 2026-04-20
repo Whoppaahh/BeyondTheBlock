@@ -6,6 +6,7 @@ import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -39,7 +40,7 @@ public class PaleHangingMossBlock extends Block implements Fertilizable {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos abovePos = pos.up();
         BlockState aboveState = world.getBlockState(abovePos);
-        return aboveState.isOf(this) || aboveState.isSideSolidFullSquare(world, abovePos, Direction.DOWN);
+        return aboveState.isOf(this) || aboveState.isSideSolidFullSquare(world, abovePos, Direction.DOWN) || aboveState.isIn(BlockTags.LEAVES);
     }
 
     @Override

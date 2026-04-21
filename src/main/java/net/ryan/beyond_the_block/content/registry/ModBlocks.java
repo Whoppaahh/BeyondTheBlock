@@ -37,47 +37,41 @@ import java.util.Map;
 
 public class ModBlocks {
 
-
-    public static ClosedEyeblossomBlock CLOSED_EYEBLOSSOM;
-    public static OpenEyeblossomBlock OPEN_EYEBLOSSOM;
-
     public static final Block PALE_MOSS_CARPET = registerBlock("pale_moss_carpet", new PaleMossCarpetBlock(FabricBlockSettings.copyOf(Blocks.MOSS_CARPET).nonOpaque().noCollision().sounds(BlockSoundGroup.MOSS_CARPET)), ModItemGroup.ModBlocksTab);
 
-    public static void registerEyeblossoms(){
-        CLOSED_EYEBLOSSOM = new ClosedEyeblossomBlock(
-                FabricBlockSettings.copyOf(Blocks.DANDELION)
-                        .nonOpaque()
-                        .noCollision()
-                        .sounds(BlockSoundGroup.GRASS)
-        );
+    public static final ClosedEyeblossomBlock CLOSED_EYEBLOSSOM = registerEyeblossomBlock(
+            "closed_eyeblossom",
+            new ClosedEyeblossomBlock(
+                    FabricBlockSettings.copyOf(Blocks.DANDELION)
+                            .nonOpaque()
+                            .noCollision()
+                            .sounds(BlockSoundGroup.GRASS)
+            ),
+            ModItemGroup.ModBlocksTab
+    );
 
-        OPEN_EYEBLOSSOM = new OpenEyeblossomBlock(
-                FabricBlockSettings.copyOf(Blocks.DANDELION)
-                        .nonOpaque()
-                        .noCollision()
-                        .sounds(BlockSoundGroup.GRASS)
-                        .luminance(state -> 3)
-        );
+    public static final OpenEyeblossomBlock OPEN_EYEBLOSSOM = registerEyeblossomBlock(
+            "open_eyeblossom",
+            new OpenEyeblossomBlock(
+                    FabricBlockSettings.copyOf(Blocks.DANDELION)
+                            .nonOpaque()
+                            .noCollision()
+                            .sounds(BlockSoundGroup.GRASS)
+                            .luminance(state -> 3)
+            ),
+            ModItemGroup.ModBlocksTab
+    );
 
-        Registry.register(
-                Registry.ITEM,
-                new Identifier(BeyondTheBlock.MOD_ID, "closed_eyeblossom"),
-                new BlockItem(CLOSED_EYEBLOSSOM, new FabricItemSettings().group(ModItemGroup.ModBlocksTab))
-        );
-
-        Registry.register(
-                Registry.ITEM,
-                new Identifier(BeyondTheBlock.MOD_ID, "open_eyeblossom"),
-                new BlockItem(OPEN_EYEBLOSSOM, new FabricItemSettings().group(ModItemGroup.ModBlocksTab))
-        );
-
+    static {
         CLOSED_EYEBLOSSOM.setOtherVariant(OPEN_EYEBLOSSOM);
         OPEN_EYEBLOSSOM.setOtherVariant(CLOSED_EYEBLOSSOM);
-
-        Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, "closed_eyeblossom"), CLOSED_EYEBLOSSOM);
-        Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, "open_eyeblossom"), OPEN_EYEBLOSSOM);
-
     }
+
+    private static <T extends Block> T registerEyeblossomBlock(String name, T block, ItemGroup tab) {
+        registerBlockItem(name, block, tab);
+        return (T) Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
+    }
+
     public static final Block RESIN_CLUMP = registerBlock("resin_clump",
             new ResinClumpBlock(
                     FabricBlockSettings.copyOf(Blocks.GLOW_LICHEN)
@@ -488,7 +482,6 @@ public class ModBlocks {
      */
 
     public static void registerModBlocks() {
-        registerEyeblossoms();
         BeyondTheBlock.LOGGER.info("Registering Mod Blocks for " + BeyondTheBlock.MOD_ID);
     }
 

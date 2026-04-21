@@ -38,18 +38,6 @@ public class PaleMossTreeDecorator extends TreeDecorator {
     public void generate(TreeDecorator.Generator generator) {
         Random random = generator.getRandom();
 
-        // trunk-side moss
-//        for (BlockPos logPos : generator.getLogPositions()) {
-//            if (random.nextFloat() >= trunkProbability) continue;
-//
-//            Direction dir = Direction.Type.HORIZONTAL.random(random);
-//            BlockPos side = logPos.offset(dir);
-//
-//            if (generator.isAir(side)) {
-//                generator.replace(side, ModBlocks.PALE_MOSS_BLOCK.getDefaultState());
-//            }
-//        }
-
         // simple hanging moss from leaves
         for (BlockPos leafPos : generator.getLeavesPositions()) {
             if (random.nextFloat() >= leavesProbability) continue;
@@ -58,10 +46,10 @@ public class PaleMossTreeDecorator extends TreeDecorator {
             if (generator.isAir(below)) {
                 generator.replace(below, ModBlocks.PALE_HANGING_MOSS.getDefaultState());
 
-//                BlockPos below2 = below.down();
-//                if (generator.isAir(below2) && random.nextFloat() < 0.5F) {
-//                    generator.replace(below2, ModBlocks.PALE_MOSS_BLOCK.getDefaultState());
-//                }
+                BlockPos below2 = below.down();
+                if (generator.isAir(below2) && random.nextFloat() < 0.5F) {
+                    generator.replace(below2, ModBlocks.PALE_HANGING_MOSS.getDefaultState());
+                }
             }
         }
     }

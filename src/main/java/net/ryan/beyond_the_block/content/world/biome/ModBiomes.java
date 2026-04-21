@@ -109,7 +109,7 @@ public class ModBiomes {
         // Pale oak trees
         generationBuilder.feature(
                 GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.PALE_OAK_TREE_PLACED
+                ModPlacedFeatures.PALE_OAK_TREE_NATURAL_PLACED
         );
 
         // Pale moss blocks / carpet on ground
@@ -125,10 +125,10 @@ public class ModBiomes {
 //        );
 //
 ////        // Eyeblossom if you are backporting it too
-//        generationBuilder.feature(
-//                GenerationStep.Feature.VEGETAL_DECORATION,
-//                ModPlacedFeatures.EYEBLOSSOM_PATCH_PLACED
-//        );
+        generationBuilder.feature(
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                ModPlacedFeatures.EYEBLOSSOM_PATCH_PLACED
+        );
 
         // Optional custom feature for creaking hearts inside pale oaks
         // generationBuilder.feature(

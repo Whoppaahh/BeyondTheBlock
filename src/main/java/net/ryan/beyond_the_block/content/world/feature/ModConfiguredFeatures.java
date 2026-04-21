@@ -97,14 +97,25 @@ public class ModConfiguredFeatures {
                             BlockTags.MOSS_REPLACEABLE,
                             BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK),
                             PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
-                                    new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PALE_MOSS_BLOCK))),
+                                    new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.PALE_MOSS_CARPET))),
                             VerticalSurfaceType.FLOOR,
                             UniformIntProvider.create(2, 4),
                             0.3F,
                             5,
-                            0.0F,
+                            0.35F,
                             UniformIntProvider.create(2, 4),
                             1
+                    )
+            );
+
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> EYEBLOSSOM_PATCH =
+            ConfiguredFeatures.register("eyeblossom_patch", Feature.RANDOM_PATCH,
+                    ConfiguredFeatures.createRandomPatchFeatureConfig(
+                            24,
+                            PlacedFeatures.createEntry(
+                                    Feature.SIMPLE_BLOCK,
+                                    new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.CLOSED_EYEBLOSSOM))
+                            )
                     )
             );
 

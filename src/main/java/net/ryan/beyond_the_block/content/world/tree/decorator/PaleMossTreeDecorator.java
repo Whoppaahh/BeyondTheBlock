@@ -58,10 +58,10 @@ public class PaleMossTreeDecorator extends TreeDecorator {
             if (generator.isAir(below)) {
                 generator.replace(below, ModBlocks.PALE_HANGING_MOSS.getDefaultState());
 
-                BlockPos below2 = below.down();
-                if (generator.isAir(below2) && random.nextFloat() < 0.5F) {
-                    generator.replace(below2, ModBlocks.PALE_MOSS_BLOCK.getDefaultState());
-                }
+//                BlockPos below2 = below.down();
+//                if (generator.isAir(below2) && random.nextFloat() < 0.5F) {
+//                    generator.replace(below2, ModBlocks.PALE_MOSS_BLOCK.getDefaultState());
+//                }
             }
         }
     }

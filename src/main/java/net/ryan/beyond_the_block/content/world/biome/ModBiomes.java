@@ -113,18 +113,18 @@ public class ModBiomes {
         );
 
         // Pale moss blocks / carpet on ground
-//        generationBuilder.feature(
-//                GenerationStep.Feature.VEGETAL_DECORATION,
-//                ModPlacedFeatures.PALE_MOSS_PATCH_PLACED
-//        );
+        generationBuilder.feature(
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                ModPlacedFeatures.PALE_MOSS_PATCH_PLACED
+        );
 
-        // Hanging pale moss
+//        // Hanging pale moss
 //        generationBuilder.feature(
 //                GenerationStep.Feature.VEGETAL_DECORATION,
 //                ModPlacedFeatures.HANGING_PALE_MOSS_PLACED
 //        );
-
-//        // Eyeblossom if you are backporting it too
+//
+////        // Eyeblossom if you are backporting it too
 //        generationBuilder.feature(
 //                GenerationStep.Feature.VEGETAL_DECORATION,
 //                ModPlacedFeatures.EYEBLOSSOM_PATCH_PLACED

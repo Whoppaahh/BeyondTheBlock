@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross_emissive",
+  "textures": {
+    "cross": "beyond_the_block:block/open_eyeblossom",
+    "cross_emissive": "beyond_the_block:block/open_eyeblossom_emissive"
+  }
+}

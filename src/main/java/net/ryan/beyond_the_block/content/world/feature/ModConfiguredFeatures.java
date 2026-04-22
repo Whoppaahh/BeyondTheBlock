@@ -26,6 +26,7 @@ import net.ryan.beyond_the_block.content.block.PinkPetalsBlock;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.world.tree.CherryFoliagePlacer;
 import net.ryan.beyond_the_block.content.world.tree.CherryTrunkPlacer;
+import net.ryan.beyond_the_block.content.world.tree.decorator.CreakingHeartTreeDecorator;
 import net.ryan.beyond_the_block.content.world.tree.decorator.PaleMossTreeDecorator;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
@@ -142,7 +143,8 @@ public class ModConfiguredFeatures {
                     )
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
                             .decorators(List.of(
-                                    new PaleMossTreeDecorator(0.8F, 0.15F, 0.4F)
+                                    new PaleMossTreeDecorator(0.8F, 0.15F, 0.4F),
+                                    new CreakingHeartTreeDecorator(0.3f)
                             ))
                             .ignoreVines()
                             .build()

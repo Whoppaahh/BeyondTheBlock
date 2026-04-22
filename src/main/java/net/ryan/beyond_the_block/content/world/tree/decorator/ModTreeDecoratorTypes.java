@@ -9,5 +9,9 @@ public class ModTreeDecoratorTypes {
     public static final TreeDecoratorType<PaleMossTreeDecorator> PALE_MOSS =
             TreeDecoratorTypeInvoker.beyond_the_block$invokeRegister(BeyondTheBlock.MOD_ID + ":pale_moss_decorator", PaleMossTreeDecorator.CODEC);
 
+    public static final TreeDecoratorType<CreakingHeartTreeDecorator> CREAKING_HEART =
+            TreeDecoratorTypeInvoker.beyond_the_block$invokeRegister(BeyondTheBlock.MOD_ID + ":creaking_heart", CreakingHeartTreeDecorator.CODEC);
+
+
     public static void register() {}
 }

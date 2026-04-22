@@ -13,6 +13,8 @@ public class ModTags {
     public static class Blocks {
 
         public static final TagKey<Block> CAULDRON_RECOLORABLE = createBlockTag("cauldron_recolorable");
+        public static final TagKey<Block> PALE_OAK_LOGS = createBlockTag("pale_oak_logs");
+
 
         public static final TagKey<Block> NEEDS_RUBY_TOOL = createBlockTag("needs_ruby_tool");
         public static final TagKey<Block> INCORRECT_FOR_RUBY_TOOL = createBlockTag("incorrect_for_ruby_tool");

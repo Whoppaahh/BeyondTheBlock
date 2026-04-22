@@ -46,7 +46,9 @@ public class ModPlacedFeatures {
             ModConfiguredFeatures.PALE_OAK_TREE_NATURAL,
             PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
             SquarePlacementModifier.of(),
-            PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+            SurfaceWaterDepthFilterPlacementModifier.of(0),
+            PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
+            PlacedFeatures.wouldSurvive(ModBlocks.PALE_OAK_SAPLING),
             BiomePlacementModifier.of()
     );
 

@@ -37,6 +37,13 @@ import java.util.Map;
 
 public class ModBlocks {
 
+    public static final Block CREAKING_HEART = registerBlock("creaking_heart",
+            new CreakingHeartBlock(
+                    FabricBlockSettings.copyOf(Blocks.OAK_LOG).strength(2.5F)
+            ),
+            ModItemGroup.ModBlocksTab
+    );
+
     public static final Block PALE_MOSS_CARPET = registerBlock("pale_moss_carpet", new PaleMossCarpetBlock(FabricBlockSettings.copyOf(Blocks.MOSS_CARPET).nonOpaque().noCollision().sounds(BlockSoundGroup.MOSS_CARPET)), ModItemGroup.ModBlocksTab);
 
     public static final ClosedEyeblossomBlock CLOSED_EYEBLOSSOM = registerEyeblossomBlock(

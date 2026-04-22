@@ -452,5 +452,6 @@
   "block.beyond_the_block.potted_pale_oak_sapling": "Potted Pale Oak Sapling",
   "block.beyond_the_block.pink_petals": "Pink Petals",
   "block.beyond_the_block.pale_hanging_moss": "Pale Hanging Moss",
-  "block.beyond_the_block.resin_clump": "Resin Clump"
+  "block.beyond_the_block.resin_clump": "Resin Clump",
+  "hanging_sign.edit": "Edit Hanging Sign"
 }

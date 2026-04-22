@@ -1,20 +1,28 @@
 package net.ryan.beyond_the_block.content.world.feature;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.VerticalSurfaceType;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.ThreeLayersFeatureSize;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.feature.util.CaveSurface;
 import net.minecraft.world.gen.foliage.DarkOakFoliagePlacer;
+import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
 import net.ryan.beyond_the_block.config.access.Configs;
+import net.ryan.beyond_the_block.content.block.PinkPetalsBlock;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.world.tree.CherryFoliagePlacer;
 import net.ryan.beyond_the_block.content.world.tree.CherryTrunkPlacer;
@@ -53,7 +61,59 @@ public class ModConfiguredFeatures {
                             .ignoreVines()
                             .build()
             );
+    private static final BlockStateProvider PINK_PETALS_PROVIDER = createPinkPetalsProvider();
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PINK_PETALS_PATCH =
+            ConfiguredFeatures.register("pink_petals_patch", Feature.RANDOM_PATCH,
+                    ConfiguredFeatures.createRandomPatchFeatureConfig(
+                            96,
+                            PlacedFeatures.createEntry(
+                                    Feature.SIMPLE_BLOCK,
+                                    new SimpleBlockFeatureConfig(
+                                            (PINK_PETALS_PROVIDER)
+                                    ),
+                                    BlockFilterPlacementModifier.of(
+                                            BlockPredicate.allOf(
+                                                    BlockPredicate.replaceable(),
+                                                    BlockPredicate.wouldSurvive(ModBlocks.PINK_PETALS.getDefaultState(), BlockPos.ORIGIN),
+                                                    BlockPredicate.matchingBlocks(
+                                                            BlockPos.ORIGIN.down(),
+                                                            List.of(
+                                                                    Blocks.GRASS_BLOCK,
+                                                                    Blocks.DIRT,
+                                                                    Blocks.COARSE_DIRT,
+                                                                    Blocks.PODZOL,
+                                                                    Blocks.ROOTED_DIRT,
+                                                                    Blocks.MOSS_BLOCK
+                                                            )
+                                                    )
+                                            )
+                            )
+                    )
+            ));
 
+    private static WeightedBlockStateProvider createPinkPetalsProvider() {
+        DataPool.Builder<BlockState> builder = DataPool.builder();
+
+        for (Direction direction : Direction.Type.HORIZONTAL) {
+            builder.add(ModBlocks.PINK_PETALS.getDefaultState()
+                    .with(PinkPetalsBlock.FACING, direction)
+                    .with(PinkPetalsBlock.FLOWER_AMOUNT, 1), 8);
+
+            builder.add(ModBlocks.PINK_PETALS.getDefaultState()
+                    .with(PinkPetalsBlock.FACING, direction)
+                    .with(PinkPetalsBlock.FLOWER_AMOUNT, 2), 5);
+
+            builder.add(ModBlocks.PINK_PETALS.getDefaultState()
+                    .with(PinkPetalsBlock.FACING, direction)
+                    .with(PinkPetalsBlock.FLOWER_AMOUNT, 3), 3);
+
+            builder.add(ModBlocks.PINK_PETALS.getDefaultState()
+                    .with(PinkPetalsBlock.FACING, direction)
+                    .with(PinkPetalsBlock.FLOWER_AMOUNT, 4), 1);
+        }
+
+        return new WeightedBlockStateProvider(builder);
+    }
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> PALE_OAK_TREE =
             ConfiguredFeatures.register("pale_oak_tree", Feature.TREE,
                     new TreeFeatureConfig.Builder(
@@ -64,9 +124,6 @@ public class ModConfiguredFeatures {
                             new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())
                     )
                             .dirtProvider(BlockStateProvider.of(Blocks.DIRT))
-                            .decorators(List.of(
-                                    new PaleMossTreeDecorator(0.8F, 0.15F, 0.4F)
-                            ))
                             .ignoreVines()
                             .build()
             );

@@ -1,9 +1,6 @@
 package net.ryan.beyond_the_block.content.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.PlantBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -21,10 +18,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
-public class PinkPetalsBlock extends PlantBlock implements Fertilizable {
+public class PinkPetalsBlock extends HorizontalFacingBlock implements Fertilizable {
     public static final IntProperty FLOWER_AMOUNT = IntProperty.of("flower_amount", 1, 4);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
@@ -52,12 +48,12 @@ public class PinkPetalsBlock extends PlantBlock implements Fertilizable {
 
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
+        return state.get(FLOWER_AMOUNT) < 4;
     }
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return true;
+        return state.get(FLOWER_AMOUNT) < 4;
     }
 
     @Override
@@ -92,10 +88,6 @@ public class PinkPetalsBlock extends PlantBlock implements Fertilizable {
                 .with(FACING, facing);
     }
 
-    @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return super.canPlantOnTop(floor, world, pos);
-    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, net.minecraft.block.ShapeContext context) {

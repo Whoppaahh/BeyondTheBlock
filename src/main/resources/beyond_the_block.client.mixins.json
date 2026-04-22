@@ -9,6 +9,7 @@
     "BipedModelMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
     "DoubleInventoryAccessor",
     "EntityRendererMixin",
     "GhastEntityModelMixin",

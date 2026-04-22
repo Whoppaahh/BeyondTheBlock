@@ -22,6 +22,14 @@ public class ModPlacedFeatures {
             BiomePlacementModifier.of()
     );
 
+    public static final RegistryEntry<PlacedFeature> PINK_PETALS_PATCH_PLACED = PlacedFeatures.register(
+            "pink_petals_patch_placed",
+            ModConfiguredFeatures.PINK_PETALS_PATCH,
+            CountPlacementModifier.of(6),
+            SquarePlacementModifier.of(),
+            PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+            BiomePlacementModifier.of()
+    );
 
     public static final RegistryEntry<PlacedFeature> PALE_OAK_TREE_PLACED = PlacedFeatures.register(
             "pale_oak_tree_placed",

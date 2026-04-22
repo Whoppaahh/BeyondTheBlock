@@ -61,6 +61,10 @@ public class ModBiomes {
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 ModPlacedFeatures.CHERRY_TREE_PLACED
         );
+        generationBuilder.feature(
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                ModPlacedFeatures.PINK_PETALS_PATCH_PLACED
+        );
 
         return new Biome.Builder()
                 .precipitation(Biome.Precipitation.RAIN)

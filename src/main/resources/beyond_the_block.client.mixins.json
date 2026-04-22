@@ -27,7 +27,8 @@
     "SheepWoolFeatureRendererMixin",
     "SignBlockEntityRendererMixin",
     "TexturedRenderLayersAccessor",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "BlockRenderManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

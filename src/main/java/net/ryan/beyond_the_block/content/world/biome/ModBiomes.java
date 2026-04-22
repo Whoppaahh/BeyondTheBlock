@@ -122,23 +122,11 @@ public class ModBiomes {
                 ModPlacedFeatures.PALE_MOSS_PATCH_PLACED
         );
 
-//        // Hanging pale moss
-//        generationBuilder.feature(
-//                GenerationStep.Feature.VEGETAL_DECORATION,
-//                ModPlacedFeatures.HANGING_PALE_MOSS_PLACED
-//        );
-//
-////        // Eyeblossom if you are backporting it too
         generationBuilder.feature(
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 ModPlacedFeatures.EYEBLOSSOM_PATCH_PLACED
         );
 
-        // Optional custom feature for creaking hearts inside pale oaks
-        // generationBuilder.feature(
-        //         GenerationStep.Feature.VEGETAL_DECORATION,
-        //         ModPlacedFeatures.CREAKING_HEART_PLACED
-        // );
 
         return new Biome.Builder()
                 .precipitation(Biome.Precipitation.RAIN)

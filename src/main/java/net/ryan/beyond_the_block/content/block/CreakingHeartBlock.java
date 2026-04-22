@@ -5,6 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -12,6 +14,7 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.utils.CreakingHeartState;
@@ -32,16 +35,6 @@ public class CreakingHeartBlock extends PillarBlock {
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState placed = this.getDefaultState()
-                .with(AXIS, ctx.getSide().getAxis())
-                .with(CREAKING_HEART_STATE, CreakingHeartState.UPROOTED)
-                .with(NATURAL, false);
-
-        return updateState(placed, ctx.getWorld(), ctx.getBlockPos());
-    }
-
-    @Override
     public BlockState getStateForNeighborUpdate(BlockState state,
                                                 Direction direction,
                                                 BlockState neighborState,
@@ -53,10 +46,39 @@ public class CreakingHeartBlock extends PillarBlock {
     }
 
     @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState placed = this.getDefaultState()
+                .with(AXIS, ctx.getSide().getAxis())
+                .with(CREAKING_HEART_STATE, CreakingHeartState.UPROOTED)
+                .with(NATURAL, false);
+
+        return updateState(placed, ctx.getWorld(), ctx.getBlockPos());
+    }
+
+    @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockState updated = updateState(state, world, pos);
+
         if (updated != state) {
             world.setBlockState(pos, updated, Block.NOTIFY_ALL);
+
+            CreakingHeartState oldState = state.get(CREAKING_HEART_STATE);
+            CreakingHeartState newState = updated.get(CREAKING_HEART_STATE);
+
+            if (oldState != newState) {
+                if (newState == CreakingHeartState.AWAKE) {
+                    world.playSound(null, pos, SoundEvents.BLOCK_SCULK_SHRIEKER_SHRIEK,
+                            SoundCategory.BLOCKS, 0.6F, 1.2F);
+                } else if (oldState == CreakingHeartState.AWAKE && newState == CreakingHeartState.DORMANT) {
+                    world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK,
+                            SoundCategory.BLOCKS, 0.35F, 0.8F);
+                }
+            }
+        }
+
+        // Keep natural hearts polling occasionally so day/night transitions update
+        if (updated.get(NATURAL) && updated.get(CREAKING_HEART_STATE) != CreakingHeartState.UPROOTED) {
+            world.createAndScheduleBlockTick(pos, this, 20);
         }
     }
 
@@ -65,12 +87,19 @@ public class CreakingHeartBlock extends PillarBlock {
             return state.with(CREAKING_HEART_STATE, CreakingHeartState.UPROOTED);
         }
 
-        CreakingHeartState current = state.get(CREAKING_HEART_STATE);
-        if (current == CreakingHeartState.UPROOTED) {
+        boolean natural = state.get(NATURAL);
+
+        if (!natural) {
             return state.with(CREAKING_HEART_STATE, CreakingHeartState.DORMANT);
         }
 
-        return state;
+        if (world instanceof World realWorld) {
+            boolean awake = shouldBeAwake(realWorld, pos);
+            return state.with(CREAKING_HEART_STATE,
+                    awake ? CreakingHeartState.AWAKE : CreakingHeartState.DORMANT);
+        }
+
+        return state.with(CREAKING_HEART_STATE, CreakingHeartState.DORMANT);
     }
 
     public static boolean shouldBeEnabled(BlockState state, WorldView world, BlockPos pos) {
@@ -86,6 +115,24 @@ public class CreakingHeartBlock extends PillarBlock {
         }
 
         return true;
+    }
+
+    private static boolean shouldBeAwake(World world, BlockPos pos) {
+        if (world.isClient()) {
+            return false;
+        }
+
+        if (!world.getDimension().hasSkyLight()) {
+            return false;
+        }
+
+        // Night only
+        if (!world.isNight()) {
+            return false;
+        }
+
+        // Optional: require a reasonably dark environment
+        return world.isNight() || world.getLightLevel(pos) <= 7;
     }
 
     private static boolean isValidPaleOakLog(BlockState state, Direction.Axis axis) {

@@ -45,6 +45,45 @@ public class ConfigServer implements ConfigData {
         public Horses horses = new Horses();
         public DoubleOpenables openables = new DoubleOpenables();
         public Enchantments enchantments = new Enchantments();
+        public FireVisuals fire = new FireVisuals();
+    }
+
+    public static class FireVisuals {
+        public boolean enabled = true;
+
+        // Shared defaults
+        public int baseFireColor = 0xFFFFA0;
+        public int baseSoulFireColor = 0x78C8FF;
+
+        public FirePriority priority = FirePriority.BLOCK_TAG_BIOME;
+
+        /**
+         * Format examples:
+         * minecraft:desert=0xFFCC66
+         * minecraft:soul_sand=0x66B3FF
+         * #minecraft:soul_fire_base_blocks=0x66D0FF
+         */
+        public List<String> biomeRules = new ArrayList<>(List.of(
+                "minecraft:desert=0xFFCC66",
+                "minecraft:badlands=0xFF9966",
+                "minecraft:soul_sand_valley=0x66CFFF"
+        ));
+
+        public List<String> blockRules = new ArrayList<>(List.of(
+                "minecraft:soul_sand=0x66BFFF",
+                "minecraft:soul_soil=0x7AD6FF",
+                "minecraft:netherrack=0xFF9A55"
+        ));
+
+        public List<String> blockTagRules = new ArrayList<>(List.of(
+                "#minecraft:soul_fire_base_blocks=0x66CFFF"
+        ));
+
+        public enum FirePriority {
+            BLOCK_TAG_BIOME,
+            BLOCK_BIOME_TAG,
+            BIOME_BLOCK_TAG
+        }
     }
 
     public static class Shrines {

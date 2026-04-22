@@ -19,6 +19,13 @@ public class ConfigClient implements ConfigData {
         public Names names = new Names();
         public Title title = new Title();
         public Enchantments enchantments = new Enchantments();
+        public Fire fire = new Fire();
+    }
+
+    public static class Fire {
+        public boolean fixSoulOverlay = true;
+        public float overlayHeight = 1.0F;
+        public float overlayOpacity = 1.0F;
     }
 
     public static class Enchantments {

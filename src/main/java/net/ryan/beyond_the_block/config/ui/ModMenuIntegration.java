@@ -58,40 +58,7 @@ public class ModMenuIntegration implements ModMenuApi {
                 SubCategoryBuilder ores = entry.startSubCategory(Text.literal("Worldgen - Ores")).setExpanded(false);
 
                 ores.add(entry.startIntField(Text.literal("Ruby Ore Vein Size"), edited[0].rubyOre())
-                        .setSaveConsumer(v -> edited[0] = new SyncedServerConfig(
-                                v, edited[0].miraniteOre(), edited[0].chromiteOre(), edited[0].nocturniteOre(),
-                                edited[0].amberineOre(), edited[0].rosetteOre(), edited[0].azurosOre(), edited[0].indigraOre(),
-                                edited[0].xirionOre(), edited[0].xpOre(),
-                                edited[0].guardsEnabled(), edited[0].guardsReputationRequirementToBeAttacked(), edited[0].guardsReputationRequirement(),
-                                edited[0].guardsRunFromPolarBears(), edited[0].guardsOpenDoors(), edited[0].guardFormation(),
-                                edited[0].clericHealing(), edited[0].armourerRepairGuardArmour(), edited[0].attackAllMobs(),
-                                edited[0].guardAlwaysShield(), edited[0].friendlyFire(), edited[0].guardMobBlackList(),
-                                edited[0].amountOfHealthRegenerated(), edited[0].followHero(), edited[0].guardHealthModifier(),
-                                edited[0].guardSpeedModifier(), edited[0].guardFollowRangeModifier(), edited[0].giveGuardStuffHotv(),
-                                edited[0].setGuardPatrolHotv(), edited[0].chanceToDropEquipment(), edited[0].raidAnimals(),
-                                edited[0].witchesVillager(), edited[0].blackSmithHealing(), edited[0].convertVillagerIfHaveHotv(),
-                                edited[0].guardVillagerHelpRange(), edited[0].illagersRunFromPolarBears(),
-                                edited[0].villagersRunFromPolarBears(), edited[0].guardArrowsHurtVillagers(),
-                                edited[0].shrineRewardsIncludeVanillaItems(), edited[0].shrineRewardsIncludeModdedItems(),
-                                edited[0].shrineGenerationInterval(),
-                                edited[0].pathsEnabled(), edited[0].pathsMaxDistance(), edited[0].pathsUseTerrainFollowing(),
-                                edited[0].pathsPreserveDurability(), edited[0].pathsDefaultPathBlockId(),
-                                edited[0].pathsAllowedStartingBlocks(), edited[0].pathsAllowedEndingBlocks(),
-                                edited[0].pathsMinWidth(), edited[0].pathsMaxWidth(),
-                                edited[0].enableChickenFeathers(), edited[0].chickenFeatherInterval(), edited[0].chickenFeatherChance(),
-                                edited[0].enableSkeletonBones(), edited[0].skeletonBoneInterval(), edited[0].skeletonBoneChance(),
-                                edited[0].enableSpiderDrops(), edited[0].spiderDropInterval(), edited[0].spiderDropChance(),
-                                edited[0].cobwebWeight(),
-                                edited[0].minDecayTicks(), edited[0].maxDecayTicks(), edited[0].baseDecayChance(),
-                                edited[0].lightDecayBonus(), edited[0].darknessDecayReduction(), edited[0].densityRadius(),
-                                edited[0].densityLimit(), edited[0].normalSpiderRate(), edited[0].caveSpiderRate(),
-                                edited[0].horseSwimmingEnabled(), edited[0].undeadHorseSwimmingEnabled(),
-                                edited[0].horsePreventWandering(), edited[0].horseStayRadius(),
-                                edited[0].horseRemoveMiningPenalty(), edited[0].horseIncreaseStepHeight(),
-                                edited[0].enableRecursiveOpening(), edited[0].recursiveOpeningMaxBlocksDistance(),
-                                edited[0].enableDoors(), edited[0].enableFenceGates(), edited[0].enableTrapdoors(),
-                                edited[0].enableModIncompatibilityCheck(), edited[0].dropMode()
-                        ))
+                        .setSaveConsumer(v -> edited[0] = copy(edited[0], 0, v))
                         .build());
 
                 ores.add(entry.startIntField(Text.literal("Miranite Ore Vein Size"), edited[0].miraniteOre())
@@ -374,6 +341,41 @@ public class ModMenuIntegration implements ModMenuApi {
 
                 gameplay.addEntry(openables.build());
 
+                SubCategoryBuilder fire = entry.startSubCategory(Text.literal("Fire")).setExpanded(false);
+
+                fire.add(entry.startBooleanToggle(Text.literal("Enabled"),
+                                edited[0].fireEnabled())
+                        .setSaveConsumer(v -> edited[0] = withFireEnabled(edited[0], v)).build());
+
+                fire.add(entry.startIntField(Text.literal("Base Fire Colour"),
+                                edited[0].fireBaseColor())
+                        .setSaveConsumer(v -> edited[0] = withFireBaseColor(edited[0], v)).build());
+
+                fire.add(entry.startIntField(Text.literal("Soul Fire Colour"),
+                                edited[0].fireSoulBaseColor())
+                        .setSaveConsumer(v -> edited[0] = withFireSoulBaseColor(edited[0], v)).build());
+
+                fire.add(entry.startStrField(Text.literal("Priority"),
+                                edited[0].firePriority())
+                        .setSaveConsumer(v -> edited[0] = withFirePriority(edited[0], v)).build());
+
+                fire.add(entry.startStrList(Text.literal("Biome Rules"),
+                                new ArrayList<>(edited[0].fireBiomeRules()))
+                        .setSaveConsumer(v -> edited[0] = withFireBiomeRules(edited[0], v))
+                        .build());
+
+                fire.add(entry.startStrList(Text.literal("Block Rules"),
+                                new ArrayList<>(edited[0].fireBlockRules()))
+                        .setSaveConsumer(v -> edited[0] = withFireBlockRules(edited[0], v))
+                        .build());
+
+                fire.add(entry.startStrList(Text.literal("Block Tag Rules"),
+                                new ArrayList<>(edited[0].fireBlockTagRules()))
+                        .setSaveConsumer(v -> edited[0] = withFireBlockTagRules(edited[0], v))
+                        .build());
+
+                gameplay.addEntry(fire.build());
+
                 // Enchantments
                 SubCategoryBuilder enchantments = entry.startSubCategory(Text.literal("Enchantments")).setExpanded(false);
 
@@ -561,6 +563,26 @@ public class ModMenuIntegration implements ModMenuApi {
 
             hud.addEntry(pathsHud.build());
 
+            SubCategoryBuilder fireVisuals = entry.startSubCategory(Text.literal("Fire Visuals"))
+                    .setExpanded(false);
+
+            fireVisuals.add(entry.startBooleanToggle(Text.literal("Fix Soul Overlay"),
+                            config.visuals.fire.fixSoulOverlay)
+                    .setSaveConsumer(v -> config.visuals.fire.fixSoulOverlay = v)
+                    .build());
+
+            fireVisuals.add(entry.startFloatField(Text.literal("Overlay Height"),
+                            config.visuals.fire.overlayHeight)
+                    .setSaveConsumer(v -> config.visuals.fire.overlayHeight = v)
+                    .build());
+
+            fireVisuals.add(entry.startFloatField(Text.literal("Overlay Opacity"),
+                            config.visuals.fire.overlayOpacity)
+                    .setSaveConsumer(v -> config.visuals.fire.overlayOpacity = v)
+                    .build());
+
+            visuals.addEntry(fireVisuals.build());
+
             builder.setSavingRunnable(() -> {
                 AutoConfig.getConfigHolder(ConfigClient.class).save();
 
@@ -576,6 +598,34 @@ public class ModMenuIntegration implements ModMenuApi {
     // =========================
     // Small copy helpers
     // =========================
+
+    private static SyncedServerConfig withFireEnabled(SyncedServerConfig c, boolean v) {
+        return with(c, x -> x.fireEnabled = v);
+    }
+
+    private static SyncedServerConfig withFireBaseColor(SyncedServerConfig c, int v) {
+        return with(c, x -> x.fireBaseColor = v);
+    }
+
+    private static SyncedServerConfig withFireSoulBaseColor(SyncedServerConfig c, int v) {
+        return with(c, x -> x.fireSoulBaseColor = v);
+    }
+
+    private static SyncedServerConfig withFirePriority(SyncedServerConfig c, String v) {
+        return with(c, x -> x.firePriority = v);
+    }
+
+    private static SyncedServerConfig withFireBiomeRules(SyncedServerConfig c, List<String> v) {
+        return with(c, x -> x.fireBiomeRules = new ArrayList<>(v));
+    }
+
+    private static SyncedServerConfig withFireBlockRules(SyncedServerConfig c, List<String> v) {
+        return with(c, x -> x.fireBlockRules = new ArrayList<>(v));
+    }
+
+    private static SyncedServerConfig withFireBlockTagRules(SyncedServerConfig c, List<String> v) {
+        return with(c, x -> x.fireBlockTagRules = new ArrayList<>(v));
+    }
 
     private static SyncedServerConfig copy(SyncedServerConfig c, int oreIndex, int value) {
         return new SyncedServerConfig(
@@ -668,6 +718,14 @@ public class ModMenuIntegration implements ModMenuApi {
                 c.enableTrapdoors(),
                 c.enableModIncompatibilityCheck(),
 
+                c.fireEnabled(),
+                c.fireBaseColor(),
+                c.fireSoulBaseColor(),
+                c.firePriority(),
+                c.fireBiomeRules(),
+                c.fireBlockRules(),
+                c.fireBlockTagRules(),
+
                 c.dropMode()
         );
     }
@@ -696,8 +754,12 @@ public class ModMenuIntegration implements ModMenuApi {
                 c.horseSwimmingEnabled(), c.undeadHorseSwimmingEnabled(), c.horsePreventWandering(), c.horseStayRadius(),
                 c.horseRemoveMiningPenalty(), c.horseIncreaseStepHeight(),
                 c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
-                c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(), c.dropMode()
-        );
+                c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
+
+                c.fireEnabled(), c.fireBaseColor(), c.fireSoulBaseColor(), c.firePriority(),
+                c.fireBiomeRules(), c.fireBlockRules(), c.fireBlockTagRules(),
+
+                c.dropMode());
     }
 
     private static SyncedServerConfig withGuardsReputationRequirementToBeAttacked(SyncedServerConfig c, int v) { return new SyncedServerConfig(
@@ -712,7 +774,12 @@ public class ModMenuIntegration implements ModMenuApi {
             c.spiderDropInterval(), c.spiderDropChance(), c.cobwebWeight(), c.minDecayTicks(), c.maxDecayTicks(), c.baseDecayChance(), c.lightDecayBonus(), c.darknessDecayReduction(),
             c.densityRadius(), c.densityLimit(), c.normalSpiderRate(), c.caveSpiderRate(), c.horseSwimmingEnabled(), c.undeadHorseSwimmingEnabled(), c.horsePreventWandering(),
             c.horseStayRadius(), c.horseRemoveMiningPenalty(), c.horseIncreaseStepHeight(), c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
-            c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(), c.dropMode()
+            c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
+
+            c.fireEnabled(), c.fireBaseColor(), c.fireSoulBaseColor(), c.firePriority(),
+            c.fireBiomeRules(), c.fireBlockRules(), c.fireBlockTagRules(),
+
+            c.dropMode()
     );}
     private static SyncedServerConfig withGuardsReputationRequirement(SyncedServerConfig c, int v) { return with(c, x -> x.guardsReputationRequirement = v); }
     private static SyncedServerConfig withGuardsRunFromPolarBears(SyncedServerConfig c, boolean v) { return with(c, x -> x.guardsRunFromPolarBears = v); }
@@ -892,6 +959,14 @@ public class ModMenuIntegration implements ModMenuApi {
         boolean enableTrapdoors;
         boolean enableModIncompatibilityCheck;
 
+        boolean fireEnabled;
+        int fireBaseColor;
+        int fireSoulBaseColor;
+        String firePriority;
+        List<String> fireBiomeRules;
+        List<String> fireBlockRules;
+        List<String> fireBlockTagRules;
+
         net.ryan.beyond_the_block.config.DropMode dropMode;
 
         Mutable(SyncedServerConfig c) {
@@ -984,6 +1059,14 @@ public class ModMenuIntegration implements ModMenuApi {
             enableTrapdoors = c.enableTrapdoors();
             enableModIncompatibilityCheck = c.enableModIncompatibilityCheck();
 
+            fireEnabled = c.fireEnabled();
+            fireBaseColor = c.fireBaseColor();
+            fireSoulBaseColor = c.fireSoulBaseColor();
+            firePriority = c.firePriority();
+            fireBiomeRules = new ArrayList<>(c.fireBiomeRules());
+            fireBlockRules = new ArrayList<>(c.fireBlockRules());
+            fireBlockTagRules = new ArrayList<>(c.fireBlockTagRules());
+
             dropMode = c.dropMode();
         }
 
@@ -1006,7 +1089,12 @@ public class ModMenuIntegration implements ModMenuApi {
                     horseSwimmingEnabled, undeadHorseSwimmingEnabled, horsePreventWandering, horseStayRadius,
                     horseRemoveMiningPenalty, horseIncreaseStepHeight,
                     enableRecursiveOpening, recursiveOpeningMaxBlocksDistance, enableDoors, enableFenceGates,
-                    enableTrapdoors, enableModIncompatibilityCheck, dropMode
+                    enableTrapdoors, enableModIncompatibilityCheck,
+
+                    fireEnabled, fireBaseColor, fireSoulBaseColor, firePriority,
+                    fireBiomeRules, fireBlockRules, fireBlockTagRules,
+
+                    dropMode
             );
         }
     }

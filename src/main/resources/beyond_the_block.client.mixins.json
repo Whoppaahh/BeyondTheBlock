@@ -7,6 +7,7 @@
     "BannerBlockEntityRendererMixin",
     "BatEntityModelMixin",
     "BipedModelMixin",
+    "BlockRenderManagerMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
@@ -19,6 +20,7 @@
     "HeldItemRendererMixin",
     "HorseEntityModelMixin",
     "InGameHudMixin",
+    "InGameOverlayRendererMixin",
     "ItemFrameRendererMixin",
     "ItemRendererMixin",
     "LivingEntityRendererAccessor",
@@ -27,8 +29,7 @@
     "SheepWoolFeatureRendererMixin",
     "SignBlockEntityRendererMixin",
     "TexturedRenderLayersAccessor",
-    "TitleScreenMixin",
-    "BlockRenderManagerMixin"
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

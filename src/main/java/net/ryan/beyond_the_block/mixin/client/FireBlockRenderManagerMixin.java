@@ -31,7 +31,7 @@ public abstract class FireBlockRenderManagerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void beyond$renderTintedFire(
+    private void beyond$renderTintedVanillaFire(
             BlockState state,
             BlockPos pos,
             BlockRenderView world,
@@ -56,7 +56,7 @@ public abstract class FireBlockRenderManagerMixin {
 
         beyond_the_block$fireReentry.set(true);
         try {
-            ((BlockRenderManager)(Object)this).renderBlock(
+            ((BlockRenderManager) (Object) this).renderBlock(
                     state,
                     pos,
                     world,

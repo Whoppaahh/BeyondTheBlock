@@ -56,7 +56,7 @@ public class ConfigServer implements ConfigData {
         public int baseFireColor = 0xFFFFA0;
         public int baseSoulFireColor = 0x78C8FF;
 
-        public FireRulePriority priority = FireRulePriority.BIOME_BLOCK_TAG;
+        public FireRulePriority priority = FireRulePriority.TAG_BLOCK_BIOME;
 
         /**
          * Format examples:

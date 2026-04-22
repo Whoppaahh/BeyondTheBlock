@@ -32,6 +32,11 @@ public final class FireColourResolver {
         BlockState belowState = world.getBlockState(belowPos);
 
         Integer resolved = switch (cfg.firePriority()) {
+            case TAG_BLOCK_BIOME -> firstNonNull(
+                    matchBlockTag(cfg.fireBlockTagRules(), belowState),
+                    matchBlock(cfg.fireBlockRules(), belowState),
+                    matchBiome(cfg.fireBiomeRules(), world, firePos)
+            );
             case BLOCK_BIOME_TAG -> firstNonNull(
                     matchBlock(cfg.fireBlockRules(), belowState),
                     matchBiome(cfg.fireBiomeRules(), world, firePos),

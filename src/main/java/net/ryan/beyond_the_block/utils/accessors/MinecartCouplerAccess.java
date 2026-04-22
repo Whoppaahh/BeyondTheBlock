@@ -1,7 +1,7 @@
 package net.ryan.beyond_the_block.utils.accessors;
 
-import net.ryan.beyond_the_block.utils.CouplerSide;
-import net.ryan.beyond_the_block.utils.MinecartCouplerComponent;
+import net.ryan.beyond_the_block.feature.rails.CouplerSide;
+import net.ryan.beyond_the_block.feature.rails.MinecartCouplerComponent;
 
 import java.util.UUID;
 

@@ -7,7 +7,7 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.client.screen.HangingSignEditScreen;
-import net.ryan.beyond_the_block.utils.HangingSignClientHelper;
+import net.ryan.beyond_the_block.feature.hanging_signs.HangingSignClientHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

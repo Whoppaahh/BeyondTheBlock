@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.feature.rails;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;

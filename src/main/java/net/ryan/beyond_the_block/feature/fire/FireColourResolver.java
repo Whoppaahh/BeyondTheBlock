@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.feature.fire;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import net.ryan.beyond_the_block.config.access.Configs;
@@ -20,7 +21,7 @@ public final class FireColourResolver {
     private FireColourResolver() {
     }
 
-    public static int resolve(WorldView world, BlockPos firePos, boolean soulFire) {
+    public static int resolve(BlockRenderView world, BlockPos firePos, boolean soulFire) {
         SyncedServerConfig cfg = Configs.syncedServerConfig();
 
         if (!cfg.fireEnabled()) {
@@ -31,17 +32,17 @@ public final class FireColourResolver {
         BlockState belowState = world.getBlockState(belowPos);
 
         Integer resolved = switch (cfg.firePriority()) {
-            case "BLOCK_BIOME_TAG" -> firstNonNull(
+            case BLOCK_BIOME_TAG -> firstNonNull(
                     matchBlock(cfg.fireBlockRules(), belowState),
                     matchBiome(cfg.fireBiomeRules(), world, firePos),
                     matchBlockTag(cfg.fireBlockTagRules(), belowState)
             );
-            case "BIOME_BLOCK_TAG" -> firstNonNull(
+            case BIOME_BLOCK_TAG -> firstNonNull(
                     matchBiome(cfg.fireBiomeRules(), world, firePos),
                     matchBlock(cfg.fireBlockRules(), belowState),
                     matchBlockTag(cfg.fireBlockTagRules(), belowState)
             );
-            default -> firstNonNull(
+            case BLOCK_TAG_BIOME -> firstNonNull(
                     matchBlock(cfg.fireBlockRules(), belowState),
                     matchBlockTag(cfg.fireBlockTagRules(), belowState),
                     matchBiome(cfg.fireBiomeRules(), world, firePos)
@@ -55,8 +56,11 @@ public final class FireColourResolver {
         return soulFire ? cfg.fireSoulBaseColor() : cfg.fireBaseColor();
     }
 
-    private static Integer matchBiome(List<String> rules, WorldView world, BlockPos pos) {
-        RegistryEntry<Biome> biomeEntry = world.getBiome(pos);
+    private static Integer matchBiome(List<String> rules, BlockRenderView  world, BlockPos pos) {
+        if (!(world instanceof WorldView worldView)) {
+            return null;
+        }
+        RegistryEntry<Biome> biomeEntry = worldView.getBiome(pos);
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world == null) return null;

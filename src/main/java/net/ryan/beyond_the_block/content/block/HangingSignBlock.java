@@ -21,7 +21,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.content.blockentity.HangingSignBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
-import net.ryan.beyond_the_block.utils.HangingSignTextureProvider;
+import net.ryan.beyond_the_block.feature.hanging_signs.HangingSignTextureProvider;
 
 public class HangingSignBlock extends AbstractSignBlock implements HangingSignTextureProvider {
     public static final IntProperty ROTATION = Properties.ROTATION;

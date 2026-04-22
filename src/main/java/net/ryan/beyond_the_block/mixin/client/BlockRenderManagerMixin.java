@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.mixin.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumer;
@@ -14,9 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockRenderView;
+import net.ryan.beyond_the_block.feature.fire.FireColourResolver;
+import net.ryan.beyond_the_block.feature.fire.TintingVertexConsumer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -43,7 +47,7 @@ public abstract class BlockRenderManagerMixin {
         Vec3d blockCenter = Vec3d.ofCenter(pos);
 
         // Hide leaf blocks very near / around the rider camera
-        if (camPos.squaredDistanceTo(blockCenter) <= 1.0 * 1.0) {
+        if (camPos.squaredDistanceTo(blockCenter) <= 0.75 * 0.75) {
             ci.cancel();
         }
     }

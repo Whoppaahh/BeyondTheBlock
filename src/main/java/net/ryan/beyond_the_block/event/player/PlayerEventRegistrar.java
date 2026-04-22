@@ -37,7 +37,7 @@ import net.ryan.beyond_the_block.feature.blockconversion.BlockConversionHandler;
 import net.ryan.beyond_the_block.feature.cauldrons.ModdedFluidCauldronHandler;
 import net.ryan.beyond_the_block.feature.combat.CombatEnchantmentHandler;
 import net.ryan.beyond_the_block.feature.restore.RestoreProtectionHandler;
-import net.ryan.beyond_the_block.utils.MinecartLinkingHandler;
+import net.ryan.beyond_the_block.feature.rails.MinecartLinkingHandler;
 import net.ryan.beyond_the_block.utils.helpers.BetterLadderPlacement;
 import net.ryan.beyond_the_block.utils.helpers.DoubleOpenablesHandler;
 import net.ryan.beyond_the_block.utils.helpers.RestoreManager;

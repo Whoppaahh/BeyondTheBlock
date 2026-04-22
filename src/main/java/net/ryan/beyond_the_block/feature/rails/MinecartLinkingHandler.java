@@ -1,6 +1,5 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.feature.rails;
 
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;

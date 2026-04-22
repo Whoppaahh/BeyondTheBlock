@@ -4,6 +4,7 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.ryan.beyond_the_block.config.DropMode;
+import net.ryan.beyond_the_block.feature.fire.FireRulePriority;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public class ConfigServer implements ConfigData {
         public int baseFireColor = 0xFFFFA0;
         public int baseSoulFireColor = 0x78C8FF;
 
-        public FirePriority priority = FirePriority.BLOCK_TAG_BIOME;
+        public FireRulePriority priority = FireRulePriority.BIOME_BLOCK_TAG;
 
         /**
          * Format examples:
@@ -78,12 +79,6 @@ public class ConfigServer implements ConfigData {
         public List<String> blockTagRules = new ArrayList<>(List.of(
                 "#minecraft:soul_fire_base_blocks=0x66CFFF"
         ));
-
-        public enum FirePriority {
-            BLOCK_TAG_BIOME,
-            BLOCK_BIOME_TAG,
-            BIOME_BLOCK_TAG
-        }
     }
 
     public static class Shrines {

@@ -11,7 +11,7 @@ import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.utils.HangingSignClientHelper;
+import net.ryan.beyond_the_block.feature.hanging_signs.HangingSignClientHelper;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;

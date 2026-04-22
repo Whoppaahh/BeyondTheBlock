@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.config.sync;
 import net.minecraft.network.PacketByteBuf;
 import net.ryan.beyond_the_block.config.DropMode;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
+import net.ryan.beyond_the_block.feature.fire.FireRulePriority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +110,7 @@ public record SyncedServerConfig(
         boolean fireEnabled,
         int fireBaseColor,
         int fireSoulBaseColor,
-        String firePriority,
+        FireRulePriority firePriority,
         List<String> fireBiomeRules,
         List<String> fireBlockRules,
         List<String> fireBlockTagRules,
@@ -232,7 +233,7 @@ public record SyncedServerConfig(
                 cfg.features.fire.enabled,
                 cfg.features.fire.baseFireColor,
                 cfg.features.fire.baseSoulFireColor,
-                cfg.features.fire.priority.name(),
+                cfg.features.fire.priority,
                 cfg.features.fire.biomeRules,
                 cfg.features.fire.blockRules,
                 cfg.features.fire.blockTagRules,
@@ -344,7 +345,9 @@ public record SyncedServerConfig(
         cfg.features.fire.enabled = fireEnabled;
         cfg.features.fire.baseFireColor = fireBaseColor;
         cfg.features.fire.baseSoulFireColor = fireSoulBaseColor;
-        cfg.features.fire.priority = parseFirePriority(firePriority);
+        cfg.features.fire.priority = firePriority == null
+                ? FireRulePriority.BIOME_BLOCK_TAG
+                : firePriority;
         cfg.features.fire.biomeRules = new ArrayList<>(fireBiomeRules);
         cfg.features.fire.blockRules = new ArrayList<>(fireBlockRules);
         cfg.features.fire.blockTagRules = new ArrayList<>(fireBlockTagRules);
@@ -471,7 +474,7 @@ public record SyncedServerConfig(
         buf.writeBoolean(fireEnabled);
         buf.writeInt(fireBaseColor);
         buf.writeInt(fireSoulBaseColor);
-        buf.writeString(firePriority);
+        buf.writeEnumConstant(firePriority);
 
         buf.writeInt(fireBiomeRules.size());
         for (String value : fireBiomeRules) {
@@ -618,7 +621,7 @@ public record SyncedServerConfig(
         boolean fireEnabled = buf.readBoolean();
         int fireBaseColor = buf.readInt();
         int fireSoulBaseColor = buf.readInt();
-        String firePriority = buf.readString();
+        FireRulePriority firePriority = buf.readEnumConstant(FireRulePriority.class);
 
         int fireBiomeRuleCount = buf.readInt();
         List<String> fireBiomeRules = new ArrayList<>(fireBiomeRuleCount);
@@ -763,11 +766,4 @@ public record SyncedServerConfig(
         return value == null || value.isBlank() ? fallback : value;
     }
 
-    private static ConfigServer.FireVisuals.FirePriority parseFirePriority(String value) {
-        try {
-            return ConfigServer.FireVisuals.FirePriority.valueOf(value);
-        } catch (Exception ignored) {
-            return ConfigServer.FireVisuals.FirePriority.BLOCK_TAG_BIOME;
-        }
-    }
 }

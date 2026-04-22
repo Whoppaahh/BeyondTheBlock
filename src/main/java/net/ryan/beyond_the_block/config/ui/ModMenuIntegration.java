@@ -14,6 +14,7 @@ import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.sync.ClientSyncedConfigHolder;
 import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
+import net.ryan.beyond_the_block.feature.fire.FireRulePriority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -355,9 +356,12 @@ public class ModMenuIntegration implements ModMenuApi {
                                 edited[0].fireSoulBaseColor())
                         .setSaveConsumer(v -> edited[0] = withFireSoulBaseColor(edited[0], v)).build());
 
-                fire.add(entry.startStrField(Text.literal("Priority"),
+                fire.add(entry.startEnumSelector(
+                                Text.literal("Priority"),
+                                FireRulePriority.class,
                                 edited[0].firePriority())
-                        .setSaveConsumer(v -> edited[0] = withFirePriority(edited[0], v)).build());
+                        .setSaveConsumer(v -> edited[0] = withFirePriority(edited[0], v))
+                        .build());
 
                 fire.add(entry.startStrList(Text.literal("Biome Rules"),
                                 new ArrayList<>(edited[0].fireBiomeRules()))
@@ -611,7 +615,10 @@ public class ModMenuIntegration implements ModMenuApi {
         return with(c, x -> x.fireSoulBaseColor = v);
     }
 
-    private static SyncedServerConfig withFirePriority(SyncedServerConfig c, String v) {
+    private static SyncedServerConfig withFirePriority(
+            SyncedServerConfig c,
+            FireRulePriority v
+    ) {
         return with(c, x -> x.firePriority = v);
     }
 
@@ -962,7 +969,7 @@ public class ModMenuIntegration implements ModMenuApi {
         boolean fireEnabled;
         int fireBaseColor;
         int fireSoulBaseColor;
-        String firePriority;
+        FireRulePriority firePriority;
         List<String> fireBiomeRules;
         List<String> fireBlockRules;
         List<String> fireBlockTagRules;

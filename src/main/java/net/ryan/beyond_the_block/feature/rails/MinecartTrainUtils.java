@@ -1,9 +1,8 @@
-package net.ryan.beyond_the_block.utils;
+package net.ryan.beyond_the_block.feature.rails;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.utils.accessors.MinecartCouplerAccess;
 import net.ryan.beyond_the_block.utils.accessors.MinecartSpeedAccessor;
 

@@ -14,7 +14,6 @@ import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.config.schema.ConfigClient;
 import net.ryan.beyond_the_block.config.sync.ClientSyncedConfigHolder;
 import net.ryan.beyond_the_block.config.sync.SyncedServerConfig;
-import net.ryan.beyond_the_block.feature.fire.FireRulePriority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -342,44 +341,6 @@ public class ModMenuIntegration implements ModMenuApi {
 
                 gameplay.addEntry(openables.build());
 
-                SubCategoryBuilder fire = entry.startSubCategory(Text.literal("Fire")).setExpanded(false);
-
-                fire.add(entry.startBooleanToggle(Text.literal("Enabled"),
-                                edited[0].fireEnabled())
-                        .setSaveConsumer(v -> edited[0] = withFireEnabled(edited[0], v)).build());
-
-                fire.add(entry.startIntField(Text.literal("Base Fire Colour"),
-                                edited[0].fireBaseColor())
-                        .setSaveConsumer(v -> edited[0] = withFireBaseColor(edited[0], v)).build());
-
-                fire.add(entry.startIntField(Text.literal("Soul Fire Colour"),
-                                edited[0].fireSoulBaseColor())
-                        .setSaveConsumer(v -> edited[0] = withFireSoulBaseColor(edited[0], v)).build());
-
-                fire.add(entry.startEnumSelector(
-                                Text.literal("Priority"),
-                                FireRulePriority.class,
-                                edited[0].firePriority())
-                        .setSaveConsumer(v -> edited[0] = withFirePriority(edited[0], v))
-                        .build());
-
-                fire.add(entry.startStrList(Text.literal("Biome Rules"),
-                                new ArrayList<>(edited[0].fireBiomeRules()))
-                        .setSaveConsumer(v -> edited[0] = withFireBiomeRules(edited[0], v))
-                        .build());
-
-                fire.add(entry.startStrList(Text.literal("Block Rules"),
-                                new ArrayList<>(edited[0].fireBlockRules()))
-                        .setSaveConsumer(v -> edited[0] = withFireBlockRules(edited[0], v))
-                        .build());
-
-                fire.add(entry.startStrList(Text.literal("Block Tag Rules"),
-                                new ArrayList<>(edited[0].fireBlockTagRules()))
-                        .setSaveConsumer(v -> edited[0] = withFireBlockTagRules(edited[0], v))
-                        .build());
-
-                gameplay.addEntry(fire.build());
-
                 // Enchantments
                 SubCategoryBuilder enchantments = entry.startSubCategory(Text.literal("Enchantments")).setExpanded(false);
 
@@ -603,36 +564,6 @@ public class ModMenuIntegration implements ModMenuApi {
     // Small copy helpers
     // =========================
 
-    private static SyncedServerConfig withFireEnabled(SyncedServerConfig c, boolean v) {
-        return with(c, x -> x.fireEnabled = v);
-    }
-
-    private static SyncedServerConfig withFireBaseColor(SyncedServerConfig c, int v) {
-        return with(c, x -> x.fireBaseColor = v);
-    }
-
-    private static SyncedServerConfig withFireSoulBaseColor(SyncedServerConfig c, int v) {
-        return with(c, x -> x.fireSoulBaseColor = v);
-    }
-
-    private static SyncedServerConfig withFirePriority(
-            SyncedServerConfig c,
-            FireRulePriority v
-    ) {
-        return with(c, x -> x.firePriority = v);
-    }
-
-    private static SyncedServerConfig withFireBiomeRules(SyncedServerConfig c, List<String> v) {
-        return with(c, x -> x.fireBiomeRules = new ArrayList<>(v));
-    }
-
-    private static SyncedServerConfig withFireBlockRules(SyncedServerConfig c, List<String> v) {
-        return with(c, x -> x.fireBlockRules = new ArrayList<>(v));
-    }
-
-    private static SyncedServerConfig withFireBlockTagRules(SyncedServerConfig c, List<String> v) {
-        return with(c, x -> x.fireBlockTagRules = new ArrayList<>(v));
-    }
 
     private static SyncedServerConfig copy(SyncedServerConfig c, int oreIndex, int value) {
         return new SyncedServerConfig(
@@ -725,14 +656,6 @@ public class ModMenuIntegration implements ModMenuApi {
                 c.enableTrapdoors(),
                 c.enableModIncompatibilityCheck(),
 
-                c.fireEnabled(),
-                c.fireBaseColor(),
-                c.fireSoulBaseColor(),
-                c.firePriority(),
-                c.fireBiomeRules(),
-                c.fireBlockRules(),
-                c.fireBlockTagRules(),
-
                 c.dropMode()
         );
     }
@@ -763,9 +686,6 @@ public class ModMenuIntegration implements ModMenuApi {
                 c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
                 c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
 
-                c.fireEnabled(), c.fireBaseColor(), c.fireSoulBaseColor(), c.firePriority(),
-                c.fireBiomeRules(), c.fireBlockRules(), c.fireBlockTagRules(),
-
                 c.dropMode());
     }
 
@@ -782,9 +702,6 @@ public class ModMenuIntegration implements ModMenuApi {
             c.densityRadius(), c.densityLimit(), c.normalSpiderRate(), c.caveSpiderRate(), c.horseSwimmingEnabled(), c.undeadHorseSwimmingEnabled(), c.horsePreventWandering(),
             c.horseStayRadius(), c.horseRemoveMiningPenalty(), c.horseIncreaseStepHeight(), c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
             c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
-
-            c.fireEnabled(), c.fireBaseColor(), c.fireSoulBaseColor(), c.firePriority(),
-            c.fireBiomeRules(), c.fireBlockRules(), c.fireBlockTagRules(),
 
             c.dropMode()
     );}
@@ -966,14 +883,6 @@ public class ModMenuIntegration implements ModMenuApi {
         boolean enableTrapdoors;
         boolean enableModIncompatibilityCheck;
 
-        boolean fireEnabled;
-        int fireBaseColor;
-        int fireSoulBaseColor;
-        FireRulePriority firePriority;
-        List<String> fireBiomeRules;
-        List<String> fireBlockRules;
-        List<String> fireBlockTagRules;
-
         net.ryan.beyond_the_block.config.DropMode dropMode;
 
         Mutable(SyncedServerConfig c) {
@@ -1066,14 +975,6 @@ public class ModMenuIntegration implements ModMenuApi {
             enableTrapdoors = c.enableTrapdoors();
             enableModIncompatibilityCheck = c.enableModIncompatibilityCheck();
 
-            fireEnabled = c.fireEnabled();
-            fireBaseColor = c.fireBaseColor();
-            fireSoulBaseColor = c.fireSoulBaseColor();
-            firePriority = c.firePriority();
-            fireBiomeRules = new ArrayList<>(c.fireBiomeRules());
-            fireBlockRules = new ArrayList<>(c.fireBlockRules());
-            fireBlockTagRules = new ArrayList<>(c.fireBlockTagRules());
-
             dropMode = c.dropMode();
         }
 
@@ -1097,9 +998,6 @@ public class ModMenuIntegration implements ModMenuApi {
                     horseRemoveMiningPenalty, horseIncreaseStepHeight,
                     enableRecursiveOpening, recursiveOpeningMaxBlocksDistance, enableDoors, enableFenceGates,
                     enableTrapdoors, enableModIncompatibilityCheck,
-
-                    fireEnabled, fireBaseColor, fireSoulBaseColor, firePriority,
-                    fireBiomeRules, fireBlockRules, fireBlockTagRules,
 
                     dropMode
             );

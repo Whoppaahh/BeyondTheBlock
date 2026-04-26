@@ -3,7 +3,6 @@ package net.ryan.beyond_the_block.config.sync;
 import net.minecraft.network.PacketByteBuf;
 import net.ryan.beyond_the_block.config.DropMode;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
-import net.ryan.beyond_the_block.feature.fire.FireRulePriority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,15 +105,6 @@ public record SyncedServerConfig(
         boolean enableTrapdoors,
         boolean enableModIncompatibilityCheck,
 
-        // Features -> Fire
-        boolean fireEnabled,
-        int fireBaseColor,
-        int fireSoulBaseColor,
-        FireRulePriority firePriority,
-        List<String> fireBiomeRules,
-        List<String> fireBlockRules,
-        List<String> fireBlockTagRules,
-
         // Features -> Enchantments
         DropMode dropMode
 
@@ -125,9 +115,6 @@ public record SyncedServerConfig(
         guardMobBlackList = List.copyOf(guardMobBlackList);
         pathsAllowedStartingBlocks = List.copyOf(pathsAllowedStartingBlocks);
         pathsAllowedEndingBlocks = List.copyOf(pathsAllowedEndingBlocks);
-        fireBiomeRules = List.copyOf(fireBiomeRules);
-        fireBlockRules = List.copyOf(fireBlockRules);
-        fireBlockTagRules = List.copyOf(fireBlockTagRules);
     }
 
     public static SyncedServerConfig fromServerConfig(ConfigServer cfg) {
@@ -228,15 +215,6 @@ public record SyncedServerConfig(
                 cfg.features.openables.enableFenceGates,
                 cfg.features.openables.enableTrapdoors,
                 cfg.features.openables.enableModIncompatibilityCheck,
-
-                // Fire
-                cfg.features.fire.enabled,
-                cfg.features.fire.baseFireColor,
-                cfg.features.fire.baseSoulFireColor,
-                cfg.features.fire.priority,
-                cfg.features.fire.biomeRules,
-                cfg.features.fire.blockRules,
-                cfg.features.fire.blockTagRules,
 
                 // Enchantments
                 cfg.features.enchantments.dropMode
@@ -340,17 +318,6 @@ public record SyncedServerConfig(
         cfg.features.openables.enableFenceGates = enableFenceGates;
         cfg.features.openables.enableTrapdoors = enableTrapdoors;
         cfg.features.openables.enableModIncompatibilityCheck = enableModIncompatibilityCheck;
-
-        // Fire
-        cfg.features.fire.enabled = fireEnabled;
-        cfg.features.fire.baseFireColor = fireBaseColor;
-        cfg.features.fire.baseSoulFireColor = fireSoulBaseColor;
-        cfg.features.fire.priority = firePriority == null
-                ? FireRulePriority.BIOME_BLOCK_TAG
-                : firePriority;
-        cfg.features.fire.biomeRules = new ArrayList<>(fireBiomeRules);
-        cfg.features.fire.blockRules = new ArrayList<>(fireBlockRules);
-        cfg.features.fire.blockTagRules = new ArrayList<>(fireBlockTagRules);
 
         // Enchantments
         cfg.features.enchantments.dropMode = dropMode == null ? DropMode.NORMAL : dropMode;
@@ -469,27 +436,6 @@ public record SyncedServerConfig(
         buf.writeBoolean(enableFenceGates);
         buf.writeBoolean(enableTrapdoors);
         buf.writeBoolean(enableModIncompatibilityCheck);
-
-        // Fire
-        buf.writeBoolean(fireEnabled);
-        buf.writeInt(fireBaseColor);
-        buf.writeInt(fireSoulBaseColor);
-        buf.writeEnumConstant(firePriority);
-
-        buf.writeInt(fireBiomeRules.size());
-        for (String value : fireBiomeRules) {
-            buf.writeString(value);
-        }
-
-        buf.writeInt(fireBlockRules.size());
-        for (String value : fireBlockRules) {
-            buf.writeString(value);
-        }
-
-        buf.writeInt(fireBlockTagRules.size());
-        for (String value : fireBlockTagRules) {
-            buf.writeString(value);
-        }
 
         // Enchantments
         buf.writeEnumConstant(dropMode);
@@ -617,30 +563,6 @@ public record SyncedServerConfig(
         boolean enableTrapdoors = buf.readBoolean();
         boolean enableModIncompatibilityCheck = buf.readBoolean();
 
-        // Fire
-        boolean fireEnabled = buf.readBoolean();
-        int fireBaseColor = buf.readInt();
-        int fireSoulBaseColor = buf.readInt();
-        FireRulePriority firePriority = buf.readEnumConstant(FireRulePriority.class);
-
-        int fireBiomeRuleCount = buf.readInt();
-        List<String> fireBiomeRules = new ArrayList<>(fireBiomeRuleCount);
-        for (int i = 0; i < fireBiomeRuleCount; i++) {
-            fireBiomeRules.add(buf.readString());
-        }
-
-        int fireBlockRuleCount = buf.readInt();
-        List<String> fireBlockRules = new ArrayList<>(fireBlockRuleCount);
-        for (int i = 0; i < fireBlockRuleCount; i++) {
-            fireBlockRules.add(buf.readString());
-        }
-
-        int fireBlockTagRuleCount = buf.readInt();
-        List<String> fireBlockTagRules = new ArrayList<>(fireBlockTagRuleCount);
-        for (int i = 0; i < fireBlockTagRuleCount; i++) {
-            fireBlockTagRules.add(buf.readString());
-        }
-
         // Enchantments
         DropMode dropMode = buf.readEnumConstant(DropMode.class);
 
@@ -733,14 +655,6 @@ public record SyncedServerConfig(
                 enableFenceGates,
                 enableTrapdoors,
                 enableModIncompatibilityCheck,
-
-                fireEnabled,
-                fireBaseColor,
-                fireSoulBaseColor,
-                firePriority,
-                fireBiomeRules,
-                fireBlockRules,
-                fireBlockTagRules,
 
                 dropMode
         );

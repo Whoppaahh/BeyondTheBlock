@@ -67,7 +67,6 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         ArmourTrimItemPredicates.register();
         registerTrimItemColors();
         registerClientParticles();
-
         ClientBootstrap.init();
         OutlineRenderer.init();
         ConfigSyncClient.init();

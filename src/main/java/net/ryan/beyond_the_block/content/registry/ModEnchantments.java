@@ -20,6 +20,8 @@ import net.ryan.beyond_the_block.content.enchantment.armour.helmets.ShadowsVeilE
 import net.ryan.beyond_the_block.content.enchantment.armour.leggings.FrozenMomentumEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.armour.leggings.GracefulMovementEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.armour.leggings.NightstrideEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.horses.enchantments.FleetHoovesEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.pets.enchantments.*;
 import net.ryan.beyond_the_block.content.enchantment.tools.FishingCookingEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.axes.BarkskinEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.axes.NightfallCleaveEnchantment;
@@ -38,6 +40,40 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.combat.handlers.TemporalSliceHandler;
 
 public class ModEnchantments {
+
+    public static final Enchantment HORSE_FLEET_HOOVES = register(
+            "horse_fleet_hooves",
+            new FleetHoovesEnchantment()
+    );
+
+    public static final Enchantment PET_LINKED_INVENTORY = register(
+            "pet_linked_inventory",
+            new LinkedInventoryEnchantment()
+    );
+    public static final Enchantment PET_TOTAL_RECALL = register(
+            "pet_total_recall",
+            new TotalRecallEnchantment()
+    );
+    public static final Enchantment PET_POISON_RESISTANCE = register(
+            "pet_poison_resistance",
+            new PoisonResistanceEnchantment()
+    );
+    public static final Enchantment PET_SPEEDSTER = register(
+            "pet_speedster",
+            new SpeedsterEnchantment()
+    );
+    public static final Enchantment PET_DEFLECTING = register(
+            "pet_deflecting",
+            new DeflectingEnchantment()
+    );
+    public static final Enchantment PET_FIREPROOF = register(
+            "pet_fireproof",
+            new FireproofEnchantment()
+    );
+    public static final Enchantment PET_HEALTH_BOOST = register(
+            "pet_health_boost",
+            new HealthBoostEnchantment()
+    );
 
     public static Enchantment FISHING_COOKING = register("fishing_cooking",
             new FishingCookingEnchantment(Enchantment.Rarity.UNCOMMON,

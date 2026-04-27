@@ -37,6 +37,11 @@ import java.util.Map;
 
 public class ModBlocks {
 
+    public static final Block PET_BED = registerBlock(
+            "pet_bed",
+            new PetBedBlock(FabricBlockSettings.of(Material.WOOL).strength(0.4F).nonOpaque()), ModItemGroup.ModBlocksTab
+    );
+
     public static final Block CREAKING_HEART = registerBlock("creaking_heart",
             new CreakingHeartBlock(
                     FabricBlockSettings.copyOf(Blocks.OAK_LOG).strength(2.5F)

@@ -80,13 +80,24 @@
     "feature.enchantments.freeze.MobEntityFreezeMixin",
     "feature.enchantments.freeze.PillagerFreezeAttackMixin",
     "feature.enchantments.freeze.SkeletonFreezeAttackMixin",
+    "feature.horses.AbstractHorseEntityEnchantTickMixin",
+    "feature.horses.AbstractHorseEntityHorseshoesMixin",
     "feature.horses.HorseEntityBehaviourMixin",
     "feature.horses.HorseEntityNamingMixin",
+    "feature.horses.HorseScreenHandlerHorseshoeSlotMixin",
     "feature.horses.LivingEntityHorseInteractionMixin",
     "feature.paths.DirtPathBlockMixin",
     "feature.pets.AnimalEntityCommandInteractionMixin",
     "feature.pets.FollowOwnerGoalCommandMixin",
+    "feature.pets.PetEnchantDamageMixin",
+    "feature.pets.PetEnchantPickupMixin",
+    "feature.pets.PetEnchantStatusEffectMixin",
+    "feature.pets.PetEnchantTickMixin",
+    "feature.pets.ServerWorldPetRespawnMixin",
+    "feature.pets.TameableEntityCollarMixin",
     "feature.pets.TameableEntityCommandMixin",
+    "feature.pets.TameableEntityHomeMixin",
+    "feature.pets.TameableEntityRespawnCaptureMixin",
     "feature.projectiles.ArrowEntityAccessor",
     "feature.projectiles.FireArrowMixin",
     "feature.projectiles.LivingEntityArrowMixin",
@@ -117,5 +128,8 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "accessors.WolfEntityModelAccessor"
+  ]
 }

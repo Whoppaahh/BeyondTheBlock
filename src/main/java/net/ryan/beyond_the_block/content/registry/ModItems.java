@@ -18,6 +18,17 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModItems {
 
+    public static final Item HORSESHOES = registerItem(
+            "horseshoes",
+            new HorseshoesItem(new Item.Settings().maxCount(1).group(ModItemGroup.ModArmourTab))
+    );
+    public static final Item DEED_OF_OWNERSHIP = registerItem(
+            "deed_of_ownership",
+            new DeedOfOwnershipItem(new Item.Settings().maxCount(1).group(ModItemGroup.ModToolTab)));
+    public static final Item COLLAR_TAG = registerItem("collar_tag",
+            new CollarTagItem(new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab))
+    );
+
     public static final Item CHERRY_BOAT = registerItem("cherry_boat",
             new ModBoatItem(ModBoatVariant.CHERRY, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModBlocksTab)));
 

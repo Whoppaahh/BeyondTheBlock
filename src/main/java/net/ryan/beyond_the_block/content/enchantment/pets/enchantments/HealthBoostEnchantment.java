@@ -10,11 +10,24 @@ import java.util.UUID;
 
 public class HealthBoostEnchantment extends PetEnchantment implements PetEnchantHooks {
 
-    private static final UUID MODIFIER_ID =
+    public  static final UUID MODIFIER_ID =
             UUID.fromString("e6eacaa1-9c0a-4a3f-9f32-6e2f02a6d3a9");
 
     public HealthBoostEnchantment() {
         super(Rarity.UNCOMMON);
+    }
+
+    public static void remove(LivingEntity pet) {
+        var attr = pet.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        if (attr == null) return;
+
+        float oldMax = pet.getMaxHealth();
+
+        attr.removeModifier(MODIFIER_ID);
+
+        if (pet.getHealth() > pet.getMaxHealth()) {
+            pet.setHealth(pet.getMaxHealth());
+        }
     }
 
     @Override

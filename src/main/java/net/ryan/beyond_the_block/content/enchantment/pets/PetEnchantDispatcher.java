@@ -7,6 +7,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.ryan.beyond_the_block.content.enchantment.pets.enchantments.HealthBoostEnchantment;
+import net.ryan.beyond_the_block.content.enchantment.pets.enchantments.SpeedsterEnchantment;
+import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.feature.pets.PetCollarAccessor;
 
 import java.util.Map;
@@ -30,7 +33,17 @@ public final class PetEnchantDispatcher {
     }
 
     public static void tick(LivingEntity pet) {
-        for (Map.Entry<Enchantment, Integer> entry : getEnchantments(pet).entrySet()) {
+        Map<Enchantment, Integer> enchantments = getEnchantments(pet);
+
+        if (!enchantments.containsKey(ModEnchantments.PET_HEALTH_BOOST)) {
+            HealthBoostEnchantment.remove(pet);
+        }
+
+        if (!enchantments.containsKey(ModEnchantments.PET_SPEEDSTER)) {
+            SpeedsterEnchantment.remove(pet);
+        }
+
+        for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
             if (entry.getKey() instanceof PetEnchantHooks hooks) {
                 hooks.onTick(pet, entry.getValue());
             }

@@ -22,6 +22,10 @@ public abstract class PetEnchantTickMixin {
             return;
         }
 
+        if (pet.getWorld().isClient) {
+            return;
+        }
+
         PetEnchantDispatcher.tick((LivingEntity) (Object) this);
         if (pet.getOwner() instanceof PlayerEntity owner) {
             PetEnchantDispatcher.ownerDistanceCheck(

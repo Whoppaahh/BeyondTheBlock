@@ -62,6 +62,7 @@
     "entity.SpiderEntityMixin",
     "entity.TameableEntityMixin",
     "entity.VillagerEntityMixin",
+    "entity.WolfEntityMixin",
     "entity.player.PlayerAirJumpTrackerMixin",
     "entity.player.PlayerArrowSelectionMixin",
     "entity.player.PlayerCombatVisualsMixin",

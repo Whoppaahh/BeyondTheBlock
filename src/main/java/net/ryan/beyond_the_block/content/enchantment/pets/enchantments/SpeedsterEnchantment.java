@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class SpeedsterEnchantment extends PetEnchantment implements PetEnchantHooks {
 
-    private static final UUID MODIFIER_ID =
+    public  static final UUID MODIFIER_ID =
             UUID.fromString("9c2820ef-7ec8-4d7d-a9d8-7d861bc4d8e1");
 
     public SpeedsterEnchantment() {
@@ -20,6 +20,13 @@ public class SpeedsterEnchantment extends PetEnchantment implements PetEnchantHo
     @Override
     public int getMaxLevel() {
         return 3;
+    }
+
+    public static void remove(LivingEntity pet) {
+        var attr = pet.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        if (attr != null) {
+            attr.removeModifier(MODIFIER_ID);
+        }
     }
 
     @Override

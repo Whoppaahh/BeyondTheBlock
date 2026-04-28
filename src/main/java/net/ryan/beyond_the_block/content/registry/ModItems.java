@@ -12,11 +12,21 @@ import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.item.*;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourItem;
 import net.ryan.beyond_the_block.content.item.armour.ModArmourMaterials;
+import net.ryan.beyond_the_block.content.item.armour.WolfArmourItem;
 import net.ryan.beyond_the_block.content.item.tools.*;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModItems {
+
+    public static final Item IRON_WOLF_ARMOUR = registerItem("iron_wolf_armour",
+            new WolfArmourItem(5, Items.IRON_INGOT, 0xC8C8C8, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab)));
+
+    public static final Item GOLDEN_WOLF_ARMOUR = registerItem("golden_wolf_armour",
+            new WolfArmourItem(7, Items.GOLD_INGOT, 0xF6D44A, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab)));
+
+    public static final Item DIAMOND_WOLF_ARMOUR = registerItem("diamond_wolf_armour",
+            new WolfArmourItem(11, Items.DIAMOND, 0x5EECD9, new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab)));
 
     public static final Item HORSESHOES = registerItem(
             "horseshoes",

@@ -137,7 +137,7 @@ public abstract class WolfEntityMixin extends TameableEntity implements WolfArmo
         }
     }
 
-    @Inject(method = "damage", at = @At("HEAD"))
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void btb$damageWolfArmourBeforeDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (this.getWorld().isClient) return;
         if (amount <= 0.0F) return;
@@ -155,6 +155,8 @@ public abstract class WolfEntityMixin extends TameableEntity implements WolfArmo
         } else {
             this.btb$setWolfArmour(armour.copy());
         }
+
+        cir.setReturnValue(false);
     }
 
     @Inject(method = "onDeath", at = @At("HEAD"))
@@ -163,8 +165,6 @@ public abstract class WolfEntityMixin extends TameableEntity implements WolfArmo
             this.btb$dropWolfArmour();
         }
     }
-
-
 
     @Override
     public ItemStack btb$getWolfArmour() {

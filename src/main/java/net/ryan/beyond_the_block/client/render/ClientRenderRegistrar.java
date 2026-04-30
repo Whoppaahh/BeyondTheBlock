@@ -1,5 +1,8 @@
 package net.ryan.beyond_the_block.client.render;
 
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.minecraft.client.render.entity.WolfEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.ryan.beyond_the_block.client.render.blockentity.BlockEntityRenderRegistrar;
 import net.ryan.beyond_the_block.client.render.colour.ColourProviderRegistrar;
 import net.ryan.beyond_the_block.client.render.entity.EntityRenderRegistrar;
@@ -16,5 +19,10 @@ public class ClientRenderRegistrar {
         BlockRenderLayerRegistrar.register();
         DynamicLightRegistrar.register();
         ColourProviderRegistrar.register();
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
+            if (entityType == EntityType.WOLF && entityRenderer instanceof WolfEntityRenderer wolfRenderer) {
+                registrationHelper.register(new WolfArmourFeatureRenderer(wolfRenderer));
+            }
+        });
     }
 }

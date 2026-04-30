@@ -22,7 +22,6 @@ import net.ryan.beyond_the_block.utils.ModTags;
 public class WolfArmourFeatureRenderer extends FeatureRenderer<WolfEntity, WolfEntityModel<WolfEntity>> {
     private static final Identifier WOLF_ARMOUR_TEXTURE =
             new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/wolf/wolf_armor.png");
-
     public WolfArmourFeatureRenderer(FeatureRendererContext<WolfEntity, WolfEntityModel<WolfEntity>> context) {
         super(context);
     }

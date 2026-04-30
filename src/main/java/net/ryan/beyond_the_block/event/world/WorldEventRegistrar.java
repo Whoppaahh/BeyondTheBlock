@@ -14,6 +14,7 @@ import net.ryan.beyond_the_block.feature.cauldrons.IceConversionHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.MagmaDripHelper;
 import net.ryan.beyond_the_block.feature.cauldrons.PowderSnowCauldronHelper;
 import net.ryan.beyond_the_block.feature.paths.PathSpeedHelper;
+import net.ryan.beyond_the_block.utils.battle.BattleManager;
 import net.ryan.beyond_the_block.utils.helpers.HelmetEnchantmentHandler;
 import net.ryan.beyond_the_block.utils.helpers.NightstrideHelper;
 import net.ryan.beyond_the_block.utils.helpers.RestoreManager;
@@ -40,6 +41,7 @@ public class WorldEventRegistrar {
             PowderSnowCauldronHelper.tick(world);
             MagmaDripHelper.tick(world);
             IceConversionHelper.tick(world);
+            BattleManager.tick(world.getServer());
         });
 
 

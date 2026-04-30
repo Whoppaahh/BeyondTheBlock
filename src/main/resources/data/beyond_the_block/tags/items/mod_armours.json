@@ -35,6 +35,10 @@
     "beyond_the_block:rosette_boots",
     "beyond_the_block:rosette_chestplate",
     "beyond_the_block:rosette_helmet",
-    "beyond_the_block:rosette_leggings"
+    "beyond_the_block:rosette_leggings",
+
+    "beyond_the_block:iron_wolf_armour",
+    "beyond_the_block:golden_wolf_armour",
+    "beyond_the_block:diamond_wolf_armour"
   ]
 }

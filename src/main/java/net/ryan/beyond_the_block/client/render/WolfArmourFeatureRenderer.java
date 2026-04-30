@@ -22,8 +22,40 @@ import net.ryan.beyond_the_block.utils.ModTags;
 public class WolfArmourFeatureRenderer extends FeatureRenderer<WolfEntity, WolfEntityModel<WolfEntity>> {
     private static final Identifier WOLF_ARMOUR_TEXTURE =
             new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/wolf/wolf_armor.png");
+
+    private static final Identifier WOLF_ARMOUR_CRACKINESS_LOW =
+            new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/wolf/wolf_armor_crackiness_low.png");
+
+    private static final Identifier WOLF_ARMOUR_CRACKINESS_MEDIUM =
+            new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/wolf/wolf_armor_crackiness_medium.png");
+
+    private static final Identifier WOLF_ARMOUR_CRACKINESS_HIGH =
+            new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/wolf/wolf_armor_crackiness_high.png");
+
     public WolfArmourFeatureRenderer(FeatureRendererContext<WolfEntity, WolfEntityModel<WolfEntity>> context) {
         super(context);
+    }
+
+    private static Identifier getCrackTexture(ItemStack stack) {
+        if (!stack.isDamageable() || !stack.isDamaged()) {
+            return null;
+        }
+
+        float damageRatio = (float) stack.getDamage() / (float) stack.getMaxDamage();
+
+        if (damageRatio >= 0.75F) {
+            return WOLF_ARMOUR_CRACKINESS_HIGH;
+        }
+
+        if (damageRatio >= 0.50F) {
+            return WOLF_ARMOUR_CRACKINESS_MEDIUM;
+        }
+
+        if (damageRatio >= 0.25F) {
+            return WOLF_ARMOUR_CRACKINESS_LOW;
+        }
+
+        return null;
     }
 
     @Override
@@ -60,5 +92,12 @@ public class WolfArmourFeatureRenderer extends FeatureRenderer<WolfEntity, WolfE
 
         VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(WOLF_ARMOUR_TEXTURE));
         model.render(matrices, consumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
+
+        Identifier crackTexture = getCrackTexture(armor);
+
+        if (crackTexture != null) {
+            VertexConsumer crackConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(crackTexture));
+            model.render(matrices, crackConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        }
     }
 }

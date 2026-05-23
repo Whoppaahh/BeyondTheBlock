@@ -6,11 +6,7 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.content.registry.family.ModTrimMaterial;
 import net.ryan.beyond_the_block.content.registry.family.ModTrimPattern;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public final class ModTrimRegistry {
     private static final Map<Identifier, ModTrimMaterial> MATERIALS = new LinkedHashMap<>();

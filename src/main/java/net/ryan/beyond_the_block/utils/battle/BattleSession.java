@@ -70,8 +70,8 @@ public class  BattleSession {
             return;
         }
 
-        fighterA.teleport(world, arenaCenter.getX() - 3.0D, arenaCenter.getY(), arenaCenter.getZ(), fighterA.getYaw(), fighterA.getPitch());
-        fighterB.teleport(world, arenaCenter.getX() + 3.0D, arenaCenter.getY(), arenaCenter.getZ(), fighterB.getYaw(), fighterB.getPitch());
+        fighterA.teleport(arenaCenter.getX() - 3.0D, arenaCenter.getY(), arenaCenter.getZ());
+        fighterB.teleport(arenaCenter.getX() + 3.0D, arenaCenter.getY(), arenaCenter.getZ());
 
         fighterA.setInvulnerable(true);
         fighterB.setInvulnerable(true);
@@ -111,8 +111,8 @@ public class  BattleSession {
             fighterA.setInvulnerable(false);
             fighterB.setInvulnerable(false);
 
-            fighterA.setTarget(fighterB);
-            fighterB.setTarget(fighterA);
+            //fighterA.setTarget(fighterB);
+            //fighterB.setTarget(fighterA);
 
             state =  BattleState.ACTIVE;
         }
@@ -132,8 +132,8 @@ public class  BattleSession {
         keepInsideArena(fighterA);
         keepInsideArena(fighterB);
 
-        fighterA.setTarget(fighterB);
-        fighterB.setTarget(fighterA);
+        //fighterA.setTarget(fighterB);
+        //fighterB.setTarget(fighterA);
 
         if (fighterA.getHealth() <= 1.0F && !rules.allowDeath) {
             finish(server, teamB);
@@ -227,7 +227,7 @@ public class  BattleSession {
         if (fighter == null) return;
 
         fighter.setInvulnerable(false);
-        fighter.setTarget(null);
+       // fighter.setTarget(null);
 
         if (rules.restoreHealthAfterBattle) {
             fighter.setHealth(Math.max(1.0F, team.originalHealth));
@@ -246,7 +246,7 @@ public class  BattleSession {
         if (owner == null) return;
 
         owner.setCameraEntity(owner);
-        owner.changeGameMode(GameMode.SURVIVAL);
+        owner.changeGameMode(team.originalGameMode);
 
         if (rules.restorePositionAfterBattle && team.originalOwnerPos != null) {
             owner.requestTeleport(

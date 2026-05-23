@@ -12,21 +12,21 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class  BattleCommands {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(literal(" battle")
+        dispatcher.register(literal("battle")
                 .then(literal("start")
                         .then(argument("opponent", EntityArgumentType.player())
-                                .then(argument("your ", EntityArgumentType.entity())
-                                        .then(argument("opponent ", EntityArgumentType.entity())
+                                .then(argument("your beast", EntityArgumentType.entity())
+                                        .then(argument("opponent beast", EntityArgumentType.entity())
                                                 .executes(context -> {
                                                     ServerPlayerEntity playerA = context.getSource().getPlayer();
                                                     ServerPlayerEntity playerB = EntityArgumentType.getPlayer(context, "opponent");
 
-                                                    if (!(EntityArgumentType.getEntity(context, "your ") instanceof LivingEntity fighterA)) {
+                                                    if (!(EntityArgumentType.getEntity(context, "your beast") instanceof LivingEntity fighterA)) {
                                                         context.getSource().sendError(Text.literal("Your fighter must be a living entity."));
                                                         return 0;
                                                     }
 
-                                                    if (!(EntityArgumentType.getEntity(context, "opponent ") instanceof LivingEntity fighterB)) {
+                                                    if (!(EntityArgumentType.getEntity(context, "opponent beast") instanceof LivingEntity fighterB)) {
                                                         context.getSource().sendError(Text.literal("Opponent fighter must be a living entity."));
                                                         return 0;
                                                     }
@@ -37,12 +37,12 @@ public class  BattleCommands {
                                                     }
 
                                                     if (! BattleUtil.isOwnedBy(fighterA, playerA.getUuid())) {
-                                                        context.getSource().sendError(Text.literal("You do not own your selected  ."));
+                                                        context.getSource().sendError(Text.literal("You do not own your selected beast."));
                                                         return 0;
                                                     }
 
                                                     if (! BattleUtil.isOwnedBy(fighterB, playerB.getUuid())) {
-                                                        context.getSource().sendError(Text.literal("Opponent does not own their selected  ."));
+                                                        context.getSource().sendError(Text.literal("Opponent does not own their selected beast."));
                                                         return 0;
                                                     }
 

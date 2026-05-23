@@ -14,7 +14,6 @@ import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.pets.PetCollarAccessor;
 import net.ryan.beyond_the_block.feature.pets.PetCommandAccessor;
-import net.ryan.beyond_the_block.feature.pets.PetCommandState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -13,7 +13,6 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.blockentity.ShelfBlockEntity;
 import net.ryan.beyond_the_block.content.blockentity.WoodcutterBlockEntity;
 import org.jetbrains.annotations.Nullable;
 

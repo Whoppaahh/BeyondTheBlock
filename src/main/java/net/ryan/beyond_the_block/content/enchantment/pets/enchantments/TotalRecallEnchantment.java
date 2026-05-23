@@ -3,9 +3,9 @@ package net.ryan.beyond_the_block.content.enchantment.pets.enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.particle.ParticleTypes;
 import net.ryan.beyond_the_block.content.enchantment.pets.PetEnchantHooks;
 import net.ryan.beyond_the_block.content.enchantment.pets.PetEnchantment;
 

@@ -11,7 +11,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.content.entity.ChestBoatEntity;
 import net.ryan.beyond_the_block.content.entity.RaftChestEntity;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 

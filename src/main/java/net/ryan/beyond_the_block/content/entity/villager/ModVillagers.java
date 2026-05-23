@@ -1,7 +1,6 @@
 package net.ryan.beyond_the_block.content.entity.villager;
 
 import com.google.common.collect.ImmutableSet;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -9,7 +8,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -36,8 +34,6 @@ import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.poi.PointOfInterestType;
-import net.ryan.beyond_the_block.client.render.entity.GuardEntityArmourModel;
-import net.ryan.beyond_the_block.client.render.entity.GuardEntityModel;
 import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 import net.ryan.beyond_the_block.content.entity.villager.guard.goals.AttackEntityDaytimeGoal;
@@ -145,11 +141,7 @@ public class ModVillagers {
                     .dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
 
 
-    public static final EntityModelLayer ROGUE_VILLAGER_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "rogue_villager"), "main");
 
-    public static final EntityModelLayer GUARD_ENTITY_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_entity"), "main");
-    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_OUTER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_armour_outer"), "main");
-    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_INNER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_armour_inner"), "main");
 
     private static final int WEAPON_SLOT = 5;
 
@@ -159,10 +151,6 @@ public class ModVillagers {
         FabricDefaultAttributeRegistry.register(GUARD_VILLAGER, GuardEntity.createAttributes());
 
         registerTrades();
-
-        EntityModelLayerRegistry.registerModelLayer(GUARD_ENTITY_MODEL, GuardEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(GUARD_ENTITY_ARMOUR_OUTER, GuardEntityArmourModel::createOuterArmourLayer);
-        EntityModelLayerRegistry.registerModelLayer(GUARD_ENTITY_ARMOUR_INNER, GuardEntityArmourModel::createInnerArmourLayer);
 
         UseEntityCallback.EVENT.register(ModVillagers::villagerConvert);
         GuardVillagersEvents.ON_TARGET_EVENT.register(ModVillagers::target);

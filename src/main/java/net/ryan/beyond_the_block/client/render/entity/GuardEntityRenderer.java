@@ -13,7 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
+import net.ryan.beyond_the_block.content.entity.model.VillagerModels;
 import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.ryan.beyond_the_block.content.entity.villager.ModVillagers.GUARD_ENTITY_MODEL;
+import static net.ryan.beyond_the_block.content.entity.model.VillagerModels.GUARD_ENTITY_MODEL;
 
 
 public class GuardEntityRenderer extends BipedEntityRenderer<GuardEntity, BipedEntityModel<GuardEntity>> {
@@ -47,8 +47,8 @@ public class GuardEntityRenderer extends BipedEntityRenderer<GuardEntity, BipedE
         super(context, new GuardEntityModel(context.getPart(GUARD_ENTITY_MODEL)), 0.5F);
         this.model = this.getModel();
         this.addFeature(new ArmorFeatureRenderer<>(this,
-                new GuardEntityArmourModel(context.getPart(ModVillagers.GUARD_ENTITY_ARMOUR_INNER)),
-                new GuardEntityArmourModel(context.getPart(ModVillagers.GUARD_ENTITY_ARMOUR_OUTER))));
+                new GuardEntityArmourModel(context.getPart(VillagerModels.GUARD_ENTITY_ARMOUR_INNER)),
+                new GuardEntityArmourModel(context.getPart(VillagerModels.GUARD_ENTITY_ARMOUR_OUTER))));
     }
 
     @Override

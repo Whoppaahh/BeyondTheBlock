@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.event.world;
 
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -41,10 +40,9 @@ public class WorldEventRegistrar {
             PowderSnowCauldronHelper.tick(world);
             MagmaDripHelper.tick(world);
             IceConversionHelper.tick(world);
-            BattleManager.tick(world.getServer());
         });
 
-
+        ServerTickEvents.END_SERVER_TICK.register(BattleManager::tick);
         ServerTickEvents.END_SERVER_TICK.register(PathSpeedHelper::tickSpeed);
         ServerEntityEvents.ENTITY_LOAD.register(SheepColours::randomiseColours);
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {

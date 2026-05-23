@@ -3,10 +3,8 @@ package net.ryan.beyond_the_block.client.render.trim;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.item.ItemStack;
 import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.ryan.beyond_the_block.content.registry.family.ModArmourTrim;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 

@@ -17,7 +17,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.block.HangingSignBlock;
 import net.ryan.beyond_the_block.content.block.WallHangingSignBlock;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -19,6 +19,7 @@
     "HeldItemFeatureRendererMixin",
     "HeldItemRendererMixin",
     "HorseEntityModelMixin",
+    "HorseScreenHorseshoeSlotMixin",
     "InGameHudMixin",
     "ItemFrameRendererMixin",
     "ItemRendererMixin",

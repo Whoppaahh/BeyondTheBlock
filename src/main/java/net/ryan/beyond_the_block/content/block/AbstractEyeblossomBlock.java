@@ -10,8 +10,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-import java.util.Random;
-
 public abstract class AbstractEyeblossomBlock extends FlowerBlock {
 
     protected Block otherVariant;

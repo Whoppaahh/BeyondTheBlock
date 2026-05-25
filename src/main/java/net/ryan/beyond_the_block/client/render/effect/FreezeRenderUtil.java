@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.effect;
+package net.ryan.beyond_the_block.client.render.effect;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;

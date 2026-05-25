@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.entity.model;
+package net.ryan.beyond_the_block.client.render.entity.model;
 
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;

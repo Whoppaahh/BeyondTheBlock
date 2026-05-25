@@ -15,6 +15,7 @@ import net.ryan.beyond_the_block.content.world.tree.ModFoliagePlacerTypes;
 import net.ryan.beyond_the_block.content.world.tree.ModTrunkPlacerTypes;
 import net.ryan.beyond_the_block.content.world.tree.decorator.ModTreeDecoratorTypes;
 import net.ryan.beyond_the_block.event.ModEvents;
+import net.ryan.beyond_the_block.feature.combat.handlers.TemporalSliceHandler;
 import net.ryan.beyond_the_block.network.ServerNetworking;
 import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.ModLootTableModifiers;

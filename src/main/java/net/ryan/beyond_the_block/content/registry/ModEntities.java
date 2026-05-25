@@ -16,9 +16,9 @@ import net.minecraft.world.biome.BiomeKeys;
 import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModelLayers;
 import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModels;
 import net.ryan.beyond_the_block.content.entity.*;
-import net.ryan.beyond_the_block.content.entity.model.RaftChestEntityModel;
-import net.ryan.beyond_the_block.content.entity.model.RaftEntityModel;
-import net.ryan.beyond_the_block.content.entity.model.WitherZombieModel;
+import net.ryan.beyond_the_block.client.render.entity.model.RaftChestEntityModel;
+import net.ryan.beyond_the_block.client.render.entity.model.RaftEntityModel;
+import net.ryan.beyond_the_block.client.render.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModEntities {

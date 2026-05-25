@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.effect;
+package net.ryan.beyond_the_block.client.render.effect;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.OverlayTexture;

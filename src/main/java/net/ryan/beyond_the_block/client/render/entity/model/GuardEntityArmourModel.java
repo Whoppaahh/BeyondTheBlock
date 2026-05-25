@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.client.render.entity;
+package net.ryan.beyond_the_block.client.render.entity.model;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

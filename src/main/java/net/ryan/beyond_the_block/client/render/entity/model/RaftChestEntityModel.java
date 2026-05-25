@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.entity.model;
+package net.ryan.beyond_the_block.client.render.entity.model;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;

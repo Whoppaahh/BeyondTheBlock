@@ -1,13 +1,9 @@
 package net.ryan.beyond_the_block.content.enchantment.armour.boots;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,8 +14,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-
-import static net.ryan.beyond_the_block.network.packets.PacketIDs.LEAP_OF_FAITH_PACKET_ID;
 
 public class LeapOfFaithEnchantment extends Enchantment {
     public LeapOfFaithEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot... slotTypes) {
@@ -63,23 +57,5 @@ public class LeapOfFaithEnchantment extends Enchantment {
         tracker.setAirJumpCount(current + 1);
     }
 
-    public static void handleJumpPress(MinecraftClient client) {
-        if (client.player == null || client.isPaused()) return;
 
-        PlayerEntity player = client.player;
-
-        boolean pressingJump = client.options.jumpKey.isPressed();
-        boolean canDoubleJump = !player.isOnGround() && !player.getAbilities().flying;
-
-        if (pressingJump && canDoubleJump && LeapOfFaithClient.canAttemptDoubleJump(player)) {
-            // Prevent holding space from constantly retriggering
-           // EmeraldEmpire.LOGGER.info("Jump Key Pressed");
-            LeapOfFaithClient.markDoubleJumpUsed(player);
-
-            // Send a packet to server
-            ClientPlayNetworking.send(LEAP_OF_FAITH_PACKET_ID, PacketByteBufs.create());
-        } else if (!pressingJump) {
-            LeapOfFaithClient.resetJumpKey(player);
-        }
-    }
 }

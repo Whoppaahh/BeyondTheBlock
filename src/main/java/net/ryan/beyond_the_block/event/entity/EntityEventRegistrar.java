@@ -8,7 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.ryan.beyond_the_block.client.hud.BreedingHUDRenderer;
 import net.ryan.beyond_the_block.client.hud.FollowerHudRenderer;
 import net.ryan.beyond_the_block.client.hud.TrajectoryHUD;
-import net.ryan.beyond_the_block.content.effect.FreezeEffectLayer;
+import net.ryan.beyond_the_block.client.render.effect.FreezeEffectLayer;
 import net.ryan.beyond_the_block.content.entity.CupidArrowEntity;
 import net.ryan.beyond_the_block.feature.projectile.ArrowRecoveryHandler;
 

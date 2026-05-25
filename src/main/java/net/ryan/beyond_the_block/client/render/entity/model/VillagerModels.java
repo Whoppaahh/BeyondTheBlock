@@ -1,10 +1,8 @@
-package net.ryan.beyond_the_block.content.entity.model;
+package net.ryan.beyond_the_block.client.render.entity.model;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.client.render.entity.GuardEntityArmourModel;
-import net.ryan.beyond_the_block.client.render.entity.GuardEntityModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class VillagerModels {

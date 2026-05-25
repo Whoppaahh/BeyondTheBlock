@@ -12,8 +12,10 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
+import net.ryan.beyond_the_block.client.render.entity.model.GuardEntityArmourModel;
+import net.ryan.beyond_the_block.client.render.entity.model.GuardEntityModel;
 import net.ryan.beyond_the_block.config.access.Configs;
-import net.ryan.beyond_the_block.content.entity.model.VillagerModels;
+import net.ryan.beyond_the_block.client.render.entity.model.VillagerModels;
 import net.ryan.beyond_the_block.content.entity.villager.guard.GuardEntity;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.ryan.beyond_the_block.content.entity.model.VillagerModels.GUARD_ENTITY_MODEL;
+import static net.ryan.beyond_the_block.client.render.entity.model.VillagerModels.GUARD_ENTITY_MODEL;
 
 
 public class GuardEntityRenderer extends BipedEntityRenderer<GuardEntity, BipedEntityModel<GuardEntity>> {

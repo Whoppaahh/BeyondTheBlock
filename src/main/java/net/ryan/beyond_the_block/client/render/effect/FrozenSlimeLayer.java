@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.effect;
+package net.ryan.beyond_the_block.client.render.effect;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -8,15 +8,14 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.SheepEntityModel;
-import net.minecraft.client.render.entity.model.SheepWoolEntityModel;
+import net.minecraft.client.render.entity.model.SlimeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.ryan.beyond_the_block.content.registry.ModEffects;
 
-public class FrozenSheepWoolLayer extends FeatureRenderer<SheepEntity, SheepEntityModel<SheepEntity>> {
+public class FrozenSlimeLayer extends FeatureRenderer<SlimeEntity, SlimeEntityModel<SlimeEntity>> {
 
-    public FrozenSheepWoolLayer(FeatureRendererContext<SheepEntity, SheepEntityModel<SheepEntity>> context) {
+    public FrozenSlimeLayer(FeatureRendererContext<SlimeEntity, SlimeEntityModel<SlimeEntity>> context) {
         super(context);
     }
 
@@ -24,7 +23,7 @@ public class FrozenSheepWoolLayer extends FeatureRenderer<SheepEntity, SheepEnti
     public void render(MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers,
                        int light,
-                       SheepEntity sheep,
+                       SlimeEntity slime,
                        float limbAngle,
                        float limbDistance,
                        float tickDelta,
@@ -32,25 +31,25 @@ public class FrozenSheepWoolLayer extends FeatureRenderer<SheepEntity, SheepEnti
                        float headYaw,
                        float headPitch) {
 
-        if (!sheep.hasStatusEffect(ModEffects.FREEZE) || sheep.isSheared()) {
+        if (!slime.hasStatusEffect(ModEffects.FREEZE)) {
             return;
         }
 
-        SheepWoolEntityModel<SheepEntity> woolModel =
-                new SheepWoolEntityModel<>(
+        SlimeEntityModel<SlimeEntity> slimeModel =
+                new SlimeEntityModel<>(
                         MinecraftClient.getInstance()
                                 .getEntityModelLoader()
-                                .getModelPart(EntityModelLayers.SHEEP_FUR)
+                                .getModelPart(EntityModelLayers.SLIME_OUTER)
                 );
 
-        this.getContextModel().copyStateTo(woolModel);
-        woolModel.animateModel(sheep, limbAngle, limbDistance, tickDelta);
-        woolModel.setAngles(sheep, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+        this.getContextModel().copyStateTo(slimeModel);
+        slimeModel.animateModel(slime, limbAngle, limbDistance, tickDelta);
+        slimeModel.setAngles(slime, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 
         VertexConsumer vertexConsumer =
-                vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(FreezeRenderUtil.getFreezeTexture(sheep)));
+                vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(FreezeRenderUtil.getFreezeTexture(slime)));
 
-        woolModel.render(
+        slimeModel.render(
                 matrices,
                 vertexConsumer,
                 light,

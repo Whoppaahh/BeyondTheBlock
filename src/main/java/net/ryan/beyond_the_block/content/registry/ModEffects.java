@@ -9,7 +9,7 @@ import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.content.effect.PhasedStatusEffect;
+import net.ryan.beyond_the_block.client.render.effect.PhasedStatusEffect;
 import net.ryan.beyond_the_block.content.effect.beneficial.*;
 import net.ryan.beyond_the_block.content.effect.harmful.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;

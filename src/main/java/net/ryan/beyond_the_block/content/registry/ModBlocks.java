@@ -144,7 +144,7 @@ public class ModBlocks {
                     FabricBlockSettings.copyOf(Blocks.PINK_TULIP)
                             .noCollision()
                             .breakInstantly()
-                            .nonOpaque()
+                            .nonOpaque().offsetType(AbstractBlock.OffsetType.NONE)
             ),
             ModItemGroup.ModBlocksTab
     );

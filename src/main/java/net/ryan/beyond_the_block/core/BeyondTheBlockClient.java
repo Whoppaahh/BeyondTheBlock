@@ -33,6 +33,7 @@ import net.ryan.beyond_the_block.client.hud.TrajectoryHUD;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
 import net.ryan.beyond_the_block.client.network.ConfigSyncClient;
 import net.ryan.beyond_the_block.client.render.effect.*;
+import net.ryan.beyond_the_block.client.render.entity.model.VillagerModels;
 import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManager;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimItemPredicates;
@@ -42,6 +43,7 @@ import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
 import net.ryan.beyond_the_block.content.effect.beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.client.util.LeapOfFaithClient;
+import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
 import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.content.particle.FallingLeafParticle;
 import net.ryan.beyond_the_block.content.registry.ModItems;
@@ -79,6 +81,7 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         ConfigSyncClient.init();
         ModModels.registerModels();
         registerHUD();
+        VillagerModels.register();
 
     }
 

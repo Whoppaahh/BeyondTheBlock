@@ -7,9 +7,9 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class VillagerModels {
 
-    public static final EntityModelLayer GUARD_ENTITY_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_entity"), "main");
-    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_OUTER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_armour_outer"), "main");
-    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_INNER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID + "guard_armour_inner"), "main");
+    public static final EntityModelLayer GUARD_ENTITY_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "guard"), "main");
+    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_OUTER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "guard_armour_outer"), "main");
+    public static final EntityModelLayer GUARD_ENTITY_ARMOUR_INNER = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "guard_armour_inner"), "main");
 
     public static void register() {
         EntityModelLayerRegistry.registerModelLayer(GUARD_ENTITY_MODEL, GuardEntityModel::getTexturedModelData);

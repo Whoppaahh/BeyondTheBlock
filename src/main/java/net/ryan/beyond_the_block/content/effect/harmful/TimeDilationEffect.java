@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.content.effect.harmful;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -36,12 +35,6 @@ public class TimeDilationEffect extends StatusEffect {
             if (!pLivingEntity.hasStatusEffect(StatusEffects.SLOWNESS)) {
                 pLivingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20, pAmplifier + 1, false, false, false));
             }
-        }
-        // On the client side, you can apply effects like slowing down the world
-        if (pLivingEntity.world.isClient()) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            // Do client-side specific effects here, such as particle effects or altering time perception
-            // Example: Apply a screen effect to simulate the world moving faster.
         }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);
     }

@@ -32,16 +32,14 @@ import net.ryan.beyond_the_block.client.hud.FollowerHudRenderer;
 import net.ryan.beyond_the_block.client.hud.TrajectoryHUD;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
 import net.ryan.beyond_the_block.client.network.ConfigSyncClient;
+import net.ryan.beyond_the_block.client.render.effect.*;
 import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManager;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimItemPredicates;
 import net.ryan.beyond_the_block.client.screen.*;
+import net.ryan.beyond_the_block.client.util.AnimatedItemClientHandler;
 import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
-import net.ryan.beyond_the_block.client.render.effect.FreezeEffectLayer;
-import net.ryan.beyond_the_block.client.render.effect.FrozenCreeperLayer;
-import net.ryan.beyond_the_block.client.render.effect.FrozenSheepWoolLayer;
-import net.ryan.beyond_the_block.client.render.effect.FrozenSlimeLayer;
 import net.ryan.beyond_the_block.content.effect.beneficial.ClarityEffect;
 import net.ryan.beyond_the_block.client.util.LeapOfFaithClient;
 import net.ryan.beyond_the_block.content.item.AnimatedItem;
@@ -224,8 +222,8 @@ public class BeyondTheBlockClient implements ClientModInitializer {
 
     private void registerClientTickEvents() {
         ClientNetworking.registerS2CPackets();
-        ClientTickEvents.END_CLIENT_TICK.register(ClarityEffect::tickHandler);
-        ClientTickEvents.END_CLIENT_TICK.register(AnimatedItem::handleLeftClick);
+        ClientTickEvents.END_CLIENT_TICK.register(ClarityEffectClient::tickHandler);
+        ClientTickEvents.END_CLIENT_TICK.register(AnimatedItemClientHandler::handleLeftClick);
         ClientTickEvents.END_CLIENT_TICK.register(LeapOfFaithClient::handleJumpPress);
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             PlayerHeadManager.tick();

@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.feature.restore;
 
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -37,10 +36,10 @@ public class RestoreProtectionHandler {
 
         // CLIENT-SIDE BLOCK (prevents prediction)
         if (world.isClient) {
-            if (world instanceof ClientWorld clientWorld
-                    && RestoreManager.isProtectedClient(placePos)) {
+            if (RestoreManager.isProtectedClient(placePos)) {
                 return TypedActionResult.fail(stack);
             }
+
             return TypedActionResult.pass(stack);
         }
 
@@ -52,6 +51,7 @@ public class RestoreProtectionHandler {
                                 .formatted(Formatting.GRAY),
                         true
                 );
+
                 return TypedActionResult.fail(stack);
             }
         }

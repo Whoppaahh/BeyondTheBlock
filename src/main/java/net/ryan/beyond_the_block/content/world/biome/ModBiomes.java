@@ -1,6 +1,6 @@
 package net.ryan.beyond_the_block.content.world.biome;
 
-import net.minecraft.client.sound.MusicType;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeAdditionsSound;
@@ -80,7 +80,7 @@ public class ModBiomes {
                         .particleConfig(new net.minecraft.world.biome.BiomeParticleConfig(ModParticles.CHERRY_LEAF_PARTICLE, 0.005F))
                         .moodSound(BiomeMoodSound.CAVE)
                         .additionsSound(new BiomeAdditionsSound(SoundEvents.MUSIC_OVERWORLD_JUNGLE_AND_FOREST, 0.0111D))
-                        .music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_MEADOW))
+                        .music(new MusicSound(SoundEvents.MUSIC_OVERWORLD_MEADOW, 12000, 24000, false))
                         .build())
                 .spawnSettings(spawnBuilder.build())
                 .generationSettings(generationBuilder.build())
@@ -143,7 +143,7 @@ public class ModBiomes {
                         // .particleConfig(new net.minecraft.world.biome.BiomeParticleConfig(ModParticles.PALE_LEAF_PARTICLE, 0.003F))
                         .moodSound(BiomeMoodSound.CAVE)
                         .additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_CAVE, 0.02D))
-                        .music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_JUNGLE_AND_FOREST))
+                        .music(new MusicSound(SoundEvents.MUSIC_OVERWORLD_JUNGLE_AND_FOREST, 12000, 24000, false))
                         .build())
                 .spawnSettings(spawnBuilder.build())
                 .generationSettings(generationBuilder.build())

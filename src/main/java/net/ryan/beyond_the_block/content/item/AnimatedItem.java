@@ -1,8 +1,6 @@
 package net.ryan.beyond_the_block.content.item;
 
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
@@ -25,7 +23,6 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.world.dimension.ModDimensions;
 import net.ryan.beyond_the_block.screen.handler.StaffScreenHandler;
-import org.lwjgl.glfw.GLFW;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -40,7 +37,7 @@ import static net.ryan.beyond_the_block.network.packets.PacketIDs.TELEPORT_WITH_
 
 public class AnimatedItem extends Item implements IAnimatable {
     public AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static boolean wasPressedLastTick = false;
+
 
     public AnimatedItem(Settings settings) {
         super(settings);
@@ -202,24 +199,5 @@ public class AnimatedItem extends Item implements IAnimatable {
         return destPos;
     }
 
-    public static void handleLeftClick(MinecraftClient client) {
-        if (client.player == null || client.world == null) return;
-        if (client.currentScreen != null) return; // Don't trigger in GUI
 
-        long window = client.getWindow().getHandle();
-        boolean isPressed = GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS;
-
-        // Detect fresh press, not hold
-        if (isPressed && !wasPressedLastTick) {
-            ItemStack heldStack = client.player.getMainHandStack();
-
-            if (heldStack.getItem() instanceof AnimatedItem) {
-                //EmeraldEmpire.LOGGER.info("Left Clicked Air With Animated Item");
-
-                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                ClientPlayNetworking.send(TELEPORT_WITH_STAFF_ID, buf);
-            }
-        }
-        wasPressedLastTick = isPressed;
-    }
 }

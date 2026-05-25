@@ -9,7 +9,6 @@ import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.ryan.beyond_the_block.client.render.effect.PhasedStatusEffect;
 import net.ryan.beyond_the_block.content.effect.beneficial.*;
 import net.ryan.beyond_the_block.content.effect.harmful.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
@@ -45,7 +44,6 @@ public class ModEffects {
 
     public static void registerEffects() {
 
-        PHASE = registerStatusEffect("phase", () -> new PhasedStatusEffect(StatusEffectCategory.NEUTRAL, 0x2B0033));
         ZOMBIFICATION = registerStatusEffect("zombification", () -> new ZombificationEffect(StatusEffectCategory.HARMFUL, Color.GREEN.getRGB()));
         Potion zombifcation_potion = new Potion(new StatusEffectInstance(ZOMBIFICATION, 20 * 10));
         Registry.register(Registry.POTION, new Identifier(BeyondTheBlock.MOD_ID, "zombification_potion"), zombifcation_potion);

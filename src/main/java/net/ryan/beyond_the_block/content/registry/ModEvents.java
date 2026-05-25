@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.event;
+package net.ryan.beyond_the_block.content.registry;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.ryan.beyond_the_block.event.entity.EntityEventRegistrar;

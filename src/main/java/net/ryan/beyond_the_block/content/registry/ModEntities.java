@@ -2,10 +2,8 @@ package net.ryan.beyond_the_block.content.registry;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
@@ -13,12 +11,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
-import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModelLayers;
-import net.ryan.beyond_the_block.client.render.blockentity.HangingSignModels;
 import net.ryan.beyond_the_block.content.entity.*;
-import net.ryan.beyond_the_block.client.render.entity.model.RaftChestEntityModel;
-import net.ryan.beyond_the_block.client.render.entity.model.RaftEntityModel;
-import net.ryan.beyond_the_block.client.render.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModEntities {
@@ -125,9 +118,6 @@ public class ModEntities {
                             .build()
             );
 
-    public static final EntityModelLayer WITHER_ZOMBIE_MODEL = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "wither_zombie"), "main");
-    public static final EntityModelLayer RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "raft"), "main");
-    public static final EntityModelLayer CHEST_RAFT = new EntityModelLayer(new Identifier(BeyondTheBlock.MOD_ID, "chest_raft"), "main");
 
     public static final EntityType<CobwebProjectileEntity> COBWEB_PROJECTILE =
             Registry.register(
@@ -146,24 +136,7 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(WITHER_SKELETON_HORSE, WitherSkeletonHorse.createWitherSkeletonHorseAttributes());
         FabricDefaultAttributeRegistry.register(WITHER_ZOMBIE, WitherZombie.createWitherZombieAttributes());
 
-        EntityModelLayerRegistry.registerModelLayer(WITHER_ZOMBIE_MODEL, WitherZombieModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(RAFT, RaftEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(CHEST_RAFT, RaftChestEntityModel::getTexturedModelData);
 
-        EntityModelLayerRegistry.registerModelLayer(
-                HangingSignModelLayers.HANGING_SIGN_CEILING,
-                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.CEILING)
-        );
-
-        EntityModelLayerRegistry.registerModelLayer(
-                HangingSignModelLayers.HANGING_SIGN_CEILING_MIDDLE,
-                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.CEILING_MIDDLE)
-        );
-
-        EntityModelLayerRegistry.registerModelLayer(
-                HangingSignModelLayers.HANGING_SIGN_WALL,
-                () -> HangingSignModels.getTexturedModelData(HangingSignModels.AttachmentType.WALL)
-        );
     }
 
     public static void registerSpawnRestrictions() {

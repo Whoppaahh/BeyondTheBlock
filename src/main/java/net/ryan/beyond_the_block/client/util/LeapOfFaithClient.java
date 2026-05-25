@@ -1,4 +1,4 @@
-package net.ryan.beyond_the_block.content.enchantment.armour.boots;
+package net.ryan.beyond_the_block.client.util;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

@@ -37,7 +37,6 @@ import net.ryan.beyond_the_block.content.enchantment.tools.shovels.EarthShatterE
 import net.ryan.beyond_the_block.content.enchantment.tools.shovels.FertilityEnchantment;
 import net.ryan.beyond_the_block.content.enchantment.tools.swords.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
-import net.ryan.beyond_the_block.feature.combat.handlers.TemporalSliceHandler;
 
 public class ModEnchantments {
 
@@ -204,7 +203,7 @@ public class ModEnchantments {
     }
 
     public static void registerModEnchantments() {
-        TemporalSliceHandler.register();
+      //  TemporalSliceHandler.register();
         BeyondTheBlock.LOGGER.info("Registering Enchantments for " + BeyondTheBlock.MOD_ID);
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
+import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.content.entity.RaftChestEntity;
 import net.ryan.beyond_the_block.content.entity.RaftEntity;
 import net.ryan.beyond_the_block.client.render.entity.model.RaftChestEntityModel;
@@ -26,8 +27,8 @@ public class RaftEntityRenderer<T extends BoatEntity> extends EntityRenderer<T> 
         super(ctx);
         this.chest = chest;
         this.model = chest
-                ? new RaftChestEntityModel(ctx.getPart(ModEntities.CHEST_RAFT))
-                : new RaftEntityModel(ctx.getPart(ModEntities.RAFT));
+                ? new RaftChestEntityModel(ctx.getPart(ModModels.CHEST_RAFT))
+                : new RaftEntityModel(ctx.getPart(ModModels.RAFT));
         this.shadowRadius = 0.8F;
     }
 

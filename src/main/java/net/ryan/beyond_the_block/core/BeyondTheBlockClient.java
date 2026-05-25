@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -26,8 +27,12 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.client.bootstrap.ClientBootstrap;
+import net.ryan.beyond_the_block.client.hud.BreedingHUDRenderer;
+import net.ryan.beyond_the_block.client.hud.FollowerHudRenderer;
+import net.ryan.beyond_the_block.client.hud.TrajectoryHUD;
 import net.ryan.beyond_the_block.client.hud.TrajectoryRenderer;
 import net.ryan.beyond_the_block.client.network.ConfigSyncClient;
+import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManager;
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimItemPredicates;
 import net.ryan.beyond_the_block.client.screen.*;
@@ -38,7 +43,7 @@ import net.ryan.beyond_the_block.client.render.effect.FrozenCreeperLayer;
 import net.ryan.beyond_the_block.client.render.effect.FrozenSheepWoolLayer;
 import net.ryan.beyond_the_block.client.render.effect.FrozenSlimeLayer;
 import net.ryan.beyond_the_block.content.effect.beneficial.ClarityEffect;
-import net.ryan.beyond_the_block.content.enchantment.armour.boots.LeapOfFaithClient;
+import net.ryan.beyond_the_block.client.util.LeapOfFaithClient;
 import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.content.particle.FallingLeafParticle;
 import net.ryan.beyond_the_block.content.registry.ModItems;
@@ -49,6 +54,10 @@ import net.ryan.beyond_the_block.screen.ModScreenHandlers;
 import net.ryan.beyond_the_block.utils.visual.PlayerHeadManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import static net.ryan.beyond_the_block.client.hud.FollowerHudRenderer.getFollowers;
 
 public class BeyondTheBlockClient implements ClientModInitializer {
 
@@ -70,9 +79,36 @@ public class BeyondTheBlockClient implements ClientModInitializer {
         ClientBootstrap.init();
         OutlineRenderer.init();
         ConfigSyncClient.init();
+        ModModels.registerModels();
+        registerHUD();
 
     }
 
+    public static void registerHUD(){
+        HudRenderCallback.EVENT.register(new BreedingHUDRenderer());
+        HudRenderCallback.EVENT.register(new TrajectoryHUD());
+
+        HudRenderCallback.EVENT.register((context, tickDelta) -> {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.player == null) return;
+
+            List<LivingEntity> followers = getFollowers(client.player);
+            if (followers.isEmpty()) return;
+
+            int screenWidth = client.getWindow().getScaledWidth();
+            int screenHeight = client.getWindow().getScaledHeight();
+
+            int entryHeight = 32;
+            int totalHeight = followers.size() * entryHeight;
+            int startY = (screenHeight / 2) - (totalHeight / 2);
+            int x = 15; // left margin
+
+            for (LivingEntity entity : followers) {
+                FollowerHudRenderer.renderFollower(context, entity, x, startY);
+                startY += entryHeight;
+            }
+        });
+    }
     public static void registerClientParticles() {
         ParticleFactoryRegistry.getInstance().register(
                 ModParticles.CHERRY_LEAF_PARTICLE,

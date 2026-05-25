@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.content.entity.WitherZombie;
 import net.ryan.beyond_the_block.client.render.entity.model.WitherZombieModel;
 import net.ryan.beyond_the_block.content.registry.ModEntities;
@@ -16,7 +17,7 @@ public class WitherZombieRenderer extends MobEntityRenderer<WitherZombie, Wither
     private static final Identifier WITHER_ZOMBIE_TEXTURE = new Identifier(BeyondTheBlock.MOD_ID, "textures/entity/zombie/wither_zombie.png");
 
     public WitherZombieRenderer(EntityRendererFactory.Context context) {
-        super(context, new WitherZombieModel<>(context.getPart(ModEntities.WITHER_ZOMBIE_MODEL)), 0.5f);
+        super(context, new WitherZombieModel<>(context.getPart(ModModels.WITHER_ZOMBIE_MODEL)), 0.5f);
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
 
     }

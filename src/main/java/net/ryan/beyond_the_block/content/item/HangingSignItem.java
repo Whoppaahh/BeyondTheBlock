@@ -65,10 +65,6 @@ public class HangingSignItem extends Item {
                     .with(HangingSignBlock.WATERLOGGED, waterlogged)
                     .with(HangingSignBlock.ATTACHED, attached);
 
-            if (!placementState.canPlaceAt(world, placePos)) {
-                return ActionResult.FAIL;
-            }
-
         } else {
             // Wall hanging sign
             if (!(this.wallHangingSignBlock instanceof WallHangingSignBlock wallBlock)) {
@@ -82,9 +78,9 @@ public class HangingSignItem extends Item {
                     .with(WallHangingSignBlock.FACING, facing)
                     .with(WallHangingSignBlock.WATERLOGGED, waterlogged);
 
-            if (!placementState.canPlaceAt(world, placePos)) {
-                return ActionResult.FAIL;
-            }
+        }
+        if (!placementState.canPlaceAt(world, placePos)) {
+            return ActionResult.FAIL;
         }
 
         if (!world.setBlockState(placePos, placementState, Block.NOTIFY_ALL)) {

@@ -6,12 +6,17 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.List;
+
 public class PowderSnowCauldronHelper {
+
+        private static int tickCounter = 0;
 
         // Call from END_WORLD_TICK
         public static void tick(ServerWorld world) {
@@ -20,17 +25,21 @@ public class PowderSnowCauldronHelper {
 
             if (!world.isRaining()) return; // includes snowing
 
-            for (PlayerEntity player : world.getPlayers()) {
-                BlockPos center = player.getBlockPos();
-                int radius = 8;
+            List<ServerPlayerEntity> players = world.getPlayers();
+            if (players.isEmpty()) return;
 
-                BlockPos.Mutable pos = new BlockPos.Mutable();
-                for (int dx = -radius; dx <= radius; dx++) {
-                    for (int dz = -radius; dz <= radius; dz++) {
-                        for (int dy = -4; dy <= 4; dy++) {
-                            pos.set(center.getX() + dx, center.getY() + dy, center.getZ() + dz);
-                            accumulateAt(world, pos);
-                        }
+            ServerPlayerEntity player = players.get(tickCounter % players.size());
+            tickCounter++;
+
+            BlockPos center = player.getBlockPos();
+            int radius = 8;
+
+            BlockPos.Mutable pos = new BlockPos.Mutable();
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dz = -radius; dz <= radius; dz++) {
+                    for (int dy = -4; dy <= 4; dy++) {
+                        pos.set(center.getX() + dx, center.getY() + dy, center.getZ() + dz);
+                        accumulateAt(world, pos);
                     }
                 }
             }

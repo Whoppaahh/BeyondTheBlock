@@ -20,4 +20,14 @@ public class ExperienceBlock extends OreBlock {
             serverPlayer.addExperienceLevels(30);
         }
     }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, net.minecraft.util.math.random.Random random) {
+        if (random.nextInt(5) == 0) {
+            double x = (double)pos.getX() + random.nextDouble();
+            double y = (double)pos.getY() + random.nextDouble();
+            double z = (double)pos.getZ() + random.nextDouble();
+            world.addParticle(net.minecraft.particle.ParticleTypes.ELECTRIC_SPARK, x, y, z, 0.0, 0.0, 0.0);
+        }
+    }
 }

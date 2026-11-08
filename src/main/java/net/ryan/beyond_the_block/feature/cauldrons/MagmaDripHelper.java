@@ -14,24 +14,32 @@ import net.minecraft.util.math.Direction;
 import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 
+import java.util.List;
+
 public class MagmaDripHelper {
+
+    private static int tickCounter = 0;
 
     // Call from END_WORLD_TICK
     public static void tick(ServerWorld world) {
         // e.g. every 40 ticks (~2 seconds)
         if (world.getTime() % 40 != 0) return;
 
-        for (PlayerEntity player : world.getPlayers()) {
-            BlockPos center = player.getBlockPos();
-            int radius = 8;
+        List<net.minecraft.server.network.ServerPlayerEntity> players = world.getPlayers();
+        if (players.isEmpty()) return;
 
-            BlockPos.Mutable pos = new BlockPos.Mutable();
-            for (int dx = -radius; dx <= radius; dx++) {
-                for (int dz = -radius; dz <= radius; dz++) {
-                    for (int dy = -6; dy <= 6; dy++) {
-                        pos.set(center.getX() + dx, center.getY() + dy, center.getZ() + dz);
-                        tryDripAt(world, pos);
-                    }
+        net.minecraft.server.network.ServerPlayerEntity player = players.get(tickCounter % players.size());
+        tickCounter++;
+
+        BlockPos center = player.getBlockPos();
+        int radius = 8;
+
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dz = -radius; dz <= radius; dz++) {
+                for (int dy = -6; dy <= 6; dy++) {
+                    pos.set(center.getX() + dx, center.getY() + dy, center.getZ() + dz);
+                    tryDripAt(world, pos);
                 }
             }
         }

@@ -18,7 +18,6 @@ import java.util.function.Supplier;
 
 public class ModEffects {
 
-    public static StatusEffect PHASE;
     public static StatusEffect ZOMBIFICATION;
     public static StatusEffect CUPID;
 

@@ -7,8 +7,10 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
+import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public final class MindWardHandler {
@@ -19,16 +21,22 @@ public final class MindWardHandler {
     }
 
     public static void onTick(LivingEntity entity) {
+        if (entity.age % TICK_INTERVAL != 0) {
+            return;
+        }
+
         if (!(entity instanceof PlayerEntity player)) {
             return;
         }
 
-        int level = getEnchantmentLevelForPlayer(player, ModEnchantments.MIND_WARD);
-        if (level <= 0) {
-            return;
+        int level;
+        if (player instanceof EnchantmentCacheAccessor cache) {
+            level = cache.btb$getCachedLevel(ModEnchantments.MIND_WARD);
+        } else {
+            level = getEnchantmentLevelForPlayer(player, ModEnchantments.MIND_WARD);
         }
 
-        if (player.age % TICK_INTERVAL != 0) {
+        if (level <= 0) {
             return;
         }
 
@@ -46,19 +54,23 @@ public final class MindWardHandler {
     }
 
     private static void reduceNegativeEffectDurations(PlayerEntity player, int level) {
-        List<StatusEffectInstance> effects = new ArrayList<>(player.getStatusEffects());
+        List<StatusEffectInstance> effectsToAdd = new ArrayList<>();
+        List<StatusEffectInstance> currentEffects = new ArrayList<>(player.getStatusEffects());
 
-        for (StatusEffectInstance effect : effects) {
+        boolean changed = false;
+        for (StatusEffectInstance effect : currentEffects) {
             if (effect.getEffectType().isBeneficial()) {
                 continue;
             }
 
-            int newDuration = effect.getDuration() - (20 * level);
+            int reduction = 20 * level;
+            int newDuration = effect.getDuration() - reduction;
 
             player.removeStatusEffect(effect.getEffectType());
+            changed = true;
 
             if (newDuration > 0) {
-                player.addStatusEffect(new StatusEffectInstance(
+                effectsToAdd.add(new StatusEffectInstance(
                         effect.getEffectType(),
                         newDuration,
                         effect.getAmplifier(),
@@ -66,6 +78,12 @@ public final class MindWardHandler {
                         effect.shouldShowParticles(),
                         effect.shouldShowIcon()
                 ));
+            }
+        }
+
+        if (changed) {
+            for (StatusEffectInstance effect : effectsToAdd) {
+                player.addStatusEffect(effect);
             }
         }
     }

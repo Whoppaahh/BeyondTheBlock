@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:amberine_shovel",
+    "beyond_the_block:amberine_pickaxe",
+    "beyond_the_block:amberine_axe",
+    "beyond_the_block:amberine_hoe",
+    "beyond_the_block:amberine_sword"
+  ]
+}

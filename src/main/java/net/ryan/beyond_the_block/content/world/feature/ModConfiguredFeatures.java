@@ -2,6 +2,7 @@ package net.ryan.beyond_the_block.content.world.feature;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.collection.DataPool;
@@ -74,6 +75,10 @@ public class ModConfiguredFeatures {
                                     BlockFilterPlacementModifier.of(
                                             BlockPredicate.allOf(
                                                     BlockPredicate.replaceable(),
+                                                    BlockPredicate.matchingFluids(
+                                                            BlockPos.ORIGIN,
+                                                            List.of(Fluids.EMPTY)
+                                                    ),
                                                     BlockPredicate.wouldSurvive(ModBlocks.PINK_PETALS.getDefaultState(), BlockPos.ORIGIN),
                                                     BlockPredicate.matchingBlocks(
                                                             BlockPos.ORIGIN.down(),

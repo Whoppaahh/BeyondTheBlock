@@ -45,6 +45,8 @@ public class ConfigServer implements ConfigData {
         public Horses horses = new Horses();
         public DoubleOpenables openables = new DoubleOpenables();
         public Enchantments enchantments = new Enchantments();
+        public VillageTheft theft = new VillageTheft();
+        public Performance performance = new Performance();
     }
 
 
@@ -53,6 +55,14 @@ public class ConfigServer implements ConfigData {
         public boolean rewardsIncludeModdedItems = true;
         @ConfigEntry.BoundedDiscrete(min = 200, max = 240000)
         public long generationInterval = 24000;
+        public List<String> customRewards = Arrays.asList(
+                "beyond_the_block:astracinder",
+                "beyond_the_block:xenolith_staff",
+                "beyond_the_block:nocturnite_item",
+                "beyond_the_block:raw_azuros_block"
+        );
+        public String activationItemId = "beyond_the_block:ruby_item";
+        public int activationCountRequirement = 3;
     }
     public static class Paths {
         public boolean enabled = true;
@@ -172,5 +182,26 @@ public class ConfigServer implements ConfigData {
 
     public static class Enchantments {
         public DropMode dropMode = DropMode.NORMAL;
+    }
+
+    /* ---------- Village Theft ---------- */
+
+    public static class VillageTheft {
+        public boolean enabled = true;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 64)
+        public int witnessRange = 10;
+        public int gossipAmount = 10;
+        public boolean useLightDetection = true;
+        public boolean useStealthDetection = true;
+    }
+
+    /* ---------- Performance ---------- */
+
+    public static class Performance {
+        public boolean enableEnchantmentCaching = true;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+        public int hivesProcessedPerTick = 20;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 50)
+        public int maxPlayersPerNightstrideTick = 5;
     }
 }

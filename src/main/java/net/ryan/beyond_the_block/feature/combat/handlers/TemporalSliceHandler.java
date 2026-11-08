@@ -104,15 +104,11 @@ public final class TemporalSliceHandler {
                 continue;
             }
 
-            BeyondTheBlock.LOGGER.warn("[TemporalSlice] Releasing delayed hit: damage=" + pending.damage()
-                    + ", target=" + target.getName().getString()
-                    + ", now=" + now
-                    + ", releaseTick=" + pending.releaseTick());
+            BeyondTheBlock.LOGGER.warn("[TemporalSlice] Releasing delayed hit: damage={}, target={}, now={}, releaseTick={}", pending.damage(), target.getName().getString(), now, pending.releaseTick());
 
             boolean damaged = target.damage(DamageSource.GENERIC, pending.damage());
 
-            BeyondTheBlock.LOGGER.warn("[TemporalSlice] damage() returned " + damaged
-                    + ", target health now=" + target.getHealth());
+            BeyondTheBlock.LOGGER.warn("[TemporalSlice] damage() returned {}, target health now={}", damaged, target.getHealth());
 
             if (damaged) {
                 world.spawnParticles(

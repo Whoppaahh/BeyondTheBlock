@@ -106,7 +106,17 @@ public record SyncedServerConfig(
         boolean enableModIncompatibilityCheck,
 
         // Features -> Enchantments
-        DropMode dropMode
+        DropMode dropMode,
+
+        // Features -> VillageTheft
+        boolean theftEnabled,
+        int theftWitnessRange,
+        int theftGossipAmount,
+
+        // Features -> Performance
+        boolean enableEnchantmentCaching,
+        int hivesProcessedPerTick,
+        int maxPlayersPerNightstrideTick
 
 ) {
     public static final int PROTOCOL_VERSION = 3;
@@ -217,7 +227,17 @@ public record SyncedServerConfig(
                 cfg.features.openables.enableModIncompatibilityCheck,
 
                 // Enchantments
-                cfg.features.enchantments.dropMode
+                cfg.features.enchantments.dropMode,
+
+                // Village Theft
+                cfg.features.theft.enabled,
+                cfg.features.theft.witnessRange,
+                cfg.features.theft.gossipAmount,
+
+                // Performance
+                cfg.features.performance.enableEnchantmentCaching,
+                cfg.features.performance.hivesProcessedPerTick,
+                cfg.features.performance.maxPlayersPerNightstrideTick
         );
     }
 
@@ -321,6 +341,16 @@ public record SyncedServerConfig(
 
         // Enchantments
         cfg.features.enchantments.dropMode = dropMode == null ? DropMode.NORMAL : dropMode;
+
+        // Village Theft
+        cfg.features.theft.enabled = theftEnabled;
+        cfg.features.theft.witnessRange = clamp(theftWitnessRange, 1, 64);
+        cfg.features.theft.gossipAmount = theftGossipAmount;
+
+        // Performance
+        cfg.features.performance.enableEnchantmentCaching = enableEnchantmentCaching;
+        cfg.features.performance.hivesProcessedPerTick = clamp(hivesProcessedPerTick, 1, 100);
+        cfg.features.performance.maxPlayersPerNightstrideTick = clamp(maxPlayersPerNightstrideTick, 1, 50);
     }
 
     public void write(PacketByteBuf buf) {
@@ -439,6 +469,16 @@ public record SyncedServerConfig(
 
         // Enchantments
         buf.writeEnumConstant(dropMode);
+
+        // Village Theft
+        buf.writeBoolean(theftEnabled);
+        buf.writeInt(theftWitnessRange);
+        buf.writeInt(theftGossipAmount);
+
+        // Performance
+        buf.writeBoolean(enableEnchantmentCaching);
+        buf.writeInt(hivesProcessedPerTick);
+        buf.writeInt(maxPlayersPerNightstrideTick);
     }
 
     public static SyncedServerConfig read(PacketByteBuf buf) {
@@ -566,6 +606,16 @@ public record SyncedServerConfig(
         // Enchantments
         DropMode dropMode = buf.readEnumConstant(DropMode.class);
 
+        // Village Theft
+        boolean theftEnabled = buf.readBoolean();
+        int theftWitnessRange = buf.readInt();
+        int theftGossipAmount = buf.readInt();
+
+        // Performance
+        boolean enableEnchantmentCaching = buf.readBoolean();
+        int hivesProcessedPerTick = buf.readInt();
+        int maxPlayersPerNightstrideTick = buf.readInt();
+
         return new SyncedServerConfig(
                 rubyOre,
                 miraniteOre,
@@ -656,7 +706,13 @@ public record SyncedServerConfig(
                 enableTrapdoors,
                 enableModIncompatibilityCheck,
 
-                dropMode
+                dropMode,
+                theftEnabled,
+                theftWitnessRange,
+                theftGossipAmount,
+                enableEnchantmentCaching,
+                hivesProcessedPerTick,
+                maxPlayersPerNightstrideTick
         );
     }
 

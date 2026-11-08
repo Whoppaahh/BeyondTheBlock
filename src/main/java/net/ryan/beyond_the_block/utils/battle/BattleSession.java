@@ -10,34 +10,34 @@ import net.minecraft.world.GameMode;
 
 import java.util.UUID;
 
-public class  BattleSession {
+public class BattleSession {
     private final UUID id = UUID.randomUUID();
 
     private final ServerWorld world;
     private final BlockPos arenaCenter;
 
-    private final  BattleTeam teamA;
-    private final  BattleTeam teamB;
-    private final  BattleRules rules;
+    private final BattleTeam teamA;
+    private final BattleTeam teamB;
+    private final BattleRules rules;
 
-    private  BattleState state =  BattleState.WAITING;
+    private BattleState state = BattleState.WAITING;
 
     private int countdownTicks;
     private int activeTicks;
 
-    public  BattleSession(
+    public BattleSession(
             ServerWorld world,
             BlockPos arenaCenter,
             ServerPlayerEntity ownerA,
             LivingEntity fighterA,
             ServerPlayerEntity ownerB,
             LivingEntity fighterB,
-             BattleRules rules
+            BattleRules rules
     ) {
         this.world = world;
         this.arenaCenter = arenaCenter;
-        this.teamA = new  BattleTeam(ownerA, fighterA);
-        this.teamB = new  BattleTeam(ownerB, fighterB);
+        this.teamA = new BattleTeam(ownerA, fighterA);
+        this.teamB = new BattleTeam(ownerB, fighterB);
         this.rules = rules;
         this.countdownTicks = rules.countdownTicks;
     }
@@ -46,7 +46,7 @@ public class  BattleSession {
         return id;
     }
 
-    public  BattleState getState() {
+    public BattleState getState() {
         return state;
     }
 
@@ -82,16 +82,16 @@ public class  BattleSession {
         ownerA.setCameraEntity(fighterA);
         ownerB.setCameraEntity(fighterB);
 
-        state =  BattleState.COUNTDOWN;
+        state = BattleState.COUNTDOWN;
 
         ownerA.sendMessage(Text.literal("  battle starting..."), false);
         ownerB.sendMessage(Text.literal("  battle starting..."), false);
     }
 
     public void tick(MinecraftServer server) {
-        if (state ==  BattleState.COUNTDOWN) {
+        if (state == BattleState.COUNTDOWN) {
             tickCountdown(server);
-        } else if (state ==  BattleState.ACTIVE) {
+        } else if (state == BattleState.ACTIVE) {
             tickActive(server);
         }
     }
@@ -114,7 +114,7 @@ public class  BattleSession {
             //fighterA.setTarget(fighterB);
             //fighterB.setTarget(fighterA);
 
-            state =  BattleState.ACTIVE;
+            state = BattleState.ACTIVE;
         }
     }
 
@@ -182,8 +182,8 @@ public class  BattleSession {
         }
     }
 
-    private void finish(MinecraftServer server,  BattleTeam winningTeam) {
-        state =  BattleState.FINISHED;
+    private void finish(MinecraftServer server, BattleTeam winningTeam) {
+        state = BattleState.FINISHED;
 
         ServerPlayerEntity winner = server.getPlayerManager().getPlayer(winningTeam.ownerUuid);
 
@@ -193,11 +193,11 @@ public class  BattleSession {
             winner.sendMessage(Text.literal("Your   won the battle!"), false);
         }
 
-         BattleManager.removeSession(id);
+        BattleManager.removeSession(id);
     }
 
     public void cancel(MinecraftServer server, String reason) {
-        state =  BattleState.CANCELLED;
+        state = BattleState.CANCELLED;
         cleanup(server);
 
         ServerPlayerEntity ownerA = server.getPlayerManager().getPlayer(teamA.ownerUuid);
@@ -206,7 +206,7 @@ public class  BattleSession {
         if (ownerA != null) ownerA.sendMessage(Text.literal(reason), false);
         if (ownerB != null) ownerB.sendMessage(Text.literal(reason), false);
 
-         BattleManager.removeSession(id);
+        BattleManager.removeSession(id);
     }
 
     private void cleanup(MinecraftServer server) {
@@ -223,11 +223,11 @@ public class  BattleSession {
         cleanupOwner(ownerB, teamB);
     }
 
-    private void cleanupFighter(LivingEntity fighter,  BattleTeam team) {
+    private void cleanupFighter(LivingEntity fighter, BattleTeam team) {
         if (fighter == null) return;
 
         fighter.setInvulnerable(false);
-       // fighter.setTarget(null);
+        // fighter.setTarget(null);
 
         if (rules.restoreHealthAfterBattle) {
             fighter.setHealth(Math.max(1.0F, team.originalHealth));
@@ -242,7 +242,7 @@ public class  BattleSession {
         }
     }
 
-    private void cleanupOwner(ServerPlayerEntity owner,  BattleTeam team) {
+    private void cleanupOwner(ServerPlayerEntity owner, BattleTeam team) {
         if (owner == null) return;
 
         owner.setCameraEntity(owner);
@@ -258,10 +258,10 @@ public class  BattleSession {
     }
 
     private LivingEntity getFighterA(MinecraftServer server) {
-        return  BattleUtil.getLivingEntity(server, teamA.fighterUuid);
+        return BattleUtil.getLivingEntity(server, teamA.fighterUuid);
     }
 
     private LivingEntity getFighterB(MinecraftServer server) {
-        return  BattleUtil.getLivingEntity(server, teamB.fighterUuid);
+        return BattleUtil.getLivingEntity(server, teamB.fighterUuid);
     }
 }

@@ -15,13 +15,17 @@ import java.util.Set;
 public class VillageContainerTagger extends PersistentState {
 
     private final Set<BlockPos> villageContainers = new HashSet<>();
+    private static VillageContainerTagger instance;
 
     public static VillageContainerTagger get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(
+        if (instance != null) return instance;
+
+        instance = world.getPersistentStateManager().getOrCreate(
                 VillageContainerTagger::readNbt,
                 VillageContainerTagger::new,
                 "village_container_tracker"
         );
+        return instance;
     }
 
     public void markVillageContainer(BlockPos pos) {
@@ -53,11 +57,15 @@ public class VillageContainerTagger extends PersistentState {
 
     public static VillageContainerTagger readNbt(NbtCompound nbt) {
         VillageContainerTagger tracker = new VillageContainerTagger();
-        NbtList list = nbt.getList("Containers", NbtElement.INT_ARRAY_TYPE);
-        for (NbtElement element : list) {
-            int[] coords = ((NbtIntArray) element).getIntArray();
-            if (coords.length == 3) {
-                tracker.villageContainers.add(new BlockPos(coords[0], coords[1], coords[2]));
+        if (nbt.contains("Containers", NbtElement.LIST_TYPE)) {
+            NbtList list = nbt.getList("Containers", NbtElement.INT_ARRAY_TYPE);
+            for (NbtElement element : list) {
+                if (element instanceof NbtIntArray intArray) {
+                    int[] coords = intArray.getIntArray();
+                    if (coords.length == 3) {
+                        tracker.villageContainers.add(new BlockPos(coords[0], coords[1], coords[2]));
+                    }
+                }
             }
         }
         return tracker;

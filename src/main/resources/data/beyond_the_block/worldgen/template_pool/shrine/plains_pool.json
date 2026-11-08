@@ -3,10 +3,28 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 1,
+      "weight": 70,
       "element": {
         "location": "beyond_the_block:shrine/plains_shrine",
         "processors": "beyond_the_block:ruined_structure",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 20,
+      "element": {
+        "location": "beyond_the_block:shrine/plains_shrine",
+        "processors": "beyond_the_block:pristine_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "location": "beyond_the_block:shrine/plains_shrine",
+        "processors": "beyond_the_block:luxury_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

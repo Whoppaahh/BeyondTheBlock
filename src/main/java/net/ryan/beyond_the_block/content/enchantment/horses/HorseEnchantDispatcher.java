@@ -8,6 +8,7 @@ import net.ryan.beyond_the_block.content.enchantment.horses.enchantments.FleetHo
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.feature.horses.HorseEnchantHooks;
 import net.ryan.beyond_the_block.feature.horses.HorseEquipmentAccessor;
+import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
 
 import java.util.Map;
 
@@ -28,14 +29,13 @@ public class HorseEnchantDispatcher {
 
     public static void tick(AbstractHorseEntity horse) {
         Map<Enchantment, Integer> enchantments = getEnchantments(horse);
-
-        if (!enchantments.containsKey(ModEnchantments.HORSE_FLEET_HOOVES)) {
-            FleetHoovesEnchantment.remove(horse);
-        }
-
-        for (var entry : enchantments.entrySet()) {
-            if (entry.getKey() instanceof HorseEnchantHooks hooks) {
-                hooks.onTick(horse, entry.getValue());
+        
+        for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
+            Enchantment enchantment = entry.getKey();
+            int level = entry.getValue();
+            
+            if (enchantment instanceof HorseEnchantHooks hooks) {
+                hooks.onTick(horse, level);
             }
         }
     }

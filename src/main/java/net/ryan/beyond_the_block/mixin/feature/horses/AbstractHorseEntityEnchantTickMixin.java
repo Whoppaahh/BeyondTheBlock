@@ -12,6 +12,8 @@ public abstract class AbstractHorseEntityEnchantTickMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void btb$horseEnchantTick(CallbackInfo ci) {
-        HorseEnchantDispatcher.tick((AbstractHorseEntity)(Object)this);
+        AbstractHorseEntity self = (AbstractHorseEntity)(Object)this;
+        if (self.getWorld().isClient || self.age % 20 != 0) return;
+        HorseEnchantDispatcher.tick(self);
     }
 }

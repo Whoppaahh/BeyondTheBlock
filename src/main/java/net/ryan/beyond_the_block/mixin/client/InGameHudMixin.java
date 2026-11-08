@@ -225,7 +225,7 @@ public abstract class InGameHudMixin {
         int scaledWidth = ScaledTextRenderer.getMultiScaledTextWidth(textRenderer, Collections.singletonList(segment));
 
         matrices.push();
-        matrices.translate(0, 0, 500); // above items
+        matrices.translate(0, 0, 200); // above items
         ScaledTextRenderer.drawMultiScaledText(
                 matrices,
                 textRenderer,
@@ -246,9 +246,12 @@ public abstract class InGameHudMixin {
             this.itemRenderer.renderInGuiWithOverrides(player, stack, x, y, seed);
 
             // Render custom scaled overlay
-            drawScaledItemCount(new MatrixStack(), x, y, stack.getCount(), 0.8f);
+            // Note: ItemRendererMixin now handles canceling the vanilla overlay for counts > 1
+            if (stack.getCount() > 1) {
+                drawScaledItemCount(new MatrixStack(), x, y, stack.getCount(), 0.8f);
+            }
 
-            ci.cancel(); // prevent vanilla code from running
+            ci.cancel(); // prevent vanilla Hotbar rendering (which calls renderGuiItemOverlay)
         }
     }
 

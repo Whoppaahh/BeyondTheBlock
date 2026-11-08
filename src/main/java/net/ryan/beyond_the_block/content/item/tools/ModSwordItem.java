@@ -1,5 +1,6 @@
 package net.ryan.beyond_the_block.content.item.tools;
 
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -14,14 +15,25 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.registry.ModEffects;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.ModParticles;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ModSwordItem extends SwordItem {
     public ModSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        TooltipHelper.appendSwordTooltip(tooltip, this.getMaterial());
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

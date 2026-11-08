@@ -2,11 +2,14 @@ package net.ryan.beyond_the_block.content.block;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -15,6 +18,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.blockentity.PedestalBlockEntity;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PedestalBlock extends BlockWithEntity implements BlockEntityProvider {
 
@@ -23,6 +29,14 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
 
     public PedestalBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.literal("A display for your most prized possessions.").formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Right-click with an item to place it.").formatted(Formatting.AQUA));
+        tooltip.add(Text.literal("Right-click with an empty hand to retrieve it.").formatted(Formatting.AQUA));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

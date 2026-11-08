@@ -4,10 +4,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.ryan.beyond_the_block.content.effect.beneficial.SoulLinkEffect;
 import net.ryan.beyond_the_block.content.registry.ModEffects;
+import net.ryan.beyond_the_block.damage_sources.ModDamageSources;
 
 public final class SoulLinkHandler {
 
@@ -33,7 +35,7 @@ public final class SoulLinkHandler {
             return;
         }
 
-        linked.damage(DamageSource.MAGIC, amount);
+        linked.damage(ModDamageSources.SOUL_LINK, amount);
 
         entity.getWorld().playSound(
                 null,
@@ -44,12 +46,14 @@ public final class SoulLinkHandler {
                 1.0F
         );
 
-        if (!entity.getWorld().isClient) {
-            entity.getWorld().addParticle(
+        if (entity.getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(
                     ParticleTypes.END_ROD,
                     linked.getX(),
                     linked.getY(),
                     linked.getZ(),
+                    1,
+                    0.1,
                     0.1,
                     0.1,
                     0.1

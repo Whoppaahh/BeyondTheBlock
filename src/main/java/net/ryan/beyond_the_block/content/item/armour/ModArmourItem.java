@@ -1,6 +1,7 @@
 package net.ryan.beyond_the_block.content.item.armour;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,8 +11,12 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.item.tools.TooltipHelper;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 
 public class ModArmourItem extends ArmorItem {
@@ -23,6 +28,12 @@ public class ModArmourItem extends ArmorItem {
 
     public ModArmourItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        TooltipHelper.appendArmourTooltip(tooltip, this.getMaterial());
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
@@ -38,6 +49,7 @@ public class ModArmourItem extends ArmorItem {
 
                 if(hasFullSuitOfArmorOn(player)) {
                     evaluateArmorEffects(player);
+                    spawnArmorParticles(world, player);
                 }else{
                     player.removeStatusEffect(MATERIAL_TO_EFFECT_MAP.get(ModArmourMaterials.RUBY).getEffectType());
                 }
@@ -45,6 +57,16 @@ public class ModArmourItem extends ArmorItem {
         }
 
         super.inventoryTick(stack, world, entity, slot, selected);
+    }
+
+    private void spawnArmorParticles(World world, PlayerEntity player) {
+        if (hasCorrectArmorOn(ModArmourMaterials.NOCTURNITE, player)) {
+            if (world.getRandom().nextInt(10) == 0) {
+                world.addParticle(net.minecraft.particle.ParticleTypes.REVERSE_PORTAL,
+                        player.getParticleX(0.5), player.getRandomBodyY(), player.getParticleZ(0.5),
+                        0, 0, 0);
+            }
+        }
     }
 
     private void evaluateArmorEffects(PlayerEntity player) {

@@ -13,6 +13,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 
+import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -30,6 +32,7 @@ public final class HelmetEnchantmentHandler {
     }
 
     private static void onEndWorldTick(ServerWorld world) {
+        if (world.getTime() % 20 != 0) return;
         for (ServerPlayerEntity player : world.getPlayers()) {
             tickIronCladVision(player);
             tickShadowsVeil(player);
@@ -37,8 +40,13 @@ public final class HelmetEnchantmentHandler {
     }
 
     private static void tickIronCladVision(ServerPlayerEntity player) {
-        ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
-        int level = EnchantmentHelper.getLevel(ModEnchantments.IRON_CLAD_VISION, helmet);
+        int level;
+        if (player instanceof EnchantmentCacheAccessor cache) {
+            level = cache.btb$getCachedLevel(ModEnchantments.IRON_CLAD_VISION);
+        } else {
+            ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
+            level = EnchantmentHelper.getLevel(ModEnchantments.IRON_CLAD_VISION, helmet);
+        }
 
         if (level <= 0) {
             removeIronCladModifiers(player);
@@ -123,8 +131,13 @@ public final class HelmetEnchantmentHandler {
     }
 
     private static void tickShadowsVeil(ServerPlayerEntity player) {
-        ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
-        int level = EnchantmentHelper.getLevel(ModEnchantments.SHADOWS_VEIL, helmet);
+        int level;
+        if (player instanceof EnchantmentCacheAccessor cache) {
+            level = cache.btb$getCachedLevel(ModEnchantments.SHADOWS_VEIL);
+        } else {
+            ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
+            level = EnchantmentHelper.getLevel(ModEnchantments.SHADOWS_VEIL, helmet);
+        }
 
         if (level <= 0) {
             return;

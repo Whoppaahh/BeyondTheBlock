@@ -3,6 +3,7 @@ package net.ryan.beyond_the_block.content.block.cauldrons;
 import net.minecraft.block.*;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,16 +12,23 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.blockentity.DyedWaterCauldronBlockEntity;
 import net.ryan.beyond_the_block.utils.ModTags;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class DyedWaterCauldronBlock extends LeveledCauldronBlock implements BlockEntityProvider {
 
@@ -34,6 +42,36 @@ public class DyedWaterCauldronBlock extends LeveledCauldronBlock implements Bloc
                         .with(LEVEL, 1)
                         .with(COLOR_INDEX, 0)
         );
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.literal("A cauldron filled with dyed water.").formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Used to dye leather armor, banners, and more.").formatted(Formatting.AQUA));
+        tooltip.add(Text.literal("Throw in multiple dyes to mix custom colors!").formatted(Formatting.LIGHT_PURPLE));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (random.nextInt(10) == 0) {
+            BlockEntity be = world.getBlockEntity(pos);
+            if (be instanceof DyedWaterCauldronBlockEntity dyed) {
+                int color = dyed.getColor();
+                double r = (double)((color >> 16) & 0xFF) / 255.0;
+                double g = (double)((color >> 8) & 0xFF) / 255.0;
+                double b = (double)(color & 0xFF) / 255.0;
+
+                int level = state.get(LEVEL);
+                double height = 0.1875 + (double)level * 0.1875; // Approx water level
+
+                world.addParticle(net.minecraft.particle.ParticleTypes.AMBIENT_ENTITY_EFFECT,
+                        pos.getX() + 0.2 + random.nextDouble() * 0.6,
+                        pos.getY() + height,
+                        pos.getZ() + 0.2 + random.nextDouble() * 0.6,
+                        r, g, b);
+            }
+        }
     }
 
     @Override

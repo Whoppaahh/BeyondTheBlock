@@ -6,15 +6,22 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.ryan.beyond_the_block.content.registry.ModEnchantments;
+import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
 
 public final class FrozenMomentumHandler {
     private FrozenMomentumHandler() {}
 
     public static Float getMovementSpeedBonus(PlayerEntity player) {
-        int level = EnchantmentHelper.getLevel(
-                ModEnchantments.FROZEN_MOMENTUM,
-                player.getEquippedStack(EquipmentSlot.LEGS)
-        );
+        int level;
+        if (player instanceof EnchantmentCacheAccessor cache) {
+            level = cache.btb$getCachedLevel(ModEnchantments.FROZEN_MOMENTUM);
+        } else {
+            level = EnchantmentHelper.getLevel(
+                    ModEnchantments.FROZEN_MOMENTUM,
+                    player.getEquippedStack(EquipmentSlot.LEGS)
+            );
+        }
+
         if (level <= 0) return null;
 
         if (!isOnFrozenSurface(player)) {

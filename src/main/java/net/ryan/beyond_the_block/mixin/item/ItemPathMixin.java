@@ -63,7 +63,7 @@ public class ItemPathMixin {
 
 
         // UNDO: only when there is no active start point and the click was not a valid new start.
-        if (!hasStart && sneaking && !validStartBlock && PathUndoManager.hasUndo(player)) {
+        if (!hasStart && sneaking && PathUndoManager.hasUndo(player)) {
             PathUndoEntry entry = PathUndoManager.pop(player);
             if (entry != null) {
                 undoEntry(world, entry);

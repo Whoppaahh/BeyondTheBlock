@@ -26,6 +26,7 @@ public class ModPlacedFeatures {
             ModConfiguredFeatures.PINK_PETALS_PATCH,
             CountPlacementModifier.of(6),
             SquarePlacementModifier.of(),
+            SurfaceWaterDepthFilterPlacementModifier.of(0),
             PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
             BiomePlacementModifier.of()
     );

@@ -10,6 +10,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.feature.rails.CouplerSide;
+import net.ryan.beyond_the_block.feature.rails.MinecartCouplerComponent;
+import net.ryan.beyond_the_block.utils.accessors.MinecartCouplerAccess;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -102,6 +105,25 @@ public class MinecartChainLinkEntity extends Entity {
         if (first == null || second == null || !first.isAlive() || !second.isAlive()) {
             this.discard();
             return;
+        }
+
+        // Verify that these two carts are still actually linked to each other
+        if (first instanceof MinecartCouplerAccess firstAccess && second instanceof MinecartCouplerAccess secondAccess) {
+            MinecartCouplerComponent firstCouplers = firstAccess.beyond_the_block$getCouplers();
+            MinecartCouplerComponent secondCouplers = secondAccess.beyond_the_block$getCouplers();
+
+            boolean linked = false;
+            for (CouplerSide side : CouplerSide.values()) {
+                if (second.getUuid().equals(firstCouplers.get(side))) {
+                    linked = true;
+                    break;
+                }
+            }
+
+            if (!linked) {
+                this.discard();
+                return;
+            }
         }
 
         double x = (first.getX() + second.getX()) * 0.5D;

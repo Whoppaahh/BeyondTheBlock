@@ -35,7 +35,7 @@ projectJDK: "17" #(Applied in CI/CD pipeline)
 # Quality gate. Will fail the CI/CD pipeline if any condition is not met
 # severityThresholds - configures maximum thresholds for different problem severities
 # testCoverageThresholds - configures minimum code coverage on a whole project and newly added code
-#  Coverage is available in Ultimate and Ultimate Plus plans
+# Code Coverage is available in Ultimate and Ultimate Plus plans
 #failureConditions:
 #  severityThresholds:
 #    any: 15
@@ -45,4 +45,4 @@ projectJDK: "17" #(Applied in CI/CD pipeline)
 #    total: 50
 
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
-linter: jetbrains/qodana-jvm:2025.3
+linter: jetbrains/qodana-jvm:2026.1

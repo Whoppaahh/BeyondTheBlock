@@ -1,14 +1,12 @@
 package net.ryan.beyond_the_block.mixin;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.SpawnHelper;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.ryan.beyond_the_block.utils.CampfireProtectionManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SpawnHelperMixin {
 
     @Inject(
-            method = "canSpawn(Lnet/minecraft/entity/SpawnRestriction$Location;" +
-                    "Lnet/minecraft/world/WorldView;" +
-                    "Lnet/minecraft/util/math/BlockPos;" +
-                    "Lnet/minecraft/entity/EntityType;)Z",
+            method = "canSpawn(Lnet/minecraft/entity/SpawnRestriction$Location;"
+                    + "Lnet/minecraft/world/WorldView;"
+                    + "Lnet/minecraft/util/math/BlockPos;"
+                    + "Lnet/minecraft/entity/EntityType;)Z",
             at = @At("HEAD"),
             cancellable = true
     )
@@ -29,38 +27,23 @@ public abstract class SpawnHelperMixin {
             SpawnRestriction.Location location,
             WorldView world,
             BlockPos pos,
-            @Nullable EntityType<?> entityType,
+            EntityType<?> entityType,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        if (entityType == null) return;
-        if (entityType.getSpawnGroup().isPeaceful()) return;
-        if (!(world instanceof World realWorld)) return;
-        if (realWorld.isClient()) return;
+        if (entityType == null) {
+            return;
+        }
 
-        int radius = 30;
-        int radiusSq = radius * radius;
+        if (entityType.getSpawnGroup().isPeaceful()) {
+            return;
+        }
 
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        if (!(world instanceof ServerWorld serverWorld)) {
+            return;
+        }
 
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
-                if (x * x + z * z > radiusSq) continue;
-
-                for (int y = -8; y <= 8; y++) {
-                    mutable.set(
-                            pos.getX() + x,
-                            pos.getY() + y,
-                            pos.getZ() + z
-                    );
-
-                    BlockState state = realWorld.getBlockState(mutable);
-                    if (state.getBlock() instanceof CampfireBlock
-                            && state.get(CampfireBlock.LIT)) {
-                        cir.setReturnValue(false);
-                        return;
-                    }
-                }
-            }
+        if (CampfireProtectionManager.isProtected(serverWorld, pos)) {
+            cir.setReturnValue(false);
         }
     }
 }

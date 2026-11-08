@@ -39,7 +39,7 @@ public class ModBlocks {
 
     public static final Block PET_BED = registerBlock(
             "pet_bed",
-            new PetBedBlock(FabricBlockSettings.of(Material.WOOL).strength(0.4F).nonOpaque()), ModItemGroup.ModBlocksTab
+            new PetBedBlock(FabricBlockSettings.copyOf(Blocks.WHITE_WOOL).strength(0.4F).nonOpaque()), ModItemGroup.ModBlocksTab
     );
 
     public static final Block CREAKING_HEART = registerBlock("creaking_heart",
@@ -51,7 +51,7 @@ public class ModBlocks {
 
     public static final Block PALE_MOSS_CARPET = registerBlock("pale_moss_carpet", new PaleMossCarpetBlock(FabricBlockSettings.copyOf(Blocks.MOSS_CARPET).nonOpaque().noCollision().sounds(BlockSoundGroup.MOSS_CARPET)), ModItemGroup.ModBlocksTab);
 
-    public static final ClosedEyeblossomBlock CLOSED_EYEBLOSSOM = registerEyeblossomBlock(
+    public static final ClosedEyeblossomBlock CLOSED_EYEBLOSSOM = registerBlock(
             "closed_eyeblossom",
             new ClosedEyeblossomBlock(
                     FabricBlockSettings.copyOf(Blocks.DANDELION)
@@ -62,7 +62,7 @@ public class ModBlocks {
             ModItemGroup.ModBlocksTab
     );
 
-    public static final OpenEyeblossomBlock OPEN_EYEBLOSSOM = registerEyeblossomBlock(
+    public static final OpenEyeblossomBlock OPEN_EYEBLOSSOM = registerBlock(
             "open_eyeblossom",
             new OpenEyeblossomBlock(
                     FabricBlockSettings.copyOf(Blocks.DANDELION)
@@ -79,10 +79,6 @@ public class ModBlocks {
         OPEN_EYEBLOSSOM.setOtherVariant(CLOSED_EYEBLOSSOM);
     }
 
-    private static <T extends Block> T registerEyeblossomBlock(String name, T block, ItemGroup tab) {
-        registerBlockItem(name, block, tab);
-        return (T) Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
-    }
 
     public static final Block RESIN_CLUMP = registerBlock("resin_clump",
             new ResinClumpBlock(
@@ -208,26 +204,26 @@ public class ModBlocks {
 
     public static final Block CHISELED_BOOKSHELF = registerBlock(
             "chiseled_bookshelf",
-            new ChiseledBookshelfBlock(FabricBlockSettings.of(Material.WOOD)),
+            new ChiseledBookshelfBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)),
             ModItemGroup.ModBlocksTab
     );
 
     public static final Block GEM_BLOCK = registerBlock(
             "gem_block",
-            new GemBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).requiresTool().nonOpaque()),
+            new GemBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(2f, 2f).requiresTool().nonOpaque()),
             ModItemGroup.ModBlocksTab
     );
 
     public static final Block PLAYER_VAULT_BLOCK = registerBlock(
             "player_vault",
-            new PlayerVaultBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).requiresTool().nonOpaque()),
+            new PlayerVaultBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(2f, 2f).requiresTool().nonOpaque()),
             ModItemGroup.ModBlocksTab
     );
 
     public static final Block INFI_FURNACE_BLOCK = registerBlock(
             "infi_furnace",
             new InfiFurnaceBlock(
-                    FabricBlockSettings.of(Material.STONE)
+                    FabricBlockSettings.copyOf(Blocks.FURNACE)
                             .strength(2f, 2f)
                             .requiresTool()
                             .luminance(state -> state.get(InfiFurnaceBlock.LIT) ? 15 : 0)
@@ -238,13 +234,13 @@ public class ModBlocks {
 
     public static final Block DECRAFTER_BLOCK = registerBlock(
             "decrafter_block",
-            new DecrafterBlock(FabricBlockSettings.of(Material.WOOD).strength(2f, 2f)),
+            new DecrafterBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).strength(2f, 2f)),
             ModItemGroup.ModBlocksTab
     );
 
     public static final Block LAVA_LAMP_BLOCK = registerBlock(
             "lava_lamp_block",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(2f, 2f).requiresTool().nonOpaque().luminance(15)),
+            new LavaLampBlock(FabricBlockSettings.copyOf(Blocks.COBBLESTONE).strength(2f, 2f).requiresTool().nonOpaque().luminance(15)),
             ModItemGroup.ModBlocksTab
     );
      //SHELVES
@@ -333,21 +329,21 @@ public class ModBlocks {
 
     public static final SpongeTierSet COMPRESSED_SPONGE_SET = registerSpongeTier(
             "compressed_sponge",
-            new CompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.6F)),
+            new CompressedSpongeBlock(FabricBlockSettings.copyOf(Blocks.SPONGE).strength(0.6F)),
             0.6F,
             ModItemGroup.ModBlocksTab
     );
 
     public static final SpongeTierSet DOUBLE_COMPRESSED_SPONGE_SET = registerSpongeTier(
             "double_compressed_sponge",
-            new DoubleCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(0.8F)),
+            new DoubleCompressedSpongeBlock(FabricBlockSettings.copyOf(Blocks.SPONGE).strength(0.8F)),
             0.8F,
             ModItemGroup.ModBlocksTab
     );
 
     public static final SpongeTierSet TRIPLE_COMPRESSED_SPONGE_SET = registerSpongeTier(
             "triple_compressed_sponge",
-            new TripleCompressedSpongeBlock(FabricBlockSettings.of(Material.SPONGE).strength(1.0F)),
+            new TripleCompressedSpongeBlock(FabricBlockSettings.copyOf(Blocks.SPONGE).strength(1.0F)),
             1.0F,
             ModItemGroup.ModBlocksTab
     );
@@ -389,7 +385,7 @@ public class ModBlocks {
 
     public static final Block SANTA_HAT = registerBlockWithoutBlockItem(
             "santa_hat",
-            new SantaHat(FabricBlockSettings.of(Material.WOOL).strength(1f, 1f))
+            new SantaHat(FabricBlockSettings.copyOf(Blocks.WHITE_WOOL).strength(1f, 1f))
     );
 
     public static final Item SANTA_HAT_ITEM = Registry.register(
@@ -412,52 +408,52 @@ public class ModBlocks {
     public static final Block DEEPSLATE_MIRANITE_ORE = registerOre("deepslate_miranite_ore", 2f, 2f, 3, 7);
     public static final Block NETHER_MIRANITE_ORE = registerOre("nether_miranite_ore", 2f, 2f, 3, 7);
     public static final Block END_MIRANITE_ORE = registerOre("end_miranite_ore", 2f, 2f, 3, 7);
-    public static final Block MIRANITE_BLOCK = registerStorageBlock("miranite_block", Material.AMETHYST, 4f, 2f);
-    public static final Block RAW_MIRANITE_BLOCK = registerStorageBlock("raw_miranite_block", Material.AMETHYST, 4f, 2f);
+    public static final Block MIRANITE_BLOCK = registerStorageBlock("miranite_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
+    public static final Block RAW_MIRANITE_BLOCK = registerStorageBlock("raw_miranite_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
 
     public static final Block CHROMITE_ORE = registerOre("chromite_ore", 2f, 2f, 3, 7);
     public static final Block DEEPSLATE_CHROMITE_ORE = registerOre("deepslate_chromite_ore", 2f, 2f, 3, 7);
     public static final Block NETHER_CHROMITE_ORE = registerOre("nether_chromite_ore", 2f, 2f, 3, 7);
     public static final Block END_CHROMITE_ORE = registerOre("end_chromite_ore", 2f, 2f, 3, 7);
-    public static final Block CHROMITE_BLOCK = registerStorageBlock("chromite_block", Material.AMETHYST, 4f, 2f);
+    public static final Block CHROMITE_BLOCK = registerStorageBlock("chromite_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
 
     public static final Block NOCTURNITE_ORE = registerOre("nocturnite_ore", 5f, 4f, 3, 7);
     public static final Block DEEPSLATE_NOCTURNITE_ORE = registerOre("deepslate_nocturnite_ore", 5f, 4f, 3, 7);
     public static final Block NETHER_NOCTURNITE_ORE = registerOre("nether_nocturnite_ore", 5f, 4f, 3, 7);
     public static final Block END_NOCTURNITE_ORE = registerOre("end_nocturnite_ore", 5f, 4f, 3, 7);
-    public static final Block NOCTURNITE_BLOCK = registerStorageBlock("nocturnite_block", Material.AMETHYST, 5f, 4f);
+    public static final Block NOCTURNITE_BLOCK = registerStorageBlock("nocturnite_block", Blocks.AMETHYST_BLOCK, 5f, 4f);
 
     public static final Block AMBERINE_ORE = registerLuminousOre("amberine_ore", 2f, 2f, 3, 7, 5);
     public static final Block DEEPSLATE_AMBERINE_ORE = registerLuminousOre("deepslate_amberine_ore", 2f, 2f, 3, 7, 5);
-    public static final Block AMBERINE_BLOCK = registerLuminousStorageBlock("amberine_block", Material.AMETHYST, 2f, 2f, 15);
+    public static final Block AMBERINE_BLOCK = registerLuminousStorageBlock("amberine_block", Blocks.AMETHYST_BLOCK, 2f, 2f, 15);
 
     public static final Block ROSETTE_ORE = registerOre("rosette_ore", 2f, 2f, 3, 7);
     public static final Block DEEPSLATE_ROSETTE_ORE = registerOre("deepslate_rosette_ore", 2f, 2f, 3, 7);
     public static final Block NETHER_ROSETTE_ORE = registerOre("nether_rosette_ore", 2f, 2f, 3, 7);
     public static final Block END_ROSETTE_ORE = registerOre("end_rosette_ore", 2f, 2f, 3, 7);
-    public static final Block ROSETTE_BLOCK = registerStorageBlock("rosette_block", Material.AMETHYST, 4f, 2f);
-    public static final Block RAW_ROSETTE_BLOCK = registerStorageBlock("raw_rosette_block", Material.AMETHYST, 4f, 2f);
+    public static final Block ROSETTE_BLOCK = registerStorageBlock("rosette_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
+    public static final Block RAW_ROSETTE_BLOCK = registerStorageBlock("raw_rosette_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
 
     public static final Block AZUROS_ORE = registerOre("azuros_ore", 3f, 3f, 3, 7);
     public static final Block DEEPSLATE_AZUROS_ORE = registerOre("deepslate_azuros_ore", 3f, 3f, 3, 7);
     public static final Block NETHER_AZUROS_ORE = registerOre("nether_azuros_ore", 3f, 3f, 3, 7);
     public static final Block END_AZUROS_ORE = registerOre("end_azuros_ore", 3f, 3f, 3, 7);
-    public static final Block AZUROS_BLOCK = registerStorageBlock("azuros_block", Material.AMETHYST, 4f, 3f);
-    public static final Block RAW_AZUROS_BLOCK = registerStorageBlock("raw_azuros_block", Material.AMETHYST, 4f, 3f);
+    public static final Block AZUROS_BLOCK = registerStorageBlock("azuros_block", Blocks.AMETHYST_BLOCK, 4f, 3f);
+    public static final Block RAW_AZUROS_BLOCK = registerStorageBlock("raw_azuros_block", Blocks.AMETHYST_BLOCK, 4f, 3f);
 
     public static final Block INDIGRA_ORE = registerOre("indigra_ore", 2f, 2f, 3, 7);
     public static final Block DEEPSLATE_INDIGRA_ORE = registerOre("deepslate_indigra_ore", 2f, 2f, 3, 7);
     public static final Block NETHER_INDIGRA_ORE = registerOre("nether_indigra_ore", 2f, 2f, 3, 7);
     public static final Block END_INDIGRA_ORE = registerOre("end_indigra_ore", 2f, 3f, 3, 7);
-    public static final Block INDIGRA_BLOCK = registerStorageBlock("indigra_block", Material.AMETHYST, 4f, 3f);
+    public static final Block INDIGRA_BLOCK = registerStorageBlock("indigra_block", Blocks.AMETHYST_BLOCK, 4f, 3f);
 
     public static final Block XIRION_ORE = registerOre("xirion_ore", 4f, 4f, 3, 7);
     public static final Block DEEPSLATE_XIRION_ORE = registerOre("deepslate_xirion_ore", 4f, 4f, 3, 7);
     public static final Block NETHER_XIRION_ORE = registerOre("nether_xirion_ore", 4f, 4f, 3, 7);
     public static final Block END_XIRION_ORE = registerOre("end_xirion_ore", 4f, 4f, 3, 7);
-    public static final Block XIRION_BLOCK = registerStorageBlock("xirion_block", Material.AMETHYST, 4f, 4f);
+    public static final Block XIRION_BLOCK = registerStorageBlock("xirion_block", Blocks.AMETHYST_BLOCK, 4f, 4f);
 
-    public static final Block RUBY_BLOCK = registerStorageBlock("ruby_block", Material.AMETHYST, 4f, 2f);
+    public static final Block RUBY_BLOCK = registerStorageBlock("ruby_block", Blocks.AMETHYST_BLOCK, 4f, 2f);
     public static final Block RUBY_ORE = registerOre("ruby_ore", 2f, 2f, 3, 7);
     public static final Block DEEPSLATE_RUBY_ORE = registerOre("deepslate_ruby_ore", 4f, 4f, 7, 15);
 
@@ -466,17 +462,18 @@ public class ModBlocks {
 
     public static final Block ANIMATED_BLOCK = registerBlockWithoutBlockItem(
             "animated_block",
-            new AnimatedBlock(FabricBlockSettings.of(Material.METAL).nonOpaque())
+            new AnimatedBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque())
     );
 
     public static final Block EXPERIENCE_BLOCK = registerBlock(
             "experience_block",
-            new ExperienceBlock(FabricBlockSettings.of(Material.AMETHYST).strength(3f, 3f).requiresTool()),
+            new ExperienceBlock(FabricBlockSettings.copyOf(Blocks.AMETHYST_BLOCK).strength(3f, 3f).requiresTool()),
             ModItemGroup.ModBlocksTab
     );
 
 
-     //SHRINE FAMILY
+    //SHRINE FAMILY
+    private static final FabricBlockSettings SHRINE_SETTINGS = FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(2f, 2f).nonOpaque();
 
     public static final ShrineBlockSet SHRINE_SET = registerShrineBlockSet(ModItemGroup.ModBlocksTab);
 
@@ -503,9 +500,10 @@ public class ModBlocks {
      * ============================================================
      */
 
-    private static Block registerBlock(String name, Block block, ItemGroup tab) {
+    private static <T extends Block> T registerBlock(String name, T block, ItemGroup tab) {
+        Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
         registerBlockItem(name, block, tab);
-        return Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
+        return block;
     }
 
     private static Item registerBlockItem(String name, Block block, ItemGroup tab) {
@@ -516,8 +514,9 @@ public class ModBlocks {
         );
     }
 
-    private static Block registerBlockWithoutBlockItem(String name, Block block) {
-        return Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
+    private static <T extends Block> T registerBlockWithoutBlockItem(String name, T block) {
+        Registry.register(Registry.BLOCK, new Identifier(BeyondTheBlock.MOD_ID, name), block);
+        return block;
     }
 
     /*
@@ -546,7 +545,7 @@ public class ModBlocks {
         Block wet = registerBlock(
                 "wet_" + dryName,
                 new WetCompressedSpongeBlock(
-                        FabricBlockSettings.of(Material.SPONGE).strength(wetStrength),
+                        FabricBlockSettings.copyOf(Blocks.WET_SPONGE).strength(wetStrength),
                         () -> dry
                 ),
                 tab
@@ -558,37 +557,37 @@ public class ModBlocks {
     private static ShrineBlockSet registerShrineBlockSet(ItemGroup tab) {
         Block pedestal = registerBlock(
                 "pedestal_block",
-                new PedestalBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new PedestalBlock(SHRINE_SETTINGS),
                 tab
         );
 
         Block core = registerBlock(
                 "shrine_core_block",
-                new ShrineCoreBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new ShrineCoreBlock(SHRINE_SETTINGS),
                 tab
         );
 
         Block heads = registerBlock(
                 "shrine_heads_block",
-                new ShrineHeadsBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new ShrineHeadsBlock(SHRINE_SETTINGS),
                 tab
         );
 
         Block decor = registerBlock(
                 "shrine_decor_block",
-                new ShrineDecorBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new ShrineDecorBlock(SHRINE_SETTINGS),
                 tab
         );
 
         Block doubleInput = registerBlock(
                 "double_input_block",
-                new DoubleInputBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new DoubleInputBlock(SHRINE_SETTINGS),
                 tab
         );
 
         Block singleInput = registerBlock(
                 "single_input_block",
-                new SingleInputBlock(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).nonOpaque()),
+                new SingleInputBlock(SHRINE_SETTINGS),
                 tab
         );
 
@@ -596,10 +595,11 @@ public class ModBlocks {
     }
 
     private static Block registerOre(String name, float hardness, float resistance, int minXp, int maxXp) {
+        FabricBlockSettings settings = FabricBlockSettings.copyOf(Blocks.IRON_ORE).strength(hardness, resistance).requiresTool();
         return registerBlock(
                 name,
                 new OreBlock(
-                        FabricBlockSettings.of(Material.STONE).strength(hardness, resistance).requiresTool(),
+                        settings,
                         UniformIntProvider.create(minXp, maxXp)
                 ),
                 ModItemGroup.ModBlocksTab
@@ -607,28 +607,31 @@ public class ModBlocks {
     }
 
     private static Block registerLuminousOre(String name, float hardness, float resistance, int minXp, int maxXp, int luminance) {
+        FabricBlockSettings settings = FabricBlockSettings.copyOf(Blocks.IRON_ORE).strength(hardness, resistance).luminance(luminance).requiresTool();
         return registerBlock(
                 name,
                 new OreBlock(
-                        FabricBlockSettings.of(Material.STONE).strength(hardness, resistance).luminance(luminance).requiresTool(),
+                        settings,
                         UniformIntProvider.create(minXp, maxXp)
                 ),
                 ModItemGroup.ModBlocksTab
         );
     }
 
-    private static Block registerStorageBlock(String name, Material material, float hardness, float resistance) {
+    private static Block registerStorageBlock(String name, Block template, float hardness, float resistance) {
+        FabricBlockSettings settings = FabricBlockSettings.copyOf(template).strength(hardness, resistance).requiresTool();
         return registerBlock(
                 name,
-                new Block(FabricBlockSettings.of(material).strength(hardness, resistance).requiresTool()),
+                new Block(settings),
                 ModItemGroup.ModBlocksTab
         );
     }
 
-    private static Block registerLuminousStorageBlock(String name, Material material, float hardness, float resistance, int luminance) {
+    private static Block registerLuminousStorageBlock(String name, Block template, float hardness, float resistance, int luminance) {
+        FabricBlockSettings settings = FabricBlockSettings.copyOf(template).strength(hardness, resistance).luminance(luminance).requiresTool();
         return registerBlock(
                 name,
-                new Block(FabricBlockSettings.of(material).strength(hardness, resistance).luminance(luminance).requiresTool()),
+                new Block(settings),
                 ModItemGroup.ModBlocksTab
         );
     }
@@ -643,10 +646,9 @@ public class ModBlocks {
         Block hangingSign = registerBlockWithoutBlockItem(
                 name + "_hanging_sign",
                 new HangingSignBlock(
-                        FabricBlockSettings.of(Material.WOOD)
+                        FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
                                 .noCollision()
-                                .strength(1.0F)
-                                .sounds(BlockSoundGroup.WOOD),
+                                .strength(1.0F),
                         signType,
                         new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png")
                 )
@@ -655,24 +657,15 @@ public class ModBlocks {
         Block wallHangingSign = registerBlockWithoutBlockItem(
                 name + "_wall_hanging_sign",
                 new WallHangingSignBlock(
-                        FabricBlockSettings.of(Material.WOOD)
+                        FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
                                 .noCollision()
-                                .strength(1.0F)
-                                .sounds(BlockSoundGroup.WOOD),
+                                .strength(1.0F),
                         signType,
                         new Identifier(BeyondTheBlock.MOD_ID, "/textures/gui/hanging_signs/" + name + ".png")
                 )
         );
 
-        Item hangingSignItem = Registry.register(
-                Registry.ITEM,
-                new Identifier(BeyondTheBlock.MOD_ID, name + "_hanging_sign"),
-                new HangingSignItem(
-                        new FabricItemSettings().group(tab),
-                        hangingSign,
-                        wallHangingSign
-                )
-        );
+        Item hangingSignItem = registerHangingSignItem(name + "_hanging_sign", hangingSign, wallHangingSign, tab);
         HANGING_SIGN_ITEMS.put(signType, hangingSignItem);
         return new HangingSignOnlySet(hangingSign, wallHangingSign, hangingSignItem);
     }

@@ -14,6 +14,11 @@ public abstract class PetEnchantTickMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void btb$petEnchantTick(CallbackInfo ci) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (self.getWorld().isClient || self.age % 20 != 0) {
+            return;
+        }
+
         if (!((Object) this instanceof TameableEntity pet)) {
             return;
         }
@@ -22,14 +27,10 @@ public abstract class PetEnchantTickMixin {
             return;
         }
 
-        if (pet.getWorld().isClient) {
-            return;
-        }
-
-        PetEnchantDispatcher.tick((LivingEntity) (Object) this);
+        PetEnchantDispatcher.tick(self);
         if (pet.getOwner() instanceof PlayerEntity owner) {
             PetEnchantDispatcher.ownerDistanceCheck(
-                    (LivingEntity) (Object) this,
+                    self,
                     owner,
                     32.0D
             );

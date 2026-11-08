@@ -246,7 +246,7 @@ public class ArmourTrimSmithingScreenHandler extends ScreenHandler {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack original = slot.getStack();
             newStack = original.copy();
 

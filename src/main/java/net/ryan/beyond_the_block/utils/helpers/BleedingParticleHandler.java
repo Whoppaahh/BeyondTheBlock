@@ -28,29 +28,27 @@ public class BleedingParticleHandler {
     private static final net.minecraft.entity.effect.StatusEffect BLEED_EFFECT = ModEffects.BLEED;
 
     public void onWorldTick(ServerWorld world) {
-        if (!Configs.client().visuals.blood.enabled) return;
+        if (!Configs.client().visuals.blood.enabled || world.getTime() % 5 != 0) return;
 
-        cooldowns.replaceAll((uuid, cd) -> Math.max(cd - 1, 0));
+        cooldowns.replaceAll((uuid, cd) -> Math.max(cd - 5, 0));
 
         float radius = 32.0f;
         Set<UUID> allProcessedEntities = new HashSet<>();
+        Set<LivingEntity> entitiesToProcess = new HashSet<>();
 
         for (PlayerEntity player : world.getPlayers()) {
-            Box searchBox = new Box(
-                    player.getX() - radius, player.getY() - radius, player.getZ() - radius,
-                    player.getX() + radius, player.getY() + radius, player.getZ() + radius
-            );
+            Box searchBox = player.getBoundingBox().expand(radius);
+            entitiesToProcess.addAll(world.getEntitiesByClass(LivingEntity.class, searchBox, e -> true));
+        }
 
-            List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class, searchBox, e -> true);
+        for (LivingEntity living : entitiesToProcess) {
+            if (living.isDead()) continue;
+            if (!BloodTargetHelper.shouldShowBlood(living)) continue;
 
-            for (LivingEntity living : nearbyEntities) {
-                if (living.isDead()) continue;
-                if (!BloodTargetHelper.shouldShowBlood(living)) continue;
+            UUID id = living.getUuid();
+            allProcessedEntities.add(id);
 
-                UUID id = living.getUuid();
-                allProcessedEntities.add(id);
-
-                boolean lowHealth = BloodTargetHelper.passesHealthThreshold(living, Configs.client().visuals.blood.healthPercentThreshold);
+            boolean lowHealth = BloodTargetHelper.passesHealthThreshold(living, Configs.client().visuals.blood.healthPercentThreshold);
 
                 StatusEffectInstance bleedInstance = living.getStatusEffect(BLEED_EFFECT);
                 boolean hasBleedEffect = bleedInstance != null && bleedInstance.getDuration() > 0;
@@ -130,7 +128,6 @@ public class BleedingParticleHandler {
                 }
 
                 cooldowns.put(id, BLOOD_INTERVAL);
-            }
         }
 
         cooldowns.keySet().retainAll(allProcessedEntities);

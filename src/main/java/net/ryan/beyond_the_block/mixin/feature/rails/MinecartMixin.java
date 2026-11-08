@@ -304,6 +304,10 @@ public abstract class MinecartMixin implements MinecartSpeedAccessor, MinecartCo
 
     @Unique
     private void beyond_the_block$solveCouplerPair(AbstractMinecartEntity a, AbstractMinecartEntity b) {
+        if (!a.isAlive() || !b.isAlive()) {
+            return;
+        }
+
         Vec3d aPos = a.getPos();
         Vec3d bPos = b.getPos();
         Vec3d delta = bPos.subtract(aPos);
@@ -311,6 +315,13 @@ public abstract class MinecartMixin implements MinecartSpeedAccessor, MinecartCo
         double distance = delta.length();
         if (distance < 1.0E-6D) {
             return;
+        }
+
+        // If distance is too great (e.g. teleported or loaded weirdly), consider unlinking if it persists
+        // but for now, the spring will pull it back. 
+        // We'll limit the max distance to avoid extreme forces.
+        if (distance > 16.0D) {
+            return; 
         }
 
         Vec3d direction = delta.normalize();

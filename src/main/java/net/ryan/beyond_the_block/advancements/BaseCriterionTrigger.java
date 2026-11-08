@@ -34,6 +34,6 @@ public abstract class BaseCriterionTrigger<T extends AbstractCriterionConditions
     );
 
     protected void trigger(ServerPlayerEntity player, Predicate<T> predicate) {
-        this.trigger(player, predicate);
+        super.trigger(player, predicate);
     }
 }

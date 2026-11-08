@@ -45,7 +45,8 @@ public class ModLootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.35f)) // Drops 35% of the time
-                        .with(ItemEntry.builder(ModItems.AMBERINE_SHOVEL))
+                        .with(ItemEntry.builder(ModItems.AMBERINE_SHOVEL)) // Keeping specific items for drops but using tags for conditions if needed. 
+                        // Actually, the user might want more variety, but for now I will stick to the requested change of using tags where it makes sense.
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
@@ -89,7 +90,7 @@ public class ModLootTableModifiers {
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.KILLER,
                                 new EntityPredicate.Builder().equipment(EntityEquipmentPredicate.Builder.create()
-                                        .mainhand(ItemPredicate.Builder.create().items(ModItems.MIRANITE_SWORD).build()).build()).build()))
+                                        .mainhand(ItemPredicate.Builder.create().tag(ModTags.Items.MIRANITE_WEAPONS).build()).build()).build()))
                         .with(ItemEntry.builder(ModItems.XENOLITH_STAFF))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());

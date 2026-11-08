@@ -12,11 +12,10 @@ public final class WardingGlyphHandler {
     private WardingGlyphHandler() {}
 
     public static void onTick(LivingEntity entity) {
+        if (entity.age % 20 != 0) return;
+
         int level = EnchantmentHelper.getEquipmentLevel(ModEnchantments.WARDING_GLYPH, entity);
         if (level <= 0) return;
-
-        int cooldown = 100 * level;
-        if (entity.age % cooldown != 0) return;
 
         reflectFirstNegativeEffect(entity);
     }

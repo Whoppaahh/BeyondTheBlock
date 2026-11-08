@@ -1,8 +1,10 @@
 package net.ryan.beyond_the_block.mixin.feature.theft;
 
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BarrelBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.SmokerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -31,7 +33,7 @@ public abstract class TheftSlotMixin {
         if (!(player.world instanceof ServerWorld serverWorld)) return;
         if (!(inventory instanceof BlockEntity blockEntity)) return;
 
-        if (inventory instanceof ChestBlockEntity || inventory instanceof BarrelBlockEntity) {
+        if (inventory instanceof ChestBlockEntity || inventory instanceof BarrelBlockEntity || inventory instanceof AbstractFurnaceBlockEntity || inventory instanceof SmokerBlockEntity) {
             BlockPos pos = blockEntity.getPos();
             if (VillageContainerTagger.get(serverWorld).isVillageContainer(pos)) {
                 TheftDetector.onItemTaken(serverWorld, pos, player);

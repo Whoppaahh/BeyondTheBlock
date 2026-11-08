@@ -35,6 +35,11 @@ public class FleetHoovesEnchantment extends HorseEnchantment implements HorseEnc
         var attr = horse.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (attr == null) return;
 
+        if (level <= 0) {
+            attr.removeModifier(MODIFIER_ID);
+            return;
+        }
+
         double amount = 0.05D * level;
 
         var existing = attr.getModifier(MODIFIER_ID);

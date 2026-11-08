@@ -5,6 +5,8 @@ import net.minecraft.util.Identifier;
 import net.ryan.beyond_the_block.advancements.criteria.MinecartLinkedTrigger;
 import net.ryan.beyond_the_block.advancements.criteria.MountedEntityTrigger;
 import net.ryan.beyond_the_block.advancements.criteria.SpongeDriedTrigger;
+import net.ryan.beyond_the_block.advancements.criteria.TheftTrigger;
+import net.ryan.beyond_the_block.advancements.criteria.StaffUsageTrigger;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public final class ModCriteria {
@@ -16,6 +18,12 @@ public final class ModCriteria {
 
     public static final MinecartLinkedTrigger MINECART_LINKED =
             Criteria.register(new MinecartLinkedTrigger(new Identifier(BeyondTheBlock.MOD_ID, "minecart_linked")));
+
+    public static final TheftTrigger THEFT =
+            Criteria.register(new TheftTrigger(new Identifier(BeyondTheBlock.MOD_ID, "theft")));
+
+    public static final StaffUsageTrigger STAFF_USAGE =
+            Criteria.register(new StaffUsageTrigger(new Identifier(BeyondTheBlock.MOD_ID, "staff_usage")));
 
     private ModCriteria() {
     }

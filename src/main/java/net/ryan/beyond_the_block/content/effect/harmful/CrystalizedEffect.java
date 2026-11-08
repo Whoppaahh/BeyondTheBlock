@@ -6,6 +6,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
+import net.ryan.beyond_the_block.damage_sources.ModDamageSources;
+
 import java.util.UUID;
 
 public class CrystalizedEffect extends StatusEffect {
@@ -21,6 +23,10 @@ public class CrystalizedEffect extends StatusEffect {
         if (!pLivingEntity.world.isClient()) {
             pLivingEntity.setVelocity(0, 0, 0);
             pLivingEntity.velocityModified = true;
+
+            if (pLivingEntity.age % 20 == 0) {
+                pLivingEntity.damage(ModDamageSources.CRYSTALLIZED, 1.0F + pAmplifier);
+            }
 
             pLivingEntity.world.addParticle(
                     net.minecraft.particle.ParticleTypes.END_ROD,

@@ -10,10 +10,16 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public class ModItemGroup {
 
-    public static ItemGroup ModBlocksTab = FabricItemGroupBuilder.build(
-            new Identifier(BeyondTheBlock.MOD_ID, "mod_blocks_tab"), () -> new ItemStack(ModBlocks.GEM_BLOCK));
-    public static ItemGroup ModToolTab = FabricItemGroupBuilder.build(
-            new Identifier(BeyondTheBlock.MOD_ID, "mod_tools_tab"), () -> new ItemStack(ModItems.RUBY_SWORD));
-    public static ItemGroup ModArmourTab = FabricItemGroupBuilder.build(
-            new Identifier(BeyondTheBlock.MOD_ID, "mod_armour_tab"), () -> new ItemStack(ModItems.RUBY_HELMET));
+    public static final ItemGroup ModBlocksTab = FabricItemGroupBuilder.create(
+                    new Identifier(BeyondTheBlock.MOD_ID, "mod_blocks_tab"))
+            .icon(() -> new ItemStack(ModBlocks.GEM_BLOCK))
+            .build();
+    public static final ItemGroup ModToolTab = FabricItemGroupBuilder.create(
+                    new Identifier(BeyondTheBlock.MOD_ID, "mod_tools_tab"))
+            .icon(() -> new ItemStack(ModItems.RUBY_SWORD))
+            .build();
+    public static final ItemGroup ModArmourTab = FabricItemGroupBuilder.create(
+                    new Identifier(BeyondTheBlock.MOD_ID, "mod_armour_tab"))
+            .icon(() -> new ItemStack(ModItems.RUBY_HELMET))
+            .build();
 }

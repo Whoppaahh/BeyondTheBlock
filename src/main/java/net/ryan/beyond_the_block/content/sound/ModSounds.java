@@ -9,6 +9,7 @@ public class ModSounds {
     public static SoundEvent PLAYER_VAULT_OPEN = registerSoundEvent("player_vault_open");
     public static SoundEvent RIDDLE_GENERATED = registerSoundEvent("riddle_generated");
     public static SoundEvent RIDDLE_COMPLETE = registerSoundEvent("riddle_complete");
+    public static SoundEvent XENOLITH_STAFF_PULSE = registerSoundEvent("xenolith_staff_pulse");
 
 
     private static SoundEvent registerSoundEvent(String name) {

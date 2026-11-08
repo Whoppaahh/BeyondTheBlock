@@ -34,11 +34,10 @@ public class ContentRegistrar {
         ModTrunkPlacerTypes.register();
         ModFoliagePlacerTypes.register();
 
-        ModConfiguredFeatures.registerConfiguredFeatures();
-        ModBiomes.register();
-
         ModSignTypes.init();
         ModBlocks.registerModBlocks();
+        ModConfiguredFeatures.registerConfiguredFeatures();
+        ModBiomes.register();
         ModBlockEntities.registerModBlockEntities();
         ModItems.registerModItems();
         ModTrimBootstrap.bootstrap();

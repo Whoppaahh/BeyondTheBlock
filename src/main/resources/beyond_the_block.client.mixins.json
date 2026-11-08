@@ -12,6 +12,7 @@
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
     "DoubleInventoryAccessor",
+    "EntityRendererAccessor",
     "EntityRendererMixin",
     "GhastEntityModelMixin",
     "HandledScreenAccessor",

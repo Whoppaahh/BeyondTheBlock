@@ -3,22 +3,37 @@ package net.ryan.beyond_the_block.content.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import net.ryan.beyond_the_block.feature.pets.PetHomeAccessor;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PetBedBlock extends Block {
 
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 3.0, 16.0);
+
     public PetBedBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.literal("A cozy resting place for your tamed friends.").formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Allows pets to set their home when they step on it.").formatted(Formatting.AQUA));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
@@ -43,6 +58,13 @@ public class PetBedBlock extends Block {
                     Text.literal(pet.getName().getString() + "'s home has been set."),
                     true
             );
+
+            // Visual feedback
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.spawnParticles(net.minecraft.particle.ParticleTypes.HEART,
+                        pos.getX() + 0.5, pos.getY() + 0.4, pos.getZ() + 0.5,
+                        5, 0.3, 0.1, 0.3, 0.1);
+            }
         }
     }
 
@@ -53,6 +75,6 @@ public class PetBedBlock extends Block {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return super.getOutlineShape(state, world, pos, context);
+        return SHAPE;
     }
 }

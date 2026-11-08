@@ -149,7 +149,19 @@ public class CreakingHeartBlock extends PillarBlock {
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AXIS, CREAKING_HEART_STATE, NATURAL);
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (state.get(CREAKING_HEART_STATE) == CreakingHeartState.AWAKE) {
+            if (random.nextInt(3) == 0) {
+                double x = (double)pos.getX() + random.nextDouble();
+                double y = (double)pos.getY() + random.nextDouble();
+                double z = (double)pos.getZ() + random.nextDouble();
+                world.addParticle(net.minecraft.particle.ParticleTypes.SMOKE, x, y, z, 0.0, 0.0, 0.0);
+            }
+        }
     }
 }

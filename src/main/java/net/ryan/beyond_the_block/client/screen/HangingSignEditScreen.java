@@ -183,7 +183,7 @@ public class HangingSignEditScreen extends Screen {
 
                 if (row == this.currentRow && selectionStart >= 0 && blink) {
                     int cursorOffset = this.textRenderer.getWidth(
-                            string.substring(0, Math.max(Math.min(selectionStart, string.length()), 0))
+                            string.substring(0, Math.min(selectionStart, string.length()))
                     );
                     int cursorX = cursorOffset - this.textRenderer.getWidth(string) / 2;
 
@@ -198,7 +198,7 @@ public class HangingSignEditScreen extends Screen {
             String string = this.text[row];
             if (string != null && row == this.currentRow && selectionStart >= 0) {
                 int cursorOffset = this.textRenderer.getWidth(
-                        string.substring(0, Math.max(Math.min(selectionStart, string.length()), 0))
+                        string.substring(0, Math.min(selectionStart, string.length()))
                 );
                 int cursorX = cursorOffset - this.textRenderer.getWidth(string) / 2;
 

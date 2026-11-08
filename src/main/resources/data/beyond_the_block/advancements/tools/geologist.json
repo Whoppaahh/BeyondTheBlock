@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "beyond_the_block:xenolith_staff" },
+    "title": { "translate": "advancements.beyond_the_block.tools.geologist.title" },
+    "description": { "translate": "advancements.beyond_the_block.tools.geologist.description" },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "found_many_ores": {
+      "trigger": "beyond_the_block:staff_usage",
+      "conditions": {
+        "min_ores": 6
+      }
+    }
+  }
+}

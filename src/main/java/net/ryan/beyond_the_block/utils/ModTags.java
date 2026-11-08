@@ -14,6 +14,8 @@ public class ModTags {
 
         public static final TagKey<Block> CAULDRON_RECOLORABLE = createBlockTag("cauldron_recolorable");
         public static final TagKey<Block> PALE_OAK_LOGS = createBlockTag("pale_oak_logs");
+        public static final TagKey<Block> MOD_ORES = createBlockTag("mod_ores");
+        public static final TagKey<net.minecraft.world.gen.structure.Structure> VILLAGE_STRUCTURES = TagKey.of(Registry.STRUCTURE_KEY, Identifier.of("minecraft", "village"));
 
 
         public static final TagKey<Block> NEEDS_RUBY_TOOL = createBlockTag("needs_ruby_tool");
@@ -33,6 +35,10 @@ public class ModTags {
         public static final TagKey<Item> MOD_ORES = createItemTag("mod_ores");
         public static final TagKey<Item> MOD_TOOLS = createItemTag("mod_tools");
         public static final TagKey<Item> MOD_WEAPONS = createItemTag("mod_weapons");
+        public static final TagKey<Item> MIRANITE_WEAPONS = createItemTag("miranite_weapons");
+        public static final TagKey<Item> AMBERINE_TOOLS = createItemTag("amberine_tools");
+        public static final TagKey<Item> CHROMITE_TOOLS = createItemTag("chromite_tools");
+        public static final TagKey<Item> AZUROS_TOOLS = createItemTag("azuros_tools");
 
 
         private static TagKey<Item> createItemTag(String name) {

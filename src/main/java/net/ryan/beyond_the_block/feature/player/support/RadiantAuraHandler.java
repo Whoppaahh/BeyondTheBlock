@@ -10,8 +10,7 @@ public final class RadiantAuraHandler {
     private RadiantAuraHandler() {}
 
     public static void onTick(PlayerEntity player) {
-        if (player.getWorld().isClient) return;
-        if (player.age % 20 != 0) return; // once per second
+        if (player.getWorld().isClient || player.age % 20 != 0) return; // once per second
 
         int level = EnchantmentHelper.getLevel(
                 ModEnchantments.RADIANT_AURA,

@@ -30,11 +30,11 @@ public class ModItems {
 
     public static final Item HORSESHOES = registerItem(
             "horseshoes",
-            new HorseshoesItem(new Item.Settings().maxCount(1).group(ModItemGroup.ModArmourTab))
+            new HorseshoesItem(new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab))
     );
     public static final Item DEED_OF_OWNERSHIP = registerItem(
             "deed_of_ownership",
-            new DeedOfOwnershipItem(new Item.Settings().maxCount(1).group(ModItemGroup.ModToolTab)));
+            new DeedOfOwnershipItem(new FabricItemSettings().maxCount(1).group(ModItemGroup.ModToolTab)));
     public static final Item COLLAR_TAG = registerItem("collar_tag",
             new CollarTagItem(new FabricItemSettings().maxCount(1).group(ModItemGroup.ModArmourTab))
     );
@@ -98,10 +98,10 @@ public class ModItems {
             new TrimTemplateItem(new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
 
     public static final Item TROWEL_ITEM = registerItem("trowel", new TrowelItem(new FabricItemSettings().group(ModItemGroup.ModToolTab)));
-    public static final Item SANTA_HELMET = registerItem("santa_helmet", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroup.ModArmourTab)));
-    public static final Item SANTA_CHESTPLATE = registerItem("santa_chestplate", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroup.ModArmourTab)));
-    public static final Item SANTA_LEGGINGS = registerItem("santa_leggings", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.LEGS, new Item.Settings().group(ModItemGroup.ModArmourTab)));
-    public static final Item SANTA_BOOTS = registerItem("santa_boots", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.FEET, new Item.Settings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SANTA_HELMET = registerItem("santa_helmet", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.HEAD, new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SANTA_CHESTPLATE = registerItem("santa_chestplate", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.CHEST, new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SANTA_LEGGINGS = registerItem("santa_leggings", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.LEGS, new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
+    public static final Item SANTA_BOOTS = registerItem("santa_boots", new ArmorItem(ModArmourMaterials.SANTA, EquipmentSlot.FEET, new FabricItemSettings().group(ModItemGroup.ModArmourTab)));
 
 
     public static final Item CUPID_ARROW_ITEM = registerItem("cupid_arrow", new CupidArrowItem(new FabricItemSettings().group(ItemGroup.COMBAT)));
@@ -334,7 +334,7 @@ public class ModItems {
             new AnimatedBlockItem(ModBlocks.ANIMATED_BLOCK,
                     new FabricItemSettings().group(ModItemGroup.ModBlocksTab).maxCount(1)));
 
-    private static Item registerItem(String name, Item item){
+    private static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(BeyondTheBlock.MOD_ID, name), item);
     }
     private static void registerCompostables(){

@@ -21,18 +21,18 @@ public class DeathCounterDatapackInstaller {
                     Files.createDirectories(targetDatapack);
 
                     // Copy pack.mcmeta
-                    copyResource("/beyond_the_block/pack.mcmeta", targetDatapack.resolve("pack.mcmeta"));
+                    copyResource("/datapack_template/pack.mcmeta", targetDatapack.resolve("pack.mcmeta"));
 
                     // Copy setup.mcfunction
-                    Path dataFunctions = targetDatapack.resolve("data/death_counter/functions");
+                    Path dataFunctions = targetDatapack.resolve("data/beyond_the_block/functions");
                     Files.createDirectories(dataFunctions);
-                    copyResource("/beyond_the_block/data/beyond_the_block/functions/setup.mcfunction",
+                    copyResource("/datapack_template/data/beyond_the_block/functions/setup.mcfunction",
                             dataFunctions.resolve("setup.mcfunction"));
 
                     // Copy load.json
                     Path tagFunctions = targetDatapack.resolve("data/minecraft/tags/functions");
                     Files.createDirectories(tagFunctions);
-                    copyResource("/beyond_the_block/data/minecraft/tags/functions/load.json",
+                    copyResource("/datapack_template/data/minecraft/tags/functions/load.json",
                             tagFunctions.resolve("load.json"));
 
                     installed = true;

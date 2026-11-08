@@ -19,5 +19,12 @@
     "sounds": [
       "beyond_the_block:riddle_complete"
     ]
+  },
+  "xenolith_staff_pulse": {
+    "category": "players",
+    "subtitle": "item.beyond_the_block.xenolith_staff.pulse",
+    "sounds": [
+      "beyond_the_block:xenolith_staff_pulse"
+    ]
   }
 }

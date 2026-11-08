@@ -1,37 +1,88 @@
-[
-  {
-    "processor_type": "minecraft:rule",
-    "rules": [
-      {
-        "location_predicate": {
-          "predicate_type": "minecraft:always_true"
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:stone_brick_stairs",
+            "probability": 0.3
+          },
+          "output_state": {
+            "Name": "minecraft:spruce_stairs"
+          }
         },
-        "input_predicate": {
-          "predicate_type": "minecraft:random_block_match",
-          "block": "minecraft:stone_brick_slab",
-          "probability": 0.3
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:stone_brick_slab",
+            "probability": 0.3
+          },
+          "output_state": {
+            "Name": "minecraft:spruce_slab"
+          }
         },
-        "output_state": {
-          "Name": "minecraft:spruce_slab"
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:stone_brick_wall",
+            "probability": 0.3
+          },
+          "output_state": {
+            "Name": "minecraft:spruce_fence"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:mossy_stone_bricks"
+          },
+          "output_state": {
+            "Name": "minecraft:stone_bricks"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:cracked_stone_bricks"
+          },
+          "output_state": {
+            "Name": "minecraft:stone_bricks"
+          }
+        },
+        {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:block_match",
+            "block": "minecraft:mossy_cobblestone"
+          },
+          "output_state": {
+            "Name": "minecraft:cobblestone"
+          }
         }
-      },
-      {
-        "location_predicate": {
-          "predicate_type": "minecraft:always_true"
-        },
-        "input_predicate": {
-          "predicate_type": "minecraft:random_block_match",
-          "block": "minecraft:stone_brick_wall",
-          "probability": 0.3
-        },
-        "output_state": {
-          "Name": "minecraft:spruce_fence"
-        }
-      }
-    ]
-  },
-  {
-    "processor_type": "minecraft:block_age",
-    "mossiness": 0.7
-  }
-]
+      ]
+    },
+    {
+      "processor_type": "minecraft:block_age",
+      "mossiness": 0.7
+    }
+  ]
+}

@@ -22,23 +22,19 @@ public final class VillageContainerScannerManager {
 
     public static void tick(ServerWorld world) {
         int processed = 0;
-        int scannedOtherWorldEntries = 0;
+        int maxAttempts = chunkScanQueue.size();
+        int attempted = 0;
 
-        while (processed < MAX_CHUNKS_PER_TICK) {
+        while (processed < MAX_CHUNKS_PER_TICK && attempted < maxAttempts) {
             QueuedChunk queued = chunkScanQueue.poll();
             if (queued == null) {
                 break;
             }
+            attempted++;
 
             // Re-queue chunks for other dimensions/worlds
             if (!queued.worldKey().equals(world.getRegistryKey())) {
                 chunkScanQueue.offer(queued);
-                scannedOtherWorldEntries++;
-
-                // Avoid infinite spinning if the front of the queue belongs to other worlds
-                if (scannedOtherWorldEntries >= chunkScanQueue.size() + 1) {
-                    break;
-                }
                 continue;
             }
 

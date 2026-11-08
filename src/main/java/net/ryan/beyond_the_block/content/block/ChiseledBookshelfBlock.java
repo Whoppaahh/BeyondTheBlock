@@ -100,19 +100,16 @@ public class ChiseledBookshelfBlock extends Block implements BlockEntityProvider
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, net.minecraft.util.BlockRotation rotation) {
         return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, net.minecraft.util.BlockMirror mirror) {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (!(blockEntity instanceof ChiseledBookshelfBlockEntity shelf)) {
@@ -134,7 +131,7 @@ public class ChiseledBookshelfBlock extends Block implements BlockEntityProvider
         if (world.isClient) {
             if (heldIsEmpty && !slotIsEmpty) return ActionResult.SUCCESS;
             if (heldIsValidBook && slotIsEmpty) return ActionResult.SUCCESS;
-            if (heldIsValidBook && !slotIsEmpty) return ActionResult.SUCCESS;
+            if (heldIsValidBook) return ActionResult.SUCCESS;
             return ActionResult.CONSUME;
         }
 
@@ -237,13 +234,11 @@ public class ChiseledBookshelfBlock extends Block implements BlockEntityProvider
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof ChiseledBookshelfBlockEntity shelf) {
@@ -253,7 +248,6 @@ public class ChiseledBookshelfBlock extends Block implements BlockEntityProvider
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.isOf(newState.getBlock())) {
             super.onStateReplaced(state, world, pos, newState, moved);

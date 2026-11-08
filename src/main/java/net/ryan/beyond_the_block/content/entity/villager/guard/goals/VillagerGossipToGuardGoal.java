@@ -22,9 +22,9 @@ public class VillagerGossipToGuardGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        if (this.villager.getBrain().hasMemoryModule(MemoryModuleType.INTERACTION_TARGET) && this.villager.getBrain().getOptionalMemory(MemoryModuleType.INTERACTION_TARGET).get() instanceof GuardEntity guard) {
-            this.guard = guard;
-            long gameTime = guard.getWorld().getTime();
+        if (this.villager.getBrain().hasMemoryModule(MemoryModuleType.INTERACTION_TARGET) && this.villager.getBrain().getOptionalMemory(MemoryModuleType.INTERACTION_TARGET).get() instanceof GuardEntity guardEntity) {
+            this.guard = guardEntity;
+            long gameTime = guardEntity.getWorld().getTime();
             if (!nearbyVillagersInteractingWithGuards() && (gameTime < this.guard.lastGossipTime || gameTime >= this.guard.lastGossipTime + 1200L))
                 return this.guard.getTarget() == null && !this.villager.getWorld().isNight();
         }

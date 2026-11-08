@@ -23,6 +23,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.block.shrine.AbstractShrineBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
 import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
@@ -38,7 +39,7 @@ import java.util.UUID;
 
 import static net.ryan.beyond_the_block.network.packets.PacketIDs.SYNC_RIDDLES_ID;
 
-public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory {
+public class ShrineCoreBlockEntity extends AbstractShrineBlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory {
     private final DefaultedList<ItemStack> item = DefaultedList.ofSize(1, Items.WRITTEN_BOOK.getDefaultStack());
     private float rotation = 0;
     private boolean initialised = false;
@@ -83,15 +84,12 @@ public class ShrineCoreBlockEntity extends BlockEntity implements ImplementedInv
         Inventories.readNbt(nbt, item);
     }
 
-    @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+    public void sync() {
+        super.sync();
+        if (world != null && !world.isClient) {
+            // Additional syncing if needed for core specifically
+        }
     }
 
     @Override

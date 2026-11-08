@@ -15,12 +15,19 @@ public class MagneticPullEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity pLivingEntity, int pAmplifier) {
         if (!pLivingEntity.world.isClient()) {
-            // Example: pull the entity toward the nearest player
             PlayerEntity nearestPlayer = pLivingEntity.world.getClosestPlayer(pLivingEntity, 16);
             if (nearestPlayer != null) {
                 Vec3d direction = nearestPlayer.getPos().subtract(pLivingEntity.getPos()).normalize();
                 double strength = 0.1D + pAmplifier * 0.05D;
                 pLivingEntity.addVelocity(direction.x * strength, direction.y * strength, direction.z * strength);
+
+                if (pLivingEntity.age % 5 == 0 && pLivingEntity.world instanceof net.minecraft.server.world.ServerWorld serverWorld) {
+                    serverWorld.spawnParticles(
+                            net.minecraft.particle.ParticleTypes.PORTAL,
+                            pLivingEntity.getX(), pLivingEntity.getRandomBodyY(), pLivingEntity.getZ(),
+                            3, 0.2, 0.2, 0.2, -0.1
+                    );
+                }
             }
         }
         super.applyUpdateEffect(pLivingEntity, pAmplifier);

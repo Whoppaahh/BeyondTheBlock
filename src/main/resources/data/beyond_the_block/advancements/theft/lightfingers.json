@@ -1,0 +1,20 @@
+{
+  "parent": "beyond_the_block:core/beyond_the_block",
+  "display": {
+    "icon": { "item": "minecraft:chest" },
+    "title": { "translate": "advancements.beyond_the_block.theft.lightfingers.title" },
+    "description": { "translate": "advancements.beyond_the_block.theft.lightfingers.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stole_successfully": {
+      "trigger": "beyond_the_block:theft",
+      "conditions": {
+        "caught": false
+      }
+    }
+  }
+}

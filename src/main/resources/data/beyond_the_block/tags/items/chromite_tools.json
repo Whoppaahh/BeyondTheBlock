@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:chromite_shovel",
+    "beyond_the_block:chromite_pickaxe",
+    "beyond_the_block:chromite_axe",
+    "beyond_the_block:chromite_hoe",
+    "beyond_the_block:chromite_sword"
+  ]
+}

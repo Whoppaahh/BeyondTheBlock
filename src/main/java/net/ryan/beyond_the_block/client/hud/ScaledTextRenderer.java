@@ -17,7 +17,7 @@ public class ScaledTextRenderer {
             matrices.translate(currentX, y, 0);
             matrices.scale(segment.scale, segment.scale, 1.0f);
 
-            renderer.draw(matrices, segment.text, 0, 0, segment.color);
+            renderer.drawWithShadow(matrices, segment.text, 0, 0, segment.color);
 
             // Advance position correctly based on the scaled width
             currentX += renderer.getWidth(segment.text) * segment.scale;

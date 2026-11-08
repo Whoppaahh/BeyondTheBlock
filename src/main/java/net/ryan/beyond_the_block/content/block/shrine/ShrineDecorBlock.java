@@ -2,6 +2,8 @@ package net.ryan.beyond_the_block.content.block.shrine;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,27 +20,43 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.registry.Registry;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.blockentity.ShrineDecorBlockEntity;
+import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
-public class ShrineDecorBlock extends BlockWithEntity implements BlockEntityProvider {
+public class ShrineDecorBlock extends AbstractShrineBlock implements BlockEntityProvider {
 
-    private final List<Item> rewards = new ArrayList<>();
     private final Random random = new Random();
     private static final VoxelShape SHAPE =
             Block.createCuboidShape(2, 0, 2, 14, 13, 14);
 
     public ShrineDecorBlock(Settings settings) {
         super(settings);
-        rewards.add(ModItems.ASTRACINDER);
-        rewards.add(ModItems.XENOLITH_STAFF);
-        rewards.add(ModItems.NOCTURNITE_ITEM);
-        rewards.add(ModBlocks.RAW_AZUROS_BLOCK.asItem());
+    }
+
+    private List<ItemStack> getRewards() {
+        List<ItemStack> rewardStacks = new ArrayList<>();
+        var config = Configs.server().features.shrines;
+
+        for (String id : config.customRewards) {
+            Optional<Item> item = Registry.ITEM.getOrEmpty(new net.minecraft.util.Identifier(id));
+            item.ifPresent(i -> rewardStacks.add(i.getDefaultStack()));
+        }
+
+        if (rewardStacks.isEmpty()) {
+            rewardStacks.add(ModItems.ASTRACINDER.getDefaultStack());
+        }
+        return rewardStacks;
     }
 
     @Override
@@ -59,47 +77,61 @@ public class ShrineDecorBlock extends BlockWithEntity implements BlockEntityProv
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof ShrineDecorBlockEntity shrineDecorBlockEntity) {
+            ItemStack heldItem = player.getStackInHand(hand);
+            var config = Configs.server().features.shrines;
+            Item activationItem = Registry.ITEM.get(new net.minecraft.util.Identifier(config.activationItemId));
 
-                ItemStack heldItem = player.getStackInHand(hand);
+            if (heldItem.getItem().equals(activationItem)) {
+                int currentCount = shrineDecorBlockEntity.getUseCount();
+                int requirement = config.activationCountRequirement;
 
-                if (heldItem.getItem().equals(ModItems.RUBY_ITEM)) {
-                    int currentCount = shrineDecorBlockEntity.getUseCount();
+                // Even if we only need 1 for activation, we still allow up to 'requirement' for rewards
+                if (currentCount < requirement) {
+                    shrineDecorBlockEntity.incrementUseCount();
+                    shrineDecorBlockEntity.markDirty();
+                    shrineDecorBlockEntity.sync();
+                    
+                    int updatedCount = shrineDecorBlockEntity.getUseCount();
 
-                    if (currentCount < 2) {
-                        shrineDecorBlockEntity.incrementUseCount();
-                        shrineDecorBlockEntity.markDirty();
-                        world.updateListeners(pos, state, state, 3);
-
-                        ParticleEffect particle = switch (currentCount) {
-                            case 0 -> ParticleTypes.HAPPY_VILLAGER;
-                            case 1 -> ParticleTypes.ENCHANT;
-                            default -> ParticleTypes.SMOKE;
-                        };
+                    if (updatedCount < requirement) {
+                        ParticleEffect particle = (updatedCount % 2 == 0) ? ParticleTypes.HAPPY_VILLAGER : ParticleTypes.ENCHANT;
                         if(!world.isClient) {
                             ((ServerWorld) world).spawnParticles(particle, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 10, 0.2, 0.3, 0.2, 0.01);
                         }
+                        world.playSound(null, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 1f, 1f + updatedCount * 0.1f);
+                        heldItem.decrement(1);
                     } else {
-                        // Give reward
-                        ItemStack reward = rewards.get(random.nextInt(rewards.size())).getDefaultStack();
+                        // Give reward when reaching requirement
+                        List<ItemStack> currentRewards = getRewards();
+                        ItemStack reward = currentRewards.get(random.nextInt(currentRewards.size())).copy();
                         if (!player.getInventory().insertStack(reward)) {
-                            player.dropItem(reward, false); // drop if inventory is full
+                            player.dropItem(reward, false);
                         }
-                        if(player instanceof ServerPlayerEntity serverPlayer) {
+                        if(player instanceof ServerPlayerEntity) {
                             player.currentScreenHandler.sendContentUpdates();
                         }
-                        heldItem.decrement(1); // remove ruby
+                        heldItem.decrement(1);
                         world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
+                        world.playSound(null, pos, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.BLOCKS, 0.5f, 1.5f);
+
+                        if(!world.isClient) {
+                            ((ServerWorld) world).spawnParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 20, 0.5, 0.5, 0.5, 0.1);
+                        }
 
                         // Reset count
                         shrineDecorBlockEntity.resetUseCount();
                         shrineDecorBlockEntity.markDirty();
-                        world.updateListeners(pos, state, state, 3);
-
+                        shrineDecorBlockEntity.sync();
                     }
-                    return ActionResult.SUCCESS;
                 }
+                return ActionResult.SUCCESS;
             }
+        }
         return ActionResult.PASS;
+    }
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ? null : checkType(type, ModBlockEntities.SHRINE_DECOR_BLOCK_ENTITY, ShrineDecorBlockEntity::tick);
     }
 }
 

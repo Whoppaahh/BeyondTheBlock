@@ -198,7 +198,7 @@ public class ModEnchantments {
     //endregion
     //endregion
 
-    private static Enchantment register(String name, Enchantment enchantment) {
+    private static <T extends Enchantment> T register(String name, T enchantment) {
         return Registry.register(Registry.ENCHANTMENT, new Identifier(BeyondTheBlock.MOD_ID, name), enchantment);
     }
 

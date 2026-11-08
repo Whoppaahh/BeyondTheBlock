@@ -77,15 +77,49 @@ public class WitherZombie extends SkeletonEntity implements RangedAttackMob {
     public void tick() {
         super.tick();
 
-        if (!this.world.isClient && this.world.getDifficulty() == Difficulty.HARD && this.age % 60 == 0) {
-            List<PlayerEntity> players = this.world.getEntitiesByClass(
-                    PlayerEntity.class,
-                    this.getBoundingBox().expand(2.0),
-                    p -> true
-            );
+        if (this.world.isClient) {
+            if (this.random.nextInt(10) == 0) {
+                this.world.addParticle(
+                        net.minecraft.particle.ParticleTypes.ASH,
+                        this.getX() + (this.random.nextDouble() - 0.5) * this.getWidth(),
+                        this.getY() + this.random.nextDouble() * this.getHeight(),
+                        this.getZ() + (this.random.nextDouble() - 0.5) * this.getWidth(),
+                        0.0, 0.0, 0.0
+                );
+            }
+            if (this.random.nextInt(20) == 0) {
+                this.world.addParticle(
+                        net.minecraft.particle.ParticleTypes.SQUID_INK,
+                        this.getX() + (this.random.nextDouble() - 0.5) * this.getWidth(),
+                        this.getY() + this.random.nextDouble() * this.getHeight(),
+                        this.getZ() + (this.random.nextDouble() - 0.5) * this.getWidth(),
+                        0.0, 0.0, 0.0
+                );
+            }
+        }
 
-            for (PlayerEntity player : players) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 60, 0));
+        if (!this.world.isClient) {
+            // Wither effect for nearby players on Hard difficulty
+            if (this.world.getDifficulty() == Difficulty.HARD && this.age % 60 == 0) {
+                List<PlayerEntity> players = this.world.getEntitiesByClass(
+                        PlayerEntity.class,
+                        this.getBoundingBox().expand(2.0),
+                        p -> true
+                );
+
+                for (PlayerEntity player : players) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 60, 0));
+                }
+            }
+
+            // Desperation state logic
+            if (this.getHealth() < this.getMaxHealth() * 0.3F) {
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20, 1, false, false));
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 20, 0, false, false));
+                
+                if (this.age % 10 == 0 && this.world instanceof net.minecraft.server.world.ServerWorld sw) {
+                    sw.spawnParticles(net.minecraft.particle.ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 1, 0.2, 0.2, 0.2, 0.0);
+                }
             }
         }
 

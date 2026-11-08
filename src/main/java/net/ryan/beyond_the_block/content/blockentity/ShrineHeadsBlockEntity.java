@@ -28,6 +28,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.content.block.shrine.AbstractShrineBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.registry.ModBlocks;
 import net.ryan.beyond_the_block.content.riddles.Riddle;
@@ -39,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedInventory {
+public class ShrineHeadsBlockEntity extends AbstractShrineBlockEntity implements ImplementedInventory {
     private DefaultedList<ItemStack> items = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public boolean initialised = false;
 
@@ -372,33 +373,13 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
     }
 
 
+    @Override
     public void sync() {
+        super.sync();
         if (world != null && !world.isClient) {
-            // Mark the block as dirty in the world
-            world.markDirty(pos);
-
-            // Update listeners and notify the world of the change
-            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-
-            // Mark the chunk for update if in a server world
-            if (world instanceof ServerWorld serverWorld) {
-                serverWorld.getChunkManager().markForUpdate(pos);
-            }
-
-            // Sync block entity changes
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity != null) {
-                blockEntity.markDirty();
-                // Ensure listeners for the block entity are updated
-                world.updateListeners(pos, blockEntity.getCachedState(), blockEntity.getCachedState(), Block.NOTIFY_ALL);
-            }
-
             // Re-set the block state if needed (e.g., if you changed the state itself)
             BlockState state = world.getBlockState(pos);
             world.setBlockState(pos, state, Block.FORCE_STATE, Block.NOTIFY_ALL);
-
-            // Log the state of the inventory slots after syncing
-            //   System.out.println("Syncing head block entity, Slot 1: " + getStack(0) + ", Slot 2: " + getStack(1) + ", Slot 3: " + getStack(2) + ", Slot 4: " + getStack(3));
         }
     }
 
@@ -450,16 +431,5 @@ public class ShrineHeadsBlockEntity extends BlockEntity implements ImplementedIn
 
     }
 
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
 
 }

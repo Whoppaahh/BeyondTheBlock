@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,16 +13,23 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.blockentity.ShrineCoreBlockEntity;
+import net.ryan.beyond_the_block.content.blockentity.ShrineDecorBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
+import org.jetbrains.annotations.Nullable;
 
-public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvider {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShrineCoreBlock extends AbstractShrineBlock implements BlockEntityProvider {
 
     public ShrineCoreBlock(Settings settings) {
         super(settings);
@@ -30,6 +38,14 @@ public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvi
     private static final VoxelShape SHAPE =
             Block.createCuboidShape(2, 0, 2, 14, 13, 14);
 
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.literal("The heart of an ancient shrine.").formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Right-click to receive the Shrine Rules.").formatted(Formatting.GOLD));
+        tooltip.add(Text.literal("Sneak + Right-click to open its inventory.").formatted(Formatting.DARK_PURPLE));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -47,10 +63,6 @@ public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvi
     }
 
 
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
@@ -58,6 +70,11 @@ public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvi
         if (!world.isClient) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof ShrineCoreBlockEntity shrineCoreBlockEntity) {
+                if (!isStructureValid(world, pos)) {
+                    player.sendMessage(Text.literal("The shrine structure is incomplete!").formatted(Formatting.RED), true);
+                    return ActionResult.SUCCESS;
+                }
+
                 if (player.isSneaking()) {
                     player.openHandledScreen(shrineCoreBlockEntity);
                 }else{
@@ -70,6 +87,30 @@ public class ShrineCoreBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }
         return ActionResult.SUCCESS;
+    }
+
+    private boolean isStructureValid(World world, BlockPos pos) {
+        List<ShrineDecorBlockEntity> decorBlocks = new ArrayList<>();
+        int searchRadius = 8;
+
+        for (BlockPos searchPos : BlockPos.iterate(pos.add(-searchRadius, -2, -searchRadius), pos.add(searchRadius, 2, searchRadius))) {
+            BlockEntity be = world.getBlockEntity(searchPos);
+            if (be instanceof ShrineDecorBlockEntity decor) {
+                decorBlocks.add(decor);
+            }
+        }
+
+        if (decorBlocks.size() < 4) {
+            return false;
+        }
+
+        for (ShrineDecorBlockEntity decor : decorBlocks) {
+            if (decor.getUseCount() < 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private ItemStack createRulesBook() {

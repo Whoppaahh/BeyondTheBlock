@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.registry.ModEffects;
@@ -43,12 +44,19 @@ public class CupidArrowEntity extends PersistentProjectileEntity{
                 if(animal.getBreedingAge() == 0 && !animal.isInLove()) {
                     animal.lovePlayer(player); // triggers hearts and love mode
                 }
+                if (world instanceof ServerWorld sw) {
+                    sw.spawnParticles(ParticleTypes.HEART, target.getX(), target.getBodyY(0.5), target.getZ(), 5, 0.5, 0.5, 0.5, 0.05);
+                }
+                discard();
                 return; // skip calling super.onEntityHit -> prevents damage
             }
 
             // Hostile mobs
             if (target instanceof MobEntity mob) {
                 mob.addStatusEffect(new StatusEffectInstance(ModEffects.CUPID, 20*60, 0));
+                if (world instanceof ServerWorld sw) {
+                    sw.spawnParticles(ParticleTypes.HEART, target.getX(), target.getBodyY(0.5), target.getZ(), 5, 0.5, 0.5, 0.5, 0.05);
+                }
             }
             super.onEntityHit(hitResult);
         }

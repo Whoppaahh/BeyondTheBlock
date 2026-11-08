@@ -202,10 +202,10 @@ public class WoodcutterScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        ItemStack result = ItemStack.EMPTY;
+        ItemStack result;
         Slot slot = this.slots.get(index);
 
-        if (slot == null || !slot.hasStack()) {
+        if (!slot.hasStack()) {
             return ItemStack.EMPTY;
         }
 

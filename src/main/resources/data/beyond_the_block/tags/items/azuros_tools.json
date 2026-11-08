@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_the_block:azuros_shovel",
+    "beyond_the_block:azuros_pickaxe",
+    "beyond_the_block:azuros_axe",
+    "beyond_the_block:azuros_hoe",
+    "beyond_the_block:azuros_sword"
+  ]
+}

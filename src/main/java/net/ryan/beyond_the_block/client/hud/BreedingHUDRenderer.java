@@ -97,7 +97,7 @@ public class BreedingHUDRenderer implements HudRenderCallback {
             int remaining = Math.max(-age, 0); // convert negative ticks to positive remaining
 
             color = 0xFFAA00;
-            main = "Growing: " + formatTime(remaining);
+            main = "⌛ Growing: " + formatTime(remaining);
 
             extra1 = favoriteFoodText(a);
 
@@ -107,20 +107,20 @@ public class BreedingHUDRenderer implements HudRenderCallback {
         // ---------- ADULT / COOLDOWN ----------
         if (age > 0) {
             color = 0xFF5555;
-            main = "Cooldown: " + formatTime(age);
+            main = "⏳ Cooldown: " + formatTime(age);
 
             extra1 = favoriteFoodText(a);
-            extra3 = "Partner nearby: " + (hasPartnerNearby(a) ? "Yes" : "No");
+            extra3 = (hasPartnerNearby(a) ? "§a✔" : "§c✘") + " Partner nearby";
 
             return new BreedingInfo(main, extra1, extra2, extra3, color);
         }
 
-        // ---------- ADULT / READY ----------
+        // ADULT / READY
         color = 0x00FF66;
-        main = "Ready to breed";
+        main = "❤ Ready to breed";
 
         extra1 = favoriteFoodText(a);
-        extra3 = "Partner nearby: " + (hasPartnerNearby(a) ? "Yes" : "No");
+        extra3 = (hasPartnerNearby(a) ? "§a✔" : "§c✘") + " Partner nearby";
 
         return new BreedingInfo(main, extra1, extra2, extra3, color);
     }
@@ -140,7 +140,7 @@ public class BreedingHUDRenderer implements HudRenderCallback {
 
     private String favoriteFoodText(AnimalEntity a) {
         Item fav = findFavoriteFood(a);
-        return fav != null ? "Favorite: " + fav.getName().getString() : null;
+        return fav != null ? "🍴 Favorite: " + fav.getName().getString() : null;
     }
 
     private @Nullable Item findFavoriteFood(AnimalEntity a) {

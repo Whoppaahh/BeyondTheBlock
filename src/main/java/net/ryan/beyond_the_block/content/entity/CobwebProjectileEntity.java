@@ -13,6 +13,8 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +27,7 @@ public class CobwebProjectileEntity extends ThrownItemEntity {
     private final boolean isArcAttack;
 
     public CobwebProjectileEntity(World world, LivingEntity owner, boolean isArcAttack) {
-        super(ModEntities.COBWEB_PROJECTILE, owner, world); // Use snowball as placeholder type
+        super(ModEntities.COBWEB_PROJECTILE, owner, world);
         this.isArcAttack = isArcAttack;
     }
 
@@ -58,6 +60,15 @@ public class CobwebProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult hit) {
+        if (world.isClient) {
+            for (int i = 0; i < 8; ++i) {
+                world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.COBWEB.getDefaultState()),
+                        getX(), getY(), getZ(),
+                        (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() - 0.5) * 0.2);
+            }
+            world.playSound(getX(), getY(), getZ(), SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+        }
+
         if (!(world instanceof ServerWorld sw)) return;
 
         BlockPos pos = hit.getBlockPos().up();
@@ -71,6 +82,15 @@ public class CobwebProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult hit) {
+        if (world.isClient) {
+            for (int i = 0; i < 8; ++i) {
+                world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.COBWEB.getDefaultState()),
+                        getX(), getY(), getZ(),
+                        (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() - 0.5) * 0.2, (random.nextDouble() - 0.5) * 0.2);
+            }
+            world.playSound(getX(), getY(), getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+        }
+
         if (!(world instanceof ServerWorld)) {
             discard();
             return;

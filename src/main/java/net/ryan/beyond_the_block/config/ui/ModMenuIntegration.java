@@ -350,6 +350,26 @@ public class ModMenuIntegration implements ModMenuApi {
                         .build());
 
                 gameplay.addEntry(enchantments.build());
+
+                // Village Theft
+                SubCategoryBuilder theft = entry.startSubCategory(Text.literal("Village Theft")).setExpanded(false);
+                theft.add(entry.startBooleanToggle(Text.literal("Enabled"), edited[0].theftEnabled())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.theftEnabled = v)).build());
+                theft.add(entry.startIntField(Text.translatable("beyond_the_block.config.theft.witness_range"), edited[0].theftWitnessRange())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.theftWitnessRange = v)).build());
+                theft.add(entry.startIntField(Text.translatable("beyond_the_block.config.theft.gossip_amount"), edited[0].theftGossipAmount())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.theftGossipAmount = v)).build());
+                gameplay.addEntry(theft.build());
+
+                // Performance
+                SubCategoryBuilder performance = entry.startSubCategory(Text.literal("Performance")).setExpanded(false);
+                performance.add(entry.startBooleanToggle(Text.translatable("beyond_the_block.config.performance.enchantment_caching"), edited[0].enableEnchantmentCaching())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.enableEnchantmentCaching = v)).build());
+                performance.add(entry.startIntField(Text.translatable("beyond_the_block.config.performance.hives_per_tick"), edited[0].hivesProcessedPerTick())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.hivesProcessedPerTick = v)).build());
+                performance.add(entry.startIntField(Text.translatable("beyond_the_block.config.performance.nightstride_players"), edited[0].maxPlayersPerNightstrideTick())
+                        .setSaveConsumer(v -> edited[0] = with(edited[0], x -> x.maxPlayersPerNightstrideTick = v)).build());
+                gameplay.addEntry(performance.build());
             } else {
                 gameplay.addEntry(entry.startTextDescription(Text.literal(
                         "Server gameplay settings are only editable while in an integrated singleplayer world."
@@ -656,55 +676,19 @@ public class ModMenuIntegration implements ModMenuApi {
                 c.enableTrapdoors(),
                 c.enableModIncompatibilityCheck(),
 
-                c.dropMode()
+                c.dropMode(),
+                c.theftEnabled(),
+                c.theftWitnessRange(),
+                c.theftGossipAmount(),
+                c.enableEnchantmentCaching(),
+                c.hivesProcessedPerTick(),
+                c.maxPlayersPerNightstrideTick()
         );
     }
 
-    private static SyncedServerConfig withGuardsEnabled(SyncedServerConfig c, boolean v) {
-        return new SyncedServerConfig(
-                c.rubyOre(), c.miraniteOre(), c.chromiteOre(), c.nocturniteOre(), c.amberineOre(),
-                c.rosetteOre(), c.azurosOre(), c.indigraOre(), c.xirionOre(), c.xpOre(),
-                v, c.guardsReputationRequirementToBeAttacked(), c.guardsReputationRequirement(),
-                c.guardsRunFromPolarBears(), c.guardsOpenDoors(), c.guardFormation(), c.clericHealing(),
-                c.armourerRepairGuardArmour(), c.attackAllMobs(), c.guardAlwaysShield(), c.friendlyFire(),
-                c.guardMobBlackList(), c.amountOfHealthRegenerated(), c.followHero(), c.guardHealthModifier(),
-                c.guardSpeedModifier(), c.guardFollowRangeModifier(), c.giveGuardStuffHotv(), c.setGuardPatrolHotv(),
-                c.chanceToDropEquipment(), c.raidAnimals(), c.witchesVillager(), c.blackSmithHealing(),
-                c.convertVillagerIfHaveHotv(), c.guardVillagerHelpRange(), c.illagersRunFromPolarBears(),
-                c.villagersRunFromPolarBears(), c.guardArrowsHurtVillagers(),
-                c.shrineRewardsIncludeVanillaItems(), c.shrineRewardsIncludeModdedItems(), c.shrineGenerationInterval(),
-                c.pathsEnabled(), c.pathsMaxDistance(), c.pathsUseTerrainFollowing(), c.pathsPreserveDurability(),
-                c.pathsDefaultPathBlockId(), c.pathsAllowedStartingBlocks(), c.pathsAllowedEndingBlocks(),
-                c.pathsMinWidth(), c.pathsMaxWidth(),
-                c.enableChickenFeathers(), c.chickenFeatherInterval(), c.chickenFeatherChance(),
-                c.enableSkeletonBones(), c.skeletonBoneInterval(), c.skeletonBoneChance(),
-                c.enableSpiderDrops(), c.spiderDropInterval(), c.spiderDropChance(), c.cobwebWeight(),
-                c.minDecayTicks(), c.maxDecayTicks(), c.baseDecayChance(), c.lightDecayBonus(),
-                c.darknessDecayReduction(), c.densityRadius(), c.densityLimit(), c.normalSpiderRate(), c.caveSpiderRate(),
-                c.horseSwimmingEnabled(), c.undeadHorseSwimmingEnabled(), c.horsePreventWandering(), c.horseStayRadius(),
-                c.horseRemoveMiningPenalty(), c.horseIncreaseStepHeight(),
-                c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
-                c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
+    private static SyncedServerConfig withGuardsEnabled(SyncedServerConfig c, boolean v) { return with(c, x -> x.guardsEnabled = v); }
 
-                c.dropMode());
-    }
-
-    private static SyncedServerConfig withGuardsReputationRequirementToBeAttacked(SyncedServerConfig c, int v) { return new SyncedServerConfig(
-            c.rubyOre(), c.miraniteOre(), c.chromiteOre(), c.nocturniteOre(), c.amberineOre(), c.rosetteOre(), c.azurosOre(), c.indigraOre(), c.xirionOre(), c.xpOre(),
-            c.guardsEnabled(), v, c.guardsReputationRequirement(), c.guardsRunFromPolarBears(), c.guardsOpenDoors(), c.guardFormation(), c.clericHealing(), c.armourerRepairGuardArmour(),
-            c.attackAllMobs(), c.guardAlwaysShield(), c.friendlyFire(), c.guardMobBlackList(), c.amountOfHealthRegenerated(), c.followHero(), c.guardHealthModifier(),
-            c.guardSpeedModifier(), c.guardFollowRangeModifier(), c.giveGuardStuffHotv(), c.setGuardPatrolHotv(), c.chanceToDropEquipment(), c.raidAnimals(), c.witchesVillager(),
-            c.blackSmithHealing(), c.convertVillagerIfHaveHotv(), c.guardVillagerHelpRange(), c.illagersRunFromPolarBears(), c.villagersRunFromPolarBears(), c.guardArrowsHurtVillagers(),
-            c.shrineRewardsIncludeVanillaItems(), c.shrineRewardsIncludeModdedItems(), c.shrineGenerationInterval(), c.pathsEnabled(), c.pathsMaxDistance(), c.pathsUseTerrainFollowing(),
-            c.pathsPreserveDurability(), c.pathsDefaultPathBlockId(), c.pathsAllowedStartingBlocks(), c.pathsAllowedEndingBlocks(), c.pathsMinWidth(), c.pathsMaxWidth(),
-            c.enableChickenFeathers(), c.chickenFeatherInterval(), c.chickenFeatherChance(), c.enableSkeletonBones(), c.skeletonBoneInterval(), c.skeletonBoneChance(), c.enableSpiderDrops(),
-            c.spiderDropInterval(), c.spiderDropChance(), c.cobwebWeight(), c.minDecayTicks(), c.maxDecayTicks(), c.baseDecayChance(), c.lightDecayBonus(), c.darknessDecayReduction(),
-            c.densityRadius(), c.densityLimit(), c.normalSpiderRate(), c.caveSpiderRate(), c.horseSwimmingEnabled(), c.undeadHorseSwimmingEnabled(), c.horsePreventWandering(),
-            c.horseStayRadius(), c.horseRemoveMiningPenalty(), c.horseIncreaseStepHeight(), c.enableRecursiveOpening(), c.recursiveOpeningMaxBlocksDistance(), c.enableDoors(),
-            c.enableFenceGates(), c.enableTrapdoors(), c.enableModIncompatibilityCheck(),
-
-            c.dropMode()
-    );}
+    private static SyncedServerConfig withGuardsReputationRequirementToBeAttacked(SyncedServerConfig c, int v) { return with(c, x -> x.guardsReputationRequirementToBeAttacked = v); }
     private static SyncedServerConfig withGuardsReputationRequirement(SyncedServerConfig c, int v) { return with(c, x -> x.guardsReputationRequirement = v); }
     private static SyncedServerConfig withGuardsRunFromPolarBears(SyncedServerConfig c, boolean v) { return with(c, x -> x.guardsRunFromPolarBears = v); }
     private static SyncedServerConfig withGuardsOpenDoors(SyncedServerConfig c, boolean v) { return with(c, x -> x.guardsOpenDoors = v); }
@@ -885,6 +869,14 @@ public class ModMenuIntegration implements ModMenuApi {
 
         net.ryan.beyond_the_block.config.DropMode dropMode;
 
+        boolean theftEnabled;
+        int theftWitnessRange;
+        int theftGossipAmount;
+
+        boolean enableEnchantmentCaching;
+        int hivesProcessedPerTick;
+        int maxPlayersPerNightstrideTick;
+
         Mutable(SyncedServerConfig c) {
             rubyOre = c.rubyOre();
             miraniteOre = c.miraniteOre();
@@ -976,6 +968,14 @@ public class ModMenuIntegration implements ModMenuApi {
             enableModIncompatibilityCheck = c.enableModIncompatibilityCheck();
 
             dropMode = c.dropMode();
+
+            theftEnabled = c.theftEnabled();
+            theftWitnessRange = c.theftWitnessRange();
+            theftGossipAmount = c.theftGossipAmount();
+
+            enableEnchantmentCaching = c.enableEnchantmentCaching();
+            hivesProcessedPerTick = c.hivesProcessedPerTick();
+            maxPlayersPerNightstrideTick = c.maxPlayersPerNightstrideTick();
         }
 
         SyncedServerConfig build() {
@@ -999,7 +999,8 @@ public class ModMenuIntegration implements ModMenuApi {
                     enableRecursiveOpening, recursiveOpeningMaxBlocksDistance, enableDoors, enableFenceGates,
                     enableTrapdoors, enableModIncompatibilityCheck,
 
-                    dropMode
+                    dropMode, theftEnabled, theftWitnessRange, theftGossipAmount,
+                    enableEnchantmentCaching, hivesProcessedPerTick, maxPlayersPerNightstrideTick
             );
         }
     }

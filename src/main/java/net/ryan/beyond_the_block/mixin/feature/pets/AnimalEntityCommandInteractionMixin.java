@@ -81,7 +81,7 @@ public abstract class AnimalEntityCommandInteractionMixin {
             ItemStack collar = collarAccessor.btb$getCollar();
 
             if (collar.isEmpty()) {
-                BeyondTheBlock.LOGGER.info("This pet has no collar.");
+                BeyondTheBlock.LOGGER.info("This pet has no collar to inspect.");
                 player.sendMessage(Text.literal("This pet has no collar."), true);
             } else {
                 BeyondTheBlock.LOGGER.info("Collar: {}", collar.getName());

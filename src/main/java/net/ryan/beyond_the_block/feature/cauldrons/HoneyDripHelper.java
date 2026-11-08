@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;
 import net.ryan.beyond_the_block.utils.helpers.HiveTracker;
 
@@ -14,11 +15,19 @@ import static net.ryan.beyond_the_block.content.registry.ModBlocks.MODDED_FLUID_
 
 public class HoneyDripHelper {
     private static int dripCount = 0;
+    private static int hiveIndex = 0;
+    private static final int HIVES_PER_TICK = 20;
 
     public static void tick(ServerWorld world) {
+        List<BlockPos> hives = List.copyOf(HiveTracker.getHives());
+        if (hives.isEmpty()) return;
 
-        // Snapshot to prevent concurrent modification
-        for (BlockPos hivePos : List.copyOf(HiveTracker.getHives())) {
+        int size = hives.size();
+        int toProcess = Math.min(size, Configs.server().features.performance.hivesProcessedPerTick);
+
+        for (int i = 0; i < toProcess; i++) {
+            if (hiveIndex >= size) hiveIndex = 0;
+            BlockPos hivePos = hives.get(hiveIndex++);
 
             BlockState hiveState = world.getBlockState(hivePos);
 

@@ -23,11 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
         DispenserBlockEntity.class,
         AbstractFurnaceBlockEntity.class
 })
+
 public abstract class NetherContainerMixin {
     @Inject(method = "writeNbt", at = @At("RETURN"))
     private void netherLargeStackSave(NbtCompound nbt, CallbackInfo ci) {
-        MinecraftServer server = ServerContext.getServer();
-        if (server == null || server.getWorld(World.NETHER) == null) return;
 
         DefaultedList<ItemStack> stacks = getInventory();
         if (stacks == null) return;
@@ -53,8 +52,6 @@ public abstract class NetherContainerMixin {
 
     @Inject(method = "readNbt", at = @At("TAIL"))
     private void netherLargeStackLoad(NbtCompound nbt, CallbackInfo ci) {
-        MinecraftServer server = ServerContext.getServer();
-        if (server == null || server.getWorld(World.NETHER) == null) return;
 
         DefaultedList<ItemStack> stacks = getInventory();
 

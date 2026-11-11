@@ -1,13 +1,11 @@
 package net.ryan.beyond_the_block.content.item;
 
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.MinecraftServer;
@@ -32,8 +30,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
-
-import static net.ryan.beyond_the_block.network.packets.PacketIDs.TELEPORT_WITH_STAFF_ID;
 
 public class AnimatedItem extends Item implements IAnimatable {
     public AnimationFactory factory = GeckoLibUtil.createFactory(this);

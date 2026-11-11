@@ -10,12 +10,11 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
+import net.ryan.beyond_the_block.client.render.entity.model.RaftChestEntityModel;
+import net.ryan.beyond_the_block.client.render.entity.model.RaftEntityModel;
 import net.ryan.beyond_the_block.client.render.layer.ModModels;
 import net.ryan.beyond_the_block.content.entity.RaftChestEntity;
 import net.ryan.beyond_the_block.content.entity.RaftEntity;
-import net.ryan.beyond_the_block.client.render.entity.model.RaftChestEntityModel;
-import net.ryan.beyond_the_block.client.render.entity.model.RaftEntityModel;
-import net.ryan.beyond_the_block.content.registry.ModEntities;
 import net.ryan.beyond_the_block.content.registry.family.ModBoatVariant;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 

@@ -15,6 +15,7 @@
     "accessors.ChestBlockEntityAccessor",
     "accessors.CrossbowAccessor",
     "accessors.DispenserBlockEntityAccessor",
+    "accessors.DoubleInventoryAccessor",
     "accessors.ExplosionAccessor",
     "accessors.ForgingScreenHandlerAccessor",
     "accessors.HopperBlockEntityAccessor",
@@ -115,6 +116,7 @@
     "item.GlassBottleItemMixin",
     "item.ItemPathMixin",
     "item.ItemStackMixin",
+    "network.PacketByteBufMixin",
     "utils.LivingEntityEnchantmentCacheMixin",
     "world.FoliagePlacerTypeInvoker",
     "world.ServerWorldAIInjectionMixin",
@@ -124,10 +126,12 @@
     "world.TrunkPlacerTypeInvoker",
     "world.WorldChunkMixin",
     "world.netherstacks.AbstractFurnaceBlockEntityMixin",
-    "world.netherstacks.InventoryMixin",
     "world.netherstacks.NetherContainerMixin",
-    "world.netherstacks.NetherScreenHandlerMixin",
-    "world.netherstacks.NetherSlotMixin"
+    "world.netherstacks.NetherContainerStackLimitMixin",
+    "world.netherstacks.NetherSlotMixin",
+    "world.netherstacks.NetherStorageScreenHandlerMixin",
+    "world.netherstacks.NetherStorageScreenMixin",
+    "world.netherstacks.SimpleInventoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

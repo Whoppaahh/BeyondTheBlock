@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.ryan.beyond_the_block.config.schema.ConfigServer;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
+import net.ryan.beyond_the_block.network.packets.Client.NetherStorageSyncC2SPacket;
 import net.ryan.beyond_the_block.network.packets.PacketIDs;
 
 public final class ServerConfigSync {
@@ -46,6 +47,11 @@ public final class ServerConfigSync {
                         sendToAll(server);
                     });
                 }
+        );
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                PacketIDs.REQUEST_NETHER_STORAGE_SYNC_PACKET_ID,
+                NetherStorageSyncC2SPacket::receive
         );
     }
 

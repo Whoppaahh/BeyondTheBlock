@@ -1,12 +1,10 @@
 package net.ryan.beyond_the_block.content.effect.harmful;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-
 import net.ryan.beyond_the_block.damage_sources.ModDamageSources;
 
 import java.util.UUID;

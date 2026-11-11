@@ -22,6 +22,7 @@ public class ClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(RIDDLE_TIME_SYNC_PACKET_ID, SyncRiddleTimeS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SYNC_BREEDING_PACKET_ID, SyncBreedingInfoS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(SYNC_RESTORE_PACKET_ID, ClientNetworking::syncRestoreBlocks);
+        ClientPlayNetworking.registerGlobalReceiver(NETHER_STORAGE_SLOTS_PACKET_ID, NetherStorageS2CPacket::receive);
     }
 
     private static void syncRestoreBlocks(MinecraftClient client, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf buf, PacketSender packetSender) {

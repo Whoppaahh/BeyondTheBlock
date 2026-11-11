@@ -1,14 +1,12 @@
 package net.ryan.beyond_the_block.content.blockentity;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.block.shrine.AbstractShrineBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlockEntities;
 import net.ryan.beyond_the_block.content.registry.ModItems;

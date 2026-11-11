@@ -6,6 +6,8 @@ import net.ryan.beyond_the_block.core.BeyondTheBlock;
 public class PacketIDs {
 
 
+    public static final Identifier NETHER_STORAGE_SLOTS_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "nether_storage_slots");
+    public static final Identifier REQUEST_NETHER_STORAGE_SYNC_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "request_nether_storage_sync");
 
     public static final Identifier SYNC_SERVER_CONFIG_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "sync_server_config");
     public static final Identifier REQUEST_SERVER_CONFIG_PACKET_ID = new Identifier(BeyondTheBlock.MOD_ID, "request_server_config");

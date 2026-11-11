@@ -1,6 +1,9 @@
 package net.ryan.beyond_the_block.content.block.shrine;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -20,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.ryan.beyond_the_block.config.access.Configs;
 import net.ryan.beyond_the_block.content.blockentity.ShrineCoreBlockEntity;
 import net.ryan.beyond_the_block.content.blockentity.ShrineDecorBlockEntity;
 import net.ryan.beyond_the_block.content.registry.ModBlockEntities;

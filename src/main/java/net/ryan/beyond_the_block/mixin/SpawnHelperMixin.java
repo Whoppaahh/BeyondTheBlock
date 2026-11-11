@@ -2,8 +2,8 @@ package net.ryan.beyond_the_block.mixin;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.WorldView;
 import net.ryan.beyond_the_block.utils.CampfireProtectionManager;

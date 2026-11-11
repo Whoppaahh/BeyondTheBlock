@@ -10,7 +10,6 @@ import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public final class MindWardHandler {

@@ -1,12 +1,17 @@
 package net.ryan.beyond_the_block.mixin.world.netherstacks;
 
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ryan.beyond_the_block.utils.accessors.FurnaceAccessor;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -57,6 +62,44 @@ public abstract class AbstractFurnaceBlockEntityMixin implements FurnaceAccessor
             }
 
         }
+    }
+
+    /**
+     * @author
+     * @reason Allow oversized furnace output stacks in the Nether.
+     */
+
+    @Overwrite
+    private static boolean canAcceptRecipeOutput(
+            @Nullable Recipe<?> recipe,
+            DefaultedList<ItemStack> slots,
+            int count
+    ) {
+        if (recipe == null || slots.get(0).isEmpty()) {
+            return false;
+        }
+
+        ItemStack recipeOutput = recipe.getOutput();
+        ItemStack outputStack = slots.get(2);
+
+        int itemLimit = recipeOutput.getMaxCount();
+
+        // A container limit above 64 identifies our expanded Nether inventory.
+        if (count > 64) {
+            itemLimit *= 8;
+        }
+
+        int maxAllowed = Math.min(count, itemLimit);
+
+        if (outputStack.isEmpty()) {
+            return recipeOutput.getCount() <= maxAllowed;
+        }
+
+        if (!ItemStack.canCombine(outputStack, recipeOutput)) {
+            return false;
+        }
+
+        return outputStack.getCount() + recipeOutput.getCount() <= maxAllowed;
     }
 }
 

@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screen.ingame.MerchantScreen;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.ryan.beyond_the_block.client.visual.GlowManager;
-import net.ryan.beyond_the_block.core.BeyondTheBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

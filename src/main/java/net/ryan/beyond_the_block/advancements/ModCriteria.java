@@ -2,11 +2,7 @@ package net.ryan.beyond_the_block.advancements;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.util.Identifier;
-import net.ryan.beyond_the_block.advancements.criteria.MinecartLinkedTrigger;
-import net.ryan.beyond_the_block.advancements.criteria.MountedEntityTrigger;
-import net.ryan.beyond_the_block.advancements.criteria.SpongeDriedTrigger;
-import net.ryan.beyond_the_block.advancements.criteria.TheftTrigger;
-import net.ryan.beyond_the_block.advancements.criteria.StaffUsageTrigger;
+import net.ryan.beyond_the_block.advancements.criteria.*;
 import net.ryan.beyond_the_block.core.BeyondTheBlock;
 
 public final class ModCriteria {

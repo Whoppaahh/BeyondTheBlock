@@ -15,9 +15,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -36,7 +33,6 @@ import net.ryan.beyond_the_block.content.riddles.RiddleDataManager;
 import net.ryan.beyond_the_block.content.sound.ModSounds;
 import net.ryan.beyond_the_block.core.bootstrap.ContentRegistrar;
 import net.ryan.beyond_the_block.utils.visual.ImplementedInventory;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 

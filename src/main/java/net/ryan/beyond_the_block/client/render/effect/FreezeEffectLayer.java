@@ -1,6 +1,5 @@
 package net.ryan.beyond_the_block.client.render.effect;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -10,13 +9,6 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
 import net.ryan.beyond_the_block.content.registry.ModEffects;
 
 public class FreezeEffectLayer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {

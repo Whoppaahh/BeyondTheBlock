@@ -39,12 +39,9 @@ import net.ryan.beyond_the_block.client.render.trim.ArmourTrimBakedTextureManage
 import net.ryan.beyond_the_block.client.render.trim.ArmourTrimItemPredicates;
 import net.ryan.beyond_the_block.client.screen.*;
 import net.ryan.beyond_the_block.client.util.AnimatedItemClientHandler;
+import net.ryan.beyond_the_block.client.util.LeapOfFaithClient;
 import net.ryan.beyond_the_block.client.visual.HighlightTracker;
 import net.ryan.beyond_the_block.client.visual.OutlineRenderer;
-import net.ryan.beyond_the_block.content.effect.beneficial.ClarityEffect;
-import net.ryan.beyond_the_block.client.util.LeapOfFaithClient;
-import net.ryan.beyond_the_block.content.entity.villager.ModVillagers;
-import net.ryan.beyond_the_block.content.item.AnimatedItem;
 import net.ryan.beyond_the_block.content.particle.FallingLeafParticle;
 import net.ryan.beyond_the_block.content.registry.ModItems;
 import net.ryan.beyond_the_block.content.registry.ModParticles;

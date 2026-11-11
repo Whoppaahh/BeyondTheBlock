@@ -4,11 +4,8 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.item.ItemStack;
-import net.ryan.beyond_the_block.content.enchantment.horses.enchantments.FleetHoovesEnchantment;
-import net.ryan.beyond_the_block.content.registry.ModEnchantments;
 import net.ryan.beyond_the_block.feature.horses.HorseEnchantHooks;
 import net.ryan.beyond_the_block.feature.horses.HorseEquipmentAccessor;
-import net.ryan.beyond_the_block.utils.accessors.EnchantmentCacheAccessor;
 
 import java.util.Map;
 

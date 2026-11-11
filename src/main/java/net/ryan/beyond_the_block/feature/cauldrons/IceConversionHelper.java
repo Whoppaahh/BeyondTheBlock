@@ -3,7 +3,6 @@ package net.ryan.beyond_the_block.feature.cauldrons;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.ryan.beyond_the_block.content.block.cauldrons.ModdedFluidCauldronBlock;

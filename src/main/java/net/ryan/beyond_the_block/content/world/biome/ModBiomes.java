@@ -1,10 +1,10 @@
 package net.ryan.beyond_the_block.content.world.biome;
 
-import net.minecraft.sound.MusicSound;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeAdditionsSound;
 import net.minecraft.sound.BiomeMoodSound;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;

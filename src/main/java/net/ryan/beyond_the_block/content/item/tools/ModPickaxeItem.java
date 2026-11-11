@@ -1,8 +1,8 @@
 package net.ryan.beyond_the_block.content.item.tools;
 
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;

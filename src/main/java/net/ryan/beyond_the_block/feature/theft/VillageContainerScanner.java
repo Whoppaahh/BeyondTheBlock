@@ -3,7 +3,6 @@ package net.ryan.beyond_the_block.feature.theft;
 import net.minecraft.block.entity.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureStart;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
